@@ -38,33 +38,47 @@
 \hypertarget{ch:intro}{%
 \chapter{Introduction}\label{ch:intro}}
 
-\hypertarget{research-questions}{%
-\section{Research Questions}\label{research-questions}}
+\hypertarget{research-question-and-objective}{%
+\section{Research Question and Objective}\label{research-question-and-objective}}
 
-This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides time series datasets and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle occurs in other data types. Following section 2 of \textcite{GA11}, the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule. Furthermore, the empirical study will be extended to examine the application of the general explanantion and solution to the forecast combination puzzle proposed by \textcite{ZMFP22} and \textcite{FZMP23}.
+This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides the time series domain and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle is present in other data types. Furthermore, the general solution for the forecast combination puzzle is still lack of empirical support. The empirical study will be extended to examine the application of the general explanation and solution proposed by \textcite{ZMFP22} and \textcite{FZMP23}.
 
 \hypertarget{motivation}{%
 \section{Motivation}\label{motivation}}
 
-Under the frequentist approach, forecasteres often choose one best model to forecast future value based on their preferred selection criteria. However, that single model may not be able to capture all the importannt features of the data. \textcite{BG69} formally discussed the idea of forecast combination and empirically showed the accuracy improvement with a number of combination methods. This finding attracts increasing attention and massive contributions on combination methods; see \textcite{WHLK22} for a modern literature reviews over the past 50 years.
+The forecasting accuracy is always a concern when forecasts are used in the decision-making. Under the classical frequentist approach, forecasters often choose only one ``best model'' to mimic the actual data generating process and then predict the future values. However, that single model could be misleading as it may not capture all the important features of the data. \textcite{BG69} discussed the idea of forecast combination and empirically showed the accuracy improvement with a number of combination techniques. This influential finding has attracted increasing attention and massive contributions to combination methods; see \textcite{WHLK22} for a modern literature review over the past 50 years.
 
-Most empirical study undertaken so far investigates
+In short, forecast combinations involve producing point or density forecasts, and then combining them based on a rule or a weighting scheme. Multiple characteristics of the true data generating process could be incorporated via this flexible combination process, which will mitigate different sources of uncertainties and therefore, imporve the accuracy. However, issues arise with careless implementation of methods.
 
-counter-intuitive
+One surprising phenomenon in many empirical study, coined by \textcite{SW04}, is the so-called ``forecast combination puzzle'' - ``theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts''. This counter-intuitive result is mainly discovered in the time series settings, then what will happen when working with datasets such as surveys of professional forecasters, dynamic panels, and pure cross-sectional? Following section 2 of \textcite{GA11}, the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule.
 
-\hypertarget{problem-statement}{%
-\section{Problem Statement}\label{problem-statement}}
-
-While
-
-\hypertarget{contributions}{%
-\section{Contributions}\label{contributions}}
+If the forecast combination puzzle occurs in all settings, then it is essential to solve it in a general way without any specific restrictions. \textcite{FZMP23} demonstrated that, in theory, the cause of the puzzle is the two-step approach of estimating unknown parameters and combination weights separately. If forecasts are produced by estimating parameters and weights at the same time, the sophisticated weighting schemes should (asymptotically) be superior.
 
 \hypertarget{methodology}{%
 \chapter{Methodology}\label{methodology}}
 
-\hypertarget{forecast-combination}{%
-\section{Forecast Combination}\label{forecast-combination}}
+The first goal is to combine any two parametric and suitable models for a given dataset in a linear way. Then, I will show that the forecast combinations indeed improve the forecast accuracy by assessing the log predictive score function.
+
+Before explaining the details, I introduce the following notations used throughout the paper. For a probability density measure \(p\), a vector time series \(\pmb{y}_t\) and its past information \(\pmb{Y}_{t-1}\), I use \(p(\pmb{y}_t|\pmb{Y}_{t-1})\) to represent the probability density for \(\pmb{y}_t\) with known history until \(t-1\).
+
+The unknown parameters are denoted as a vector \(\pmb{\theta}\) and the two-model prediction pool is denoted as \(\pmb{M}=\{M_1, M_2\}\) .
+
+Assuming that the sample has \(T\) available observations, it will be partitioned into two periods with rough proportion, \(R\) in-sample periods and \(P\) out-of-sample periods, where \(R+P=T\).
+
+\hypertarget{forecast-combination-method}{%
+\section{Forecast Combination Method}\label{forecast-combination-method}}
+
+Following section 1.2 of \textcite{GA11}, the forecasts are based on a two-model linear pool \(M\) of two constituent predictive densities \(M_1\) and \(M_2\):
+
+\begin{equation}
+p(\pmb{y}_t|\pmb{Y}_{t-1},M) = wp(\pmb{y}^{obs}_t|\pmb{Y}_{t-1},M_1) + (1-w)p(\pmb{y}^{obs}_t|\pmb{Y}_{t-1},M_2)
+\end{equation}
+
+\(p(\pmb{y}_t|\pmb{Y}_{t-1},M_j), \ j=1,2,...,J\) where \(J\) is the total number of considered models
+
+\(M_1\) and \(M_2\) where \(M_1\ne M_2\). The two-model pool is then defined as \(M=\{M_1, M_2\}\).
+
+the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule.
 
 How to combine forecasts
 
@@ -74,8 +88,13 @@ Assumed models are
 
 Combined weights
 
-\hypertarget{forecast-evaluation}{%
-\section{Forecast Evaluation}\label{forecast-evaluation}}
+\hypertarget{evaluation-of-weighted-forecast-combinations}{%
+\section{Evaluation of Weighted Forecast Combinations}\label{evaluation-of-weighted-forecast-combinations}}
+
+Following section 1.1 of \textcite{GA11},
+
+\hypertarget{a-motivating-example}{%
+\section{A Motivating Example}\label{a-motivating-example}}
 
 \hypertarget{citations}{%
 \section{Citations}\label{citations}}

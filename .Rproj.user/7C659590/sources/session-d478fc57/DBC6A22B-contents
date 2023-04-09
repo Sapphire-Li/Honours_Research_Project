@@ -8,7 +8,8 @@
   title={The Impact of Sampling Variability on Estimated Combinations of Distributional Forecasts},
   author={Zischke, Ryan and Martin, Gael M and Frazier, David T and Poskitt, Donald S},
   journal={arXiv preprint arXiv:2206.02376},
-  year={2022}
+  year={2022},
+  doi = {https://doi.org/10.48550/arXiv.2206.02376}
 }
 
 @article{GA11,
@@ -31,7 +32,8 @@
   number={4},
   pages={451--468},
   year={1969},
-  publisher={Taylor \& Francis}
+  publisher={Taylor \& Francis},
+  doi = {https://doi.org/10.1057/jors.1969.103}
 }
 
 @article{WHLK22,
@@ -43,7 +45,17 @@
   doi = {https://doi.org/10.48550/arXiv.2205.04216}
 }
 
-
+@article{SW04,
+  title={Combination forecasts of output growth in a seven-country data set},
+  author={Stock, James H and Watson, Mark W},
+  journal={Journal of forecasting},
+  volume={23},
+  number={6},
+  pages={405--430},
+  year={2004},
+  publisher={Wiley Online Library},
+  doi = {https://doi.org/10.1002/for.928}
+}
 
 
 

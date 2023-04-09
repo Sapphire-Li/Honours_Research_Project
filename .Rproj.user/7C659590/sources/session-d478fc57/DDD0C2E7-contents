@@ -5,41 +5,23 @@ knit: "bookdown::render_book"
 
 # Introduction {#ch:intro}  
 
-## Research Questions  
+## Research Question and Objective
 
-This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides time series datasets and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle occurs in other data types. Following section 2 of @GA11, the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule. Furthermore, the empirical study will be extended to examine the application of the general explanantion and solution to the forecast combination puzzle proposed by @ZMFP22 and @FZMP23.  
+This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides the time series domain and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle is present in other data types. Furthermore, the general solution for the forecast combination puzzle is still lack of empirical support. The empirical study will be extended to examine the application of the general explanation and solution proposed by @ZMFP22 and @FZMP23.
 
 
 
 
 ## Motivation
 
-UUnder the frequentist approach, forecasters often choose only one best model to forecast future values based on their preferred selection criteria. However, that single model may not be able to capture all the important features of the data. @BG69 formally discussed the idea of forecast combination and empirically showed the accuracy improvement with a number of combination methods. This finding attracts increasing attention and massive contributions to combination methods; see @WHLK22 for a modern literature review over the past 50 years. However, issues arise with careless implementation of methods. One surprising phenomenon in many empirical study is the so-called "forecast combination puzzle", coined by 
+The forecasting accuracy is always a concern when forecasts are used in the decision-making. Under the classical frequentist approach, forecasters often choose only one "best model" to mimic the actual data generating process and then predict the future values. However, that single model could be misleading as it may not capture all the important features of the data. @BG69 discussed the idea of forecast combination and empirically showed the accuracy improvement with a number of combination techniques. This influential finding has attracted increasing attention and massive contributions to combination methods; see @WHLK22 for a modern literature review over the past 50 years.
+
+In short, forecast combinations involve producing point or density forecasts, and then combining them based on a rule or a weighting scheme. Multiple characteristics of the true data generating process could be incorporated via this flexible combination process, which will mitigate different sources of uncertainties and therefore, imporve the accuracy. However, issues arise with careless implementation of methods. 
+
+One surprising phenomenon in many empirical study, coined by @SW04, is the so-called "forecast combination puzzle" - "theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts". This counter-intuitive result is mainly discovered in the time series settings, then what will happen when working with datasets such as surveys of professional forecasters, dynamic panels, and pure cross-sectional? Following section 2 of @GA11, the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule.
 
 
-
-
-Most empirical study undertaken so far investigates
-
-
-counter-intuitive
-
-
-
-
-
-## Problem Statement
-
-While 
-
-
-## Contributions
-
-
-
-
-
-
+If the forecast combination puzzle occurs in all settings, then it is essential to solve it in a general way without any specific restrictions. @FZMP23 demonstrated that, in theory, the cause of the puzzle is the two-step approach of estimating unknown parameters and combination weights separately. If forecasts are produced by estimating parameters and weights at the same time, the sophisticated weighting schemes should (asymptotically) be superior. 
 
 
 
