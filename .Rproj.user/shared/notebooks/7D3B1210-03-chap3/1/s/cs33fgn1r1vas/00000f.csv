@@ -1,0 +1,8 @@
+"0","sales %>%"
+"0","  pivot_longer(Sales:GDP) %>%"
+"0","  autoplot(value) +"
+"0","  facet_grid(name ~ ., scales = ""free_y"") +"
+"0","  theme(legend.position = ""none"")"
+"2","Error in sales %>% pivot_longer(Sales:GDP) %>% autoplot(value) : 
+  could not find function ""%>%""
+"

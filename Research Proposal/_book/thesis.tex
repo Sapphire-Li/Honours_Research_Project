@@ -1,0 +1,130 @@
+% This is a LaTeX thesis template for Monash University.
+% to be used with Rmarkdown
+% This template was produced by Rob Hyndman
+% Version: 6 September 2016
+
+\documentclass{monashthesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add any LaTeX packages and other preamble here if required
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Xiefei Li}
+\title{Revisiting the forecast combination puzzle with different data types: An empirical study}
+\studentid{30204232}
+\def\degreetitle{Bachelor of Commerce (Honours)}
+% Add subject and keywords below
+\hypersetup{
+     %pdfsubject={The Subject},
+     %pdfkeywords={Some Keywords},
+     pdfauthor={Xiefei Li},
+     pdftitle={Revisiting the forecast combination puzzle with different data types: An empirical study},
+     pdfproducer={Bookdown with LaTeX}
+}
+
+
+\bibliography{thesisrefs}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\titlepage
+
+{\setstretch{1.2}\sf\tighttoc\doublespacing}
+
+\clearpage\pagenumbering{arabic}\setcounter{page}{0}
+
+\hypertarget{ch:intro}{%
+\chapter{Introduction}\label{ch:intro}}
+
+\hypertarget{research-questions}{%
+\section{Research Questions}\label{research-questions}}
+
+This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides time series datasets and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle occurs in other data types. Following section 2 of \textcite{GA11}, the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule. Furthermore, the empirical study will be extended to examine the application of the general explanantion and solution to the forecast combination puzzle proposed by \textcite{ZMFP22} and \textcite{FZMP23}.
+
+\hypertarget{motivation}{%
+\section{Motivation}\label{motivation}}
+
+Under the frequentist approach, forecasteres often choose one best model to forecast future value based on their preferred selection criteria. However, that single model may not be able to capture all the importannt features of the data. \textcite{BG69} formally discussed the idea of forecast combination and empirically showed the accuracy improvement with a number of combination methods. This finding attracts increasing attention and massive contributions on combination methods; see \textcite{WHLK22} for a modern literature reviews over the past 50 years.
+
+Most empirical study undertaken so far investigates
+
+counter-intuitive
+
+\hypertarget{problem-statement}{%
+\section{Problem Statement}\label{problem-statement}}
+
+While
+
+\hypertarget{contributions}{%
+\section{Contributions}\label{contributions}}
+
+\hypertarget{methodology}{%
+\chapter{Methodology}\label{methodology}}
+
+\hypertarget{forecast-combination}{%
+\section{Forecast Combination}\label{forecast-combination}}
+
+How to combine forecasts
+
+Linear pools
+
+Assumed models are
+
+Combined weights
+
+\hypertarget{forecast-evaluation}{%
+\section{Forecast Evaluation}\label{forecast-evaluation}}
+
+\hypertarget{citations}{%
+\section{Citations}\label{citations}}
+
+All citations should be done using markdown notation as shown below. This way, your bibliography will be compiled automatically and correctly. \autocite{FZMP23,BG69}.
+\autocite[see][]{FZMP23}.
+
+The methods were less popular in academic circles until \textcite{FZMP23} introduced a state space formulation of some of the methods, which was extended in \textcite{HKSG02} to cover the full range of exponential smoothing methods.
+
+\hypertarget{preliminary-results}{%
+\chapter{Preliminary Results}\label{preliminary-results}}
+
+\hypertarget{tables}{%
+\section{Tables}\label{tables}}
+
+Let's assume future advertising spend and GDP are at the current levels. Then forecasts for the next year are given in Table \ref{tab:salesforecasts}.
+
+\{r salesforecasts, results=``asis''\}
+as.data.frame(fc) \%\textgreater\%
+select(Quarter, .mean) \%\textgreater\%
+rename(\texttt{Sales\ forecast} = .mean) \%\textgreater\%
+knitr::kable(booktabs=TRUE, digits=1,
+caption = ``Forecasts for the next year assuming Advertising budget and GDP are unchanged.'')
+
+Again, notice the use of labels and references to automatically generate table numbers.
+
+\hypertarget{figures}{%
+\section{Figures}\label{figures}}
+
+Figure \ref{fig:deaths} shows time plots of the data we just loaded.
+
+\{r deaths, message=FALSE, fig.cap= ``Quarterly sales, advertising and GDP data.''\}
+sales \%\textgreater\%
+pivot\_longer(Sales:GDP) \%\textgreater\%
+autoplot(value) +
+facet\_grid(name \textasciitilde{} ., scales = ``free\_y'') +
+theme(legend.position = ``none'')
+
+\appendix
+
+\hypertarget{appendix}{%
+\chapter{Appendix}\label{appendix}}
+
+\begin{equation}
+  y_t - y_{t-4} = \beta (x_t-x_{t-4}) + \gamma (z_t-z_{t-4}) + \phi_1 (y_{t-1} - y_{t-5}) + \Theta_1 \varepsilon_{t-4} + \varepsilon_t
+\end{equation}
+
+\printbibliography[heading=bibintoc]
+
+
+
+\end{document}

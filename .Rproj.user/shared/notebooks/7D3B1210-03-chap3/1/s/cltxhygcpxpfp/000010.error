@@ -1,0 +1,1 @@
+{"frames":[],"message":"Error in new_data(sales, n = 4) %>% mutate(AdBudget = tail(sales$AdBudget,  : \n  could not find function \"%>%\"\n"}

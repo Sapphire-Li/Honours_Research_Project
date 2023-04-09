@@ -1,0 +1,47 @@
+---
+chapter: 1
+knit: "bookdown::render_book"
+---
+
+# Introduction {#ch:intro}  
+
+## Research Questions  
+
+This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides time series datasets and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle occurs in other data types. Following section 2 of @GA11, the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule. Furthermore, the empirical study will be extended to examine the application of the general explanantion and solution to the forecast combination puzzle proposed by @ZMFP22 and @FZMP23.  
+
+
+
+
+## Motivation
+
+UUnder the frequentist approach, forecasters often choose only one best model to forecast future values based on their preferred selection criteria. However, that single model may not be able to capture all the important features of the data. @BG69 formally discussed the idea of forecast combination and empirically showed the accuracy improvement with a number of combination methods. This finding attracts increasing attention and massive contributions to combination methods; see @WHLK22 for a modern literature review over the past 50 years. However, issues arise with careless implementation of methods. One surprising phenomenon in many empirical study is the so-called "forecast combination puzzle", coined by 
+
+
+
+
+Most empirical study undertaken so far investigates
+
+
+counter-intuitive
+
+
+
+
+
+## Problem Statement
+
+While 
+
+
+## Contributions
+
+
+
+
+
+
+
+
+
+
+

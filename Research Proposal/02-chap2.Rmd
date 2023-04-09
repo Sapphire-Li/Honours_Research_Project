@@ -1,0 +1,34 @@
+---
+chapter: 2
+knit: "bookdown::render_book"
+---
+
+# Methodology
+
+
+## Forecast Combination
+
+How to combine forecasts
+
+Linear pools
+
+Assumed models are
+
+Combined weights
+
+
+
+
+## Forecast Evaluation
+
+
+
+
+## Citations
+
+All citations should be done using markdown notation as shown below. This way, your bibliography will be compiled automatically and correctly. [@FZMP23;@BG69]. 
+[see @FZMP23].
+
+The methods were less popular in academic circles until  @FZMP23 introduced a state space formulation of some of the methods, which was extended in @HKSG02 to cover the full range of exponential smoothing methods.
+
+
