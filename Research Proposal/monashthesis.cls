@@ -177,6 +177,9 @@
 \def\submitdate#1{\gdef\@submitdate{#1}}
 \def\degrees#1{\gdef\@degrees{#1}}
 \def\studentid#1{\gdef\@degrees{#1}}
+\def\studentemail{\gdef\@studentemail}
+\def\studentdetails{\gdef\@studentdetails}
+\def\supervisoremail{\gdef\@supervisoremail}
 \def\@title{}\def\@author{}
 \def\authorname{\@author}
 \def\@degrees{}
@@ -200,7 +203,10 @@
     \begin{center}
         by\\[0.6cm]
         {\LARGE\@author}\\[0.2cm]
-                {\@degrees}
+                {\@degrees}\\[0.05cm]
+                ~{\@studentemail}\\[0.05cm]
+                 ~{\@studentdetails}\\[0.05cm]
+                 ~{\@supervisoremail}
             
         \vfill\vfill
 

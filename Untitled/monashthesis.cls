@@ -84,8 +84,6 @@
 
 %% SECTION TITLES
 \RequirePackage[compact,sf,bf]{titlesec}
-\titleformat{\chapter}[display]
-  {\normalfont\bfseries}{}{0pt}{\Huge}
 \titleformat{\section}[block]
   {\fontsize{15}{17}\bfseries\sffamily}
   {\thesection}
@@ -159,7 +157,6 @@
      urlcolor=blue,
      citecolor=darkblue,
      colorlinks=true}
-     
 
 %% Set up line spacing
 \AtBeginDocument{%
@@ -177,6 +174,8 @@
 \def\submitdate#1{\gdef\@submitdate{#1}}
 \def\degrees#1{\gdef\@degrees{#1}}
 \def\studentid#1{\gdef\@degrees{#1}}
+\def\studentemail{\gdef\@studentemail}
+\def\studentdetails{\gdef\@studentdetails}
 \def\@title{}\def\@author{}
 \def\authorname{\@author}
 \def\@degrees{}
@@ -189,19 +188,21 @@
     \thispagestyle{empty}%
     \null\vskip1cm%
     \begin{center}
-        \LARGE\textbf{\expandafter{\@title}}
+        \Huge\textbf{\expandafter{\@title}}
     \end{center}
     \vfill
     \begin{center}\Large
-        {A research proposal submitted
+        {A thesis submitted
         for the degree of\\[0.3cm] \degreetitle}
     \end{center}
     \vfill
     \begin{center}
         by\\[0.6cm]
         {\LARGE\@author}\\[0.2cm]
-                {\@degrees}
-            
+                {\@degrees}\\[0.05cm]
+                ~{\@studentemail}\\[0.05cm]
+                 ~{\@studentdetails}
+
         \vfill\vfill
 
         \includegraphics[width=2.5cm]{figures/crest}
@@ -226,7 +227,9 @@
 
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
 \hbox{}
-
+\vspace*{\fill}
+\thispagestyle{empty}
+\newpage
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 \def\tighttoc
