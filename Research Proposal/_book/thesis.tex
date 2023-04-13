@@ -36,7 +36,7 @@
 
 {\setstretch{1.2}\sf\tighttoc\doublespacing}
 
-\clearpage\pagenumbering{arabic}\setcounter{page}{0}
+\clearpage\pagenumbering{arabic}\setcounter{page}{1}
 
 \hypertarget{ch:intro}{%
 \chapter{Introduction}\label{ch:intro}}
@@ -44,68 +44,93 @@
 \hypertarget{research-question-and-objective}{%
 \section{Research Question and Objective}\label{research-question-and-objective}}
 
-This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides the time series domain and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle is present in other data types. Furthermore, the general solution for the forecast combination puzzle is still lack of empirical support. The empirical study will be extended to examine the application of the general explanation and solution proposed by \textcite{ZMFP22} and \textcite{FZMP23}.
+This paper aims to demonstrate the presence of the forecast combination puzzle in various settings besides the time series domain and to examine the general solution to the forecast combination puzzle empirically. The combination puzzle refers to the empirical finding that the simple average combination method often out-performs sophisticated combination methods. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention have been focused on different time series datasets. Therefore, it is necessary to explore whether the forecast combination puzzle is present in other data types. Furthermore, the general solution for the forecast combination puzzle is still lack of empirical support. This study will be then extended to examine the application of the general explanation and solution proposed by \textcite{ZMFP22} and \textcite{FZMP23} through a forecasting accuracy test.
 
 \hypertarget{motivation}{%
 \section{Motivation}\label{motivation}}
 
-The forecasting accuracy is always a concern when forecasts are used in the decision-making. Under the classical frequentist approach, forecasters often choose only one ``best model'' to mimic the actual data generating process and then predict the future values. However, that single model could be misleading as it may not capture all the important features of the data. \textcite{BG69} discussed the idea of forecast combination and empirically showed the accuracy improvement with a number of combination techniques. This influential finding has attracted increasing attention and massive contributions to combination methods; see \textcite{WHLK22} for a modern literature review over the past 50 years.
+The forecasting accuracy is always a concern when forecasts are used in the decision-making. Under the classical frequentist approach, forecasters often choose only one ``best model'' to mimic the actual data generating process of the interested variable and then use it to predict future values. However, that single model could be misleading as it may not capture all important features of the data. The idea of combining multiple estimates of unknown interests already exists before the well-known seminal work conducted by \textcite{BG69}. They popularized the use of forecast combination for optimal forecasts with a number of combination techniques. The dramatic improvements in forecast accuracy through flexible combination methods attract increasing attention and contributions among researchers from different fields, both theoretical and empirical {[}\textcite{C89};T06{]}; see \textcite{WHLK22} for a modern literature review over the past 50 years.
 
-In short, forecast combinations involve producing point or density forecasts, and then combining them based on a rule or a weighting scheme. Multiple characteristics of the true data generating process could be incorporated via this flexible combination process, which will mitigate different sources of uncertainties and therefore, imporve the accuracy. However, issues arise with careless implementation of methods.
+In short, forecast combinations involve producing point or density forecasts, and then combining them based on a rule or a weighting scheme. This process can incorporate more independent and unique characteristics of the true data generating process to mitigate different sources of uncertainties. However, issues could arise with arbitrary or careless implementation. One surprising phenomenon in many empirical study, coined by \textcite{SW04}, is the so-called ``forecast combination puzzle'' - ``theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts'' \autocite{WHLK22} (see the section 2.6 for more details and examples). This counter-intuitive result is widely discovered in the time series settings, what will happen when working with datasets such as surveys of professional forecasters, dynamic panels, and pure cross-sectional?
 
-One surprising phenomenon in many empirical study, coined by \textcite{SW04}, is the so-called ``forecast combination puzzle'' - ``theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts''. This counter-intuitive result is mainly discovered in the time series settings, then what will happen when working with datasets such as surveys of professional forecasters, dynamic panels, and pure cross-sectional? Following section 2 of \textcite{GA11}, the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule.
-
-If the forecast combination puzzle occurs in all settings, then it is essential to solve it in a general way without any specific restrictions. \textcite{FZMP23} demonstrated that, in theory, the cause of the puzzle is the two-step approach of estimating unknown parameters and combination weights separately. If forecasts are produced by estimating parameters and weights at the same time, the sophisticated weighting schemes should (asymptotically) be superior.
+Lastly, a general solution of explaining the forecast combination puzzle is still under development and lack of public acceptance. If the forecast combination puzzle occurs in every setting, it is then essential to explore its cause and to support the theory with empirical evidence. \textcite{FZMP23} demonstrated that, in theory, the cause of the puzzle is the way researchers produce the forecast, named a ``two-step'' approach in the paper. The constituent model forecasts are determined at first with estimated parameters and the unknown weights are then estimated conditional on all the estimates in the first stage. Due to the unawareness and the dimensionality of combining all unknown parameters, this two-step approach is commonly studied and used in the literature, e.g.~HM07; \textcite{GA11}; \textcite{GR13}; BS16. \textcite{FZMP23} further claims that the forecast combination puzzle can be avoided when unknown parameters and weights are estimated in one step, namely a ``one-step'' approach, when feasible. In other words, if forecasts are produced by estimating parameters and weights simultaneously, the sophisticated weighting schemes should (asymptotically) be superior. This new finding relies on the investigation of forecast combination performance conducted by \textcite{ZMFP22} in terms of the one- and two-step approach. In this paper, I will use some real data to empirically support all their ideas along with a measure of forecast accuracy test by examine the null hypothesis of \emph{no inferior forecast performance}.
 
 \hypertarget{methodology}{%
 \chapter{Methodology}\label{methodology}}
 
-The first goal is to combine any two parametric and suitable models for a given dataset in a linear way. Then, I will show that the forecast combinations indeed improve the forecast accuracy by assessing the log predictive score function.
+The first goal is to construct linear density forecast combinations with any two parametric models for a given data. On top of point forecasts, using density forecast can benefit forecasters or decision markers with a broader view of understanding the target variable and potential risks (see the section 2.6.1. of \textcite{FTP22} for related contributions). The weighting scheme is to maximize the log predictive score function, which is comprised of two selected forecast densities. The procedure refers to the two-step approach mentioned before. The results should not be surprising that the forecast combinations indeed improve the forecast accuracy via assessing the log predictive score function.
 
-Before explaining the details, I introduce the following notations used throughout the paper. For a probability density measure \(p\), a vector time series \(\pmb{y}_t\) and its past information \(\pmb{Y}_{t-1}\), I use \(p(\pmb{y}_t|\pmb{Y}_{t-1})\) to represent the probability density for \(\pmb{y}_t\) with known history until \(t-1\).
+Next goal is to estimate unknown parameters of constituent models and the weight in a single step. This one-step approach is expected to have a better performance than the two-step approach stated above by conducting the forecast accuracy test.
 
-The unknown parameters are denoted as a vector \(\pmb{\theta}\) and the two-model prediction pool is denoted as \(\pmb{M}=\{M_1, M_2\}\) .
-
-Assuming that the sample has \(T\) available observations, it will be partitioned into two periods with rough proportion, \(R\) in-sample periods and \(P\) out-of-sample periods, where \(R+P=T\).
+Before explaining further details, the following notations will be used throughout the paper. The dataset with \(T\) observations will be divided proportionally into two parts, an in-sample period \(R\) and an out-of-sample period \(P\). The realization of a target variable \(y\) at time \(t\) is denoted as \(y_{t}\). Its future value after the in-sample period is denoted as \(y_{\small{R+h}}\) where \(h\) is the forecast horizon. \(\mathcal{F}_t\), the information set at time t, is consists of all observed (and known) realizations of \(y\) up to time t, i.e., \(\mathcal{F}_t = \{y_1, y_2, .., y_t\}\).
 
 \hypertarget{forecast-combination-method}{%
 \section{Forecast Combination Method}\label{forecast-combination-method}}
 
-Following section 1.2 of \textcite{GA11}, the forecasts are based on a two-model linear pool \(M\) of two constituent predictive densities \(M_1\) and \(M_2\):
+For the first step, I will estimate unknown parameter of each constituent model by the Maximum Likelihood Estimation. Estimates will then be held fixed and substituted into their corresponding probability density function.
+
+With the idea of linear pooling \autocite{BG69,HM07,GA11}, the linear combinations of two predictive densities \(f^{(t)}\) will be constructed with two constituent predictive densities \(f^{(t)}_1\) and \(f^{(t)}_2\):
 
 \begin{equation}
-p(\pmb{y}_t|\pmb{Y}_{t-1},M) = wp(\pmb{y}^{obs}_t|\pmb{Y}_{t-1},M_1) + (1-w)p(\pmb{y}^{obs}_t|\pmb{Y}_{t-1},M_2)
+f^{(t)}(y) = wf^{(t)}_1(y) + (1-w)f^{(t)}_2(y)
 \end{equation}
 
-\(p(\pmb{y}_t|\pmb{Y}_{t-1},M_j), \ j=1,2,...,J\) where \(J\) is the total number of considered models
+where \(f^{(t)}_1(y)\) and \(f^{(t)}_2(y)\) are assumed to follow the normal distributions but with different means and variances, \(h\) is the future value after the in-sample period (\(R\)), and \(w\) is the weight allocated to the first model. Through this construction, the sum of two weights is implied to be 1, which is necessary and sufficient for the combination to be a density function\autocite{GA11}.
 
-\(M_1\) and \(M_2\) where \(M_1\ne M_2\). The two-model pool is then defined as \(M=\{M_1, M_2\}\).
-
-the weighted linear combinations of two different prediction models will be evaluated via the log predictive scoring rule.
-
-How to combine forecasts
-
-Linear pools
-
-Assumed models are
-
-Combined weights
+More specifically, \(f^{(t)}_1(y)=f_1(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_1, \sigma^2_1\}\) and \(f^{(t)}_2(y)=f_2(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_2, \sigma^2_2\}\). \(N\{x; \mu, \sigma^2\}\) denotes the normal probability density function evaluated at value \(x\) with mean \(\mu\) and variance \(\sigma^2\). Given \(\mathcal{F}_{t-1}\), the conditional mean and conditional variance should be used.
 
 \hypertarget{evaluation-of-weighted-forecast-combinations}{%
 \section{Evaluation of Weighted Forecast Combinations}\label{evaluation-of-weighted-forecast-combinations}}
 
-Following section 1.1 of \textcite{GA11},
+This refers to the second step where I can estimate the weight given the aforementioned estimates for parameters.
+
+Following section 1.1 and 1.2 of \textcite{GA11}, \(w\) is estimated by maximizing the log predictive score function:
+
+\begin{equation}
+\sum^P_{h=1}log\Big[wf_1(y_{\small{R+h}}) + (1-w)f_2(y_{\small{R+h}})\Big]
+\end{equation}
+
+where \(f(y_{\small{R+h}}) = f(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}})\).
 
 \hypertarget{a-motivating-example}{%
 \section{A Motivating Example}\label{a-motivating-example}}
 
-\hypertarget{citations}{%
-\section{Citations}\label{citations}}
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
 
-All citations should be done using markdown notation as shown below. This way, your bibliography will be compiled automatically and correctly. \autocite{FZMP23,BG69}.
-\autocite[see][]{FZMP23}.
+Reconsidering the example in section 3 of \textcite{GA11}, I use the daily Standard and Poor's (S\&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total) retrieved via the \textcite{SP500}. Total 2519 (\(T\)) available observations are partitioned into two periods with rough proportion. The in-sample period contains the first 60\% of the data (\(R = 1511\)), which is used for estimating unknown parameters in each model. The rest 40\% (\(P = 1008\)) becomes the out-of-sample period for further evaluation.
 
-The methods were less popular in academic circles until \textcite{FZMP23} introduced a state space formulation of some of the methods, which was extended in \textcite{HKSG02} to cover the full range of exponential smoothing methods.
+\hypertarget{model-specification}{%
+\subsection{Model Specification}\label{model-specification}}
+
+For a simple illustration purpose, I choose five basic models to study the performance of two-model pools:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Model 1: An ARIMA(1,1,1) model with an intercept for the natural logarithm of S\&P 500.
+\item
+  Model 2: An ETS(M,N,N) model for the S\&P 500.
+\item
+  Model 3: An ETS(M,A,N) model for the S\&P 500.
+\end{enumerate}
+
+All error terms are assumed to be independent and normally distributed with mean zero and variance \(\sigma_m^2 \ \text{for}\  m = 1,2,3\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Model 4: A linear regression model for the S\&P 500 with a trend regressor and errors, follow an ARIMA(1,0,0) process.
+\item
+  Model 5: A linear regression model for the natural logarithm of S\&P 500 with a trend regressor and errors follow an ARIMA(1,0,0) process.
+\end{enumerate}
+
+Both error terms in the ARIMA model are assumed to be independent and normally distributed with mean zero and variance \(\sigma_m^2 \ \text{for}\  m = 4,5\).
+
+All unknown parameters in each model are estimated by maximizing the likelihood function with the in-sample period data. Estimated values are held fixed for the density evaluations. For each model, I generate the predictive densities at every future time point of S\&P 500 (\(h=1,2,...,P\)) given that all information before that point is known.
 
 \hypertarget{preliminary-results}{%
 \chapter{Preliminary Results}\label{preliminary-results}}
@@ -113,37 +138,33 @@ The methods were less popular in academic circles until \textcite{FZMP23} introd
 \hypertarget{tables}{%
 \section{Tables}\label{tables}}
 
-Let's assume future advertising spend and GDP are at the current levels. Then forecasts for the next year are given in Table \ref{tab:salesforecasts}.
-
-\{r salesforecasts, results=``asis''\}
-as.data.frame(fc) \%\textgreater\%
-select(Quarter, .mean) \%\textgreater\%
-rename(\texttt{Sales\ forecast} = .mean) \%\textgreater\%
-knitr::kable(booktabs=TRUE, digits=1,
-caption = ``Forecasts for the next year assuming Advertising budget and GDP are unchanged.'')
-
-Again, notice the use of labels and references to automatically generate table numbers.
-
 \hypertarget{figures}{%
 \section{Figures}\label{figures}}
-
-Figure \ref{fig:deaths} shows time plots of the data we just loaded.
-
-\{r deaths, message=FALSE, fig.cap= ``Quarterly sales, advertising and GDP data.''\}
-sales \%\textgreater\%
-pivot\_longer(Sales:GDP) \%\textgreater\%
-autoplot(value) +
-facet\_grid(name \textasciitilde{} ., scales = ``free\_y'') +
-theme(legend.position = ``none'')
 
 \appendix
 
 \hypertarget{appendix}{%
 \chapter{Appendix}\label{appendix}}
 
+All analyses were performed using R Statistical Software (R version 4.2.1 (2022-06-23))
+
+Packages used are \texttt{tidyverse} \autocite{tidy19}, \texttt{dplyr} \autocite{dplyr23}, and \texttt{fpp3} \autocite{fpp23}.
+
+\[\begin{aligned}
+M_1: log(y_t) &= \phi_{0,1} + log(y_{t-1}) + \phi_{1,1}log(y)_{t-1} + \theta_{1,1}\epsilon_{t-1} + \epsilon_{t,1} \ \ \ \ \epsilon_t \stackrel{i.i.d.}{\sim} N(0,\sigma_1^2) \\
+M_2: y_t &= \ell_{t-1,2}(1+\epsilon_{t,2}) \\
+  \ell_{t,2} &= \ell_{t-1,2}(1+\alpha_2\epsilon_{t,2}) \\
+M_3: y_t &= (\ell_{t-1}+b_{t-1}) (1+\epsilon_{t,3}) \\
+  \ell_t &= \ell_{t-1}(1+\alpha\epsilon_{t,2}) \\
+M_4&: y_t = \\
+M_5&: y_t = 
+\end{aligned}\]
+
 \begin{equation}
   y_t - y_{t-4} = \beta (x_t-x_{t-4}) + \gamma (z_t-z_{t-4}) + \phi_1 (y_{t-1} - y_{t-5}) + \Theta_1 \varepsilon_{t-4} + \varepsilon_t
 \end{equation}
+
+\textcite{fpp3}
 
 \printbibliography[title={Reference}]
 
