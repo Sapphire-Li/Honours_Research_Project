@@ -92,16 +92,6 @@ sd_1 <- sqrt(var_1) |> as.numeric()
 
 
 # Predictive Density
-pd_1 <- numeric(P) |> as.numeric()
-for (j in 1:P) {
-  pd_1[j] <- dnorm(test[[j,4]], mean_1[[j]], sd_1[[1]])
-}
-
-
-LS_1 <- sum(log(pd_1)) / P
-LS_1
-# 2.327308
-
 
 # If the log of a variable follows a normal distribution, then the variable itself follows a log-normal distribution.
 # A log-normal distribution is a probability distribution of a random variable whose logarithm follows a normal distribution. 
@@ -109,14 +99,14 @@ LS_1
 #   f(x) = 1 / (x * σ * sqrt(2π)) * exp(-((ln(x) - μ)^2) / (2 * σ^2))
 # where μ and σ are the mean and standard deviation of the logarithm of X, respectively.
 
-pd_1b <- numeric(P) |> as.numeric()
+pd_1 <- numeric(P) |> as.numeric()
 for (j in 1:P) {
-  pd_1b[j] <- dlnorm(test[[j,2]], mean_1[[j]], sd_1[[1]])
+  pd_1[j] <- dlnorm(test[[j,2]], mean_1[[j]], sd_1[[1]])
 }
 
 
-LS_1b <- sum(log(pd_1b)) / P
-LS_1b
+LS_1 <- sum(log(pd_1)) / P
+LS_1
 # -5.864283
 
 
@@ -414,7 +404,7 @@ pool <- numeric(length(w)) |> as.numeric()
 # ARIMA(1,1,1) w/ drift and ETS(M,N,N)
 # weight on the first model
 for (j in 1:length(w)) {
-  pool[j] <-  sum(log(w[j]*pd_1b + (1-w[j])*pd_2))/P
+  pool[j] <-  sum(log(w[j]*pd_1 + (1-w[j])*pd_2))/P
 }
 
 comb <- cbind(w,pool) |> as_tibble()
@@ -434,7 +424,7 @@ comb |> ggplot(aes(w, pool)) +
 # ARIMA(1,1,1) w/ drift and ETS(M,A,N)
 # weight on the first model
 for (j in 1:length(w)) {
-  pool[j] <-  sum(log(w[j]*pd_1b + (1-w[j])*pd_3))/P
+  pool[j] <-  sum(log(w[j]*pd_1 + (1-w[j])*pd_3))/P
 }
 
 comb <- cbind(w,pool) |> as_tibble()
@@ -474,7 +464,7 @@ comb |> ggplot(aes(w, pool)) +
 # ARIMA(1,1,1) w/ drift and LM
 # weight on the first model
 for (j in 1:length(w)) {
-  pool[j] <-  sum(log(w[j]*pd_1b + (1-w[j])*pd_5))/P
+  pool[j] <-  sum(log(w[j]*pd_1 + (1-w[j])*pd_5))/P
 }
 
 comb <- cbind(w,pool) |> as_tibble()
@@ -528,20 +518,6 @@ comb |> ggplot(aes(w, pool)) +
        x = "Weight on model ETS(M,A,N)",
        y = "Log predictive socre") +
   theme(plot.title = element_text(hjust = 0.5))
-
-
-
-
-
-
-
-
-
-
-
-
-
-return <- train |> model(ARIMA(return^2))
 
 
 

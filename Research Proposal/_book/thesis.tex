@@ -58,7 +58,7 @@ Lastly, a general solution of explaining the forecast combination puzzle is stil
 \hypertarget{methodology}{%
 \chapter{Methodology}\label{methodology}}
 
-The first goal is to construct linear density forecast combinations with any two parametric models for a given data. On top of point forecasts, using density forecast can benefit forecasters or decision markers with a broader view of understanding the target variable and potential risks (see the section 2.6.1. of \textcite{FTP22} for related contributions). The weighting scheme is to maximize the log predictive score function, which is comprised of two selected forecast densities. The procedure refers to the two-step approach mentioned before. The results should not be surprising that the forecast combinations indeed improve the forecast accuracy via assessing the log predictive score function.
+The first goal is to construct linear density forecast combinations with two parametric models, selected from several possible models, for a given data. On top of point forecasts, using density forecast can benefit forecasters or decision markers with a broader view of understanding the target variable and potential risks (see the section 2.6.1. of \textcite{FTP22} for related contributions). The weighting scheme is to maximize the log predictive score function, which is comprised of two selected forecast densities. The procedure refers to the two-step approach mentioned before. The results should not be surprising that some forecast combinations will indeed improve the forecast accuracy via assessing the log predictive score function.
 
 Next goal is to estimate unknown parameters of constituent models and the weight in a single step. This one-step approach is expected to have a better performance than the two-step approach stated above by conducting the forecast accuracy test.
 
@@ -79,18 +79,24 @@ where \(f^{(t)}_1(y)\) and \(f^{(t)}_2(y)\) are assumed to follow the normal dis
 
 More specifically, \(f^{(t)}_1(y)=f_1(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_1, \sigma^2_1\}\) and \(f^{(t)}_2(y)=f_2(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_2, \sigma^2_2\}\). \(N\{x; \mu, \sigma^2\}\) denotes the normal probability density function evaluated at value \(x\) with mean \(\mu\) and variance \(\sigma^2\). Given \(\mathcal{F}_{t-1}\), the conditional mean and conditional variance should be used.
 
-\hypertarget{evaluation-of-weighted-forecast-combinations}{%
-\section{Evaluation of Weighted Forecast Combinations}\label{evaluation-of-weighted-forecast-combinations}}
+\hypertarget{evaluation}{%
+\section{Evaluation of Models and Weighted Forecast Combinations}\label{evaluation}}
 
-This refers to the second step where I can estimate the weight given the aforementioned estimates for parameters.
+This refers to the second step where I estimate the weight on the first model given the aforementioned estimates for parameters. The assessment of out-of-sample predictions for individual model and combinations will rely on the average log predictive score function.
 
-Following section 1.1 and 1.2 of \textcite{GA11}, \(w\) is estimated by maximizing the log predictive score function:
+The average log predictive score function of a specific model over the forecast horizon \(h=1,2,...,P\) (i.e., the out-of-sample period) is defined as follows:
 
 \begin{equation}
-\sum^P_{h=1}log\Big[wf_1(y_{\small{R+h}}) + (1-w)f_2(y_{\small{R+h}})\Big]
+LS = \frac{1}{P}\sum^P_{h=1}logf(y_{\small{R+h}}) = \frac{1}{P}\sum^P_{h=1} logf(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}})
 \end{equation}
 
-where \(f(y_{\small{R+h}}) = f(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}})\).
+The optimal weight \(w*\) will be estimated by maximizing the average logarithmic predictive score function over the out-of-sample period:
+
+\begin{equation}
+\frac{1}{P}\sum^P_{h=1}log\Big[wf_1(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}) + (1-w)f_2(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}})\Big]
+\end{equation}
+
+The corresponding forecast density combination, given the optimal weight, will be referred to the optimal combination.
 
 \hypertarget{a-motivating-example}{%
 \section{A Motivating Example}\label{a-motivating-example}}
@@ -100,10 +106,10 @@ where \(f(y_{\small{R+h}}) = f(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}})\).
 
 Reconsidering the example in section 3 of \textcite{GA11}, I use the daily Standard and Poor's (S\&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total) retrieved via the \textcite{SP500}. Total 2519 (\(T\)) available observations are partitioned into two periods with rough proportion. The in-sample period contains the first 60\% of the data (\(R = 1511\)), which is used for estimating unknown parameters in each model. The rest 40\% (\(P = 1008\)) becomes the out-of-sample period for further evaluation.
 
-\hypertarget{model-specification}{%
-\subsection{Model Specification}\label{model-specification}}
+\hypertarget{model}{%
+\subsection{Model Specification}\label{model}}
 
-For a simple illustration purpose, I choose five basic models to study the performance of two-model pools:
+For a simple illustration purpose, I use five prediction models to study the performance of two-model pools:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -116,7 +122,7 @@ For a simple illustration purpose, I choose five basic models to study the perfo
   Model 3: An ETS(M,A,N) model for the S\&P 500.
 \end{enumerate}
 
-All error terms are assumed to be independent and normally distributed with mean zero and variance \(\sigma_m^2 \ \text{for}\  m = 1,2,3\).
+ARIMA is short for autoregressive integrated moving average, ETS stands for exponential smoothing. All error terms are assumed to be independent and normally distributed with mean zero and variance \(\sigma_m^2 \ \text{for}\  m = 1,2,3\).
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -130,16 +136,93 @@ All error terms are assumed to be independent and normally distributed with mean
 
 Both error terms in the ARIMA model are assumed to be independent and normally distributed with mean zero and variance \(\sigma_m^2 \ \text{for}\  m = 4,5\).
 
-All unknown parameters in each model are estimated by maximizing the likelihood function with the in-sample period data. Estimated values are held fixed for the density evaluations. For each model, I generate the predictive densities at every future time point of S\&P 500 (\(h=1,2,...,P\)) given that all information before that point is known.
+All unknown parameters in each model are estimated by maximizing the likelihood function with the in-sample period data. Estimated values are held fixed for the density evaluations. For each model, I generate the predictive densities at every future time point of S\&P 500 returns (\(h=1,2,...,P\)) given that all information before that point is known. In order to compare every pair of these models, the log of S\&P 500 returns will be ``back-transformed'' by evaluating the log normal density function.
+
+As a reference, detailed formulas and explanations of these models can be found in \textcite{fpp3}. The formula of the conditional variance for the ETS models in this case is discussed in Chapter 6.3 of \textcite{HKOS08}. All coding are performed using R Statistical Software (R version 4.2.1 (2022-06-23)). Packages used are \texttt{tidyverse} \autocite{tidy19}, \texttt{dplyr} \autocite{dplyr23}, and \texttt{fpp3} \autocite{fpp23}.
 
 \hypertarget{preliminary-results}{%
 \chapter{Preliminary Results}\label{preliminary-results}}
 
-\hypertarget{tables}{%
-\section{Tables}\label{tables}}
+The average log predictive score of each model mentioned in section \ref{model} is calculated and presented in Table \ref{tab:1}. If only one model can be chosen, the model with the highest score will be preferred, which is the ETS(M,A,N) model with a score of -5.8351 in this case. The differences among models seem to be small, disregarding the linear model on the level of S\&P 500 returns, but they are closely related to the number of out-of-sample observations and the effect of natural logarithm. Taking these into consideration, the ETS(M,A,N) model could be strongly favored.
 
-\hypertarget{figures}{%
-\section{Figures}\label{figures}}
+\vspace{0.3cm}
+
+\begin{table}[htbp!]
+\centering
+\caption{Average log predictive score of each proposed model for S\&P 500 returnes.}
+\begin{tabular}{l*{4}{c}cccccccc}
+\hline
+     ARIMA(1,1,1) & ETS(M,N,N) & ETS(M,A,N) & LM (linear) & LM (log) \\
+    \hline
+     -5.8643 & -5.8373  & -5.8351 & -7.4724 & -5.8716\\
+    \hline
+\end{tabular}
+\label{tab:1}
+\end{table}
+
+\vspace{0.3cm}
+
+Besides, there are 10 pairs of two-model combinations given 5 models. For each combination, I generated all the average log predictive scores when the weight on the first model in that combination increases from 0 to 1 by a 0.01 change every time. The optimal combination is generated according to section \ref{evaluation}. Table \ref{tab:2} presents the information about the optimal combination of every pair, including the highest log score and the optimal weight.
+
+\vspace{0.3cm}
+
+\begin{table}[htbp!]
+  \centering
+  \caption{Average log predictive score of density forecasts combination under two-model pools}
+    \begin{tabular}{llllll}
+    \toprule
+          & ARIMA(1,1,1) & ETS(M,N,N) & ETS(M,A,N) &  LM (linear) &  LM (log) \\
+    \midrule
+    ARIMA(1,1,1) & \textit{-5.8643} & -5.793 & -5.7964 & -5.8643 & -5.8473 \\
+    ETS(M,N,N) & 0.45  & \textit{-5.8373} & -5.8351 & -5.8373 & -5.8121 \\
+    ETS(M,A,N) & 0.43  & 0.08  & \textit{-5.8351} & -5.8351 & -5.8133 \\
+     LM (linear) & 1     & 1     & 1     & \textit{-7.4724} & -5.8716 \\
+     LM (log) & 0.56  & 0.65  & 0.67  & 0     & -5.8716 \\
+    \bottomrule
+    \multicolumn{6}{l}{\footnotesize The diagonal entries contains individual average log scores for each model.}\\
+    \multicolumn{6}{l}{\footnotesize The highest average log scores for optimal pools are located above the diagonal.}\\
+    \multicolumn{6}{l}{\footnotesize Entries below the diagonal show the optimal weight of the model in that column in the two-model pool.}\\
+    \end{tabular}
+  \label{tab:2}
+\end{table}
+
+\vspace{0.3cm}
+
+More specifically, I picked the first 4 highest score as shown in Table \ref{tab:3}.
+
+\vspace{0.3cm}
+
+\begin{table}[htbp!]
+  \centering
+  \caption{The best four density forecasts combinations evaluated by the average log predictive score}
+    \begin{tabular}{ll}
+    \toprule
+    Combination & Average log predictive score \\
+    \midrule
+    ARIMA(1,1,1) \& ETS(M,N,N) & -5.793 \\
+    ARIMA(1,1,1) \& ETS(M,A,N) & -5.7964 \\
+    ETS(M,N,N) \&  LM (log) & -5.8121 \\
+    ETS(M,A,N) \&  LM (log) & -5.8133 \\
+    \bottomrule
+    \end{tabular}
+  \label{tab:3}
+\end{table}
+
+\vspace{0.3cm}
+
+The Figure \ref{fig:best4} illustrates the changes in the average log predictive score as the weight increases for the best 4 combinations.
+
+\vspace{0.3cm}
+
+\begin{figure}[htbp!]
+\centering
+\caption{The highest four average log predictive scores of weighted two-model-pool combinations for S\&P 500 returnes predictive densities. }
+\includegraphics{figures/best4.pdf}
+\begin{flushleft}
+{\footnotesize The weights on the first model is in the x-axis and the corresponding average log predictive scores are on the y-axis. Constitutent models are stated in the title. The orange point represent the highest average log score of a specific combination. Its value and the corresponding optimal weight are noted below.}\\
+\end{flushleft}
+\label{fig:best4}
+\end{figure}
 
 \appendix
 

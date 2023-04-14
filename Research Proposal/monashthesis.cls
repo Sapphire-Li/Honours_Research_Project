@@ -44,10 +44,10 @@
 
 %% CAPTIONS
 \RequirePackage{caption}
-\DeclareCaptionStyle{italic}[justification=centering]
+\DeclareCaptionStyle{Italic}[justification=centering]
  {labelfont={bf},textfont={it},labelsep=colon}
-\captionsetup[figure]{style=italic,format=hang,singlelinecheck=true}
-\captionsetup[table]{style=italic,format=hang,singlelinecheck=true}
+\captionsetup[figure]{style=Italic,format=hang,singlelinecheck=true}
+\captionsetup[table]{style=Italic,format=hang,singlelinecheck=true}
 
 %% HEADERS AND FOOTERS
 \RequirePackage{fancyhdr}

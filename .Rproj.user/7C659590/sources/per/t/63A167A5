@@ -3,24 +3,25 @@
     "path": "~/Documents/R/Honours_Research_Project/Research Proposal/03-chap3.Rmd",
     "project_path": "Research Proposal/03-chap3.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "3000844688",
     "contents": "",
     "dirty": false,
     "created": 1680957385065.0,
     "source_on_save": false,
-    "relative_order": 7,
+    "relative_order": 4,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "47,35",
-        "scrollLine": "0"
+        "cursorPosition": "98,57",
+        "scrollLine": "88",
+        "last_setup_crc32": "4a8e3123fb6c3232"
     },
     "folds": "",
-    "lastKnownWriteTime": 1681309252,
+    "lastKnownWriteTime": 1681482706,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1681309252440,
+    "last_content_update": 1681482706249,
     "read_only": false,
     "read_only_alternatives": []
 }
