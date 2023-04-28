@@ -1,0 +1,99 @@
+---
+chapter: 2
+knit: "bookdown::render_book"
+---
+
+# Methodology
+
+**The first** goal of this paper is to construct linear density forecast combinations with several potential parametric models of a dataset. In addition to point forecasts, the use of density forecasts can offer forecasters or decision markers a broader and more comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions). The two-step approach will be applied in this part, and the results are anticipated to reveal that forecast combinations can **deliver improved accuracy over single models, but are not necessarily superior to forecasts obtained from the equally weighted combination.**
+
+
+
+The next goal is to estimate the unknown parameters of the constituent models and the weight in a single step, **and to compare the accuracy of forecasts based on these combinatinos against the usual (two-step) combinations, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in West (1996), which measure out-of-sample differences between forecasts.** 
+`r kableExtra::text_spec("You need to give some references for such tests if you are going to present them. There are a plethora going back to Diebold and Mariano, White (2000), Giacomini and White (2000), West (1996). Just see the references in our paper", color = "red")`
+
+
+
+Before further explaining the details, the following notations will be used throughout the paper. The dataset with $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_{t}$. Its future value after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon. $\mathcal{F}_t$, the information set at time t, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$.
+
+
+
+
+
+## Forecast Combination Method
+`r kableExtra::text_spec("You need much more detail here. At a minimum you need to more clearly define: 1) the parameters in the constituent models; 2) what you mean by the MLE; how you're estimating the combination weight in (2.1)", color = "red")`
+For the first step, I will estimate the unknown parameters of each constituent model using Maximum Likelihood Estimation. These estimates will then be held fixed and substituted into their corresponding probability density functions.
+
+Based on the idea of linear pooling [@BG69;@HM07;@GA11], the linear combinations of two predictive densities $f^{(t)}$ will be constructed with two constituent predictive densities $f^{(t)}_1$ and $f^{(t)}_2$:
+
+\begin{equation}
+f^{(t)}(y) = wf^{(t)}_1(y) + (1-w)f^{(t)}_2(y)
+\end{equation}  
+`r kableExtra::text_spec("This is not generally necessary, and is only what you do in the empirical section. you can leave these as general models for now.", color = "red")`
+where $f^{(t)}_1(y)$ and $f^{(t)}_2(y)$ are assumed to follow the normal distributions but with different means and variances, $h$ is the future value after the in-sample period ($R$), and $w$ is the weight allocated to the first model. Through this construction, the sum of two weights is implied to be 1, which is necessary and sufficient for the combination to be a density function[@GA11].
+
+More specifically, $f^{(t)}_1(y)=f_1(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_1, \sigma^2_1\}$ and $f^{(t)}_2(y)=f_2(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_2, \sigma^2_2\}$. $N\{x; \mu, \sigma^2\}$ denotes the normal probability density function evaluated at value $x$ with mean $\mu$ and variance $\sigma^2$. Given $\mathcal{F}_{t-1}$, the conditional mean and conditional variance should be used.
+
+`r kableExtra::text_spec("The estimation steps should all be in the same section, not split across two as you have it now.", color = "red")`
+
+## Evaluation of Models and Weighted Forecast Combinations {#evaluation}
+
+This refers to the second step, where I estimate the weight that is assigned to the first model given the aforementioned estimates. The assessment of out-of-sample predictions for individual models and combinations will rely on the average log predictive score function. Following the literature on density forecast evaluation, our initial analysis will focus on using log predictive scoring rules to measure the accuracy of our density forecasts; see, e.g., Geweke and Amisano for a discussion on log score and its use in density forecasting. 
+
+The average log predictive score function of a specific model over the forecast horizon $h=1,2,...,P$ (i.e., the out-of-sample period) is defined as follows:
+
+\begin{equation}
+LS = \frac{1}{P}\sum^P_{h=1}logf(y_{\small{R+h}}) = \frac{1}{P}\sum^P_{h=1} logf(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}})
+\end{equation}
+
+
+**The optimal weight $w*$ ** `r kableExtra::text_spec("This is not correct. We estimate the weights and the combinatinos on the same sample, then take them both out of sample according to equation (2.1)", color = "red")` will be estimated by maximizing the average logarithmic predictive score function over the out-of-sample period:
+
+\begin{equation}
+\frac{1}{P}\sum^P_{h=1}log\Big[wf_1(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}) + (1-w)f_2(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}})\Big]
+\end{equation}  
+
+The corresponding forecast density combination, given the optimal weight, will be referred to as the optimal combination.
+
+**Why are we using this $LS$, and what does it buy us? How does this help us look at the accuracy of density forecasts? These questions need to be answered here...**
+
+## A Motivating Example
+
+### Data  
+
+Reconsidering the example in section 3 of @GA11, I use the daily Standard and Poor's (S&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total), retrieved via the @SP500. Total 2519 ($T$) available observations are partitioned into two periods with a rough proportion. The in-sample period contains the first 60% of the data ($R = 1511$), which is used for estimating unknown parameters in each model. The remaining 40% ($P = 1008$) becomes the out-of-sample period for further evaluation.  
+
+
+
+### Model Specification {#model}
+
+For simplicity, I use $j=1,\cdots,M$, with $M=5$ prediction models to study the performance of density predictions across sets of ``two-model`` pools. Each of the $j$ predictive models has a conditionally Gaussian density, which  takes the form $f^{(j)}_1(y)=f_j(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_j, \sigma^2_j\}$, where $N\{x; \mu, \sigma^2\}$ denotes the normal probability density function evaluated at value $x$ with mean $\mu$ and variance $\sigma^2$. The notation $\mathcal{F}_{t-1}$ denotes all information available at time $t-1$, and we assume that the conditional mean and variance of the models are, up to unknown parameters, known at time $t-1$.
+
+We use the following models in the construction of the two-model pools. 
+
+
+1. Model 1: An ARIMA(1,1,1) model with an intercept for the natural logarithm of S&P 500. 
+2. Model 2: An ETS(M,N,N) model for the S&P 500. 
+3. Model 3: An ETS(M,A,N) model for the S&P 500. 
+
+ARIMA is short for autoregressive integrated moving average, and ETS stands for exponential smoothing. All error terms are assumed to be independent and normally distributed with mean zero and variance $\sigma_m^2 \ \text{for}\  m = 1,2,3$.
+
+4. Model 4: A linear regression model for the S&P 500 with a trend regressor and errors, follow an ARIMA(1,0,0) process. 
+5. Model 5: A linear regression model for the natural logarithm of S&P 500 with a trend regressor and errors follow an ARIMA(1,0,0) process. 
+
+Both error terms in the ARIMA model are assumed to be independent and normally distributed with mean zero and variance $\sigma_m^2 \ \text{for}\  m = 4,5$.
+
+
+All unknown parameters are estimated by maximizing the likelihood function using the in-sample period data. Once the estimated are obtained, they are held fixed for the density evaluations. For each model, I generate the predictive densities at every future time point of S&P 500 returns ($h=1,2,...,P$) given that all past information is known. In order to make a comparison between each pair of these models, the log of S&P 500 returns will be "back-transformed" by evaluating with the log normal density function.
+
+
+As a reference, detailed formulas and explanations of these models can be found in @fpp3. The formula of the conditional variance for the ETS models in this case is discussed in Chapter 6.3 of @HKOS08. All coding is performed using R Statistical Software (version 4.2.1 (2022-06-23)). The packages used are `tidyverse` [@tidy19], `dplyr` [@dplyr23], and `fpp3` [@fpp23].
+
+
+
+
+
+
+
+
+

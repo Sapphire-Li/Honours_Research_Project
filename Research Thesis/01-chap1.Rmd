@@ -1,0 +1,36 @@
+---
+chapter: 1
+knit: "bookdown::render_book"
+---
+
+# Introduction 
+
+## Research Objective
+
+This thesis aims to investigate the determinants behind, and evidence for the forecast combination puzzle in various domains, and to empirically examine a general solution to the forecast combination puzzle. The combination puzzle refers to the well-known empirical finding that an equally weighted combination of forecasts generally outperforms more sophisticated combination schemes. Over the past 50 years, the empirical studies undertaken so far have focused more on different time series settings. Thus, one of the main contributions of this research will be to investigate the presence of the combination puzzle in settings outside of pure time series models. As an additional contribution, we will assess the veracity, and applicability, of a recently proposed solution to the forecast combination puzzle suggested in @ZMFP22 and @FZMP23.  
+
+
+
+## Literature Review and Motivation
+
+The accuracy of forecasts is of critical concern for forecasters and decision makers. An idea of combining multiple forecasts from different models was originally proposed in the seminal work of @BG69. With the evidence of dramatic improvements in the forecast accuracy, forecast combinations have attracted increasing attention and contributions in the literature, both theoretical and applied [@C89;@T06]. In short, forecast combination methods involve producing point or density forecasts and then combining them based on a rule or weighting scheme. This process can sometimes capture more meaningful characteristics of the true data generating process than using a single model, and allow us to combine the best features of different models within a single framework. Researchers have examined a variety of combination methods for point and probabilistic forecasts over the past 50 years, see @WHLK22 for a modern literature review.  
+
+
+
+In most time series setting under which forecast combinations are employed, a striking empirical phenomenon is often observed, coined by @SW04, as the "forecast combination puzzle". The puzzle is encapsulated by the fact that "theoretically sophisticated weighting schemes should provide more benefits than the sample average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts" [@WHLK22]. In the early forecast comparison studies, @MACF82 and @SW98 demonstrated that combinations perform better than the individual models and a simple average of the forecasts is typically more preferred with empirical evidence. More recently, @SW04, @MSA18 and @MSA20 delved more into forecast combinations, and also claimed that equally-weighted strategies are highly competitive compared with complicated schemes.
+
+
+
+Most explanations for the puzzle concentrate on the error of combination weight estimation. For example, @SW04 showed that the higher average loss and instability make sophisticated weighting schemes to have inferior performance. @T06 pointed out that the success of averaging is the efficiency gains under certain assumptions whereas recursive estimation of parameters in the optimally-weighted combinations could potentially lead to biased estimators of the combination weights. On the other hand, @E11 explored the sizes of theoretical gains from optimal weights and established that the estimation error would outweigh gains if the number of forecasts is small. Later, @CMVW16 demonstrated the presence of bias and inefficiency when weights estimation is required, in comparison with the fixed-weights such as the equal weights. While various explanations for the forecast combination puzzle have been suggested over the years (see the above references), a general solution to the puzzle has so far proved elusive. 
+
+
+
+Instead of exploring the estimation error in determining optimal weights, @ZMFP22 investigated the sampling variability in estimating constituent models and the main determinant of forecast combination performance. They illustrated that, asymptotically, the bias and variability mainly come from the estimation of parameters in the constituent models, rather than the weight estimation. This new insight motivates @FZMP23 to propose a most general solution to the puzzle. They demonstrated that, in theory, the puzzle is evident due to the way of producing forecast combinations. Furthermore, a process of eliminating the puzzle is also suggested, which is to produce forecasts by estimating parameters and weights simultaneously, if feasible. Under this approach, the sophisticated weighting schemes should (asymptotically) be superior.
+
+
+
+The goal of this thesis is two-fold: first, to search for empirical evidence of the combination puzzle in settings outside of the usual time series in which it has been found; second, to test the empirical veracity of the theoretical solution to the puzzle found in @FZMP23, both within, and outside of, the standard time series setting where the puzzle is often observed.
+
+
+
+

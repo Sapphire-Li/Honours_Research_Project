@@ -1,0 +1,43 @@
+---
+chapter: 1
+knit: "bookdown::render_book"
+---
+
+# Introduction 
+
+## Research Objective
+
+This **thesis aims to investigate** the **determinants behind, and evidence for,** the forecast combination puzzle in various settings, besides the time series domain, and to empirically examine a general solution to the forecast combination puzzle. The combination puzzle refers to the **well-known empirical finding that an equally weighted combination of forecasts generally** outperforms **more** sophisticated combination **schemes**. Over the past 50 years, the empirical study undertaken so far has been limited, in that most attention has been focused on different time series datasets. **Thus, one of the main contributions of this research will be to investigate the presence of the combination puzzle in settings outside of pure time series models. As an additional contribution, we will investigate the veracity, and applicability, of a recently proposed solution to forecasting combination puzzle suggested in @ZMFP22 and @FZMP23.**
+
+
+
+## Literature Review and Motivation
+
+**The accuracy of forecasts is of critical concern** when forecasts are used in decision-making. _Under the classical frequentist approach, forecasters often choose only one "best model" to mimic the actual data generating process of the target variable and then use it to predict future values._ `r kableExtra::text_spec("This is not true in general. What you are doing is frequentist actually, so I also don't see the need to be distinct here. Perhaps best to say something instead about: one possible approach would be to choose a single best model and use the resulting model to produce our forecasts. However, that single model, even if chosen optimally, may not capture all important information about the data generaring process.", color = "red")` However, that single model could be misleading, as it may not capture all the important features of the data. The idea of combining multiple **forecasts from different models was originally proposed in the seminar work of ** @BG69. They popularized the use of forecast combination for optimal forecasts with several combination techniques. The dramatic improvements in forecast accuracy, along with flexible combination methods, have attracted increasing attention and contributions from researchers in different fields, both theoretical and empirical [@C89;T06]; see @WHLK22 for a modern literature review over the past 50 years.  
+
+
+
+In short, forecast **combination methods** involve producing point or density forecasts and then combining them based on a rule or weighting scheme. This process can **sometimes capture more meaningful features of the true data generating process than using a single model, and allows us to combine the best features of different models within a single framework**. `r kableExtra::text_spec("This makes it seem like you are saying the forecast puzzle is due to carelessness... which is a very bad idea. Best to revise this sentence or just describe the phenomena.", color = "red")` However, issues could arise with arbitrary or careless implementation. **IN most time series settings under which forecast combinatinos are employed, a striking empirical phenomena is often observed, coined by @SW04, as the "forecast combination puzzle". The puzzle is the encapsulated by the fact that** "theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts" [@WHLK22] (see section 2.6 for more details and examples). 
+
+`r kableExtra::text_spec("Can't use this if you haven't said why it is counter-intuitive. Ask yourself, why is this counterintuivie? ", color = "red")`
+This counter-intuitive result is widely discovered in time series settings, what will happen when working with datasets such as surveys of professional forecasters, dynamic panels, and pure cross-sectional?  
+
+`r kableExtra::text_spec("you need a more extensive review here. Go back through the papers Wang et al. mentions in their review, as well as the other review I mentioned, and try and pick out several more key references to discuss. In particular, you also need to present some information on the various solutions for the puzzle that have so far been suggested, which is conspicuously missing; e.g., Smith and Wallis, The paper by Hjort and Vasney, etc. We weren't the first to present a solution, our solution is just the most general, and nests all the other proposed solutions", color = "red")`
+
+`r kableExtra::text_spec("This can then be more carefully connected with the following paragraph", color = "red")`
+
+**While various explanatinos for the forecast combination puzzle have been suggested over the years (see the above references), a general solution to the puzzle has so far proved ellusive.** If the forecast combination puzzle occurs in every setting, it is essential to explore its cause and support the theory with empirical evidence. 
+`r kableExtra::text_spec("These two ideas are far to disperate to be presented in the same paragraph. You need to pull them apart and make each a separate idea with their own paragraphs. They can't be so easily smushed together.", color = "red")`
+@FZMP23 demonstrated that, in theory, the cause of the puzzle is the way researchers produce forecast combinations, called a "two-step" approach in the paper. The constituent model forecasts are determined first with estimated parameters, and the unknown weights are then estimated conditional on all the estimates. `r kableExtra::text_spec("Revise this, it is unclear what you are trying to say here or why. I think what you are trying to state is why people use the two-step approach in general. ", color = "red")` Due to the unawareness and dimensionality of combining all unknown parameters, this two-step approach is commonly studied and used in the literature, e.g., @HM07; @GA11; @GR13; @BS16. @FZMP23 further claims that the forecast combination puzzle can be avoided when unknown parameters and weights are estimated in one step, namely a "one-step" approach, when feasible. In other words, if forecasts are produced by estimating parameters and weights simultaneously, the sophisticated weighting schemes should (asymptotically) be superior. 
+
+**The goal of this thesis is two-fold: first, to search for empirical evidence of the combination puzzle in settings outside of the ususal time series in which it has been found; second, to test the empirical veracity of the theoretical solution to the puzzle found in @FZMP23, both within, and outside of, the standard time series setting where the puzzle is often observed.**
+`r kableExtra::text_spec("There is no neet to talk about testing at this stage, as you can't scratch the surface of this idea yet, and placing it here looks awkward without the necessary literature to back it up", color = "red")`
+
+
+
+
+
+
+
+
+

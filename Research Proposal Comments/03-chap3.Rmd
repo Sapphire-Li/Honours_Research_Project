@@ -14,7 +14,7 @@ The average log predictive score of each model mentioned in section \@ref(model)
 
 \begin{table}[htbp!]
 \centering
-\caption{Average log predictive score of each proposed model for S\&P 500 returnes.}
+\caption{Average log predictive score of each proposed model for S\&P 500 returns.}
 \begin{tabular}{l*{4}{c}}
 \hline
      ARIMA(1,1,1) & ETS(M,N,N) & ETS(M,A,N) & LM (linear) & LM (log) \\
@@ -96,7 +96,7 @@ The Figure \ref{fig:best4} illustrates the changes in the average log predictive
 
 \begin{figure}[htbp!]
 \centering
-\caption{The highest four average log predictive scores of weighted two-model-pool combinations for S\&P 500 returnes predictive densities. }
+\caption{The highest four average log predictive scores of weighted two-model-pool combinations for S\&P 500 returns predictive densities. }
 \includegraphics{figures/best4.pdf}
 \begin{flushleft}
 {\footnotesize The weights on the first model is in the x-axis and the corresponding average log predictive scores are on the y-axis. Constitutent models are stated in the title. The orange point represent the highest average log score of a specific combination. Its value and the corresponding optimal weight are noted below.}\\
