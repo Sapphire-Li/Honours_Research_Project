@@ -101,7 +101,7 @@
 
 %% SPACING
 \RequirePackage{setspace}
-\spacing{1.5}
+\spacing{1}
 
 %% LINE AND PAGE BREAKING
 \sloppy
@@ -192,7 +192,7 @@
     \thispagestyle{empty}%
     \null\vskip1cm%
     \begin{center}
-        \LARGE\textbf{\expandafter{\@title}}
+        \Huge\textbf{\expandafter{\@title}}
     \end{center}
     \vfill
     \begin{center}\Large

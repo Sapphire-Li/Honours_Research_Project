@@ -99,6 +99,8 @@ Reconsidering the example in section 3 of \textcite{GA11}, the data used is the 
 
 Models include commonly used model types such as autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors. See Appendix for detailed model specifications.
 
+There are 10 sets of two-model combination and each combination log score is generated according to (2.3) with the value of weight changes by 0.01 every time. Table \ref{tab:2} shows the estimated weights and combination log scores.
+
 \begin{table}[ht]
   \centering
   \caption{Log predictive score of density forecasts combination under two-model pools}
@@ -119,8 +121,6 @@ Models include commonly used model types such as autoregressive integrated movin
   \label{tab:2}
 \end{table}
 
-There are 10 sets of two-model combination and each combination log score is generated according to (2.3) with the value of weight changes by 0.01 every time. Table \ref{tab:2} shows the estimated weights and combination log scores.
-
 \vspace{0.3cm}
 
 \begin{figure}[ht]
@@ -134,6 +134,22 @@ There are 10 sets of two-model combination and each combination log score is gen
 \end{figure}
 
 Figure \ref{fig:best4} illustrates the change of the log predictive score for the top 4 combinations as the weight increases. The great improvement in the scores means that the combination forecasts do perform better than the individual forecasts. It is also noticeable that the estimated weights are close to the equal weight (0.5), which could be an evidence for the forecast combination puzzle.
+
+\hypertarget{timeline-of-future-research}{%
+\section{Timeline of Future Research}\label{timeline-of-future-research}}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Research Plan}
+    \begin{tabular}{ll}
+    Time  & Objectives \\
+    \midrule
+    May - June & Investigating the presence of puzzle in panel data and literature review \\
+    July - August & Applying the forecast accuracy tests with time series data and drafting thesis  \\
+    September & Attempting the tests with panel data and considering limitations \\
+    October & Working on thesis and final presentation \\
+    \end{tabular}
+\end{table}
 
 \appendix
 
