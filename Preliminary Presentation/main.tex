@@ -1,0 +1,167 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\graphicspath{{Graph/}{./}} % Specifies where to look for included images (trailing slash required)
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule for better rules in tables
+\usepackage{calligra} % Font for wordart
+\usepackage{appendixnumberbeamer} % If you want a separate slide counter for your appendix
+\usepackage{fnpct} % Eliminate the unwanted space before the footnote mark
+\usepackage{listings} % For code display
+
+
+%---------------------------------------------------------
+%	CITATIONS / REFERENCES
+%---------------------------------------------------------
+\usepackage[style=authoryear]{biblatex}
+\addbibresource{bib.bib}
+%\bibliographystyle{apalike}
+
+
+
+%---------------------------------------------------------
+%	SELECT THEME & COLORS
+%---------------------------------------------------------
+\usetheme{Madrid}
+\definecolor{MonashBlue}{RGB}{0, 99, 167}
+\definecolor{Orange}{RGB}{204, 89, 0}
+
+\setbeamercolor*{structure}{bg=MonashBlue, fg=MonashBlue}
+% Title block and bottom right box color
+\setbeamercolor*{palette primary}{use=structure, fg=white,bg=MonashBlue}
+% Bottom left box and bar between title & top bubbles
+\setbeamercolor*{palette secondary}{use=structure, fg=MonashBlue, bg=white}
+% Probably not used
+\setbeamercolor*{palette tertiary}{use=structure, fg=white, bg=MonashBlue} 
+
+% Title of each slide
+\setbeamercolor{frametitle}{bg=MonashBlue, fg=white}
+\setbeamercolor*{titlelike}{parent=palette primary}
+
+
+%%% Headline and Central Footer %%%
+% You can change the theme back and forth for each frame
+
+% Theme II - gold head, gold foot (as shown in the title frame)
+    \setbeamercolor{section in head/foot}{fg=white, bg=Orange}
+    \setbeamercolor{headline}{fg=white, bg=Orange}
+
+
+
+%%% Specific Colors %%%
+\setbeamercolor{item projected}{bg=Orange}
+\setbeamertemplate{enumerate items}{bg=Orange}
+
+\setbeamercolor{itemize item}{fg=Orange}
+\setbeamercolor{itemize subitem}{fg=Orange}
+
+\setbeamercolor{button}{bg=Orange}
+
+%%% Edits ONLY the TOC slide %%%
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{subsection in toc}{fg=black}
+
+%%% Block Colors %%%
+% Standard block
+    \setbeamercolor{block title}{bg=Orange, fg=white}
+    \setbeamercolor{block body}{bg=Orange!20}
+% Alerted block
+    \setbeamercolor{block title alerted}{bg=orange, fg=white}
+    \setbeamercolor{block body alerted}{bg=orange!10}
+% Example block
+    \setbeamercolor{block title example}{bg=MonashBlue, fg=white}
+    \setbeamercolor{block body example}{bg=MonashBlue!10}
+
+%---------------------------------------------------------
+%	SELECT THE FONT THEME & FONTS
+%---------------------------------------------------------
+\usefonttheme{default} % Typeset using the default sans serif font
+\usepackage{palatino} % Use the Palatino font for serif text
+\usepackage[default]{opensans} % Use the Open Sans font for sans serif text
+\useinnertheme{circles}
+
+%---------------------------------------------------------
+%	SELECT THE OUTER THEME
+%---------------------------------------------------------
+
+% \useoutertheme{default}
+% \useoutertheme{miniframes}
+% \useoutertheme{infolines}
+% \useoutertheme{smoothbars}
+% \useoutertheme{sidebar}
+ \useoutertheme{split}
+% \useoutertheme{shadow}
+% \useoutertheme{tree}
+% \useoutertheme{smoothtree}
+
+%---------------------------------------------------------
+%	PRESENTATION INFORMATION
+%---------------------------------------------------------
+
+\title[Revisiting Forecast Combination Puzzle]{Revisiting Forecast Combination Puzzle}
+% Click the middle footer can switch between the first and last numbered frame
+\subtitle{An Empirical Study}
+\medskip
+\author[Honours Preliminary Presentation]{\Large{XIEFEI (SAPPHIRE) LI}}
+\institute[]{Department of Econometrics and Business Statistics \\ \medskip
+\textit{xlii0145@student.monash.edu} \\ \bigskip
+\text{\small{Supervisor: David T. Frazier}}
+}
+\date[May 2023]
+
+\logo{\includegraphics[width=2.5cm]{Monash.png}}
+
+%---------------------------------------------------------
+%	CODE DISPLAY
+%---------------------------------------------------------
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries\color{blue},
+    emphstyle=\ttfamily\color{red},   
+    stringstyle=\color{green},
+    numbers=left,
+    numberstyle=\small\color{gray},
+    rulesepcolor=\color{red!20!green!20!blue!20},
+    frame=shadowbox,
+    xleftmargin=1cm,
+    xrightmargin=1cm,
+}
+
+%---------------------------------------------------------
+%	EXTRA SETTINGS
+%---------------------------------------------------------
+
+% Clear warnings related to \translate
+%     https://github.com/josephwright/beamer/issues/449
+\pdfstringdefDisableCommands{
+    \def\translate#1{#1}
+}
+
+% Adjust header height
+\setbeamertemplate{headline}{
+    \nointerlineskip
+    \begin{beamercolorbox}[wd=\paperwidth,ht=7.0ex]{headline}
+        \insertnavigation{\paperwidth}\vspace*{2.0ex}
+    \end{beamercolorbox}
+}
+
+% Disable navigation symbols
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize
+{
+    text margin left=1cm,
+    text margin right=1cm
+}
+
+%---------------------------------------------------------
+%   DOCUMENT BEGINS
+%---------------------------------------------------------
+\begin{document}
+
+\input{01-title.tex}
+\input{02-motivation.tex}
+\input{03-aim.tex}
+\input{04-methodology.tex}
+\input{05-result.tex}
+\input{06-conclusion.tex}
+\input{07-reference.tex}
+\input{08-appendix.tex}
+
+\end{document}

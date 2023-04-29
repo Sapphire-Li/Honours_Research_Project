@@ -1,0 +1,15 @@
+
+
+% Remove headers from top
+\appendix
+\setbeamertemplate{headline}{
+    \nointerlineskip
+}
+\addtobeamertemplate{frametitle}{\vspace*{-\headheight}}{}
+
+\begin{frame}[noframenumbering, allowframebreaks]
+    \frametitle{References}
+    \printbibliography[title={References}, heading=bibintoc, style=apa]
+\end{frame}
+
+

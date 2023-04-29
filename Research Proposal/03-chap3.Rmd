@@ -44,7 +44,7 @@ There are 10 sets of two-model combination and each combination log score is gen
 \caption{The highest four log predictive scores of weighted two-model-pool combinations for S\&P 500 returns predictive densities. }
 \includegraphics{figures/best4comb.pdf}
 \begin{flushleft}
-{\footnotesize The weights on the first model is in the x-axis and the corresponding log predictive scores are on the y-axis. Constitutent models are stated in the title. The orange point represent the highest log score of a specific combination. Its value and the corresponding optimal weight are noted below.}\\
+{\footnotesize The weights on the first model is in the x-axis and the corresponding log predictive scores are on the y-axis. Constituent models are stated in the title. The orange point represent the highest log score of a specific combination. Its value and the corresponding estimated weight are noted below.}\\
 \end{flushleft}
 \label{fig:best4}
 \end{figure}

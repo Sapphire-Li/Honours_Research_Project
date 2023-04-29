@@ -1,0 +1,58 @@
+
+\section{Methodology}
+
+
+\begin{frame}
+\label{Figure}
+	\frametitle{Forecast combination method}
+		
+        A linear combination of two predictive densities, $f(y_t)$, is constructed with two constituent predictive densities $f_1(y_t)$ and $f_2(y_t)$:
+        
+        \vspace{3mm}
+        
+        \begin{equation}
+        f(y_t) = w \ f_1(y_t) + (1-w) \ f_2(y_t)
+        \end{equation}  
+        
+        \vspace{5mm}
+        
+        where $w$ \footnote{\scriptsize{Through this construction, the sum of two weights is implied to be 1, which is necessary and sufficient for the combination to be a density function [\cite{GA11}].}} is the weight allocated to the first model. 
+        
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Parameters Estimation}
+
+The unknown parameters, $\theta_M$, of each model ($M$) are estimated by maximizing the log likelihood function of the conditional probability density over the in-sample period ($R$):
+
+\begin{equation}
+    \hat\theta_M = \text{argmax} \sum^R_{t=1} log f(y_t|M).
+\end{equation}
+ 
+\end{frame}
+
+\begin{frame}{Log predictive score function}
+
+Following \cite{GA11}, we measure the accuracy of density forecasts with the log predictive score function for each model, which is defined as:
+
+\begin{equation}
+LS = \sum^P_{h=1} log\ f(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}}, \hat\theta_M, M)
+\end{equation}
+
+\vspace{5mm}
+\scriptsize{where $P$ denotes the out-of-sample period and $h$ is the forecast horizon with $h>0$. $\mathcal{F}_{\small{R+h-1}}$ denotes all information available at time $R+h-1$, and we assume that the conditional mean and variance of the models are, up to unknown parameters, known at time $R+h-1$. }
+
+\end{frame}
+
+\begin{frame}{Weight Estimation}
+    The weight ($w$) assigned to the first model will be estimated by maximizing the log predictive score function over the out-of-sample period:
+
+\begin{multline}
+\hat{w} = \text{argmax} \sum^P_{h=1}log\Big[w \ f_1(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}, \hat\theta_{M_1}, M_1) \\
+ + (1-w) \ f_2(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}, \hat\theta_{M_2}, M_2)\Big]
+\end{multline}
+
+\end{frame}
+
+

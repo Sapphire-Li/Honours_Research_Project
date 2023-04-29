@@ -69,24 +69,24 @@ A prediction model \(M\) determines the conditional probability density for \(\t
 \hypertarget{forecast-combination-method}{%
 \section{Forecast Combination Method}\label{forecast-combination-method}}
 
-Based on the idea of linear pooling \autocite{BG69,HM07,GA11}, a linear combination of two predictive densities \(f^{(t)}\) is constructed with two constituent predictive densities \(f^{(t)}_1\) and \(f^{(t)}_2\):
+Based on the idea of linear pooling \autocite{BG69,HM07,GA11}, a linear combination of two predictive densities \(f(y_t)\) is constructed with two constituent predictive densities \(f_1(y_t)\) and \(f_2(y_t)\):
 
 \begin{equation}
-f^{(t)}(y) = wf^{(t)}_1(y) + (1-w)f^{(t)}_2(y)
+f(y_t) = wf_1(y_t) + (1-w)f_2(y_t)
 \end{equation}
 
-where \(h\) is the future value after the in-sample period (\(R\)), and \(w\) is the weight allocated to the first model. Through this construction, the sum of two weights is implied to be 1, which is necessary and sufficient for the combination to be a density function \autocite{GA11}.
+where \(w\) is the weight allocated to the first model. Through this construction, the sum of two weights is implied to be 1, which is necessary and sufficient for the combination to be a density function \autocite{GA11}.
 
 Following the literature on density forecast evaluation, our initial analysis will focus on using log predictive score functions to assess the model estimation and measure the accuracy of our density forecasts; see, e.g., \textcite{GA11} for a discussion on log score and its use in density forecasting. The log predictive score function of a specific model over the forecast horizon \(h=1,2,...,P\) (i.e., the out-of-sample period) is defined as follows:
 
 \begin{equation}
-LS = \sum^P_{h=1} logf(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}})
+LS = \sum^P_{h=1} logf(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}}, \theta_M, M)
 \end{equation}
 
 The weight \(w\) assigned to the first model will be estimated by maximizing the log predictive score function over the out-of-sample period:
 
 \begin{equation}
-\sum^P_{h=1}log\Big[wf_1(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}) + (1-w)f_2(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}})\Big]
+\sum^P_{h=1}log\Big[wf_1(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}, \theta_{M_1}, M_1) + (1-w)f_2(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}, \theta_{M_2}, M_2)\Big]
 \end{equation}
 
 \hypertarget{preliminary-results}{%
@@ -128,7 +128,7 @@ There are 10 sets of two-model combination and each combination log score is gen
 \caption{The highest four log predictive scores of weighted two-model-pool combinations for S\&P 500 returns predictive densities. }
 \includegraphics{figures/best4comb.pdf}
 \begin{flushleft}
-{\footnotesize The weights on the first model is in the x-axis and the corresponding log predictive scores are on the y-axis. Constitutent models are stated in the title. The orange point represent the highest log score of a specific combination. Its value and the corresponding optimal weight are noted below.}\\
+{\footnotesize The weights on the first model is in the x-axis and the corresponding log predictive scores are on the y-axis. Constituent models are stated in the title. The orange point represent the highest log score of a specific combination. Its value and the corresponding estimated weight are noted below.}\\
 \end{flushleft}
 \label{fig:best4}
 \end{figure}
