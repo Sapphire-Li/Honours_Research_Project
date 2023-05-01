@@ -10,11 +10,11 @@ The first goal of this paper is to construct linear density forecast combination
 The next goal is to estimate the unknown parameters of the constituent models and the weight in a single step, and to compare the accuracy of forecasts based on these combinations against the usual combinations process, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in @W96, which measure out-of-sample differences between forecasts.
 
 
-Before explaining the details, the following notations will be used throughout the paper. A vector time series $\textbf{y}_t$ with a total of $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_{t}$. Its future value after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon and $h>0$. The information set at time t, $\mathcal{F}_t$, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$. 
+Before explaining further details, the following notations will be used throughout the paper. A vector time series $\textbf{y}_t$ with a total of $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_{t}$. Its future values after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon and $h>0$. The information set at time t, $\mathcal{F}_t$, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$. 
 
 
 
-A prediction model $M$ determines the conditional probability density for $\textbf{y}_t$ with unknown parameters $\theta_M$ given the history $\mathcal{F}_{t-1}$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$. Parameter estimates $\hat\theta_M$ are obtained by maximizing the log likelihood function of the conditional probability density for the in-sample period, i.e., $\hat\theta_M = \text{argmax} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. These estimates will be held fixed for the easy of evaluation.
+A prediction model $M$ determines the conditional probability density for $\textbf{y}_t$ with unknown parameters $\theta_M$ given the history $\mathcal{F}_{t-1}$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$. Parameter estimates $\hat\theta_M$ are obtained by maximizing the log likelihood function of the conditional probability density for the in-sample period, i.e., $\hat\theta_M = \text{argmax} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. These estimates will be held fixed for the convenience of evaluation.
 
 
 ## Forecast Combination Method
@@ -34,7 +34,7 @@ LS = \sum^P_{h=1} logf(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}}, \theta_M, M
 \end{equation}
 
 
-The weight $w$ assigned to the first model will be estimated by maximizing the log predictive score function over the out-of-sample period:
+The weight $w$ assigned to the first model will then be estimated by maximizing the log predictive score function over the out-of-sample period:
 
 \begin{equation}
 \sum^P_{h=1}log\Big[wf_1(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}, \theta_{M_1}, M_1) + (1-w)f_2(y_{\small{R+h}}|\mathcal{F}_{\small{R+h-1}}, \theta_{M_2}, M_2)\Big]

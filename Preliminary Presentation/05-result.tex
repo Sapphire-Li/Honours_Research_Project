@@ -4,18 +4,23 @@
 
 \begin{frame}
     \frametitle{Model Specification I}
+    
+Data: Standard and Poor’s (S\&P) 500 index retrieved from the \cite{SP500}.
+
+\vspace{2mm}
 
     \begin{itemize}
-    \item An ARIMA(1,1,1) model 
+    \item ARIMA(1,1,1) model 
         \begin{equation*}
         log(y_t) = c + log(y_{t-1}) + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \epsilon_t + \theta_1\epsilon_{t-1}
         \end{equation*}
-    \item An ETS(M,N,N) model
+    \item ETS(M,N,N) model
         \begin{align*}
         y_t &= \ell_{t-1} (1+\epsilon_t) \\
         \ell_t &= \ell_{t-1} (1+\alpha \epsilon_t) \\
         \end{align*}
-    \item An ETS(M,A,N) model
+        \vspace{-1cm}
+    \item ETS(M,A,N) model
         \begin{align*}
         y_t &= (\ell_{t-1} + b_{t-1} (1+\epsilon_t) \\
         \ell_t &= (\ell_{t-1} + b_{t-1}) (1+\alpha \epsilon_t) \\

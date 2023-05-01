@@ -3,7 +3,7 @@
     "path": "~/Documents/R/Honours_Research_Project/Research Proposal/A-appA.Rmd",
     "project_path": "Research Proposal/A-appA.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "2627177016",
     "contents": "",
     "dirty": false,
     "created": 1682650303772.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "45,8",
-        "scrollLine": "31"
+        "cursorPosition": "58,3",
+        "scrollLine": "52"
     },
     "folds": "",
-    "lastKnownWriteTime": 1682759093,
+    "lastKnownWriteTime": 1682937088,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1682759093669,
+    "last_content_update": 1682937088096,
     "read_only": false,
     "read_only_alternatives": []
 }
