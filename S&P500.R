@@ -23,7 +23,7 @@ P <- nrow(test)
 fit_1 <- train |> model(ARIMA(log(SP500)))
 fit_1_coef <- coef(fit_1) |> select(term, estimate)
 resid_1_train <- residuals(fit_1) |> as_tibble() |> select(.resid)
-mean_1_train <- numeric(R-1) |> as.numeric()
+mean_1_train <- numeric(R-2) |> as.numeric()
 
 for (j in 1:(R-1)) {
   mean_1_train[j] <- fit_1_coef[3,2] + (1+fit_1_coef[1,2])*train[j+1,4] - fit_1_coef[1,2]*train[j,4] + fit_1_coef[2,2]*resid_1_train[j+1,]

@@ -39,13 +39,13 @@ b_t &= b_{t-1} + \beta (\ell_{t-1} + b_{t-1})\epsilon_t \\
 4. Model 4: A linear regression model of the S&P 500 index and ARIMA(1,0,0) errors. 
 \begin{align*}
 y_t &= \beta_0 + \beta_1 t + u_t \\
-u_t &= \phi_1 \epsilon_{t-1} + \epsilon_t
+u_t &= \phi_1 u_{t-1} + \epsilon_t
 \end{align*}
 
 5. Model 5: A linear regression model of the natural logarithm of the S&P 500 index and ARIMA(1,0,0) errors. 
 \begin{align*}
 log(y_t) &= \beta_0 + \beta_1 t + u_t \\
-u_t &= \phi_1 \epsilon_{t-1} + \epsilon_t
+u_t &= \phi_1 u_{t-1} + \epsilon_t
 \end{align*}
 
 The $\epsilon_t$ in each model is assumed to be independent and normally distributed with a zero mean and a constant variance.
