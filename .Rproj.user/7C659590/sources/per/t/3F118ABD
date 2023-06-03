@@ -1,27 +1,27 @@
 {
-    "id": "6F526310",
-    "path": "~/Documents/R/Honours_Research_Project/Cross Sectional Data Simulation.R",
-    "project_path": "Cross Sectional Data Simulation.R",
+    "id": "3F118ABD",
+    "path": "~/Documents/R/Honours_Research_Project/Preliminary Results - Final.R",
+    "project_path": "Preliminary Results - Final.R",
     "type": "r_source",
-    "hash": "3788082325",
+    "hash": "1809753246",
     "contents": "",
     "dirty": false,
-    "created": 1685716197573.0,
+    "created": 1685789183978.0,
     "source_on_save": false,
     "relative_order": 3,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "8,10",
-        "scrollLine": "0"
+        "cursorPosition": "337,0",
+        "scrollLine": "328"
     },
     "folds": "",
-    "lastKnownWriteTime": 1685790437,
+    "lastKnownWriteTime": 1685788595,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1685790437977,
+    "last_content_update": 1685788595,
     "read_only": false,
     "read_only_alternatives": []
 }
