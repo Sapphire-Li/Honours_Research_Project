@@ -180,7 +180,8 @@ comb <- cbind(w,pool_train) |> as_tibble()
 comb |> filter(pool_train == max(comb$pool_train))
 weight_optimal[1] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(w) |> as.numeric()
 LS_comb_optimal[1] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(pool_train) |> as.numeric()
-comb |> ggplot(aes(w, pool_train)) +
+
+p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
   labs(title = "ARIMA(1,1,1) and ETS(M,N,N)",
        x = "Weight on model ARIMA(1,1,1)",
@@ -206,11 +207,7 @@ comb |> filter(pool_train == max(comb$pool_train))
 weight_optimal[2] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(w) |> as.numeric()
 LS_comb_optimal[2] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(pool_train) |> as.numeric()
 
-comb <- cbind(w,pool_train) |> as_tibble()
-comb |> filter(pool_train == max(comb$pool_train))
-weight_optimal[2] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(w) |> as.numeric()
-LS_comb_optimal[2] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(pool_train) |> as.numeric()
-comb |> ggplot(aes(w, pool_train)) +
+p2 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
   labs(title = "ARIMA(1,1,1) and Linear Regression",
        x = "Weight on model ARIMA(1,1,1)",
@@ -236,11 +233,7 @@ comb |> filter(pool_train == max(comb$pool_train))
 weight_optimal[3] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(w) |> as.numeric()
 LS_comb_optimal[3] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(pool_train) |> as.numeric()
 
-comb <- cbind(w,pool_train) |> as_tibble()
-comb |> filter(pool_train == max(comb$pool_train))
-weight_optimal[3] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(w) |> as.numeric()
-LS_comb_optimal[3] <- comb |> filter(pool_train == max(comb$pool_train)) |> select(pool_train) |> as.numeric()
-comb |> ggplot(aes(w, pool_train)) +
+p3 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
   labs(title = "ETS(M,N,N) and Linear Regression",
        x = "Weight on model ETS(M,N,N)",
@@ -272,7 +265,7 @@ weight_test[1] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.nume
 LS_comb_test[1] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_1 <- comb |> filter(w == weight_optimal[1]) |> select(pool) |> as.numeric()
 
-comb |> ggplot(aes(w, pool)) +
+p4 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
   labs(title = "ARIMA(1,1,1) and ETS(M,N,N)",
        x = "Weight on model ARIMA(1,1,1)",
@@ -302,11 +295,7 @@ weight_test[2] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.nume
 LS_comb_test[2] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_2 <- comb |> filter(w == weight_optimal[2]) |> select(pool) |> as.numeric()
 
-comb <- cbind(w,pool) |> as_tibble()
-comb |> filter(pool == max(comb$pool))
-weight_test[2] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.numeric()
-LS_comb_test[2] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
-comb |> ggplot(aes(w, pool)) +
+p5 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
   labs(title = "ARIMA(1,1,1) and Linear Regression",
        x = "Weight on model ARIMA(1,1,1)",
@@ -322,7 +311,7 @@ comb |> ggplot(aes(w, pool)) +
   geom_point(aes(x = weight_test[2], y = LS_comb_test[2]), size = 3, color = "blue") +
   geom_point(aes(x = weight_optimal[2], y = LS_comb_2), size = 2, color = "orange") +
   annotate("text", x = weight_optimal[2], y = LS_comb_2,
-           label = paste0("Optimal Weight: ", round(weight_optimal[2],4)), vjust = 3, hjust = -0.01, size = 3)
+           label = paste0("Optimal Weight: ", round(weight_optimal[2],4)), hjust = 1.1, size = 3)
 
 
 
@@ -337,11 +326,7 @@ weight_test[3] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.nume
 LS_comb_test[3] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_3 <- comb |> filter(w == weight_optimal[3]) |> select(pool) |> as.numeric()
 
-comb <- cbind(w,pool) |> as_tibble()
-comb |> filter(pool == max(comb$pool))
-weight_test[3] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.numeric()
-LS_comb_test[3] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
-comb |> ggplot(aes(w, pool)) +
+p6 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
   labs(title = "ETS(M,N,N) and Linear Regression",
        x = "Weight on model ETS(M,N,N)",
@@ -351,16 +336,21 @@ comb |> ggplot(aes(w, pool)) +
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
   annotate("text", x = weight_test[3], y = LS_comb_test[3],
-           label = paste0("Max: ", round(LS_comb_test[3],4)), vjust = 2, size = 3) +
+           label = paste0("Max: ", round(LS_comb_test[3],4)), vjust = 3, hjust = 0.8, size = 3) +
   annotate("text", x = weight_test[3], y = LS_comb_test[3],
-           label = paste0("Weight: ", round(weight_test[3],4)), vjust = 4, size = 3) +
+           label = paste0("Weight: ", round(weight_test[3],4)), vjust = 5, hjust = 0.8, size = 3) +
   geom_point(aes(x = weight_test[3], y = LS_comb_test[3]), size = 3, color = "blue") +
   geom_point(aes(x = weight_optimal[3], y = LS_comb_3), size = 2, color = "orange") +
   annotate("text", x = weight_optimal[3], y = LS_comb_3,
-           label = paste0("Optimal Weight: ", round(weight_optimal[3],4)), vjust = -2, hjust = -0.1, size = 3)
+           label = paste0("Optimal Weight: ", round(weight_optimal[3],4)), hjust = -0.1, size = 3)
 
 
+library(gridExtra)
+grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 
+pdf("SP500.pdf", width = 14, height = 10)
+grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
+dev.off()
 
 
 

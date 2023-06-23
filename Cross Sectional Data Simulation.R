@@ -7,12 +7,15 @@ set.seed(12345678)
 N = 10000
 
 beta0 <- 1
-beta1 <- 3
-beta2 <- 3
+beta1 <- 1
+beta2 <- -1
 Beta <- matrix(c(beta1, beta2), nrow = 2)
 X_varcov <- matrix(c(1,0.7,0.7,1), ncol = 2)
 X <- rmvnorm(N, mean = c(0,0), sigma = X_varcov)
 error <- rnorm(N, 5, 10)
+
+
+
 
 # The True Model
 Y <- beta0 + X%*%Beta + error
@@ -99,7 +102,7 @@ for (j in 1:length(w)) {
 comb <- cbind(w,pool_train) |> as_tibble()
 optimal <- comb |> filter(pool_train == max(comb$pool_train))
 
-comb |> ggplot(aes(w, pool_train)) +
+p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
   labs(title = "Model 1 and Model 2",
        x = "Weight on Model 1",
@@ -126,11 +129,11 @@ comb <- cbind(w,pool_test) |> as_tibble()
 weight <- comb |> filter(pool_test == max(comb$pool_test))
 LS_comb <- comb |> filter(w == optimal[[1]]) |> select(pool_test) |> as.numeric()
 
-comb |> ggplot(aes(w, pool_test)) +
+p2 <- comb |> ggplot(aes(w, pool_test)) +
   geom_line(color = "red") +
   labs(title = "Model 1 and Model 2",
        x = "Weight on Model 1",
-       y = "Log socre") +
+       y = "Log Predictive socre") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
@@ -145,7 +148,12 @@ comb |> ggplot(aes(w, pool_test)) +
            label = paste0("Optimal Weight: ", round(optimal[[1]],4)), vjust = 6, size = 3)
 
 
+library(gridExtra)
+grid.arrange(p1,p2)
 
+pdf("Cross-section.pdf", width = 6, height = 8)
+grid.arrange(p1,p2)
+dev.off()
 
 
 
