@@ -1,5 +1,5 @@
 ---
-title: 'Revisiting the forecast combination puzzle with different data types: An empirical study'
+title: 'Revisiting the Forecast Combination Puzzle: An Empirical Study'
 degreetype: 'Bachelor of Commerce (Honours)'
 author: 'Xiefei Li'
 studentid: 30204232

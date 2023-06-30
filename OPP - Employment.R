@@ -3,23 +3,24 @@ library(fpp3)
 library(tidyverse)
 library(dplyr)
 
-# https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia-detailed/latest-release
+# https://www.abs.gov.au/statistics/labour/EMPL-and-unEMPL/labour-force-australia-detailed/latest-release
 Quarter <- read_xlsx("6291004.xlsx", range = "Data1!A11:A164", col_names = "Quarter")
 Total <- read_xlsx("6291004.xlsx", range = "Data1!BI11:BI164", col_names = "Total")
-employment <- cbind(Quarter, Total)
+
+EMPL <- cbind(Quarter, Total)
 # 1978 Feb - 2023 Feb
 
-employment <- employment |> 
+EMPL <- EMPL |> 
   mutate(Quarter = yearquarter(Quarter)) |> 
   as_tsibble(index = "Quarter")
-employment <- employment |> mutate(Log = log(Total))
+EMPL <- EMPL |> mutate(Log = log(Total))
 
-T <- nrow(employment)
+T <- nrow(EMPL)
 # In-sample - Training Set
-train <- employment[1:floor(nrow(employment)*.75),] |> as_tsibble()
+train <- EMPL[1:floor(nrow(EMPL)*.75),] |> as_tsibble()
 R <- nrow(train)
 # Out-of-sample - Test set
-test <- employment[(R+1):nrow(employment),] |> as_tsibble()
+test <- EMPL[(R+1):nrow(EMPL),] |> as_tsibble()
 P <- nrow(test)
 m <- 4
 
@@ -80,13 +81,13 @@ resid_1[3] <- residuals(fit_1) |>
 
 
 
-# Conditional Mean for Total Employment
+# Conditional Mean for Total EMPL
 mean_1 <- numeric(P) |> as.numeric()
 for (j in 1:P) {
   mean_1[j] <- (level[[R+j-1]] + trend[[R+j-1]])*season[[R+j]]
 }
 
-# Conditional Variance for Total Employment
+# Conditional Variance for Total EMPL
 var <- glance(fit_1) |> select(sigma2) |> as.numeric()
 var_1 <- numeric(P) |> as.numeric()
 for (j in 1:P) {

@@ -1,27 +1,27 @@
 {
-    "id": "833C4186",
-    "path": "~/Documents/R/Honours_Research_Project/SP500-OPP-2 Models-Stationary.R",
-    "project_path": "SP500-OPP-2 Models-Stationary.R",
+    "id": "079BA071",
+    "path": "~/Documents/R/Honours_Research_Project/EMPL-OPP-2 Models-Misspecification.R",
+    "project_path": "EMPL-OPP-2 Models-Misspecification.R",
     "type": "r_source",
-    "hash": "3796430795",
+    "hash": "1336421918",
     "contents": "",
     "dirty": false,
-    "created": 1687484253631.0,
+    "created": 1688102988096.0,
     "source_on_save": false,
     "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "11,0",
-        "scrollLine": "0"
+        "cursorPosition": "76,0",
+        "scrollLine": "46"
     },
     "folds": "",
-    "lastKnownWriteTime": 1687484944,
+    "lastKnownWriteTime": 1688103010,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1687484944315,
+    "last_content_update": 1688103010467,
     "read_only": false,
     "read_only_alternatives": []
 }

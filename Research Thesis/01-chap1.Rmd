@@ -7,17 +7,29 @@ knit: "bookdown::render_book"
 
 ## Research Objective
 
-This thesis aims to investigate the determinants behind, and evidence for the forecast combination puzzle in various domains, and to empirically examine a general solution to the forecast combination puzzle. The combination puzzle refers to the well-known empirical finding that an equally weighted combination of forecasts generally outperforms more sophisticated combination schemes. Over the past 50 years, the empirical studies undertaken so far have focused more on different time series settings. Thus, one of the main contributions of this research will be to investigate the presence of the combination puzzle in settings outside of pure time series models. As an additional contribution, we will assess the veracity, and applicability, of a recently proposed solution to the forecast combination puzzle suggested in @ZMFP22 and @FZMP23.  
+This thesis aims to investigate the determinants behind, and evidence for the forecast combination puzzle in various domains, and to empirically examine a general solution to the forecast combination puzzle. The combination puzzle refers to the well-known empirical finding that an equally weighted combination of forecasts generally outperforms more sophisticated combination schemes. This phenomenon is often found in the point forecast combinations but it is also the case in the density forecast combinations. Besides working with stationary time series, this research also explores how density forecast combinations perform with nonstationary time series. The empirical studies undertaken so far have focused more on pure time series settings, while there is little literature on the presence of the combination puzzle in the cross-sectional setting. The performance of density forecast combinations will be assessed via the log score function. As an additional contribution, we will assess the veracity, and applicability, of a recently proposed solution to the forecast combination puzzle suggested in @ZMFP22 and @FZMP23.  
+
+
 
 
 
 ## Literature Review and Motivation
 
-The accuracy of forecasts is of critical concern for forecasters and decision makers. An idea of combining multiple forecasts from different models was originally proposed in the seminal work of @BG69. With the evidence of dramatic improvements in the forecast accuracy, forecast combinations have attracted increasing attention and contributions in the literature, both theoretical and applied [@C89;@T06]. In short, forecast combination methods involve producing point or density forecasts and then combining them based on a rule or weighting scheme. This process can sometimes capture more meaningful characteristics of the true data generating process than using a single model, and allow us to combine the best features of different models within a single framework. Researchers have examined a variety of combination methods for point and probabilistic forecasts over the past 50 years, see @WHLK22 for a modern literature review.  
+The forecast accuracy is of critical concern for forecasters and decision makers. With the evidence of dramatic improvements in the forecast accuracy, forecast combinations have attracted increasing attention and contributions in the literature, both theoretical and applied [@C89;@T06]. More importantly, this promising approach often has a robust performance for various types of series, which is borne out by numerous empirical results [@A11]. For example, @MACF82 and @SW98 demonstrated that forecast combinations perform better than individual models. MORE!!!!
 
 
 
-In most time series setting under which forecast combinations are employed, a striking empirical phenomenon is often observed, coined by @SW04, as the "forecast combination puzzle". The puzzle is encapsulated by the fact that "theoretically sophisticated weighting schemes should provide more benefits than the sample average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts" [@WHLK22]. In the early forecast comparison studies, @MACF82 and @SW98 demonstrated that combinations perform better than the individual models and a simple average of the forecasts is typically more preferred with empirical evidence. More recently, @SW04, @MSA18 and @MSA20 delved more into forecast combinations, and also claimed that equally-weighted strategies are highly competitive compared with complicated schemes.
+Forecast combinations refer to the idea of combining multiple forecasts generated from possible models, which was originally proposed in the seminal work of @BG69. The forecast combination methods, in general, involve producing forecasts from constituent models, and then combining them based on a rule or weighting scheme. Each scheme has different selection criteria for the "best" forecast combination and the corresponding weight value assigned to each model. This process can sometimes capture more meaningful characteristics of the true data generating process than using a single model, and allow us to combine the best features of different models within a single framework. Researchers have examined a variety of combination methods for both point and density forecasts over the past 50 years, see @WHLK22 for a modern literature review.
+
+
+
+In most time series setting under which forecast combinations are employed, a striking empirical phenomenon is often observed, coined by @SW04, as the "forecast combination puzzle". The puzzle is encapsulated by the fact that "theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts" [@WHLK22]. In simple words, forecast combinations obtained through weighting schemes should perform better in theory. However, the averaged forecasts are often preferred in empirical studies. 
+
+@MACF82 and @SW98 found that a simple average of the forecasts is typically more preferred with empirical evidence in the early forecast comparison studies. More recently, @SW04, @MSA18 and @MSA20 delved more into forecast combinations, and also claimed that equally-weighted strategies are highly competitive compared with complicated weighting schemes.
+
+
+
+In the literature, there are two possible explanations for the puzzle. One concentrates on the estimation uncertainty in combination weight (@SW98, @SW04 and @SW09). Complicated weighting schemes introduce variability when estimating parameters whereas the simple averaging does not require any estimation. On the other hand, @E11 and @CMVW16 explore the trade-off between bias and variance in the Mean Squared Forecast Error (MSFE). They proved that equally weighted combination is unbiased and its variance has only one component, resulting in a smaller mean squared error than a biased combination. However, this is mainly applicable to the MSFE scheme. Recently, @ZMFP22 and @FZMP23 proposed a new explanation for the puzzle in a general way by investigating the sampling variability of the forecasts induced via estimation of the constituent model forecasts (i.e., the models used to produce the forecasts). They illustrated that, asymptotically, the bias and variability mainly come from the estimation of the models used to produce the constituent model forecasts.
 
 
 
@@ -29,7 +41,37 @@ Instead of exploring the estimation error in determining optimal weights, @ZMFP2
 
 
 
+
+
 The goal of this thesis is two-fold: first, to search for empirical evidence of the combination puzzle in settings outside of the usual time series in which it has been found; second, to test the empirical veracity of the theoretical solution to the puzzle found in @FZMP23, both within, and outside of, the standard time series setting where the puzzle is often observed.
+
+
+we may be able to answer the question: why does the simple average work so well - good in different ways for nonstationary time series
+
+Under what conditions, the puzzle will exist
+
+We start with modelling nonstationary time series with high volatility without removing the unit root. The forecast combinations between the in-sample period and the out-of-sample period are not similar.
+
+
+Even though there is a widespread literature among different pure time series settings, not much attention has been put on the cross-sectional datasets. We investigate the forecasting performance of simulated cross-sectional data
+
+We illustrate that the presence of the forecast combination puzzle is determined by at least 4 elements in the two-model pool case with simulated cross-sectional data and mis-specified models. In this special case, the puzzle can be avoided with 
+
+The puzzle is sensible with the sample size, the true value of parameters, the correlation between regressors, the difference variance of each regres
+
+variance difference
+
+sample size
+slit proportion
+true value of 
+
+
+
+
+
+
+
+
 
 
 
