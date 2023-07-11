@@ -86,11 +86,11 @@
 \RequirePackage[compact,sf,bf]{titlesec}
 \titleformat{\chapter}[display]
   {\normalfont\bfseries}{}{0pt}{\Huge}
-\titleformat{\section}[block]
+\titleformat{\section}[display]
   {\fontsize{15}{17}\bfseries\sffamily}
   {\thesection}
   {0.4em}{}
-\titleformat{\subsection}[block]
+\titleformat{\subsection}[display]
   {\fontsize{12}{14}\bfseries\sffamily}
   {\thesubsection}
   {0.4em}{}

@@ -264,6 +264,7 @@ comb |> filter(pool == max(comb$pool))
 weight_test[1] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.numeric()
 LS_comb_test[1] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_1 <- comb |> filter(w == weight_optimal[1]) |> select(pool) |> as.numeric()
+equ_1 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p4 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
@@ -274,14 +275,19 @@ p4 <- comb |> ggplot(aes(w, pool)) +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
-  annotate("text", x = weight_test[1], y = LS_comb_test[1],
-           label = paste0("Max: ", round(LS_comb_test[1],4)), vjust = 3, size = 3) +
-  annotate("text", x = weight_test[1], y = LS_comb_test[1],
-           label = paste0("Weight: ", round(weight_test[1],4)), vjust = 5, size = 3) +
-  geom_point(aes(x = weight_test[1], y = LS_comb_test[1]), size = 3, color = "blue") +
   geom_point(aes(x = weight_optimal[1], y = LS_comb_1), size = 2, color = "orange") +
+  geom_point(aes(x = weight_test[1], y = LS_comb_test[1]), size = 1.5, color = "green") +
+  geom_point(aes(x = 0.5, y = equ_1), size = 2, color = "blue") +
+  # annotate("text", x = weight_test[1], y = LS_comb_test[1],
+  #          label = paste0("Max: ", round(LS_comb_test[1],4)), vjust = 3, size = 3) +
+  # annotate("text", x = weight_test[1], y = LS_comb_test[1],
+  #          label = paste0("Weight: ", round(weight_test[1],4)), vjust = 5, size = 3) +
   annotate("text", x = weight_optimal[1], y = LS_comb_1,
-           label = paste0("Optimal Weight: ", round(weight_optimal[1],4)), vjust = 2, hjust = 1, size = 3)
+           label = paste0("Optimal Weight: ", round(weight_optimal[1],4)), vjust = 2, hjust = 1, size = 3) + 
+  annotate("text", x = weight_optimal[1], y = LS_comb_1,
+           label = paste0("LPS: ", round(LS_comb_1,4)), vjust = 4, hjust = 1, size = 3) +
+  annotate("text", x = 0.5, y = equ_1,
+           label = paste0("Simple Average: ", round(equ_1,4)), vjust = -1, hjust = -0.03, size = 3)
 
 
 
@@ -294,6 +300,7 @@ comb |> filter(pool == max(comb$pool))
 weight_test[2] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.numeric()
 LS_comb_test[2] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_2 <- comb |> filter(w == weight_optimal[2]) |> select(pool) |> as.numeric()
+equ_2 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p5 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
@@ -304,14 +311,19 @@ p5 <- comb |> ggplot(aes(w, pool)) +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
-  annotate("text", x = weight_test[2], y = LS_comb_test[2],
-           label = paste0("Max: ", round(LS_comb_test[2],4)), vjust = 3, size = 3) +
-  annotate("text", x = weight_test[2], y = LS_comb_test[2],
-           label = paste0("Weight: ", round(weight_test[2],4)), vjust = 5, size = 3) +
-  geom_point(aes(x = weight_test[2], y = LS_comb_test[2]), size = 3, color = "blue") +
   geom_point(aes(x = weight_optimal[2], y = LS_comb_2), size = 2, color = "orange") +
+  geom_point(aes(x = weight_test[2], y = LS_comb_test[2]), size = 1.5, color = "green") +
+  geom_point(aes(x = 0.5, y = equ_2), size = 2, color = "blue") +
+  # annotate("text", x = weight_test[2], y = LS_comb_test[2],
+  #          label = paste0("Max: ", round(LS_comb_test[2],4)), vjust = 3, size = 3) +
+  # annotate("text", x = weight_test[2], y = LS_comb_test[2],
+  #          label = paste0("Weight: ", round(weight_test[2],4)), vjust = 5, size = 3) +
   annotate("text", x = weight_optimal[2], y = LS_comb_2,
-           label = paste0("Optimal Weight: ", round(weight_optimal[2],4)), hjust = 1.1, size = 3)
+           label = paste0("Optimal Weight: ", round(weight_optimal[2],4)), vjust = 2, hjust = -0.03, size = 3) + 
+  annotate("text", x = weight_optimal[2], y = LS_comb_2,
+           label = paste0("LPS: ", round(LS_comb_2,4)), vjust = 4, hjust = -0.03, size = 3) +
+  annotate("text", x = 0.5, y = equ_2,
+           label = paste0("Simple Average: ", round(equ_2,4)), hjust = 1.1, size = 3)
 
 
 
@@ -325,6 +337,7 @@ comb |> filter(pool == max(comb$pool))
 weight_test[3] <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.numeric()
 LS_comb_test[3] <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_3 <- comb |> filter(w == weight_optimal[3]) |> select(pool) |> as.numeric()
+equ_3 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p6 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
@@ -335,20 +348,28 @@ p6 <- comb |> ggplot(aes(w, pool)) +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
-  annotate("text", x = weight_test[3], y = LS_comb_test[3],
-           label = paste0("Max: ", round(LS_comb_test[3],4)), vjust = 3, hjust = 0.8, size = 3) +
-  annotate("text", x = weight_test[3], y = LS_comb_test[3],
-           label = paste0("Weight: ", round(weight_test[3],4)), vjust = 5, hjust = 0.8, size = 3) +
-  geom_point(aes(x = weight_test[3], y = LS_comb_test[3]), size = 3, color = "blue") +
   geom_point(aes(x = weight_optimal[3], y = LS_comb_3), size = 2, color = "orange") +
+  geom_point(aes(x = weight_test[3], y = LS_comb_test[3]), size = 1.5, color = "green") +
+  geom_point(aes(x = 0.5, y = equ_3), size = 2, color = "blue") +
+  # annotate("text", x = weight_test[3], y = LS_comb_test[3],
+  #          label = paste0("Max: ", round(LS_comb_test[3],4)), vjust = 3, hjust = 0.8, size = 3) +
+  # annotate("text", x = weight_test[3], y = LS_comb_test[3],
+  #          label = paste0("Weight: ", round(weight_test[3],4)), vjust = 5, hjust = 0.8, size = 3) +
   annotate("text", x = weight_optimal[3], y = LS_comb_3,
-           label = paste0("Optimal Weight: ", round(weight_optimal[3],4)), hjust = -0.1, size = 3)
+           label = paste0("Optimal Weight: ", round(weight_optimal[3],4)), vjust = 2, hjust = -0.03, size = 3) + 
+  annotate("text", x = weight_optimal[3], y = LS_comb_3,
+           label = paste0("LPS: ", round(LS_comb_3,4)), vjust = 4, hjust = -0.03, size = 3) +
+  annotate("text", x = 0.5, y = equ_3,
+           label = paste0("Simple Average: ", round(equ_3,4)), vjust = 2, hjust = -0.03, size = 3)
+
+
+
 
 
 library(gridExtra)
 grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 
-pdf("SP500.pdf", width = 14, height = 10)
+pdf("SP500_nonstationary.pdf", width = 14, height = 10)
 grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 dev.off()
 

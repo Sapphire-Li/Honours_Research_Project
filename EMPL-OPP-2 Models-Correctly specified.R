@@ -3,7 +3,7 @@ library(fpp3)
 library(tidyverse)
 library(dplyr)
 
-# https://www.abs.gov.au/statistics/labour/EMPL-and-unEMPL/labour-force-australia-detailed/latest-release
+# https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia-detailed/latest-release
 Quarter <- read_xlsx("6291004.xlsx", range = "Data1!A11:A164", col_names = "Quarter")
 Total <- read_xlsx("6291004.xlsx", range = "Data1!BI11:BI164", col_names = "Total")
 
@@ -13,8 +13,7 @@ EMPL <- cbind(Quarter, Total)
 EMPL <- EMPL |> 
   mutate(Quarter = yearquarter(Quarter)) |> 
   as_tsibble(index = "Quarter")
-EMPL <- EMPL |> mutate(Log = log(Total),
-                       Log_diff = difference(log(Total),4))
+EMPL <- EMPL |> mutate(Log = log(Total))
 
 T <- nrow(EMPL)
 # In-sample - Training Set
@@ -55,29 +54,39 @@ fit_1_coef <- coef(fit_1) |> select(term, estimate)
 # yt = fit_1_coef[6,2] + (yt-4) + fit_1_coef[1,2]*(yt-1) + fit_1_coef[2,2]*(yt-2) - fit_1_coef[1,2]*(yt-5) - fit_1_coef[2,2]*(yt-6)
 # + et + fit_1_coef[3,2]*(et-1) + fit_1_coef[4,2]*(et-2) + fit_1_coef[5,2]*(et-4) + fit_1_coef[3,2]*fit_1_coef[5,2]*(et-5) + fit_1_coef[4,2]*fit_1_coef[5,2]*(et-6)
 
+
 resid_1_train <- residuals(fit_1) |> as_tibble() |> select(.resid)
-mean_1_train <- numeric(R)
-mean_1_train[1] <- fit_1_coef[6,2]
-mean_1_train[2] <- fit_1_coef[6,2] + fit_1_coef[1,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[1,1]
-mean_1_train[3] <- fit_1_coef[6,2] + fit_1_coef[1,2]*train[2,3] + fit_1_coef[2,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[2,1] + fit_1_coef[4,2]*resid_1_train[1,1]
-mean_1_train[4] <- fit_1_coef[6,2] + fit_1_coef[1,2]*train[3,3] + fit_1_coef[2,2]*train[2,3] + fit_1_coef[3,2]*resid_1_train[3,1] + fit_1_coef[4,2]*resid_1_train[2,1]
-mean_1_train[5] <- fit_1_coef[6,2] + train[1,3] + fit_1_coef[1,2]*train[4,3] + fit_1_coef[2,2]*train[3,3] + fit_1_coef[3,2]*resid_1_train[4,1] + fit_1_coef[4,2]*resid_1_train[3,1] + fit_1_coef[5,2]*resid_1_train[1,1]
-mean_1_train[6] <- fit_1_coef[6,2] + train[2,3] + fit_1_coef[1,2]*train[5,3] + fit_1_coef[2,2]*train[4,3] - fit_1_coef[1,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[5,1] + fit_1_coef[4,2]*resid_1_train[4,1] + fit_1_coef[5,2]*resid_1_train[2,1] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1_train[1,1]
-mean_1_train[7] <- fit_1_coef[6,2] + train[3,3] + fit_1_coef[1,2]*train[6,3] + fit_1_coef[2,2]*train[5,3] - fit_1_coef[1,2]*train[2,3] - fit_1_coef[2,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[6,1] + fit_1_coef[4,2]*resid_1_train[5,1] + fit_1_coef[5,2]*resid_1_train[3,1] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1_train[2,1] + fit_1_coef[4,2]*fit_1_coef[5,2]*resid_1_train[1,1]
 
-for (j in 8:R) {
-  mean_1_train[j] <- fit_1_coef[6,2] + train[j-4,3] + fit_1_coef[1,2]*train[j-1,3] + fit_1_coef[2,2]*train[j-2,3] - fit_1_coef[1,2]*train[j-5,3] - fit_1_coef[2,2]*train[j-6,3] + fit_1_coef[3,2]*resid_1_train[j-1,1] + fit_1_coef[4,2]*resid_1_train[j-2,1] + fit_1_coef[5,2]*resid_1_train[j-4,1] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1_train[j-5,1] + fit_1_coef[4,2]*fit_1_coef[5,2]*resid_1_train[j-6,1]
-}
+# Calculation by hand
+# mean_1_train <- numeric(R)
+# mean_1_train[1] <- fit_1_coef[6,2]
+# mean_1_train[2] <- fit_1_coef[6,2] + fit_1_coef[1,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[1,1]
+# mean_1_train[3] <- fit_1_coef[6,2] + fit_1_coef[1,2]*train[2,3] + fit_1_coef[2,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[2,1] + fit_1_coef[4,2]*resid_1_train[1,1]
+# mean_1_train[4] <- fit_1_coef[6,2] + fit_1_coef[1,2]*train[3,3] + fit_1_coef[2,2]*train[2,3] + fit_1_coef[3,2]*resid_1_train[3,1] + fit_1_coef[4,2]*resid_1_train[2,1]
+# mean_1_train[5] <- fit_1_coef[6,2] + train[1,3] + fit_1_coef[1,2]*train[4,3] + fit_1_coef[2,2]*train[3,3] + fit_1_coef[3,2]*resid_1_train[4,1] + fit_1_coef[4,2]*resid_1_train[3,1] + fit_1_coef[5,2]*resid_1_train[1,1]
+# mean_1_train[6] <- fit_1_coef[6,2] + train[2,3] + fit_1_coef[1,2]*train[5,3] + fit_1_coef[2,2]*train[4,3] - fit_1_coef[1,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[5,1] + fit_1_coef[4,2]*resid_1_train[4,1] + fit_1_coef[5,2]*resid_1_train[2,1] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1_train[1,1]
+# mean_1_train[7] <- fit_1_coef[6,2] + train[3,3] + fit_1_coef[1,2]*train[6,3] + fit_1_coef[2,2]*train[5,3] - fit_1_coef[1,2]*train[2,3] - fit_1_coef[2,2]*train[1,3] + fit_1_coef[3,2]*resid_1_train[6,1] + fit_1_coef[4,2]*resid_1_train[5,1] + fit_1_coef[5,2]*resid_1_train[3,1] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1_train[2,1] + fit_1_coef[4,2]*fit_1_coef[5,2]*resid_1_train[1,1]
+# 
+# for (j in 8:R) {
+#   mean_1_train[j] <- fit_1_coef[6,2] + train[j-4,3] + fit_1_coef[1,2]*train[j-1,3] + fit_1_coef[2,2]*train[j-2,3] - fit_1_coef[1,2]*train[j-5,3] - fit_1_coef[2,2]*train[j-6,3] + fit_1_coef[3,2]*resid_1_train[j-1,1] + fit_1_coef[4,2]*resid_1_train[j-2,1] + fit_1_coef[5,2]*resid_1_train[j-4,1] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1_train[j-5,1] + fit_1_coef[4,2]*fit_1_coef[5,2]*resid_1_train[j-6,1]
+# }
+# 
+# SE_1_train <- numeric(R) |> as.numeric()
+# for (j in 1:R) {
+#   SE_1_train[j] <- (mean_1_train[[j]] - train$Log[j])^2
+# }
+# MSE_1_train <- sum(SE_1_train[7:R]) / R
+# # 2.668196
+# # 0.0000335834
 
-SE_1_train <- numeric(R) |> as.numeric()
+mean_1_train <- fitted(fit_1)$.fitted
+
+SE_1_fit <- numeric(R) |> as.numeric()
 for (j in 1:R) {
-  SE_1_train[j] <- (mean_1_train[[j]] - train$Log[j])^2
+  SE_1_fit[j] <- (mean_1_train[[j]] - train$Log[j])^2
 }
-
-MSE_1_train <- sum(SE_1_train[7:R]) / R
-# 2.668196
-# 0.0000335834
-
+MSE_1_fit <- sum(SE_1_fit) / R
+# 3.458818e-05
 
 
 resid_1 <- numeric(P) |> as.numeric()
@@ -91,8 +100,6 @@ resid_1[6] <- test[6,3] - (fit_1_coef[6,2] + test[2,3] + fit_1_coef[1,2]*test[5,
 for (j in 7:P) {
   resid_1[j] <- test[j,3] - (fit_1_coef[6,2] + test[j-4,3] + fit_1_coef[1,2]*test[j-1,3] + fit_1_coef[2,2]*test[j-2,3] - fit_1_coef[1,2]*test[j-5,3] - fit_1_coef[2,2]*test[j-6,3] + fit_1_coef[3,2]*resid_1[j-1] + fit_1_coef[4,2]*resid_1[j-2] + fit_1_coef[5,2]*resid_1[j-4] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1[j-5] + fit_1_coef[4,2]*fit_1_coef[5,2]*resid_1[j-6])
 }
-
-# yt = fit_1_coef[6,2] + (yt-4) + fit_1_coef[1,2]*(yt-1) + fit_1_coef[2,2]*(yt-2) - fit_1_coef[1,2]*(yt-5) - fit_1_coef[2,2]*(yt-6) + fit_1_coef[3,2]*(et-1) + fit_1_coef[4,2]*(et-2) + fit_1_coef[5,2]*(et-4) + fit_1_coef[3,2]*fit_1_coef[5,2]*(et-5) + fit_1_coef[4,2]*fit_1_coef[5,2]*(et-6)
 
 mean_1_test <- numeric(P)
 mean_1_test[1] <- fit_1_coef[6,2] + train[R-3,3] + fit_1_coef[1,2]*train[R,3] + fit_1_coef[2,2]*train[R-1,3] - fit_1_coef[1,2]*train[R-4,3] - fit_1_coef[2,2]*train[R-5,3] + fit_1_coef[3,2]*resid_1_train[R,1] + fit_1_coef[4,2]*resid_1_train[R-1,1] + fit_1_coef[5,2]*resid_1_train[R-3,1] + fit_1_coef[3,2]*fit_1_coef[5,2]*resid_1_train[R-4,1] + fit_1_coef[4,2]*fit_1_coef[5,2]*resid_1_train[R-5,1]
@@ -115,11 +122,14 @@ MSE_1_test <- sum(SE_1_test) / P
 
 
 
-fit_1_train <- fitted(fit_1)$.fitted
-fit_1_test <- forecast(fit_1, h=P)$.mean
-
-
-
+# fit_1_test <- forecast(fit_1, h=P)$.mean
+# 
+# SE_1_fit <- numeric(P) |> as.numeric()
+# for (j in 1:P) {
+#   SE_1_fit[j] <- (fit_1_test[[j]] - test$Log[j])^2
+# }
+# MSE_1_fit <- sum(SE_1_fit) / P
+# # 0.0001987525
 
 
 
@@ -168,9 +178,8 @@ for (j in 1:R) {
   SE_2_train[j] <- (mean_2_train[[j]] - train$Log[j])^2
 }
 
-MSE_2_train <- sum(SE_2_train[7:R]) / R
+MSE_2_train <- sum(SE_2_train) / R
 # 0.00003521677 (3.521677e-05)
-# 0.00003154357 (3.154357e-05)
 
 
 
@@ -196,8 +205,25 @@ MSE_2_test <- sum(SE_2_test) / P
 
 
 
-fit_2_train <- fitted(fit_2)$.fitted
-fit_2_test <- forecast(fit_2, h=P)$.mean
+# fit_2_train <- fitted(fit_2)$.fitted
+# fit_2_test <- forecast(fit_2, h=P)$.mean
+# 
+# SE_2_fit <- numeric(R) |> as.numeric()
+# for (j in 1:R) {
+#   SE_2_fit[j] <- (fit_2_train[[j]] - train$Log[j])^2
+# }
+# MSE_2_fit <- sum(SE_2_fit) / R
+# # 3.521677e-05
+# 
+# SE_2_fit <- numeric(P) |> as.numeric()
+# for (j in 1:P) {
+#   SE_2_fit[j] <- (fit_2_test[[j]] - test$Log[j])^2
+# }
+# MSE_2_fit <- sum(SE_2_fit) / P
+# # 0.02167402
+
+
+
 
 
 
@@ -205,19 +231,19 @@ fit_2_test <- forecast(fit_2, h=P)$.mean
 w <- seq(from = 0, to = 1, by = 0.01)
 
 # In-sample
-pool_train <- matrix(NA, length(w), (R-6))
+pool_train <- matrix(NA, length(w), R)
 for (i in 1:length(w)) {
-  for (j in 7:R) {
-    pool_train[i,j-6] <-  (w[i]*mean_1_train[[j]] + (1-w[i])*mean_2_train[[j]] - train$Log[j])^2
+  for (j in 1:R) {
+    pool_train[i,j] <-  (w[i]*mean_1_train[[j]] + (1-w[i])*mean_2_train[[j]] - train$Log[j])^2
   }
 }
 pool_train <- rowSums(pool_train) / R
 
-# Remain the effects from the initial values
-# pool_train <- matrix(NA, length(w), R)
+# Remove the effects from the initial values
+# pool_train <- matrix(NA, length(w), (R-6))
 # for (i in 1:length(w)) {
-#   for (j in 1:R) {
-#     pool_train[i,j] <-  (w[i]*mean_1_train[[j]] + (1-w[i])*mean_2_train[[j]] - train$Log[j])^2
+#   for (j in 7:R) {
+#     pool_train[i,j-6] <-  (w[i]*mean_1_train[[j]] + (1-w[i])*mean_2_train[[j]] - train$Log[j])^2
 #   }
 # }
 # pool_train <- rowSums(pool_train) / R
@@ -229,7 +255,7 @@ LS_comb_optimal <- comb |> filter(pool_train == min(comb$pool_train)) |> select(
 
 p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(title = "SARIMA and ETS(A,A,A)",
+  labs(title = "The In-sample Combination between SARIMA and ETS(A,A,A)",
        x = "Weight on model SARIMA",
        y = "Mean squared error") +
   theme_minimal() +
@@ -258,24 +284,30 @@ comb |> filter(pool == min(comb$pool))
 weight_test <- comb |> filter(pool == min(comb$pool)) |> select(w) |> as.numeric()
 LS_comb_test <- comb |> filter(pool == min(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_2 <- comb |> filter(w == weight_optimal) |> select(pool) |> as.numeric()
+equ_1 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p2 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(title = "SARIMA and ETS(A,A,A)",
+  labs(title = "The Out-of-sample Combination between SARIMA and ETS(A,A,A)",
        x = "Weight on model SARIMA",
-       y = "Predictive mean squared error") +
+       y = "Mean squared forecast error") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
-  annotate("text", x = weight_test, y = LS_comb_test,
-           label = paste0("Min: ", round(LS_comb_test,7)), vjust = -3, hjust = 0.8, size = 3) +
-  annotate("text", x = weight_test, y = LS_comb_test,
-           label = paste0("Weight: ", round(weight_test,4)), vjust = -5, hjust = 0.8, size = 3) +
-  geom_point(aes(x = weight_test, y = LS_comb_test), size = 3, color = "blue") +
   geom_point(aes(x = weight_optimal, y = LS_comb_2), size = 2, color = "orange") +
+  geom_point(aes(x = weight_test, y = LS_comb_test), size = 1.5, color = "green") +
+  geom_point(aes(x = 0.5, y = equ_1), size = 2, color = "blue") +
+  # annotate("text", x = weight_test, y = LS_comb_test,
+  #          label = paste0("Min: ", round(LS_comb_test,7)), vjust = -3, hjust = 0.8, size = 3) +
+  # annotate("text", x = weight_test, y = LS_comb_test,
+  #          label = paste0("Weight: ", round(weight_test,4)), vjust = -5, hjust = 0.8, size = 3) +
   annotate("text", x = weight_optimal, y = LS_comb_2,
-           label = paste0("Optimal Weight: ", round(weight_optimal,4)), hjust = 1.1, size = 3)
+           label = paste0("Optimal Weight: ", round(weight_optimal,4)), vjust = 2, hjust = 1.1, size = 3) +
+  annotate("text", x = weight_optimal, y = LS_comb_2,
+           label = paste0("MSFE: ", round(LS_comb_2,6)), vjust = 4, hjust = 1.1, size = 3) +
+  annotate("text", x = 0.5, y = equ_1,
+           label = paste0("Simple Average: ", round(equ_1,6)), vjust = -1, hjust = -0.1, size = 3)
 
 
 
@@ -284,13 +316,9 @@ p2 <- comb |> ggplot(aes(w, pool)) +
 library(gridExtra)
 grid.arrange(p1,p2)
 
-pdf("EMPL.pdf", width = 14, height = 10)
-grid.arrange(p7,p8)
+pdf("EMPL_correct.pdf", width = 8, height = 6)
+grid.arrange(p1,p2)
 dev.off()
-
-
-
-
 
 
 

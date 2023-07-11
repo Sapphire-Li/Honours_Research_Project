@@ -101,7 +101,7 @@
 
 %% SPACING
 \RequirePackage{setspace}
-\spacing{1.5}
+\spacing{1}
 
 %% LINE AND PAGE BREAKING
 \sloppy
@@ -143,7 +143,7 @@
 \DeclareDelimFormat[cbx@textcite]{nameyeardelim}{\addspace}
 
 %% PARAGRAPH BREAKS
-\setlength{\parskip}{1.4ex}
+\setlength{\parskip}{1ex}
 \setlength{\parindent}{0em}
 
 %% HYPERLINKS
@@ -192,11 +192,11 @@
     \thispagestyle{empty}%
     \null\vskip1cm%
     \begin{center}
-        \LARGE\textbf{\expandafter{\@title}}
+        \Huge\textbf{\expandafter{\@title}}
     \end{center}
     \vfill
     \begin{center}\Large
-        {A research proposal submitted
+        {A research thesis submitted
         for the degree of\\[0.3cm] \degreetitle}
     \end{center}
     \vfill

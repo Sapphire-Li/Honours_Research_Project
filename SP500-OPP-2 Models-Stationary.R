@@ -163,6 +163,7 @@ comb |> filter(pool == max(comb$pool))
 weight_test <- comb |> filter(pool == max(comb$pool)) |> select(w) |> as.numeric()
 LS_comb_test <- comb |> filter(pool == max(comb$pool)) |> select(pool) |> as.numeric()
 LS_comb_2 <- comb |> filter(w == weight_optimal) |> select(pool) |> as.numeric()
+equ <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p8 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
@@ -173,15 +174,19 @@ p8 <- comb |> ggplot(aes(w, pool)) +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
-  annotate("text", x = weight_test, y = LS_comb_test,
-           label = paste0("Max: ", round(LS_comb_test,4)), vjust = 3, size = 3) +
-  annotate("text", x = weight_test, y = LS_comb_test,
-           label = paste0("Weight: ", round(weight_test,4)), vjust = 5, size = 3) +
-  geom_point(aes(x = weight_test, y = LS_comb_test), size = 3, color = "blue") +
   geom_point(aes(x = weight_optimal, y = LS_comb_2), size = 2, color = "orange") +
+  geom_point(aes(x = weight_test, y = LS_comb_test), size = 1.5, color = "green") +
+  geom_point(aes(x = 0.5, y = equ), size = 2, color = "blue") +
+  # annotate("text", x = weight_test, y = LS_comb_test,
+  #          label = paste0("Max: ", round(LS_comb_test,4)), vjust = 3, size = 3) +
+  # annotate("text", x = weight_test, y = LS_comb_test,
+  #          label = paste0("Weight: ", round(weight_test,4)), vjust = 5, size = 3) +
   annotate("text", x = weight_optimal, y = LS_comb_2,
-           label = paste0("Optimal Weight: ", round(weight_optimal,4)), hjust = 1.1, size = 3)
-
+           label = paste0("Optimal Weight: ", round(weight_optimal,4)), vjust = 3, size = 3) +
+  annotate("text", x = weight_optimal, y = LS_comb_2,
+           label = paste0("LPS: ", round(LS_comb_2,4)), vjust = 5, size = 3) +
+  annotate("text", x = 0.5, y = equ,
+           label = paste0("Simple Average: ", round(equ,4)), vjust = 3, size = 3)
 
 
 
@@ -189,7 +194,7 @@ p8 <- comb |> ggplot(aes(w, pool)) +
 library(gridExtra)
 grid.arrange(p7,p8)
 
-pdf("SP500.pdf", width = 14, height = 10)
+pdf("SP500_stationary.pdf", width = 8, height = 6)
 grid.arrange(p7,p8)
 dev.off()
 
