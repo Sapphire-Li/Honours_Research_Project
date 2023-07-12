@@ -101,7 +101,7 @@ the accuracy of the optimal prediction combination can be improved by having hig
 
 
 The magnitude of each coefficient acts like the weight of each regressor on the dependent variable. 
-The one which includes the more important regressor will be more favoured with a higher weight in the forecast combination
+The one which includes the more important regressor will be more favored with a higher weight in the forecast combination
 
 
 
@@ -122,7 +122,6 @@ Variance of the error term will influence the log score value
 Pattern is hard to determine
 
 
-Estimates based on equation (2) need not satisfy, as noted in section 2.1, especially if the correlation between the competing forecast errors is large and positive, and we consider two possibilities. One is to use the observed point estimate; the second, following widespread practice, is to replace an estimate out- side this range by the nearest boundary value, 0 or 1 as appropriate. There are then four combined forecasts whose MSFEs are calculated over the last P observations: three weighted averages, in turn using and the observed and truncated, and the simple average using k=0.5. The estimation cost of each weighted average is expressed as the percentage increase in MSFE above that of the simple average,
 
 
 

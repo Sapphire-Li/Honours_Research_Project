@@ -3,24 +3,24 @@
     "path": "~/Documents/R/Honours_Research_Project/Research Thesis/03-chap3.Rmd",
     "project_path": "Research Thesis/03-chap3.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "4039236932",
     "contents": "",
     "dirty": false,
     "created": 1688183281789.0,
     "source_on_save": false,
-    "relative_order": 4,
+    "relative_order": 3,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "62,194",
-        "scrollLine": "0"
+        "cursorPosition": "12,204",
+        "scrollLine": "3"
     },
     "folds": "",
-    "lastKnownWriteTime": 1688722953,
+    "lastKnownWriteTime": 1689146725,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1688722953661,
+    "last_content_update": 1689146725342,
     "read_only": false,
     "read_only_alternatives": []
 }

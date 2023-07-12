@@ -10,7 +10,8 @@ knit: "bookdown::render_book"
 
 Reconsidering the example in Section 3 of @GA11, the data we use is the daily Standard and Poor's (S\&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total), retrieved from the @SP500. The S&P500 index dataset has a total of 2519 ($T$) observations and is partitioned into two periods with a rough proportion. The in-sample period contains the first 60% of the data ($R = 1511$), which is used to estimate all unknown parameters, including the optimal weight. The remaining 40% ($P = 1008$) becomes the out-of-sample period to evaluate the forecast performance.  
 
-We will investigate the presence of the forecast combination puzzle when fitting the nonstationary data and the stationary data. Constituent models come from commonly used model types, which are autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors. Detailed model specifications for each case will be clarified in the corresponding section.  
+We will investigate the presence of the forecast combination puzzle when using correctly-specified models or mis-specified models to fit the data. Constituent models are based on common classes of models: autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors. Detailed model specifications for each case will be clarified in the corresponding section.  
+
 
 To start with, 
 
@@ -20,7 +21,7 @@ We choose $j=1,\cdots,M$, with $M=3$ prediction models to study the performance 
 
 ### Fitting the nonstationary time series
 
-To reduce the level of variability, we take a natural logarithm of the S\&P 500 index and fit three candidate models directly without removing its stochastic trend.
+To reduce the level of variability, we take a natural logarithm of the S\&P 500 index $y_t$ and fit the data directly without removing its stochastic trend with three candidate models.
 
 1. Model 1: ARIMA(1,1,1) model with an intercept of the natural logarithm of S\&P 500 index. 
 \begin{equation*}
@@ -49,12 +50,12 @@ The error term, $\epsilon_t$, in each model is assumed to be independent and nor
     \toprule
           & ARIMA(1,1,1) & ETS(M,N,N) & LR \\
     \midrule
-    ARIMA(1,1,1) & \textit{-5911.1974} & -5839.3045 & -5842.7634 \\
-    ETS(M,N,N) & 0.45  & \textit{-5883.9697} & -5881.7790 \\
-    LR & 0.43  & 0.08  & \textit{-5881.7970} \\
+    ARIMA(1,1,1) & \textit{2345.9262} & 2451.7401 & 2362.9969 \\
+    ETS(M,N,N) & 0.14  & \textit{2442.2965} & 2443.2068 \\
+    LR & 0.56  & 0.97  & \textit{2338.6005} \\
     \bottomrule
-    \multicolumn{4}{l}{\footnotesize The diagonal entries contains individual log score.}\\
-    \multicolumn{4}{l}{\footnotesize The log scores for combination pools are located above the diagonal.}\\
+    \multicolumn{4}{l}{\footnotesize The diagonal entries contains individual log predictive score.}\\
+    \multicolumn{4}{l}{\footnotesize The log predictive scores for each combination pools are located above the diagonal.}\\
     \multicolumn{4}{l}{\footnotesize Entries below diagonal show the estimated weight of the model in that column in the two-model pool.}\\
     \end{tabular}
   \label{tab:2}
@@ -64,23 +65,27 @@ There are 3 sets of two-model combination and the log predictive score of each c
 
 
 
-We focused on the combination of two individual forecasts for two reasons, which in most cases apply for the prediction of business figures in enterprises. Typically, a judgmental forecast and one that is derived using purely statistical means are available and corporate planning can be based on one of the forecast or a combination of both forecasts, where additional forecasts cannot be expected to introduce as much additional information. Furthermore, focusing on the two-forecast case allowed us to provide a variety of in-depth analyses. The challenge of extending the model and the decision boundaries to a larger, arbitrary number of forecasts is subject to future research.
 
 
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.35]{figures/SP500_nonstationary.pdf}
+\caption{Three columns refer to cases when $N=100$, $N=1000$, and $N=10000$ respectively while keeping all others constant as the initial set-up. The upper graphs represent the in-sample combination performance and the bottom graphs represent the out-of-sample combination accuracy.}
+\label{fig:nonstat}
+\end{figure}
 
-
-All unknown parameters are estimated by maximizing the likelihood function using the in-sample period data. Once the estimated are obtained, they are held fixed for the density evaluations. For each model, I generate the predictive densities at every future time point of S&P 500 returns ($h=1,2,...,P$) given that all past information is known. In order to make a comparison between each pair of these models, the log of S&P 500 returns will be "back-transformed" by evaluating with the log normal density function.
-
-
-
-
-
-
+There are then four combined forecasts whose MSFEs are calculated over the last P observations: three weighted averages, in turn using and the observed and truncated, and the simple average using
 
 
 ### Fitting the stationary time series
 
 
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.35]{figures/SP500_stationary.pdf}
+\caption{}
+\label{fig:stat}
+\end{figure}
 
 
 
@@ -88,6 +93,9 @@ All unknown parameters are estimated by maximizing the likelihood function using
 
 
 
+
+
+## Pure time series with seasonality
 
 
 
