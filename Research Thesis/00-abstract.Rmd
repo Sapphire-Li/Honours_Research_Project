@@ -6,4 +6,6 @@ knit: "bookdown::render_book"
 
 The abstract should outline the main approach and findings of the thesis and must not be more than 500 words.
 
+Finish up afterwards.
+
 \newpage

@@ -15,6 +15,7 @@
 \usepackage[utf8]{inputenc}
 \RequirePackage{bera}
 \RequirePackage{mathpazo}
+\usepackage{multirow}
 
 \newif\ifsinglesp@
 \newif\ifdoublesp@

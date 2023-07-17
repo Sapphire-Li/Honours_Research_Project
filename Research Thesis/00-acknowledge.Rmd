@@ -4,4 +4,4 @@ knit: "bookdown::render_book"
 
 # Acknowledgements {-}
 
-I would like to thank my pet goldfish for \dots
+I would like to thank my supervisor, my Honours coordinator, all the people who helped me throughout the year and myself.

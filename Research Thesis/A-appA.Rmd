@@ -13,26 +13,8 @@ citation("fpp3")
 version$version.string
 ```
 
-All analyses were performed using R Statistical Software (R version 4.2.1 (2022-06-23))  
-
-Packages used are `tidyverse` [@tidy19], `dplyr` [@dplyr23], and `fpp3` [@fpp23].
+Exact formulas and explanations of these models can be found in @fpp3. The formula of the conditional variance for the ETS models in this case is discussed in Chapter 6.3 of @HKOS08. All codes are performed in R Statistical Software (version 4.2.1 (2022-06-23)). The packages used are `tidyverse` [@tidy19], `dplyr` [@dplyr23], and `fpp3` [@fpp23].
 
 
-$$\begin{aligned}
-M_1: log(y_t) &= \phi_{0,1} + log(y_{t-1}) + \phi_{1,1}log(y)_{t-1} + \theta_{1,1}\epsilon_{t-1} + \epsilon_{t,1} \ \ \ \ \epsilon_t \stackrel{i.i.d.}{\sim} N(0,\sigma_1^2) \\
-M_2: y_t &= \ell_{t-1,2}(1+\epsilon_{t,2}) \\
-  \ell_{t,2} &= \ell_{t-1,2}(1+\alpha_2\epsilon_{t,2}) \\
-M_3: y_t &= (\ell_{t-1}+b_{t-1}) (1+\epsilon_{t,3}) \\
-  \ell_t &= \ell_{t-1}(1+\alpha\epsilon_{t,2}) \\
-M_4&: y_t = \\
-M_5&: y_t = 
-\end{aligned}$$
-
-\begin{equation}
-  y_t - y_{t-4} = \beta (x_t-x_{t-4}) + \gamma (z_t-z_{t-4}) + \phi_1 (y_{t-1} - y_{t-5}) + \Theta_1 \varepsilon_{t-4} + \varepsilon_t
-\end{equation}
-
-
-@fpp3
 
 

@@ -4,8 +4,8 @@ library(tidyverse)
 library(dplyr)
 
 # https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia-detailed/latest-release
-Quarter <- read_xlsx("6291004.xlsx", range = "Data1!A11:A164", col_names = "Quarter")
-Total <- read_xlsx("6291004.xlsx", range = "Data1!BI11:BI164", col_names = "Total")
+Quarter <- read_xlsx("6291004.xlsx", range = "Data1!A12:A164", col_names = "Quarter")
+Total <- read_xlsx("6291004.xlsx", range = "Data1!BI12:BI164", col_names = "Total")
 
 EMPL <- cbind(Quarter, Total)
 # 1978 Feb - 2023 Feb
@@ -56,7 +56,7 @@ for (j in 1:R) {
 }
 
 MSE_3_train <- sum(SE_3_train) / R
-# 0.00004489514
+# 0.00004539034
 
 
 
@@ -74,7 +74,7 @@ for (j in 1:P) {
   SE_3_test[j] <- (mean_3_test[[j]] - test$Log[j])^2
 }
 MSE_3_test <- sum(SE_3_test) / P
-# 0.0002423152
+# 0.0002422809
 
 
 
@@ -86,15 +86,14 @@ MSE_3_test <- sum(SE_3_test) / P
 
 
 # Model: ETS(A,A,N)
-fit_4 <- train |> 
-  model(ETS(Log ~ trend("A") + season("N")))
+fit_4 <- train |> model(ETS(Log ~ trend("A") + season("N")))
 # Smoothing parameters:
-#   alpha = 0.513919 
-#   beta  = 0.3965017 
+#   alpha = 0.4823716
+#   beta  = 0.4336891 
 
 # Initial states:
 #      l[0]        b[0]
-#  8.777956 0.007725023
+#  8.779004 0.01247828
 
 fit_4_coef <- coef(fit_4) |> select(term, estimate)
 resid_4_train <- residuals(fit_4) |> as_tibble() |> select(.resid)
@@ -121,7 +120,7 @@ for (j in 1:R) {
 }
 
 MSE_4_train <- sum(SE_4_train) / R
-# 0.00006791883 (6.791883e-05)
+# 0.00006714365 (6.714365e-05)
 
 
 
@@ -141,7 +140,7 @@ for (j in 1:P) {
   SE_4_test[j] <- (mean_4_test[[j]] - test$Log[j])^2
 }
 MSE_4_test <- sum(SE_4_test) / P
-# 0.0002177276
+# 0.0002284498
 
 
 
@@ -169,7 +168,8 @@ LS_comb_optimal <- comb |> filter(pool_train == min(comb$pool_train)) |> select(
 
 p3 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(title = "The In-sample Combination between ARIMA(2,1,0) w/ drift and ETS(A,A,A)",
+  labs(
+    # title = "The In-sample Combination between ARIMA(2,1,0) w/ drift and ETS(A,A,A)",
        x = "Weight on model ARIMA",
        y = "Mean squared error") +
   theme_minimal() +
@@ -202,7 +202,8 @@ equ_2 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p4 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(title = "The Out-of-sample Combination between ARIMA(2,1,0) w/ drift and ETS(A,A,M)",
+  labs(
+    # title = "The Out-of-sample Combination between ARIMA(2,1,0) w/ drift and ETS(A,A,M)",
        x = "Weight on model ARIMA",
        y = "Mean squared forecast error") +
   theme_minimal() +
@@ -229,15 +230,11 @@ p4 <- comb |> ggplot(aes(w, pool)) +
 
 
 library(gridExtra)
-grid.arrange(p3,p4)
+grid.arrange(p3,p4,nrow=1)
 
-pdf("EMPL_misspecified.pdf", width = 8, height = 6)
-grid.arrange(p3,p4)
+pdf("EMPL_misspecified.pdf", width = 10, height = 6)
+grid.arrange(p3,p4,nrow=1,top="The point combination between ARIMA(2,1,0) w/ drift and ETS(A,A,M) - Misspecification")
 dev.off()
-
-
-
-
 
 
 

@@ -272,6 +272,7 @@ p4 <- comb |> ggplot(aes(w, pool)) +
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log predictive socre") +
   theme_minimal() +
+  ylim(2338,2455) +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
@@ -308,6 +309,7 @@ p5 <- comb |> ggplot(aes(w, pool)) +
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log predictive socre") +
   theme_minimal() +
+  ylim(2338,2455) +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
@@ -345,6 +347,7 @@ p6 <- comb |> ggplot(aes(w, pool)) +
        x = "Weight on model ETS(M,N,N)",
        y = "Log predictive socre") +
   theme_minimal() +
+  ylim(2338,2455) +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
@@ -372,6 +375,21 @@ grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 pdf("SP500_nonstationary.pdf", width = 14, height = 10)
 grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 dev.off()
+
+
+
+
+# lg <- sp |> ggplot(aes(trading_day, log)) +
+#   geom_line(color = "blue") +
+#   geom_vline(xintercept = R) +
+#   labs(title = "Line Graph of Log S&P500 Index",
+#        x = "Trading Day",
+#        y = "Log of S&P500 Index") +
+#   theme_minimal()
+# 
+# pdf("log_linegraph.pdf", width = 8, height = 6)
+# print(lg)
+# dev.off()
 
 
 

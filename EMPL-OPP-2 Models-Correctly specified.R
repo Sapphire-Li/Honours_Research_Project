@@ -4,11 +4,10 @@ library(tidyverse)
 library(dplyr)
 
 # https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia-detailed/latest-release
-Quarter <- read_xlsx("6291004.xlsx", range = "Data1!A11:A164", col_names = "Quarter")
-Total <- read_xlsx("6291004.xlsx", range = "Data1!BI11:BI164", col_names = "Total")
+Quarter <- read_xlsx("6291004.xlsx", range = "Data1!A12:A164", col_names = "Quarter")
+Total <- read_xlsx("6291004.xlsx", range = "Data1!BI12:BI164", col_names = "Total")
 
 EMPL <- cbind(Quarter, Total)
-# 1978 Feb - 2023 Feb
 
 EMPL <- EMPL |> 
   mutate(Quarter = yearquarter(Quarter)) |> 
@@ -29,9 +28,9 @@ P <- nrow(test)
 # train |> features(Total, features = guerrero)
 # train |> gg_season(Total)
 # train |> gg_subseries(Total)
-# train |> autoplot(difference(log(Total),m))
-# train |> gg_tsdisplay(difference(log(Total),m), "partial")
-# train |> gg_tsdisplay(difference(difference(log(Total),m),1), "partial")
+# train |> autoplot(difference(log(Total),4))
+# train |> gg_tsdisplay(difference(log(Total),4), "partial")
+# train |> gg_tsdisplay(difference(difference(log(Total),4),1), "partial")
 
 
 
@@ -86,7 +85,7 @@ for (j in 1:R) {
   SE_1_fit[j] <- (mean_1_train[[j]] - train$Log[j])^2
 }
 MSE_1_fit <- sum(SE_1_fit) / R
-# 3.458818e-05
+# 3.499752e-05
 
 
 resid_1 <- numeric(P) |> as.numeric()
@@ -118,7 +117,7 @@ for (j in 1:P) {
   SE_1_test[j] <- (mean_1_test[[j]] - test$Log[j])^2
 }
 MSE_1_test <- sum(SE_1_test) / P
-# 0.000161011
+# 0.0001609856
 
 
 
@@ -137,15 +136,15 @@ MSE_1_test <- sum(SE_1_test) / P
 # Model: ETS(A,A,A) 
 fit_2 <- train |> model(ETS(Log))
 # Smoothing parameters:
-#   alpha = 0.7814383 
-#   beta  = 0.417706 
-#   gamma = 0.000106257 
+#   alpha = 0.7668317 
+#   beta  = 0.4369036 
+#   gamma = 0.0001000011 
 
 # Initial states:
-#     l[0]        b[0]        s[0]       s[-1]        s[-2]      s[-3]
-# 8.779075 0.007883923 -0.00470008 0.003222494 -0.001751044 0.00322863
+#     l[0]        b[0]        s[0]       s[-1]        s[-2]        s[-3]
+# 8.784954 0.007606614 0.003238233 -0.004746265 0.003149188 -0.001641156
 
-# sigma^2:  2710.225
+# sigma^2:  0
 
 fit_2_coef <- coef(fit_2) |> select(term, estimate)
 resid_2_train <- residuals(fit_2) |> as_tibble() |> select(.resid)
@@ -179,7 +178,7 @@ for (j in 1:R) {
 }
 
 MSE_2_train <- sum(SE_2_train) / R
-# 0.00003521677 (3.521677e-05)
+# 0.00003552945 (3.552945e-05)
 
 
 
@@ -201,7 +200,7 @@ for (j in 1:P) {
   SE_2_test[j] <- (mean_2_test[[j]] - test$Log[j])^2
 }
 MSE_2_test <- sum(SE_2_test) / P
-# 0.0002005282
+# 0.0002020229
 
 
 
@@ -255,7 +254,8 @@ LS_comb_optimal <- comb |> filter(pool_train == min(comb$pool_train)) |> select(
 
 p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(title = "The In-sample Combination between SARIMA and ETS(A,A,A)",
+  labs(
+    # title = "The In-sample Combination between SARIMA and ETS(A,A,A)",
        x = "Weight on model SARIMA",
        y = "Mean squared error") +
   theme_minimal() +
@@ -288,7 +288,8 @@ equ_1 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p2 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(title = "The Out-of-sample Combination between SARIMA and ETS(A,A,A)",
+  labs(
+    # title = "The Out-of-sample Combination between SARIMA and ETS(A,A,A)",
        x = "Weight on model SARIMA",
        y = "Mean squared forecast error") +
   theme_minimal() +
@@ -316,8 +317,8 @@ p2 <- comb |> ggplot(aes(w, pool)) +
 library(gridExtra)
 grid.arrange(p1,p2)
 
-pdf("EMPL_correct.pdf", width = 8, height = 6)
-grid.arrange(p1,p2)
+pdf("EMPL_correct.pdf", width = 10, height = 6)
+grid.arrange(p1,p2,nrow=1,top="The point combination between ARIMA(2,1,0) w/ drift and ETS(A,A,M) - Correct Specification")
 dev.off()
 
 
