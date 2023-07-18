@@ -80,7 +80,7 @@ Following the research direction of \textcite{BS16}, we are looking for a relati
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccc}
-                       &      & \multicolumn{2}{l}{$M_2$} \\
+                       &      & \multicolumn{2}{c}{$M_2$} \\
                        &      & Good       & Bad       \\
 \multirow{2}{*}{$M_1$} & Good & $\surd$    & $\times$ \\
                        & Bad  & $\times$   & $\times$
@@ -196,9 +196,9 @@ The ``optimal'' set of weights satisfies that it minimizes the MSFE among all ot
 
 Reconsidering the example in Section 3 of \textcite{GA11}, the data we use is the daily Standard and Poor's (S\&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total), retrieved from the \textcite{SP500}. The S\&P500 index dataset has a total of 2519 (\(T\)) observations and is partitioned into two periods with a rough proportion. The in-sample period contains the first 60\% of the data (\(R = 1511\)), which is used to estimate all unknown parameters, including the optimal weight. The remaining 40\% (\(P = 1008\)) becomes the out-of-sample period to evaluate the forecast performance.
 
-We will investigate the presence of the forecast combination puzzle when using correctly-specified models or mis-specified models to fit the data. Constituent models are based on common classes of models: autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors. Detailed model specifications for each case will be clarified in the corresponding section.
+We will investigate the presence of the forecast combination puzzle when both models fit the training set well and when one of the model badly fit the data. Constituent models are based on common classes of models: autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors. Detailed model specifications for each case will be clarified in the corresponding section.
 
-We choose \(j=1,\cdots,M\), with \(M=3\) prediction models to study the performance of density predictions across sets of \texttt{two-model} pools. Each of the \(j\) predictive model has a conditional Gaussian density, which takes the form \(f^{(j)}(y)=f_j(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_j, \sigma^2_j\}\), where \(N\{x; \mu, \sigma^2\}\) denotes the normal probability density function evaluated at value \(x\) with mean \(\mu\) and variance \(\sigma^2\). The notation \(\mathcal{F}_{t-1}\) denotes all information available at time \(t-1\), and we assume that the conditional mean and variance of the models are, up to unknown parameters, known at time \(t-1\).
+We choose three prediction models to study the performance of density predictions across sets of \texttt{two-model} pools. Each of the \(j\) predictive model has a conditional Gaussian density, which takes the form \(f^{(j)}(y)=f_j(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_j, \sigma^2_j\}\), where \(N\{x; \mu, \sigma^2\}\) denotes the normal probability density function evaluated at value \(x\) with mean \(\mu\) and variance \(\sigma^2\). The notation \(\mathcal{F}_{t-1}\) denotes all information available at time \(t-1\), and we assume that the conditional mean and variance of the models are, up to unknown parameters, known at time \(t-1\).
 
 \hypertarget{nonstationary-time-series}{%
 \subsection{Nonstationary time series}\label{nonstationary-time-series}}
@@ -232,7 +232,7 @@ There are three sets of two-model combinations in total. Consider the weight \(w
 
 \begin{table}[ht]
   \centering
-  \caption{Log predictive score of density forecasts combination under two-model pools of S\&P 500}
+  \caption{Density forecasts combination under two-model pools of S\&P 500}
     \begin{tabular}{lccc}
     \toprule
                  & ARIMA(1,1,1)       & ETS(M,N,N)         & LR \\
@@ -241,9 +241,9 @@ There are three sets of two-model combinations in total. Consider the weight \(w
     ETS(M,N,N)   & 0.65               & \textit{2442.2965} & 2423.2140 \\
     LR           & 0.41               & 0.21               & \textit{2338.6005} \\
     \bottomrule
-    \multicolumn{4}{l}{\footnotesize The diagonal entries contains individual log predictive score calculated over the out-of-sample period with $P$ observations.}\\
-    \multicolumn{4}{l}{\footnotesize The log predictive scores of optimal combinations over the out-of-sample period are located above the diagonal.}\\
-    \multicolumn{4}{l}{\footnotesize Entries below diagonal show the estimated optimal weight of the model in that column in the two-model pool.}\\
+    \multicolumn{4}{l}{\footnotesize The diagonal entries contains individual log predictive score calculated with $R$ observations.}\\
+    \multicolumn{4}{l}{\footnotesize The log predictive scores of optimal combinations with $R$ observations are located above the diagonal.}\\
+    \multicolumn{4}{l}{\footnotesize Entries below diagonal show the estimated optimal weight of the model in that column.}\\
     \end{tabular}
   \label{tab:2}
 \end{table}
@@ -251,7 +251,7 @@ There are three sets of two-model combinations in total. Consider the weight \(w
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.4]{figures/SP500_nonstationary.pdf}
-\caption{Log predictive score in two-model pools over the in-sample (top) and out-of-sample (bottom) period of density combinations. Constituent prediction models described in the title. The x-axis represents the weight assigned on the former model of the combination and the y-axis indicates the log predictive score. The orange dot represents the optimal set of weights and the corresponding log predictive score in each case, while the blue dot indicates the forecast performance of the simple averaging method. The green dot, as a reference, refers to the maximum point of the out-of-sample curve.}
+\caption{Log predictive score of S\&P500 index predictive densities in two-model pools over the in-sample (top) and out-of-sample (bottom) period. Constituent prediction models described in the title. The x-axis represents the weight assigned on the former model of the combination and the y-axis indicates the log predictive score. The orange dot represents the optimal set of weights and the corresponding log predictive score in each case, while the blue dot indicates the forecast performance of the simple averaging method. The green dot, as a reference, refers to the maximum point of the out-of-sample curve.}
 \label{fig:nonstat}
 \end{figure}
 
@@ -267,6 +267,7 @@ Figure \ref{fig:nonstat} suggests that the forecast combination puzzle is only e
 WHICH ONE???
 
 ETS too bad?
+
 One possible explanation could be that the ETS model badly fits the training set but forecasts well for the evaluation set in both cases. Given this data split, the optimal weight set gives less weight on the ETS model, leading to a low log predictive score for the optimal predictive density combination, compared with the simple average. This phenomenon implies that the optimal weight set could not be fixed but a varying variable when one of the constituent models does not fit well with the data. We conjecture that there is a relationship between the forecast combination puzzle and the fitness of constituent models.
 
 ARIMA \& LR too good?
@@ -280,49 +281,49 @@ One possible explanation could be that the ARIMA model and the linear regression
 
 Continuing with the same dataset, we now fit the stationary series by taking a first difference of the log of S\&P500. A series is said to be stationary when it has constant mean and variance, and its covariance depends on the time interval only. In other words, the entire series should have a roughly consistent pattern. Then, the training set and the evaluation set will not have completely different behaviors that highly influence the goodness-of-fit of models.
 
-Consider two candidate models: a Gaussian ARMA(1,1) model and a classical linear regression model with ARMA(1,1) errors. Figure \ref{fig:stat} shows that two consitutent models have a very similar in-sample accuracy and the puzzle is obvious in the forecast combination. As expected, since both models fit the data well, the simply averaged point forecast performs almost the same as the optimal combined point forecast, indicating the presence of the forecast combination puzzle.
+Consider two candidate models: a Gaussian ARMA(1,1) model and a classical linear regression model with ARMA(1,1) errors. Figure \ref{fig:stat} shows that two constituent models have a very similar in-sample accuracy and the puzzle is obvious in the forecast combination. As expected, since both models fit the data well, the simply averaged point forecast performs almost the same as the optimal combined point forecast, indicating the presence of the forecast combination puzzle.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{figures/SP500_stationary.pdf}
-\caption{Log predictive score in two-model pools over the in-sample (left) and out-of-sample (right) period of density combinations. The x-axis represents the weight assigned on the ARMA(1,1) model and the y-axis indicates the log predictive score. The meanings of colored dots remain the same}
+\includegraphics[scale=0.6]{figures/SP500_stationary.pdf}
+\caption{Log predictive score of S\&P500 index predictive densities in two-model pools over the in-sample (left) and the out-of-sample (right) period. The x-axis represents the weight assigned on the ARMA(1,1) model and the y-axis indicates the log predictive score. The meanings of colored dots remain the same.}
 \label{fig:stat}
 \end{figure}
 
 \hypertarget{pure-time-series-with-seasonality}{%
 \section{Pure time series with seasonality}\label{pure-time-series-with-seasonality}}
 
-With the purpose of corroborating above conjectures, we experiment with a quarterly dataset to observe the relationship between the puzzle and the specification of models. To make our life easier, we produce point forecasts and evaluate point combinations with Mean Squared Forecast Error.
+With the purpose of corroborating above conjectures, we experiment with a quarterly dataset to observe the relationship between the forecast combination puzzle and the specification of models. More specifically, we would like to investigate cases when models are both correctly specified or both misspecified. To make our life easier, we produce point forecasts and evaluate point combinations with Mean Squared Forecast Error (MSFE).
 
-The data considered is the quarterly total number of unemployed individuals (in thousands) from 1985 Q1 to 2023 Q1, retrieved from the Australia Bureau of Statistics \autocite{ABS}.
-
-It has a total of 2519 (\(T\)) observations and is partitioned into two periods with a rough proportion. The in-sample period contains the first 60\% of the data (\(R = 1511\)), which is used to estimate all unknown parameters, including the optimal weight. The remaining 40\% (\(P = 1008\)) becomes the out-of-sample period to evaluate the forecast performance.
-
-We will investigate the presence of the forecast combination puzzle when using both mis-specified and correctly-specified models to fit the data.
-
-There are two combined point forecasts whose MSFEs are calculated over the last P observations
-
-\hypertarget{misspecified-models}{%
-\subsection{Misspecified models}\label{misspecified-models}}
-
-With the purpose of examining the case when using two badly fit models, we experiment with seasonal dataset to observe the relationship between the puzzle and the specification of models.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.5]{figures/EMPL_misspecified.pdf}
-\caption{}
-\label{fig:sdm}
-\end{figure}
+The data considered is the quarterly total number of unemployed individuals (in thousands) from 1985 Q1 to 2023 Q1, retrieved from the Australia Bureau of Statistics \autocite{ABS}. It has a total of 153 (\(T\)) observations and is slit into two sets in proportion. Same as before, the first 60\% of the data (\(R = 91\)), as the in-sample period, is used to estimate all unknown parameters. The rest 40\% (\(P = 62\)) is the out-of-sample period for the forecast performance evaluation. Also, we use the natural logarithm of the total number of unemployment to reduce the level of variability in the seires.
 
 \hypertarget{correctly-specified-models}{%
 \subsection{Correctly specified models}\label{correctly-specified-models}}
 
+To ensure compatibility with seasonal component, we propose the Seasonal ARIMA (SARIMA) model and the ETS model: ARIMA(2,0,2)(0,1,1){[}4{]} with drift and ETS(A,A,A). The SARIMA is simply an ARIMA model with extra seasonal component. The first parenthesis is same as before. The second parenthesis represents the seasonal AR, integrated, and MA components respectively, separately by the comma. The number in the box bracket indicates the number of observations per year, i.e., the seasonal frequency. An intercept is included in the model. In the ETS model, the seasonal part is reflected by \texttt{S} and the third position in the parenthesis. Due to the log transformation, we have additive error, additive trend, and additive seasonality.
+
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.5]{figures/EMPL_correct.pdf}
-\caption{}
+\includegraphics[scale=0.6]{figures/EMPL_correct.pdf}
+\caption{MSFE of predictive points in correctly specified two-model pools over the in-sample (left) and out-of-sample (right) period. The x-axis represents the weight assigned on the SARMA model and the y-axis indicates the value of MSFE. The meanings of colored dots remain the same.}
 \label{fig:sdc}
 \end{figure}
+
+The forecast combination puzzle is evident in Figure \ref{fig:sdc}. The optimal forecast point combination has a MSFE of 0.000177 and the simple averaging forecast has a MSFE of 0.000178. The difference between them is negligible. From the in-sample combination accuracy plot, we can assert that both models fit the training set equally well, leading the estimated optimal weight to be around 0.5. These results exemplify that producing forecasts with correctly specified models in a two-model pool will lead to the forecast combination puzzle.
+
+\hypertarget{misspecified-models}{%
+\subsection{Misspecified models}\label{misspecified-models}}
+
+One way of proposing a \texttt{wrong} model for a seasonal dataset is deliberately ignoring the seasonal component in the model specification. Even so, we still try to fit the training set well with SARIMA and ETS models by only blocking the seasonal part: ARIMA(2,1,0) with an intercept and ETS(A,A,N).
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{figures/EMPL_misspecified.pdf}
+\caption{MSFE of predictive points in misspecified two-model pools over the in-sample (left) and out-of-sample (right) period. The x-axis represents the weight assigned on the SARMA model and the y-axis indicates the value of MSFE. The meanings of colored dots remain the same.}
+\label{fig:sdm}
+\end{figure}
+
+Based on the left plot of Figure \ref{fig:sdm}, the ETS model has a bigger mean squared error than the ARIMA model, indicating a poor model performance in fitting the training set. The difference between these misspecified models is much larger than those correctly specified models mentioned above. Furthermore, Figure \ref{fig:sdm} does not reveal any evidence of the puzzle, given the simple average performs superior than the optimal forecast combination. Although the difference of MSFE, 0.000013, seems to be small in magnitude, comparing it with 0.000001 in the correct case, the difference is relatively conspicuous.
 
 \hypertarget{simulation-results}{%
 \chapter{Simulation Results}\label{simulation-results}}
@@ -350,7 +351,7 @@ where \(i\) represents each observation.
 
 The initial set-up has 15000 (N) artificial cross-sectional observations generated from \ref{eqn:DGP} with \(E[x_{1i}] = E[x_{2i}] = 0\), \(Var(x_{1i}) = Var(x_{2i}) = 1\), \(Cov(x_{1i}, x_{2i}) = 0.7\), \(\pmb{\beta} = (\beta_0, \beta_1, \beta_2)' = (1,2,2)'\), \(\mu_e = 5\) and \(\sigma^2_e=10\).
 
-Following the methodology in Section \ref{method}, the data will be divided into an in-sample period (roughly 60\%) for estimation and an out-of-sample period for accuracy evaluation. We propose two mis-specified models to generate density forecasts with each only contains one of the regressors. Assume Model 1 includes only \(x_{1i}\) as the regressor and the other model, Model 2, includes only \(x_{2i}\) as the regressor. The density forecast combinations will follow the construction of \texttt{two-model} pools and be evaluated by the log score functions.
+Following the methodology in Section \ref{method}, the data will be divided into an in-sample period (roughly 60\%) for estimation and an out-of-sample period for accuracy evaluation. We propose two misspecified models to generate density forecasts with each only contains one of the regressors. Assume Model 1 includes only \(x_{1i}\) as the regressor and the other model, Model 2, includes only \(x_{2i}\) as the regressor. The density forecast combinations will follow the construction of \texttt{two-model} pools and be evaluated by the log score functions.
 
 \begin{itemize}
 \item

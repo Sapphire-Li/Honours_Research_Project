@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.4)  17 JUL 2023 23:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.4)  18 JUL 2023 21:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -950,10 +950,6 @@ Chapter 3.
 [11
 
 ]
-Overfull \hbox (45.33252pt too wide) in paragraph at lines 236--249
- [][] 
- []
-
 <figures/SP500_nonstationary.pdf, id=257, 1011.78pt x 722.7pt>
 File: figures/SP500_nonstationary.pdf Graphic file (type pdf)
 <use figures/SP500_nonstationary.pdf>
@@ -967,86 +963,87 @@ Package pdftex.def Info: figures/log_linegraph.pdf  used on input line 262.
 (pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
 [12] [13 <./figures/SP500_nonstationary.pdf>]
 
-LaTeX Warning: Reference `ig:llg' on page 14 undefined on input line 276.
+LaTeX Warning: Reference `ig:llg' on page 14 undefined on input line 277.
 
 [14 <./figures/log_linegraph.pdf>]
 <figures/SP500_stationary.pdf, id=293, 722.7pt x 433.62pt>
 File: figures/SP500_stationary.pdf Graphic file (type pdf)
 <use figures/SP500_stationary.pdf>
-Package pdftex.def Info: figures/SP500_stationary.pdf  used on input line 287.
-(pdftex.def)             Requested size: 361.3491pt x 216.80946pt.
+Package pdftex.def Info: figures/SP500_stationary.pdf  used on input line 288.
+(pdftex.def)             Requested size: 433.62334pt x 260.17401pt.
 [15 <./figures/SP500_stationary.pdf>]
-<figures/EMPL_misspecified.pdf, id=307, 722.7pt x 433.62pt>
-File: figures/EMPL_misspecified.pdf Graphic file (type pdf)
-<use figures/EMPL_misspecified.pdf>
-Package pdftex.def Info: figures/EMPL_misspecified.pdf  used on input line 312.
-
-(pdftex.def)             Requested size: 361.3491pt x 216.80946pt.
-<figures/EMPL_correct.pdf, id=308, 722.7pt x 433.62pt>
+<figures/EMPL_correct.pdf, id=307, 722.7pt x 433.62pt>
 File: figures/EMPL_correct.pdf Graphic file (type pdf)
 <use figures/EMPL_correct.pdf>
-Package pdftex.def Info: figures/EMPL_correct.pdf  used on input line 322.
-(pdftex.def)             Requested size: 361.3491pt x 216.80946pt.
-[16 <./figures/EMPL_misspecified.pdf>] [17 <./figures/EMPL_correct.pdf>]
+Package pdftex.def Info: figures/EMPL_correct.pdf  used on input line 307.
+(pdftex.def)             Requested size: 433.62334pt x 260.17401pt.
+[16 <./figures/EMPL_correct.pdf>]
+<figures/EMPL_misspecified.pdf, id=321, 722.7pt x 433.62pt>
+File: figures/EMPL_misspecified.pdf Graphic file (type pdf)
+<use figures/EMPL_misspecified.pdf>
+Package pdftex.def Info: figures/EMPL_misspecified.pdf  used on input line 321.
+
+(pdftex.def)             Requested size: 433.62334pt x 260.17401pt.
+[17 <./figures/EMPL_misspecified.pdf>] [18]
 Chapter 4.
-[18
+[19
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 3
-57.
+58.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
-<figures/Sample_Size_15000.pdf, id=345, 722.7pt x 361.35pt>
+<figures/Sample_Size_15000.pdf, id=352, 722.7pt x 361.35pt>
 File: figures/Sample_Size_15000.pdf Graphic file (type pdf)
 <use figures/Sample_Size_15000.pdf>
-Package pdftex.def Info: figures/Sample_Size_15000.pdf  used on input line 372.
+Package pdftex.def Info: figures/Sample_Size_15000.pdf  used on input line 373.
 
 (pdftex.def)             Requested size: 433.62334pt x 216.81168pt.
-[19 <./figures/Sample_Size_15000.pdf>]
-<figures/Sample_Size_100-10000.png, id=357, 1284.2379pt x 577.1964pt>
+[20 <./figures/Sample_Size_15000.pdf>]
+<figures/Sample_Size_100-10000.png, id=364, 1284.2379pt x 577.1964pt>
 File: figures/Sample_Size_100-10000.png Graphic file (type png)
 <use figures/Sample_Size_100-10000.png>
 Package pdftex.def Info: figures/Sample_Size_100-10000.png  used on input line 
-387.
+388.
 (pdftex.def)             Requested size: 449.49pt x 202.02176pt.
-[20 <./figures/Sample_Size_100-10000.png>]
-<figures/Beta_diff_mag.png, id=368, 1284.2379pt x 577.1964pt>
+[21 <./figures/Sample_Size_100-10000.png>]
+<figures/Beta_diff_mag.png, id=375, 1284.2379pt x 577.1964pt>
 File: figures/Beta_diff_mag.png Graphic file (type png)
 <use figures/Beta_diff_mag.png>
-Package pdftex.def Info: figures/Beta_diff_mag.png  used on input line 406.
+Package pdftex.def Info: figures/Beta_diff_mag.png  used on input line 407.
 (pdftex.def)             Requested size: 449.49pt x 202.02176pt.
-<figures/Beta_diff_sign.png, id=371, 856.1586pt x 577.1964pt>
+<figures/Beta_diff_sign.png, id=378, 856.1586pt x 577.1964pt>
 File: figures/Beta_diff_sign.png Graphic file (type png)
 <use figures/Beta_diff_sign.png>
-Package pdftex.def Info: figures/Beta_diff_sign.png  used on input line 417.
+Package pdftex.def Info: figures/Beta_diff_sign.png  used on input line 418.
 (pdftex.def)             Requested size: 470.88869pt x 317.45898pt.
 
-Overfull \hbox (15.64458pt too wide) in paragraph at lines 417--418
+Overfull \hbox (15.64458pt too wide) in paragraph at lines 418--419
  [][] 
  []
 
-[21 <./figures/Beta_diff_mag.png>]
-<figures/x_var.png, id=379, 856.1586pt x 577.1964pt>
+[22 <./figures/Beta_diff_mag.png>]
+<figures/x_var.png, id=386, 856.1586pt x 577.1964pt>
 File: figures/x_var.png Graphic file (type png)
 <use figures/x_var.png>
-Package pdftex.def Info: figures/x_var.png  used on input line 432.
+Package pdftex.def Info: figures/x_var.png  used on input line 433.
 (pdftex.def)             Requested size: 299.66pt x 202.02176pt.
-[22 <./figures/Beta_diff_sign.png>] [23 <./figures/x_var.png>]
+[23 <./figures/Beta_diff_sign.png>] [24 <./figures/x_var.png>]
 Chapter 5.
-[24
-
-]
-Chapter 6.
 [25
 
 ]
-Appendix A.
+Chapter 6.
 [26
 
-] [27
+]
+Appendix A.
+[27
 
-] [28] [29] (./thesis.aux)
+] [28
+
+] [29] (./thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1061,11 +1058,11 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 ### semi simple group (level 1) entered at line 105 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23822 strings out of 478268
- 414992 string characters out of 5846348
- 1165403 words of memory out of 5000000
+ 23836 strings out of 478268
+ 415118 string characters out of 5846348
+ 1165953 words of memory out of 5000000
  41099 multiletter control sequences out of 15000+600000
- 595162 words of font info for 403 fonts, out of 8000000 for 9000
+ 595865 words of font info for 412 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,82p,1408b,18360s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc
@@ -1081,10 +1078,10 @@ f-dist/fonts/type1/public/bera/fvsr8a.pfb></usr/local/texlive/2022/texmf-dist/f
 onts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/ty
 pe1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw
 /palatino/uplri8a.pfb>
-Output written on thesis.pdf (31 pages, 1765817 bytes).
+Output written on thesis.pdf (31 pages, 1768041 bytes).
 PDF statistics:
- 531 PDF objects out of 1000 (max. 8388607)
- 447 compressed objects within 5 object streams
+ 534 PDF objects out of 1000 (max. 8388607)
+ 450 compressed objects within 5 object streams
  135 named destinations out of 1000 (max. 500000)
  123584 words of extra memory for PDF output out of 128383 (max. 10000000)
 

@@ -27,7 +27,7 @@ where $i$ represents each observation.
 
 The initial set-up has 15000 (N) artificial cross-sectional observations generated from \ref{eqn:DGP} with $E[x_{1i}] = E[x_{2i}] = 0$, $Var(x_{1i}) = Var(x_{2i}) = 1$, $Cov(x_{1i}, x_{2i}) = 0.7$, $\pmb{\beta} = (\beta_0, \beta_1, \beta_2)' = (1,2,2)'$, $\mu_e = 5$ and $\sigma^2_e=10$.
 
-Following the methodology in Section \@ref(method), the data will be divided into an in-sample period (roughly 60%) for estimation and an out-of-sample period for accuracy evaluation. We propose two mis-specified models to generate density forecasts with each only contains one of the regressors. Assume Model 1 includes only $x_{1i}$ as the regressor and the other model, Model 2, includes only $x_{2i}$ as the regressor. The density forecast combinations will follow the construction of `two-model` pools and be evaluated by the log score functions. 
+Following the methodology in Section \@ref(method), the data will be divided into an in-sample period (roughly 60%) for estimation and an out-of-sample period for accuracy evaluation. We propose two misspecified models to generate density forecasts with each only contains one of the regressors. Assume Model 1 includes only $x_{1i}$ as the regressor and the other model, Model 2, includes only $x_{2i}$ as the regressor. The density forecast combinations will follow the construction of `two-model` pools and be evaluated by the log score functions. 
 
 
 + Sample size is $N=15000$

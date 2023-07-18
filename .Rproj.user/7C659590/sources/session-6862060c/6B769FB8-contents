@@ -35,7 +35,7 @@ Following the research direction of @BS16, we are looking for a relationship bet
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccc}
-                       &      & \multicolumn{2}{c}{$M_2$} \\
+                       &      & \multicolumn{2}{l}{$M_2$} \\
                        &      & Good       & Bad       \\
 \multirow{2}{*}{$M_1$} & Good & $\surd$    & $\times$ \\
                        & Bad  & $\times$   & $\times$

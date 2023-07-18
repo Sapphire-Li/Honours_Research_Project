@@ -1,0 +1,78 @@
+---
+chapter: 3
+knit: "bookdown::render_book"
+---
+
+
+# Preliminary Results 
+
+## A Motivating Example
+
+Reconsidering the example in section 3 of @GA11, the data we use is the daily Standard and Poor's (S&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total), retrieved from the @SP500. We choose $j=1,\cdots,M$, with $M=5$ prediction models to study the performance of density predictions across sets of ``two-model`` pools. Each of the $j$ predictive model has a conditional Gaussian density, which takes the form $f^{(j)}(y)=f_j(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_j, \sigma^2_j\}$, where $N\{x; \mu, \sigma^2\}$ denotes the normal probability density function evaluated at value $x$ with mean $\mu$ and variance $\sigma^2$. The notation $\mathcal{F}_{t-1}$ denotes all information available at time $t-1$, and we assume that the conditional mean and variance of the models are, up to unknown parameters, known at time $t-1$.
+
+Candidate models include commonly used model types such as autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors. See the Appendix for detailed model specifications. 
+
+
+\begin{table}[ht]
+  \centering
+  \caption{Log predictive score of density forecasts combination under two-model pools}
+    \begin{tabular}{llllll}
+    \toprule
+          & ARIMA(1,1,1) & ETS(M,N,N) & ETS(M,A,N) &  LM (linear) &  LM (log) \\
+    \midrule
+    ARIMA(1,1,1) & \textit{-5911.1974} & -5839.3045 & -5842.7634 & -5911.1974 & -5894.1267 \\
+    ETS(M,N,N) & 0.45  & \textit{-5883.9697} & -5881.7790 & -5883.9697 & -5858.6397 \\
+    ETS(M,A,N) & 0.43  & 0.08  & \textit{-5881.7970} & -5881.7970 & -5859.7980 \\
+     LM (linear) & 1     & 1     & 1     & \textit{-7532.1464} & -5918.5230 \\
+     LM (log) & 0.56  & 0.65  & 0.67  & 0     & \textit{-5918.5230} \\
+    \bottomrule
+    \multicolumn{6}{l}{\footnotesize The diagonal entries contains individual log score.}\\
+    \multicolumn{6}{l}{\footnotesize The log scores for combination pools are located above the diagonal.}\\
+    \multicolumn{6}{l}{\footnotesize Entries below diagonal show the estimated weight of the model in that column in the two-model pool.}\\
+    \end{tabular}
+  \label{tab:2}
+\end{table}
+
+There are 10 sets of two-model combination and the log predictive score of each combination is generated according to \ref{eqn:LS} with the value of weight changing by 0.01 every time. Table \ref{tab:2} shows the estimated weights and combination log scores. 
+
+\vspace{0.3cm}
+
+\begin{figure}[ht]
+\centering
+\caption{The highest four log predictive scores of weighted two-model combinations for S\&P 500 index predictive densities.}
+\includegraphics{figures/best4comb.pdf}
+\begin{flushleft}
+{\footnotesize The weights on the first model is in the x-axis and the corresponding log predictive scores are on the y-axis. Constituent models are stated in the title. The orange point represent the highest log score of a specific combination. Its value and the corresponding estimated weight are noted below.}\\
+\end{flushleft}
+\label{fig:best4}
+\end{figure}
+
+
+Figure \ref{fig:best4} illustrates the change of the log predictive score for the top 4 combinations as the weight increases. The great improvements in all scores mean that combination forecasts do perform better than the individual forecasts. It is also noticeable that the estimated weightis "close to" the equal-weighted benchmark, which could be an evidence for the forecast combination puzzle.
+
+We have shown that the forecast combination puzzle is evident in the time series setting. We will then exploit the puzzle more extensively with the panel data in the next chapter. 
+
+
+## Timeline of Future Research
+
+\begin{table}[htbp]
+  \centering
+  \caption{Research Plan}
+    \begin{tabular}{ll}
+    Time  & Objectives \\
+    \midrule
+    May - June & Investigating the presence of puzzle in panel data and literature review \\
+    July - August & Applying forecast accuracy tests with time series data and drafting thesis  \\
+    September & Applying tests with panel data and considering limitations \\
+    October & Working on thesis and final presentation \\
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+
+
+

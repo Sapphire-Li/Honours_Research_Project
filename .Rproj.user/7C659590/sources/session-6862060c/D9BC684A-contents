@@ -1,0 +1,105 @@
+---
+chapter: 2
+knit: "bookdown::render_book"
+---
+
+# Methodology {#method}
+
+The first goal of this paper is to construct linear density forecast combinations with parametric models. The results are anticipated to reveal that forecast combinations can deliver improved accuracy over single models, but are not necessarily superior to forecasts obtained from the equally weighted combination.
+
+The next goal is to estimate the unknown parameters of the constituent models and the weight in a single step, and to compare the accuracy of forecasts based on these combinations against the usual combinations process, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in @W96, which measure out-of-sample differences between forecasts.
+
+In the literature, there are several definitions of combinations. We focus on the combination of forecasts from independent models for a given dataset, which is commonly performed in two stages:
+
+1. producing separate point or probabilistic forecasts for the next time point using observed data and constituent models, and
+
+2. combining forecasts based on one of the accuracy criteria.  
+
+Specifically, considering the combination of two individual forecasts allows us to delve into interesting and unexplained findings through fast data manipulation [@BS16].
+
+Before explaining further details, the following notation will be used throughout the paper. A vector time series $\textbf{y}_t$ with a total of $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_{t}$. Its future values after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon and $h>0$. The information set at time t, $\mathcal{F}_t$, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$.  
+
+The choice and specification of constituent models are determined by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for the following procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best accuracy.
+
+A parametric model $M$ determines the conditional probability density for $\textbf{y}_t$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$, given unknown parameters $\theta_M$ and all the past information $\mathcal{F}_{t-1}$. The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., $\hat\theta_M = \underset{\theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for the following procedures.  
+
+One thing to clarify is that we do not consider the properties of estimators, so model misspecification will not ruin the results. CHECK!!!!
+
+
+
+## Density combinations
+
+### Linear pooling  
+
+Consider the case of only two competing probability densities, undoubtedly, densities can be combined in many ways; see Section 3 of @WHLK22 for many popular means of probabilistic combination. One of the commonly used approaches is the "linear opinion pool": aggregate constituent weighted densities in a linear form [e.g., @BG69;@HM07;@GA11]. For the ``two-model`` pools, constituent densities $f_1(y_t)$ and $f_2(y_t)$ are combined as follows:
+
+\begin{equation}
+\label{eqn:LC1}
+f(y_t) = w \ f_1(y_t | \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-w) f_2(y_t | \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)
+\end{equation}  
+
+where $w$ is the non-negative weight allocated to the probability density derived from the first model. Through this construction, the sum of two weights is implied to be 1, which is a necessary and sufficient condition for $f(y_t)$ to be a proper density function [@GA11]. In addition to point forecasts, the use of density forecasts can offer forecasters or decision markers a more comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions).
+
+
+
+### Log socring rules  
+
+Following the literature on density evaluation, our initial analysis will focus on using the log score function to measure the accuracy of our density forecasts; see, e.g., @GA11 for a discussion on log score and its use in density forecasting. For each individual model $M$, the log score over the sample $t = 1, \dots, T$ is:  
+
+\begin{equation}
+\label{eqn:LS1}
+LS = \sum^T_{t=1} log \ f(y_t| \mathcal{F}_{t-1}, \hat\theta_M, M).
+\end{equation}
+
+The "optimal" linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over the in-sample $t = 1, 2, \dots, R$.  
+
+\begin{equation}
+\label{eqn:LS2}
+\hat{w}_{\text{opt}} = \underset{w}{\arg\max} \sum^R_{t=1} log \Big[ w \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-w) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big]
+\end{equation}
+
+Thus, the log predictive score over the forecast horizon $h = 1, 2, \dots, P$ (i.e., the out-of-sample period) is:
+
+\begin{equation}
+\label{eqn:LS3}
+LPS = \sum^T_{t = R+1} log \Big[ \hat{w}_{\text{opt}} \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{w}_{\text{opt}}) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+\end{equation}
+
+
+
+## Point combinations
+
+For time series with seasonal patterns, we follow @BG69 and @SW09, and consider the combination of pairs of point forecasts for the ease of calculation. Same as @SW09, the mean squared forecast error (MSFE) is adopted to measure the point forecast accuracy.
+
+### Linear combination
+
+Similar to the density case, point predictions from two models, $\hat y_{1t}$ and $\hat y_{2t}$, are aggregated linearly:
+
+\begin{equation}
+\label{eqn:PC1}
+\hat y_t = w \ \hat y_{1t} + (1-w) \ \hat y_{2t}
+\end{equation}  
+
+where $w$ is the non-negative weight allocated to the point prediction generated from the first model.
+
+
+
+### Mean squared forecast error (MSFE)
+
+The MSFE is defined as
+
+\begin{equation}
+\label{eqn:MSFE1}
+\frac{1}{P} \sum^T_{t=R+1} (y_t - \hat y_t)^2.
+\end{equation}  
+
+The "optimal" set of weights satisfies that it minimizes the MSFE among all other possible sets.
+
+
+
+
+
+
+
+
+
