@@ -172,12 +172,12 @@ for (j in 1:R) {
   mean_2_train[j] <- l[[j]] + b[[j]] + s[[j]]
 }
 
-SE_2_train <- numeric(R) |> as.numeric()
+SE_2_fit <- numeric(R) |> as.numeric()
 for (j in 1:R) {
-  SE_2_train[j] <- (mean_2_train[[j]] - train$Log[j])^2
+  SE_2_fit[j] <- (mean_2_train[[j]] - train$Log[j])^2
 }
 
-MSE_2_train <- sum(SE_2_train) / R
+MSE_2_fit <- sum(SE_2_fit) / R
 # 0.00003552945 (3.552945e-05)
 
 
@@ -260,12 +260,12 @@ p1 <- comb |> ggplot(aes(w, pool_train)) +
        y = "Mean squared error") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   annotate("text", x = weight_optimal, y = LS_comb_optimal,
-           label = paste0("Min: ", round(LS_comb_optimal,9)), vjust = -2, size = 3) +
+           label = paste0("Min: ", round(LS_comb_optimal,9)), vjust = -2, size = 4) +
   annotate("text", x = weight_optimal, y = LS_comb_optimal,
-           label = paste0("Weight: ", round(weight_optimal,4)), vjust = -4, size = 3) +
+           label = paste0("Weight: ", round(weight_optimal,4)), vjust = -4, size = 4) +
   geom_point(aes(x = weight_optimal, y = LS_comb_optimal), size = 3, color = "orange")
 
 
@@ -294,21 +294,21 @@ p2 <- comb |> ggplot(aes(w, pool)) +
        y = "Mean squared forecast error") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   geom_point(aes(x = weight_optimal, y = LS_comb_2), size = 2, color = "orange") +
-  geom_point(aes(x = weight_test, y = LS_comb_test), size = 1.5, color = "green") +
+  # geom_point(aes(x = weight_test, y = LS_comb_test), size = 1.5, color = "green") +
   geom_point(aes(x = 0.5, y = equ_1), size = 2, color = "blue") +
   # annotate("text", x = weight_test, y = LS_comb_test,
   #          label = paste0("Min: ", round(LS_comb_test,7)), vjust = -3, hjust = 0.8, size = 3) +
   # annotate("text", x = weight_test, y = LS_comb_test,
   #          label = paste0("Weight: ", round(weight_test,4)), vjust = -5, hjust = 0.8, size = 3) +
   annotate("text", x = weight_optimal, y = LS_comb_2,
-           label = paste0("Optimal Weight: ", round(weight_optimal,4)), vjust = 2, hjust = 1.1, size = 3) +
+           label = paste0("Optimal Weight: ", round(weight_optimal,4)), vjust = 2, hjust = 1.1, size = 4) +
   annotate("text", x = weight_optimal, y = LS_comb_2,
-           label = paste0("MSFE: ", round(LS_comb_2,6)), vjust = 4, hjust = 1.1, size = 3) +
+           label = paste0("MSFE: ", round(LS_comb_2,6)), vjust = 4, hjust = 1.1, size = 4) +
   annotate("text", x = 0.5, y = equ_1,
-           label = paste0("Simple Average: ", round(equ_1,6)), vjust = -1, hjust = -0.1, size = 3)
+           label = paste0("Simple Average: ", round(equ_1,6)), vjust = -1, hjust = -0.1, size = 4)
 
 
 
@@ -317,7 +317,7 @@ p2 <- comb |> ggplot(aes(w, pool)) +
 library(gridExtra)
 grid.arrange(p1,p2)
 
-pdf("EMPL_correct.pdf", width = 10, height = 6)
+pdf("EMPL_correct.pdf", width = 8, height = 6)
 grid.arrange(p1,p2,nrow=1,top="The point combination between SARIMA and ETS(A,A,A) - Correct Specification")
 dev.off()
 

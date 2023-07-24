@@ -91,7 +91,7 @@ for (j in 1:R) {
   pd_2_train[j] <- dnorm(train[[j,4]], mean_2_train[j], sd_2_train[j])
 }
 # individual predictive density (in-sample period)
-LS_2_train <- sum(log(pd_2_train))
+LS_2_train <- sum(log(pd_2_train[3:1511]))
 LS_2_train
 # 5111.7788
 
@@ -140,7 +140,7 @@ pd_3_train <- numeric(R-1) |> as.numeric()
 for (j in 1:R) {
   pd_3_train[j] <- dnorm(train[[j,4]], mean_3_train[[j]], sd_3_train[[1]])
 }
-LS_3_train <- sum(log(pd_3_train[2:1511]))
+LS_3_train <- sum(log(pd_3_train[3:1511]))
 LS_3_train
 # 5861.1674
 
@@ -188,12 +188,12 @@ p1 <- comb |> ggplot(aes(w, pool_train)) +
        y = "Log socre") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   annotate("text", x = weight_optimal[1], y = LS_comb_optimal[1],
-           label = paste0("Max: ", round(LS_comb_optimal[1],4)), vjust = 2, size = 3) +
+           label = paste0("Max: ", round(LS_comb_optimal[1],4)), vjust = 3, size = 4) +
   annotate("text", x = weight_optimal[1], y = LS_comb_optimal[1],
-           label = paste0("Weight: ", round(weight_optimal[1],4)), vjust = 4, size = 3) +
+           label = paste0("Weight: ", round(weight_optimal[1],4)), vjust = 5, size = 4) +
   geom_point(aes(x = weight_optimal[1], y = LS_comb_optimal[1]), size = 3, color = "orange")
 
 
@@ -214,18 +214,18 @@ p2 <- comb |> ggplot(aes(w, pool_train)) +
        y = "Log socre") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   annotate("text", x = weight_optimal[2], y = LS_comb_optimal[2],
-           label = paste0("Max: ", round(LS_comb_optimal[2],4)), vjust = 2, size = 3) +
+           label = paste0("Max: ", round(LS_comb_optimal[2],4)), vjust = 3, size = 4) +
   annotate("text", x = weight_optimal[2], y = LS_comb_optimal[2],
-           label = paste0("Weight: ", round(weight_optimal[2],4)), vjust = 4, size = 3) +
+           label = paste0("Weight: ", round(weight_optimal[2],4)), vjust = 5, size = 4) +
   geom_point(aes(x = weight_optimal[2], y = LS_comb_optimal[2]), size = 3, color = "orange")
 
 
 
 for (j in 1:length(w)) {
-  pool_train[j] <-  sum(log(w[j]*pd_2_train[2:1511] + (1-w[j])*pd_3_train[2:1511]))
+  pool_train[j] <-  sum(log(w[j]*pd_2_train[3:1511] + (1-w[j])*pd_3_train[3:1511]))
 }
 
 comb <- cbind(w,pool_train) |> as_tibble()
@@ -240,12 +240,12 @@ p3 <- comb |> ggplot(aes(w, pool_train)) +
        y = "Log socre") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   annotate("text", x = weight_optimal[3], y = LS_comb_optimal[3],
-           label = paste0("Max: ", round(LS_comb_optimal[3],4)), vjust = 2, size = 3) +
+           label = paste0("Max: ", round(LS_comb_optimal[3],4)), vjust = 2, size = 4) +
   annotate("text", x = weight_optimal[3], y = LS_comb_optimal[3],
-           label = paste0("Weight: ", round(weight_optimal[3],4)), vjust = 4, size = 3) +
+           label = paste0("Weight: ", round(weight_optimal[3],4)), vjust = 4, size = 4) +
   geom_point(aes(x = weight_optimal[3], y = LS_comb_optimal[3]), size = 3, color = "orange")
 
 
@@ -272,23 +272,23 @@ p4 <- comb |> ggplot(aes(w, pool)) +
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log predictive socre") +
   theme_minimal() +
-  ylim(2338,2455) +
+  # ylim(2338,2455) +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   geom_point(aes(x = weight_optimal[1], y = LS_comb_1), size = 2, color = "orange") +
-  geom_point(aes(x = weight_test[1], y = LS_comb_test[1]), size = 1.5, color = "green") +
+  # geom_point(aes(x = weight_test[1], y = LS_comb_test[1]), size = 1.5, color = "green") +
   geom_point(aes(x = 0.5, y = equ_1), size = 2, color = "blue") +
   # annotate("text", x = weight_test[1], y = LS_comb_test[1],
   #          label = paste0("Max: ", round(LS_comb_test[1],4)), vjust = 3, size = 3) +
   # annotate("text", x = weight_test[1], y = LS_comb_test[1],
   #          label = paste0("Weight: ", round(weight_test[1],4)), vjust = 5, size = 3) +
   annotate("text", x = weight_optimal[1], y = LS_comb_1,
-           label = paste0("Optimal Weight: ", round(weight_optimal[1],4)), vjust = 2, hjust = 1, size = 3) + 
+           label = paste0("Optimal Weight: ", round(weight_optimal[1],4)), vjust = 2, hjust = 1, size = 4) + 
   annotate("text", x = weight_optimal[1], y = LS_comb_1,
-           label = paste0("LPS: ", round(LS_comb_1,4)), vjust = 4, hjust = 1, size = 3) +
+           label = paste0("LPS: ", round(LS_comb_1,4)), vjust = 4, hjust = 1, size = 4) +
   annotate("text", x = 0.5, y = equ_1,
-           label = paste0("Simple Average: ", round(equ_1,4)), vjust = -1, hjust = -0.03, size = 3)
+           label = paste0("Simple Average: ", round(equ_1,4)), vjust = -1, size = 4)
 
 
 
@@ -309,23 +309,23 @@ p5 <- comb |> ggplot(aes(w, pool)) +
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log predictive socre") +
   theme_minimal() +
-  ylim(2338,2455) +
+  # ylim(2338,2455) +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   geom_point(aes(x = weight_optimal[2], y = LS_comb_2), size = 2, color = "orange") +
-  geom_point(aes(x = weight_test[2], y = LS_comb_test[2]), size = 1.5, color = "green") +
+  # geom_point(aes(x = weight_test[2], y = LS_comb_test[2]), size = 1.5, color = "green") +
   geom_point(aes(x = 0.5, y = equ_2), size = 2, color = "blue") +
   # annotate("text", x = weight_test[2], y = LS_comb_test[2],
   #          label = paste0("Max: ", round(LS_comb_test[2],4)), vjust = 3, size = 3) +
   # annotate("text", x = weight_test[2], y = LS_comb_test[2],
   #          label = paste0("Weight: ", round(weight_test[2],4)), vjust = 5, size = 3) +
   annotate("text", x = weight_optimal[2], y = LS_comb_2,
-           label = paste0("Optimal Weight: ", round(weight_optimal[2],4)), vjust = 2, hjust = -0.03, size = 3) + 
+           label = paste0("Optimal Weight: ", round(weight_optimal[2],4)), vjust = 3, hjust = 0.5, size = 4) + 
   annotate("text", x = weight_optimal[2], y = LS_comb_2,
-           label = paste0("LPS: ", round(LS_comb_2,4)), vjust = 4, hjust = -0.03, size = 3) +
+           label = paste0("LPS: ", round(LS_comb_2,4)), vjust = 5, hjust = 0.5, size = 4) +
   annotate("text", x = 0.5, y = equ_2,
-           label = paste0("Simple Average: ", round(equ_2,4)), hjust = 1.1, size = 3)
+           label = paste0("Simple Average: ", round(equ_2,4)), vjust = 2, hjust = -0.001, size = 4)
 
 
 
@@ -347,23 +347,23 @@ p6 <- comb |> ggplot(aes(w, pool)) +
        x = "Weight on model ETS(M,N,N)",
        y = "Log predictive socre") +
   theme_minimal() +
-  ylim(2338,2455) +
+  # ylim(2338,2455) +
   theme(plot.title = element_text(hjust = 0.5),
-        title = element_text(size = 9),
-        axis.text = element_text(size = 6)) +
+        title = element_text(size = 12),
+        axis.text = element_text(size = 9)) +
   geom_point(aes(x = weight_optimal[3], y = LS_comb_3), size = 2, color = "orange") +
-  geom_point(aes(x = weight_test[3], y = LS_comb_test[3]), size = 1.5, color = "green") +
+  # geom_point(aes(x = weight_test[3], y = LS_comb_test[3]), size = 1.5, color = "green") +
   geom_point(aes(x = 0.5, y = equ_3), size = 2, color = "blue") +
   # annotate("text", x = weight_test[3], y = LS_comb_test[3],
   #          label = paste0("Max: ", round(LS_comb_test[3],4)), vjust = 3, hjust = 0.8, size = 3) +
   # annotate("text", x = weight_test[3], y = LS_comb_test[3],
   #          label = paste0("Weight: ", round(weight_test[3],4)), vjust = 5, hjust = 0.8, size = 3) +
   annotate("text", x = weight_optimal[3], y = LS_comb_3,
-           label = paste0("Optimal Weight: ", round(weight_optimal[3],4)), vjust = 2, hjust = -0.03, size = 3) + 
+           label = paste0("Optimal Weight: ", round(weight_optimal[3],4)), vjust = 2, hjust = -0.03, size = 4) + 
   annotate("text", x = weight_optimal[3], y = LS_comb_3,
-           label = paste0("LPS: ", round(LS_comb_3,4)), vjust = 4, hjust = -0.03, size = 3) +
+           label = paste0("LPS: ", round(LS_comb_3,4)), vjust = 4, hjust = -0.03, size = 4) +
   annotate("text", x = 0.5, y = equ_3,
-           label = paste0("Simple Average: ", round(equ_3,4)), vjust = 2, hjust = -0.03, size = 3)
+           label = paste0("Simple Average: ", round(equ_3,4)), vjust = 2, size = 4)
 
 
 

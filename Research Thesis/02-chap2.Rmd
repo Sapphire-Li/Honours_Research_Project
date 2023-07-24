@@ -7,7 +7,9 @@ knit: "bookdown::render_book"
 
 The first goal of this paper is to construct linear density forecast combinations with parametric models. The results are anticipated to reveal that forecast combinations can deliver improved accuracy over single models, but are not necessarily superior to forecasts obtained from the equally weighted combination.
 
-The next goal is to estimate the unknown parameters of the constituent models and the weight in a single step, and to compare the accuracy of forecasts based on these combinations against the usual combinations process, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in @W96, which measure out-of-sample differences between forecasts.
+Next, we will investigate the effect of in-sample performance between two constituent models on the presence of the forecast combination puzzle empirically. One way of badly fit the dataset is to simply ignore the important features of the data in the model specification. Two main scenarios are considered: a small difference of the in-sample accuracy and a big difference of the in-sample accuracy.
+
+The last goal is to estimate the unknown parameters of the constituent models and the weight in a single step, and to compare the accuracy of forecasts based on these combinations against the usual combinations process, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in @W96, which measure out-of-sample differences between forecasts.
 
 In the literature, there are several definitions of combinations. We focus on the combination of forecasts from independent models for a given dataset, which is commonly performed in two stages:
 
@@ -15,15 +17,13 @@ In the literature, there are several definitions of combinations. We focus on th
 
 2. combining forecasts based on one of the accuracy criteria.  
 
-Specifically, considering the combination of two individual forecasts allows us to delve into interesting and unexplained findings through fast data manipulation [@BS16].
+Specifically, we only consider the combination of two individual forecasts, which allows us to delve into interesting and unexplained findings through fast data manipulation.
 
 Before explaining further details, the following notation will be used throughout the paper. A vector time series $\textbf{y}_t$ with a total of $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_{t}$. Its future values after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon and $h>0$. The information set at time t, $\mathcal{F}_t$, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$.  
 
-The choice and specification of constituent models are determined by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for the following procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best accuracy.
+The specifications of constituent models are determined by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for the following procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best accuracy.
 
 A parametric model $M$ determines the conditional probability density for $\textbf{y}_t$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$, given unknown parameters $\theta_M$ and all the past information $\mathcal{F}_{t-1}$. The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., $\hat\theta_M = \underset{\theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for the following procedures.  
-
-One thing to clarify is that we do not consider the properties of estimators, so model misspecification will not ruin the results. CHECK!!!!
 
 
 
@@ -69,11 +69,11 @@ LPS = \sum^T_{t = R+1} log \Big[ \hat{w}_{\text{opt}} \ f_1(y_t| \mathcal{F}_{t-
 
 ## Point combinations
 
-For time series with seasonal patterns, we follow @BG69 and @SW09, and consider the combination of pairs of point forecasts for the ease of calculation. Same as @SW09, the mean squared forecast error (MSFE) is adopted to measure the point forecast accuracy.
+Although our main focus is the density forecast combination, to save time and make the evaluation easier, the point forecast combination is also used but only for the seasonal time series. The point forecast of each model corresponds to the mean value of the predicted density distribution. We will use the mean squared forecast error (MSFE), following @BG69 and @SW09, to measure the accuracy of point forecast combinations in the two-model pools.
 
 ### Linear combination
 
-Similar to the density case, point predictions from two models, $\hat y_{1t}$ and $\hat y_{2t}$, are aggregated linearly:
+Similar to the density case, point predictions from two constituent models, $\hat y_{1t}$ and $\hat y_{2t}$, are aggregated linearly:
 
 \begin{equation}
 \label{eqn:PC1}
@@ -84,16 +84,35 @@ where $w$ is the non-negative weight allocated to the point prediction generated
 
 
 
-### Mean squared forecast error (MSFE)
+### Mean squared forecast error
 
-The MSFE is defined as
+The MSFE of an individual model is the average of squared difference between the actual value and the predicted value at each time point over the in-sample period $R$:
 
 \begin{equation}
 \label{eqn:MSFE1}
-\frac{1}{P} \sum^T_{t=R+1} (y_t - \hat y_t)^2.
+\frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
 \end{equation}  
 
-The "optimal" set of weights satisfies that it minimizes the MSFE among all other possible sets.
+The lower the MSFE, the better the performance. Therefore, the "optimal" set of weights satisfies that it minimizes the MSFE of the point forecast combination among all other possible sets over the training period.
+
+\begin{equation}
+\label{eqn:MSFE2}
+\hat{w}_{\text{opt}} = \underset{w}{\arg\min} \frac{1}{R} \sum^R_{t=1} w \ \hat y_{1t} + (1-w) \ \hat y_{2t}
+\end{equation}
+
+Consequently, the MSFE over the evaluation horizon $h = 1, 2, \dots, P$ is:
+
+\begin{equation}
+\label{eqn:MSFE3}
+MSFE = \frac{1}{P} \sum^T_{t = R+1} \hat{w}_{\text{opt}} \ \hat y_{1t} + (1-\hat{w}_{\text{opt}}) \ \hat y_{2t}.
+\end{equation}
+
+
+
+
+
+
+
 
 
 
