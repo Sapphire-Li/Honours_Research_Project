@@ -5,15 +5,15 @@ library(mvtnorm)
 library(gridExtra)
 
 set.seed(12345678)
-N = 10000
+N = 1000
 
 beta0 <- 1
-beta1 <- 8
-beta2 <- 13
+beta1 <- 2
+beta2 <- 2
 Beta <- matrix(c(beta1, beta2), nrow = 2)
-X_varcov <- matrix(c(1,0.7,0.7,1), ncol = 2)
+X_varcov <- matrix(c(4,0.7,0.7,1), ncol = 2)
 X <- rmvnorm(N, mean = c(0,0), sigma = X_varcov)
-error <- rnorm(N, 5, 10)
+error <- rnorm(N, 0, 4)
 
 
 
@@ -33,11 +33,25 @@ R <- nrow(train)
 test <- Data |> filter(row > nrow(Data)*.6) |> select(1:3)
 P <- nrow(test)
 
+fit_true <- lm(y ~ x1 + x2, train)
+fit_true_R2 <- summary(fit_true)$r.squared
+sse <- sum((fitted(fit_true) - train$y)^2)
+R2 <- numeric(2)
+partial_R2 <- numeric(2)
+
 
 
 # Assumed Models
 fit1 <- lm(y ~ x1, train)
 fit1_coef <- fit1$coefficients
+fit1_R2 <- summary(fit1)$r.squared
+R2[1] <- fit1_R2/fit_true_R2
+
+sse_1 <- sum((fitted(fit1) - train$y)^2)
+partial_R2[1] <- (sse_1-sse)/sse_1
+
+# What percent of the variation not explained by x1 is explained by x2.
+# In other words, given x1, what additional percent of the variation can be explained by x2?
 
 fit1_mean <- fit1_coef[1] + fit1_coef[2]*train$x1
 fit1_sd <- sd(fit1$residuals)
@@ -66,6 +80,11 @@ fit1_LS_test
 
 fit2 <- lm(y ~ x2, train)
 fit2_coef <- fit2$coefficients
+fit2_R2 <- summary(fit2)$r.squared
+R2[2] <- fit2_R2/fit_true_R2
+
+sse_2 <- sum((fitted(fit2) - train$y)^2)
+partial_R2[2] <- (sse_2-sse)/sse_2
 
 fit2_mean <- fit2_coef[1] + fit2_coef[2]*train$x2
 fit2_sd <- sd(fit2$residuals)
@@ -106,19 +125,23 @@ optimal <- comb |> filter(pool_train == max(comb$pool_train))
 p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
   labs(
-    title = "The in-sample combination of M1 and M2",
+    title = "The in-sample combination of M1 and M2 (N=1000)",
        x = "Weight on Model 1",
        y = "Log socre") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5),
         title = element_text(size = 9),
         axis.text = element_text(size = 6)) +
+  geom_point(aes(x = optimal[[1]], y = optimal[[2]]), size = 3, color = "orange") +
   annotate("text", x = optimal[[1]], y = optimal[[2]],
-           label = paste0("Max: ", round(optimal[[2]],4)), vjust = 3, size = 3) +
+           label = paste0("Max: ", round(optimal[[2]],4)), vjust = 3, size = 4) +
   annotate("text", x = optimal[[1]], y = optimal[[2]],
-           label = paste0("Optimal Weight: ", round(optimal[[1]],4)), vjust = 5, size = 3) +
-  geom_point(aes(x = optimal[[1]], y = optimal[[2]]), size = 3, color = "orange")
-
+           label = paste0("Optimal Weight: ", round(optimal[[1]],4)), vjust = 5, size = 4)
+  # annotate("text", x = optimal[[1]], y = optimal[[2]],
+  #        label = paste0("Max: ", round(optimal[[2]],4)), vjust = 3, hjust = 0.7, size = 4) +
+  # annotate("text", x = optimal[[1]], y = optimal[[2]],
+  #          label = paste0("Optimal Weight: ", round(optimal[[1]],4)), vjust = 5, hjust = 0.7, size = 4)
+  
 
 
 # Out-of-sample
@@ -136,7 +159,7 @@ p2 <- comb |> ggplot(aes(w, pool_test)) +
   geom_line(color = "red") +
   labs(
     # title = "The out-of-sample combination of M1 and M2 when coefficients have different magnitudes but the same sign",
-    title = "The out-of-sample combination of M1 and M2",
+    title = "The out-of-sample combination of M1 and M2 (N=1000)",
        x = "Weight on Model 1",
        y = "Log predictive socre") +
   theme_minimal() +
@@ -148,43 +171,43 @@ p2 <- comb |> ggplot(aes(w, pool_test)) +
   # annotate("text", x = weight[[1]], y = weight[[2]],
   #          label = paste0("Weight: ", round(weight[[1]],4)), vjust = 5, size = 3) +
   geom_point(aes(x = optimal[[1]], y =  opt), size = 2, color = "orange") +
-  geom_point(aes(x = weight[[1]], y = weight[[2]]), size = 1.5, color = "green") +
+  # geom_point(aes(x = weight[[1]], y = weight[[2]]), size = 1.5, color = "green") +
   geom_point(aes(x = 0.5, y = equ), size = 2, color = "blue") +
   annotate("text", x = optimal[[1]], y = opt, 
-           label = paste0("Optimal Weight: ", round(optimal[[1]],4)), vjust = 3, hjust = 0.5, size = 3) +
+           label = paste0("Optimal Weight: ", round(optimal[[1]],4)), vjust = 3, size = 4) +
   annotate("text", x = optimal[[1]], y = opt,
-           label = paste0("LPS: ", round(weight[[2]],4)), vjust = 5, hjust = 0.5, size = 3) +
+           label = paste0("LPS: ", round(weight[[2]],4)), vjust = 5, size = 4) +
   annotate("text", x = 0.5, y = equ,
-           label = paste0("Simple Average: ", round(equ,4)), hjust = 1.3, size = 3)
+           label = paste0("Simple Average: ", round(equ,4)), hjust = 1.1, size = 4)
+  # annotate("text", x = optimal[[1]], y = opt, 
+  #          label = paste0("Optimal Weight: ", round(optimal[[1]],4)), vjust = 3, hjust = -0.02, size = 4) +
+  # annotate("text", x = optimal[[1]], y = opt,
+  #          label = paste0("LPS: ", round(weight[[2]],4)), vjust = 5, hjust = -0.05, size = 4) +
+  # annotate("text", x = 0.5, y = equ,
+  #          label = paste0("Simple Average: ", round(equ,4)), vjust = -1, hjust = -0.1, size = 4)
 
+fit1_R2
+fit2_R2
+fit2_R2 - fit1_R2
+
+R2
+R2[2] - R2[1]
+
+partial_R2
+partial_R2[2] - partial_R2[1]
 
 grid.arrange(p1,p2)
 
-# pdf("x_var.pdf", width = 6, height = 8)
-# grid.arrange(p1,p2, top = "Variances of regressors are different")
+pdf("var4.pdf", width = 5, height = 8)
+grid.arrange(p1,p2,top="The density combination when Var(x_1i) = 4")
+dev.off()
+
+# pdf("ss_1000.pdf", width = 10, height = 5)
+# grid.arrange(p1,p2,ncol=2, top = "The density combination of M1 and M2 when sample size = 1000")
 # dev.off()
 
-# pdf("Sample_Size_100.pdf", width = 6, height = 8)
-# grid.arrange(p1,p2)
-# dev.off()
 
-# pdf("Sample_Size_15000.pdf", width = 10, height = 5)
-# grid.arrange(p1,p2,ncol=2, top = "The density combination of M1 and M2 when sample size = 15000")
-# dev.off()
 
-# grid.arrange(p1,p2,ncol=2, top = "The out-of-sample combination of M1 and M2 when sample size = 10000")
-# 
-# pdf("Sample_Size_10000.pdf", width = 6, height = 8)
-# grid.arrange(p1,p2, top = "The density combination of M1 and M2 when sample size = 10000")
-# dev.off()
-# 
-# 
-# 
-# grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
-# 
-# pdf("Sample_Size.pdf", width = 14, height = 10)
-# grid.arrange(p1,p2,p3,p4,p5,p6, ncol = 3)
-# dev.off()
 
 
 

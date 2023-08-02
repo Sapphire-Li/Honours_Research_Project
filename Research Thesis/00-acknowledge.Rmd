@@ -4,4 +4,6 @@ knit: "bookdown::render_book"
 
 # Acknowledgements {-}
 
-I would like to thank my supervisor, my Honours coordinator, all the people who helped me throughout the year and myself.
+I would like to express my deepest appreciation to my supervisor David Frazier and my Honours coordinator Heather Anderson for their incredibly valuable guidance, feedback and patience. I am also grateful to receive the Econometrics Honours Memorial Scholarship from Monash University to support my Honours study. Special thanks to my parents, my friends and people who gave me advice and helped me throughout the year.
+
+

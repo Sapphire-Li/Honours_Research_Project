@@ -7,13 +7,13 @@ knit: "bookdown::render_book"
 
 ## Pure cross-sectional setting
 
-Given that the forecast combination can greatly improve the forecast accuracy, this idea of model combination can also be applied to the cross-sectional setting. A simulated cross-sectional dataset is designed to study how related elements in the linear regression model affect the presence of the puzzle, as well as the performance of density combinations. Compared with empirical data, implementing simulation is easy for us to control things and make any changes we like. At the same time, it is an easy way of validating the conjectures by exploring the puzzle from different aspects. In line with previous notations but in the cross-sectional setting, the subscript `t` will change to `i` to represent each individual observation.
+Given that the forecast combination can greatly improve the forecast accuracy, this idea of model combination can also be applied to the cross-sectional setting. A simulated cross-sectional dataset is designed to study how elements in the linear regression model affect the presence of the puzzle, as well as the performance of density combinations. Instead of using real-life data, implementing simulation is easy to control and to make any changes efficiently. At the same time, it is an effective way of validating our conjectures through exploring the forecast combination puzzle from different aspects. In line with previous notations but in the cross-sectional setting, the subscript `t` will change to `i` to represent each individual observation.
 
 
 
 ### Experimental design
 
-The true data-generating process (DGP) is assumed to be a classic linear regression model with only two exogenous and correlated regressors, which satisfies all classical assumptions:
+The true data-generating process (DGP) is assumed to be a linear regression model with only two exogenous and correlated regressors, which satisfies all classical assumptions:
 
 \begin{equation}
 \label{eqn:DGP}
@@ -22,76 +22,130 @@ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + e_i, \ \ e_i \stackrel{i.i.d}{
 
 where $i$ represents each observation.  
 
-The initial set-up has 15000 (N) artificial cross-sectional observations generated from \ref{eqn:DGP} with $E[x_{1i}] = E[x_{2i}] = 0$, $Var(x_{1i}) = Var(x_{2i}) = 1$, $Cov(x_{1i}, x_{2i}) = 0.7$, $\pmb{\beta} = (\beta_0, \beta_1, \beta_2)' = (1,2,2)'$, $\mu_e = 5$ and $\sigma^2_e=10$.
+The initial set-up has 1000 (N) artificial cross-sectional observations generated from \ref{eqn:DGP} with $E[x_{1i}] = E[x_{2i}] = 0$, $Var(x_{1i}) = Var(x_{2i}) = 1$, $Cov(x_{1i}, x_{2i}) = 0.7$, $\pmb{\beta} = (\beta_0, \beta_1, \beta_2)' = (1,2,2)'$, $\mu_e = 0$ and $\sigma^2_e=4$.
 
-Following the methodology in Section \@ref(method), the data will be divided into an in-sample period (roughly 60%) for estimation and an out-of-sample period for accuracy evaluation. We propose two misspecified models to generate density forecasts with each only contains one of the regressors. Assume Model 1 includes only $x_{1i}$ as the regressor and the other model, Model 2, includes only $x_{2i}$ as the regressor. The density forecast combinations will follow the construction of `two-model` pools and be evaluated by the log score functions. 
+Following the methodology in Section \@ref(method), the data will be divided into an in-sample period (roughly 60%) for estimation and an out-of-sample period for accuracy evaluation. We propose two pooly-specified models to generate density forecasts with each contains only one of the regressors. Assume Model 1 $M_1$ purely includes $x_{1i}$ as the regressor and Model 2 $M_2$ only has $x_{2i}$ as the regressor. The density forecast combinations will follow the construction of `two-model` pools and be evaluated using the log score. 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.6]{figures/Sample_Size_15000.pdf}
-\caption{Two curves refer to the in-sample (left) and out-of-sample (right) performance of density combinations with artificial cross-sectional data under the initial set-up. The x-axis represents the weight assigned on Model 1 and the y-axis indicates the log score for each density combination. The orange dot represents the optimal set of weights and the corresponding log predictive score in each case, while the blue dot indicates the forecast performance of the simple averaging method. The green dot, as a reference, refers to the maximum point of the out-of-sample curve.}
-\label{fig:ss15000}
+\includegraphics[scale=0.6]{figures/ss_1000.pdf}
+\caption{Two curves refer to the in-sample (left) and out-of-sample (right) performance of density combinations with artificial cross-sectional data based on the initial set-up. The x-axis represents the weight assigned on Model 1 and the y-axis indicates the log score for each density combination. The orange dot represents the optimal forecast combination, while the blue dot indicates the forecast performance of the simple average combination.}
+\label{fig:ss1000}
 \end{figure}
 
-Figure \ref{fig:ss15000} clearly reflects that when the sample size is large enough, the simple average of predicted densities, indicated by the blue dot, can retain the forecast accuracy with a small difference in the log predictive score, compared with the optimal combination indicated by the orange dot. This is an evidence of facing forecast combination puzzle. Given the puzzle, we can change the true value of relevant elements one at a time while holding all others constant, and then summarize the conditions under which the puzzle is likely to be evidenced.
-
+Figure \ref{fig:ss1000} clearly shows that when the sample size is large and two models have similar in-sample performance, the forecast accuracy will be indistinguishable between the simple average of predicted densities and the optimal density forecast combination, which is a strong evidence of the forecast combination puzzle. We can then change the true value of different elements, and determine the conditions under which the puzzle is likely to be evidenced. More rigorously, we will evaluate the in-sample performance with the $R^2$ of constituent models, and then analyse its relationship with the optimal combination weight and the presence of the puzzle.
 
 + \bf{Sample Size}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.35]{figures/Sample_Size_100-10000.png}
-\caption{Three columns refer to cases when $N=100$, $N=1000$, and $N=10000$ respectively while keeping all others constant as the initial set-up. The top graphs represent the in-sample combination performance and the bottom graphs represent the out-of-sample combination accuracy. The meanings of colored dots are the same as those in Figure \ref{fig:ss15000}.}
-\label{fig:ss}
+\begin{figure}
+\includegraphics[width=0.47\textwidth]{figures/ss_50.pdf}
+\hspace{\fill}
+\includegraphics[width=0.47\textwidth]{figures/ss_100.pdf}
+\caption{Two columns refer to the in-sample combination performance (top) and the out-of-sample combination accuracy (bottom) when $N=100$ and $N=1000$ while keeping all others the same as in the initial set-up. The meanings of colored dots are the same as those in Figure \ref{fig:ss1000}.}
+\label{fig:samplesize}
 \end{figure}
 
-First, it is notable that, in Figure \ref{fig:ss}, the performances of in-sample and out-of-sample combinations have completely different shapes or features when $N=100$ but are gradually similar when $N=1000$ and $N=10000$. In the $N=100$ case, we completely prefer Model 1 to fit the training set, however, the Model 1 becomes the worse choice for the test set. Thus, the averaged density forecast performs much better than the combination recommended by the optimal weight. This implies that the model combination which fits the in-sample well does not necessarily generate better forecasts when the sample size is small. Second, the forecast accuracy of optimal combination and that of simple averaging are getting closer when the sample size increases, which indicates the presence of the forecast combination puzzle. Roughly, the puzzle becomes noticeable when the sample size is larger than 500.
+From Figure \ref{fig:samplesize}, it is noticeable that the set of optimal weight varies a lot when we have different sample sizes. Model 1 is given an extremely low weight when $N=50$ whereas it is highly preferred when $N=100$. The optimal weight is 0.48 when the sample size becomes 1000, shown in Figure \ref{fig:ss1000}. Based on the log score curve of in-sample combinations, the optimal weight is highly correlated with the individual model performance. The number of observations can be viewed as one factor that can affect the model fit. Figure \ref{fig:samplesize} also shows that the average density forecast performs much better than the optimal density combination in both cases, i.e., the forecast combination puzzle is found.
 
-When we have a small dataset, it is not representative of the whole population, so the model estimation involves more randomness and is highly influenced by potential outliers. There is also a possibility of overfitting the training set when the training and test sets have distinct patterns. Therefore, given a large enough dataset and two equally good models, we are very likely to have the puzzle.
+\begin{table}[ht]
+  \centering
+    \begin{tabular}{l|ccc}
+    \toprule
+    Sample Size      &   $N=50$    &    $N=100$   &  $N=1000$  \\
+    \midrule
+    $R^2$ of $M_1$   &   0.4928    &    0.4953    &   0.3612   \\
+    $R^2$ of $M_2$   &   0.5620    &    0.3320    &   0.3722   \\
+    Difference       &   0.0692    &    0.1633    &   0.0110   \\
+    Optimal Weight   &    0.07     &     0.98     &    0.48    \\
+    Puzzle           &    Yes      &     Yes      &    Yes     \\
+    \bottomrule
+    \end{tabular}
+  \caption{``Difference`` represents the absolute difference of in-sample fit between two models. ``Optimal Weight`` is the estimated weight assigned to $M_1$. ``Puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
+  \label{tab:size}
+\end{table}
+
+Table \ref{tab:size} illustrates that when two models have a relatively big difference in the in-sample fit $R^2$ (in the second and third columns), we are then more likely to have an extreme optimal weight $\omega$. However, when two models have similar $R^2$ in the fourth column, the optimal weight $\omega$ is close to 0.5. These empirical results first support the conjecture that when models have indifferent in-sample fit, the puzzle is likely evidenced. Additionally, they illustrate that the puzzle can be in evidence when one model performs outstandingly.
 
 
 
 + \bf{Magnitude and Sign of $\pmb{\beta}$}
 
-Next, the sample size is set to be 10000 so that it is large enough to reveal the puzzle. Consider the change in magnitude and sign of $\beta_1$ and $\beta_2$.
+Next, we explore the effect changes in magnitudes or signs of $\beta_1$ and $\beta_2$ given two different sample sizes. From here on, combination plots will be collected and displayed in Appendix \@ref(plot). According to Figure \ref{fig:magnitude}, the puzzle is highly sensitive to the absolute difference between two parameters. If the absolute difference is large enough, generally more than half of the smaller coefficient, it is hard to find the puzzle and the optimal combination always wins with a higher log predictive score. In the linear regression analysis, the magnitude of coefficient represents the impact size of corresponding regressor on the dependent variable. A large value of coefficient means that a change in the regressor will affect the dependent variable more in magnitude. Knowing this, it is reasonable to observe that the Model 1 has a decreasing weight in the optimal combination from left to right in Figure \ref{fig:magnitude}. The effect of $x_{2i}$ on $y_i$, $\beta_2$, is relatively larger than the effect of $x_{1i}$ on $y_i$, $\beta_1$, so the Model 2 with $x_{2i}$ should be weighted higher in the combination.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.35]{figures/Beta_diff_mag.png}
-\caption{In this case, $\beta_1$ and $\beta_2$ have the same sign but different magnitudes. The first column refers to $\beta_1=2$ and $\beta_2=3$, the second column refers to $\beta_1=2$ and $\beta_2=4$, and the third column refers to $\beta_1=2$ and $\beta_2=6$.}
-\label{fig:magnitude}
-\end{figure}
+\begin{table}[ht]
+  \centering
+    \begin{tabular}{l|cccc}
+    \toprule
+    Different Magnitudes    &  $\beta_1=2,\ \beta_2=4$   &  $\beta_1=2,\ \beta_2=6$ &  $\beta_1=2,\ \beta_2=4$  &  $\beta_1=2,\ \beta_2=6$  \\
+    \midrule
+    $R^2$ of $M_1$  &    0.6516    &   0.7057   &    0.4567     &   0.4948   \\
+    $R^2$ of $M_2$  &    0.6043    &   0.7574   &    0.6082     &   0.7478   \\
+    Difference      &    0.0472    &   0.0517   &    0.1516     &   0.2530   \\
+    Optimal Weight  &     0.59     &    0.32    &     0.18      &    0.04    \\
+    Puzzle          &     Yes      &     No     &      No       &     No     \\
+    Sample Size     &     100      &    100     &     1000      &    1000    \\
+    \bottomrule
+    \end{tabular}
+  \caption{``Difference`` represents the absolute difference of in-sample fit between two models. ``Optimal Weight`` is the estimated weight assigned to $M_1$. ``Puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
+  \label{tab:bmag}
+\end{table}
 
-Based on the results shown in Figure \ref{fig:magnitude}, the puzzle is highly sensitive to the absolute difference between two parameters. If the absolute difference is large enough, generally more than half of the smaller coefficient, it is hard to observe the puzzle and the optimal combination always wins with a higher log predictive score. The larger the absolute difference, the bigger the difference of two log predictive scores.
-
-In the linear regression analysis, the magnitude of each coefficient represents the influence size of each regressor on the dependent variable. A large coefficient means that a change in the corresponding regressor affects the dependent variable more in magnitude. Knowing this, it is reasonable to observe that the Model 1 has a decreasing weight in the optimal combination from left to right in Figure \ref{fig:magnitude}. The effect of $x_{2i}$ on $y_i$, $\beta_2$, is relatively larger than the effect of $x_{1i}$ on $y_i$, $\beta_1$, so the Model 2 with $x_{2i}$ only should be weighted higher in the combination.
+With reference to the previous results, when the absolute difference is small, the optimal weight $\omega_{opt}$ is expected to be around 0.5 and we are expected to find the puzzle. The second column of Table \ref{tab:bmag} provides another empirical evidence where the absolute difference is around 0.0472. The other three cases, however, illustrate the results when the absolute difference of $R^2$ is big enough. Different from the cases in the second and third columns of Table \ref{tab:size}, the puzzle is not obvious when one model is more favored, and we have the optimal forecast combination outperforms the simple average forecast. Recall our initial conjecture about the combination of a ``Good`` model and a ``Bad`` model, simulations have shown some corroborating evidence that the puzzle is ambiguous.
 
 
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.55]{figures/Beta_diff_sign.png}
-\caption{$\beta_1$ and $\beta_2$ have the same magnitude but different signs, i.e. $\beta_1=-\beta_2$. The first column considers the case when $\beta_1=2$ and $\beta_2=-2$ and the second column considers the case when $\beta_1=4$ and $\beta_2=-4$.}
-\label{fig:sign}
-\end{figure}
 
-Figure \ref{fig:magnitude} illustrate that when $\beta_1$ and $\beta_2$ only have opposite signs, the puzzle seems to be insensitive. In both cases, the optimal combination and simple averaging forecast have very similar log predictive scores, which is a strong evidence of the puzzle. Meanwhile, two regressors have the same effect in magnitude on $y_i$, therefore, the weight should be equally assigned in rough. We also notice that the accuracy of the optimal prediction combination can be improved by having higher absolute values of the coefficients. This makes regressors to have larger and more certain impacts on $y_i$, which is substantiated by the above case.
+Table \ref{tab:bsig} further justifies our conjecture of the relationship between the in-sample performance and the presence of the puzzle. Especially when the sample size is 100, there is a huge difference between the in-sample fit of two models and $M_2$ is given all the weight in the optimal combination. This clearly implies that the puzzle is not discovered randomly but related to the model in-sample performance. It is also noticeable that conditioning on the same magnitude, the sample size has a large impact on the model fit. When the sample size is small, the absolute difference of in-sample performance becomes larger, leading to an extreme optimal weight and the presence of the puzzle is uncertain as well.
+
+\begin{table}[ht]
+  \centering
+    \begin{tabular}{l|cccc}
+    \toprule
+    Different Signs &  $\beta_1=2,\ \beta_2=-2$  &  $\beta_1=4,\ \beta_2=-4$  &  $\beta_1=2,\ \beta_2=-2$  &  $\beta_1=4,\ \beta_2=-4$\\
+    \midrule
+    $R^2$ of $M_1$  &    0.0002    &   0.00002  &    0.0131     &   0.0423   \\
+    $R^2$ of $M_2$  &    0.1130    &   0.1934   &    0.0321     &   0.0856   \\
+    Difference      &    0.1128    &   0.1934   &    0.0191     &   0.0433   \\
+    Optimal Weight  &      0       &     0      &     0.38      &    0.38    \\
+    Puzzle          &      No      &     No     &      Yes      &    Yes     \\
+    Sample Size     &     100      &    100     &     1000      &    1000    \\
+    \bottomrule
+    \end{tabular}
+  \caption{``Difference`` represents the absolute difference of in-sample fit between two models. ``Optimal Weight`` is the estimated weight assigned to $M_1$. ``Puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
+  \label{tab:bsig}
+\end{table}
 
 
 
 + \bf{Variance of regressors}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.55]{figures/x_var.png}
-\caption{The first column refers to the case when $Var(x_{1i}) = 2$ and $Var(x_{2i}) = 1$. The second column refers to the case when $Var(x_{1i}) = 4$ and $Var(x_{2i}) = 1$.}
-\label{fig:xvar}
-\end{figure}
 
 
-First thing to note from Figure \ref{fig:xvar} is that there is no forecast combination puzzle when the variances of two regressors are different. When the difference becomes larger, the gap of the forecast accuracy between the optimally combined forecast and the simple average increases as a consequence. Since $x_{1i}$ has a larger variance than $x_{2i}$, the variation of $y_i$ can be explained more by the Model 1, which includes $x_{1i}$, than the Model 2, which only consists of $x_{2i}$. This also makes the Model 1 to have more weight in the optimal combination. Besides, the in-sample accuracy between two models is significant, leading the puzzle not to be evidenced, based on the results in Section \@ref(sp500).
+When the difference becomes larger, the gap of the forecast accuracy between the optimally combined forecast and the simple average increases, consequently. Since $x_{1i}$ has a larger variance than $x_{2i}$, the variation of $y_i$ can be explained more by Model 1 than Model 2. This is further verified by Table \ref{tab:regvar} where the $R^2$ of $M_1$ is always higher than that of $M_2$. According to the relationship between the in-sample performance and the optimal weight, Model 1 has a higher weight in the optimal combination, as expected.
+
+\begin{table}[ht]
+  \centering
+    \begin{tabular}{l|cccc}
+    \toprule
+    Change in Variance of $x_{1i}$    &  $Var(x_{1i}) = 2$   &  $Var(x_{1i}) = 4$  &  $Var(x_{1i}) = 2$  &  $Var(x_{1i}) = 4$  \\
+    \midrule
+    $R^2$ of $M_1$  &    0.5389    &   0.6056   &    0.3981     &   0.4947   \\
+    $R^2$ of $M_2$  &    0.2899    &   0.2464   &    0.3225     &   0.2536   \\
+    Difference      &    0.2490    &   0.3592   &    0.0756     &   0.2411   \\
+    Optimal Weight  &     0.92     &    0.94    &     0.66      &    0.85    \\
+    Puzzle          &      Yes     &    Yes     &      Yes      &     No     \\
+    Sample Size     &     100      &    100     &     1000      &    1000    \\
+    \bottomrule
+    \end{tabular}
+  \caption{``Difference`` represents the absolute difference of in-sample fit between two models. ``Optimal Weight`` is the estimated weight assigned to $M_1$. ``Puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
+  \label{tab:regvar}
+\end{table}
+
+Detailed explanation about the Table \ref{tab:regvar} will be described later. More relevant plots will come out soon.
 
 
 
+One additional hypothesis is that when the absolute difference of $R^2$ between two models is less than 0.05, they should be treated as having similar in-sample performance. **Formally, the null hypothesis is that the absolute difference of the in-sample fit $R^2$ is less than 0.05.**
 
+greater than 0.05, the presence of the puzzle will be ambiguous. In Table \ref{tab:bmag}, the third column shows the case where the $R^2$ of Model 2 is 0.0517 higher than that of Model 1, and the puzzle is not evidenced.
 
 

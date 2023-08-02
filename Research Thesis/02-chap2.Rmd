@@ -5,13 +5,11 @@ knit: "bookdown::render_book"
 
 # Methodology {#method}
 
-The first goal of this paper is to construct linear density forecast combinations with parametric models. The results are anticipated to reveal that forecast combinations can deliver improved accuracy over single models, but are not necessarily superior to forecasts obtained from the equally weighted combination.
+We will empirically investigate the effect of in-sample performance between two constituent models on the presence of the forecast combination puzzle. Two main scenarios are considered: a small difference of the in-sample accuracy between the models in the pool and a big difference between their in-sample accuracy. The comparison will mainly rely on the log likelihood or the $R^2$, which will be explained shortly.
 
-Next, we will investigate the effect of in-sample performance between two constituent models on the presence of the forecast combination puzzle empirically. One way of badly fit the dataset is to simply ignore the important features of the data in the model specification. Two main scenarios are considered: a small difference of the in-sample accuracy and a big difference of the in-sample accuracy.
+Next is to estimate the unknown parameters of the constituent models and the weight in a single step, and to compare the accuracy of forecasts based on these combinations against the usual combinations process, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in @W96, which measure out-of-sample differences between forecasts.
 
-The last goal is to estimate the unknown parameters of the constituent models and the weight in a single step, and to compare the accuracy of forecasts based on these combinations against the usual combinations process, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in @W96, which measure out-of-sample differences between forecasts.
-
-In the literature, there are several definitions of combinations. We focus on the combination of forecasts from independent models for a given dataset, which is commonly performed in two stages:
+In the literature, there are several definitions of combinations. We focus on the combination of forecasts from non-nested models for a given dataset, which is commonly performed in two stages:
 
 1. producing separate point or probabilistic forecasts for the next time point using observed data and constituent models, and
 
@@ -19,11 +17,9 @@ In the literature, there are several definitions of combinations. We focus on th
 
 Specifically, we only consider the combination of two individual forecasts, which allows us to delve into interesting and unexplained findings through fast data manipulation.
 
-Before explaining further details, the following notation will be used throughout the paper. A vector time series $\textbf{y}_t$ with a total of $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_{t}$. Its future values after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon and $h>0$. The information set at time t, $\mathcal{F}_t$, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$.  
+Before explaining further details, the following notation will be used throughout the paper. An observed time series $y_t$ with a total of $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_t$. Its future values after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon and $h>0$. The information set at time t, $\mathcal{F}_t$, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$.
 
-The specifications of constituent models are determined by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for the following procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best accuracy.
-
-A parametric model $M$ determines the conditional probability density for $\textbf{y}_t$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$, given unknown parameters $\theta_M$ and all the past information $\mathcal{F}_{t-1}$. The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., $\hat\theta_M = \underset{\theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for the following procedures.  
+A parametric model $M$ determines the conditional probability density for $y_t$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$, given unknown parameters $\theta_M$ and all the past information $\mathcal{F}_{t-1}$. The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., $\hat\theta_M = \underset{\theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for out-of-sample procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best in-sample accuracy.
 
 
 
@@ -31,45 +27,45 @@ A parametric model $M$ determines the conditional probability density for $\text
 
 ### Linear pooling  
 
-Consider the case of only two competing probability densities, undoubtedly, densities can be combined in many ways; see Section 3 of @WHLK22 for many popular means of probabilistic combination. One of the commonly used approaches is the "linear opinion pool": aggregate constituent weighted densities in a linear form [e.g., @BG69;@HM07;@GA11]. For the ``two-model`` pools, constituent densities $f_1(y_t)$ and $f_2(y_t)$ are combined as follows:
+Consider the case of only two competing models, which we identify through their probability densities. Undoubtedly, densities can be combined in many ways; see Section 3 of @WHLK22 for many popular means of probabilistic combination. One of the commonly used approaches is the "linear opinion pool", which aggregates constituent weighted densities in a linear form [e.g., @BG69;@HM07;@GA11]. For ``two-model`` pools, constituent densities $f_1(y_t)$ and $f_2(y_t)$ are combined as follows:
 
 \begin{equation}
 \label{eqn:LC1}
-f(y_t) = w \ f_1(y_t | \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-w) f_2(y_t | \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)
+f(y_t) = \omega \ f_1(y_t | \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) f_2(y_t | \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)
 \end{equation}  
 
-where $w$ is the non-negative weight allocated to the probability density derived from the first model. Through this construction, the sum of two weights is implied to be 1, which is a necessary and sufficient condition for $f(y_t)$ to be a proper density function [@GA11]. In addition to point forecasts, the use of density forecasts can offer forecasters or decision markers a more comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions).
+where $\omega$ is the non-negative weight allocated to the probability density derived from the first model. Through this construction, the sum of the model weights is fixed at 1, which is a necessary and sufficient condition for $f(y_t)$ to be a proper density function [@GA11]. In addition to producing point forecasts, density forecasts can offer forecasters or decision markers a comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions).
 
 
 
 ### Log socring rules  
 
-Following the literature on density evaluation, our initial analysis will focus on using the log score function to measure the accuracy of our density forecasts; see, e.g., @GA11 for a discussion on log score and its use in density forecasting. For each individual model $M$, the log score over the sample $t = 1, \dots, T$ is:  
+Following the literature on density evaluation, our initial analysis will focus on using the log score to measure the accuracy of our density forecasts; see, e.g., @GA11 for a discussion on log score and its use in density forecasting. For each individual model $M$, the log score over the sample $t = 1, \dots, T$ is:  
 
 \begin{equation}
 \label{eqn:LS1}
 LS = \sum^T_{t=1} log \ f(y_t| \mathcal{F}_{t-1}, \hat\theta_M, M).
 \end{equation}
 
-The "optimal" linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over the in-sample $t = 1, 2, \dots, R$.  
+The "optimal" linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over the in-sample observations $y_t$, $t = 1, 2, \dots, R$,  
 
 \begin{equation}
 \label{eqn:LS2}
-\hat{w}_{\text{opt}} = \underset{w}{\arg\max} \sum^R_{t=1} log \Big[ w \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-w) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big]
+\hat{\omega}_{\text{opt}} = \underset{\omega}{\arg\max} \sum^R_{t=1} log \Big[ \omega \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
 \end{equation}
 
-Thus, the log predictive score over the forecast horizon $h = 1, 2, \dots, P$ (i.e., the out-of-sample period) is:
+Thus, the log predictive score over the out-of-sample period $t = R+1, R+2, \dots, T$ is:
 
 \begin{equation}
 \label{eqn:LS3}
-LPS = \sum^T_{t = R+1} log \Big[ \hat{w}_{\text{opt}} \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{w}_{\text{opt}}) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{\omega}_{\text{opt}}) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
 \end{equation}
 
 
 
 ## Point combinations
 
-Although our main focus is the density forecast combination, to save time and make the evaluation easier, the point forecast combination is also used but only for the seasonal time series. The point forecast of each model corresponds to the mean value of the predicted density distribution. We will use the mean squared forecast error (MSFE), following @BG69 and @SW09, to measure the accuracy of point forecast combinations in the two-model pools.
+Although our main focus is the density forecast combination, to simplify certain analysis, point forecast combination is also used. The point forecast of each model corresponds to the mean value of the predicted density distribution. We will use the mean squared forecast error (MSFE), following @BG69 and @SW09, to measure the accuracy of point forecast combinations in the two-model pools.
 
 ### Linear combination
 
@@ -80,35 +76,38 @@ Similar to the density case, point predictions from two constituent models, $\ha
 \hat y_t = w \ \hat y_{1t} + (1-w) \ \hat y_{2t}
 \end{equation}  
 
-where $w$ is the non-negative weight allocated to the point prediction generated from the first model.
+where $\omega$ is the non-negative weight allocated to the point prediction generated from the first model.
 
 
 
 ### Mean squared forecast error
 
-The MSFE of an individual model is the average of squared difference between the actual value and the predicted value at each time point over the in-sample period $R$:
+The MSFE of an individual model is the average squared difference between the actual value, $y_t$, and the predicted value, $\hat y_t$, at each time point over the in-sample period $R$:
 
 \begin{equation}
 \label{eqn:MSFE1}
-\frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
+MSFE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
 \end{equation}  
 
-The lower the MSFE, the better the performance. Therefore, the "optimal" set of weights satisfies that it minimizes the MSFE of the point forecast combination among all other possible sets over the training period.
+The lower the MSFE, the higher the accuracy of the forecast. Therefore, the "optimal" set of weights satisfies that it minimizes the MSFE of the point forecast combination among all other possible sets over the training period:
 
 \begin{equation}
 \label{eqn:MSFE2}
-\hat{w}_{\text{opt}} = \underset{w}{\arg\min} \frac{1}{R} \sum^R_{t=1} w \ \hat y_{1t} + (1-w) \ \hat y_{2t}
+\hat{\omega}_{\text{opt}} = \underset{\omega}{\arg\min} \frac{1}{R} \sum^R_{t=1} \omega \ \hat y_{1t} + (1-\omega) \ \hat y_{2t}.
 \end{equation}
 
-Consequently, the MSFE over the evaluation horizon $h = 1, 2, \dots, P$ is:
+Consequently, the MSFE over the out-of-sample period $t = R+1, R+2, \dots, T$ is:
 
 \begin{equation}
 \label{eqn:MSFE3}
-MSFE = \frac{1}{P} \sum^T_{t = R+1} \hat{w}_{\text{opt}} \ \hat y_{1t} + (1-\hat{w}_{\text{opt}}) \ \hat y_{2t}.
+MSFE = \frac{1}{P} \sum^T_{t = R+1} \hat{\omega}_{\text{opt}} \ \hat y_{1t} + (1-\hat{\omega}_{\text{opt}}) \ \hat y_{2t}.
 \end{equation}
 
 
 
+## Goodness-of-fit
+
+One well-known way of quantifying the fit of a classical linear regression model is its coefficient of determination (R-squared or $R^2$). $R^2$ represents the proportion of explained variation and is often interpreted as the sample variation of the dependent variable explained by regressors in the model. Details and formulas are elaborated in Chapter 2-3c of @W15.
 
 
 

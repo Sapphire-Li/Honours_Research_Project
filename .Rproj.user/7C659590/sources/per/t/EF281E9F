@@ -3,7 +3,7 @@
     "path": "~/Documents/R/Honours_Research_Project/Research Thesis/index.Rmd",
     "project_path": "Research Thesis/index.Rmd",
     "type": "r_markdown",
-    "hash": "2916843634",
+    "hash": "1576032377",
     "contents": "",
     "dirty": false,
     "created": 1688183640956.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "13,0",
+        "cursorPosition": "9,29",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1688185075,
+    "lastKnownWriteTime": 1690788297,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1688185075053,
+    "last_content_update": 1690788297230,
     "read_only": false,
     "read_only_alternatives": []
 }

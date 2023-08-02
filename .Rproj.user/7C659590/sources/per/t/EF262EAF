@@ -1,27 +1,27 @@
 {
-    "id": "8FEDCDD7",
-    "path": "~/Documents/R/Honours_Research_Project/Research Thesis/05-chap5.Rmd",
-    "project_path": "Research Thesis/05-chap5.Rmd",
+    "id": "EF262EAF",
+    "path": "~/Documents/R/Honours_Research_Project/Extra content and graph.Rmd",
+    "project_path": "Extra content and graph.Rmd",
     "type": "r_markdown",
-    "hash": "418180723",
+    "hash": "3782817854",
     "contents": "",
     "dirty": false,
-    "created": 1689909301792.0,
+    "created": 1690367808529.0,
     "source_on_save": false,
     "relative_order": 6,
     "properties": {
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "21,92",
-        "scrollLine": "0"
+        "cursorPosition": "130,18",
+        "scrollLine": "123"
     },
     "folds": "",
-    "lastKnownWriteTime": 1689828749,
+    "lastKnownWriteTime": 1690959407,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1689828749,
+    "last_content_update": 1690959407867,
     "read_only": false,
     "read_only_alternatives": []
 }
