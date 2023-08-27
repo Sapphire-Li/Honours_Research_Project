@@ -35,6 +35,10 @@ Following the methodology in Section \@ref(method), the data will be divided int
 
 Figure \ref{fig:ss1000} clearly shows that when the sample size is large and two models have similar in-sample performance, the forecast accuracy will be indistinguishable between the simple average of predicted densities and the optimal density forecast combination, which is a strong evidence of the forecast combination puzzle. We can then change the true value of different elements, and determine the conditions under which the puzzle is likely to be evidenced. More rigorously, we will evaluate the in-sample performance with the $R^2$ of constituent models, and then analyse its relationship with the optimal combination weight and the presence of the puzzle.
 
+
+
+
+
 + \bf{Sample Size}
 
 \begin{figure}
@@ -65,6 +69,8 @@ From Figure \ref{fig:samplesize}, it is noticeable that the set of optimal weigh
 \end{table}
 
 Table \ref{tab:size} illustrates that when two models have a relatively big difference in the in-sample fit $R^2$ (in the second and third columns), we are then more likely to have an extreme optimal weight $\omega$. However, when two models have similar $R^2$ in the fourth column, the optimal weight $\omega$ is close to 0.5. These empirical results first support the conjecture that when models have indifferent in-sample fit, the puzzle is likely evidenced. Additionally, they illustrate that the puzzle can be in evidence when one model performs outstandingly.
+
+
 
 
 
@@ -116,11 +122,11 @@ Table \ref{tab:bsig} further justifies our conjecture of the relationship betwee
 
 
 
+
+
 + \bf{Variance of regressors}
 
-
-
-When the difference becomes larger, the gap of the forecast accuracy between the optimally combined forecast and the simple average increases, consequently. Since $x_{1i}$ has a larger variance than $x_{2i}$, the variation of $y_i$ can be explained more by Model 1 than Model 2. This is further verified by Table \ref{tab:regvar} where the $R^2$ of $M_1$ is always higher than that of $M_2$. According to the relationship between the in-sample performance and the optimal weight, Model 1 has a higher weight in the optimal combination, as expected.
+We keep the variance of $x_{2i}$ the same value and only increase the variance of $x_{1i}$. Then $x_{1i}$ should have a larger variance than $x_{2i}$, thus the variation of $y_i$ can be explained more by Model 1 than Model 2. This can be verified by Table \ref{tab:regvar} where $R^2$ of $M_1$ is always higher than that of $M_2$. Consequently, the in-sample performance difference between the two models is big enough to presume that all four combinations include a ``good`` Model 1 and a ``bad`` Model 2. As expected in the conjecture, Model 1 should have a higher weight, far away from 0.5, in the optimal combination. Furthermore, the forecast combination puzzle is evidenced in three of them while it is not found in the last situation, indicating that the presence of the puzzle is unclear when there is a big gap in the in-sample fit.
 
 \begin{table}[ht]
   \centering
@@ -140,12 +146,29 @@ When the difference becomes larger, the gap of the forecast accuracy between the
   \label{tab:regvar}
 \end{table}
 
-Detailed explanation about the Table \ref{tab:regvar} will be described later. More relevant plots will come out soon.
-
 
 
 One additional hypothesis is that when the absolute difference of $R^2$ between two models is less than 0.05, they should be treated as having similar in-sample performance. **Formally, the null hypothesis is that the absolute difference of the in-sample fit $R^2$ is less than 0.05.**
 
-greater than 0.05, the presence of the puzzle will be ambiguous. In Table \ref{tab:bmag}, the third column shows the case where the $R^2$ of Model 2 is 0.0517 higher than that of Model 1, and the puzzle is not evidenced.
+These results provide a general idea of the relationship between the in-sample fit of constituent models and the presence of the forecast combination puzzle. Based on the new information, the conjecture for two-model pools should be updated, as illustrated in Table \ref{tab:2}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lcc}
+Absolute difference of in-sample fit    &     Small      &    Large    \\
+Presence of the puzzle                  &     $\surd$    &    $?$      \\
+\end{tabular}
+\caption{``Small`` means that both models fit the in-sample data equally well (or equally bad), whereas ``Large`` implies that one of the models performs poorly in fitting the training set. The ``$\surd$`` implies the presense of the forecast combination puzzle, while ``$?$`` means that the presense of the puzzle is ambiguous.}
+\label{tab:2}
+\end{table}
+
+
+The choice of model is arbitrary and only the two-model pool is considered. It is also not prudent to determine ``small`` and ``Large`` difference based on subjective opinions. Potential improvements include...
+
+
+
+
+
+
 
 

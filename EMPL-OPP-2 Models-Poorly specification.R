@@ -226,15 +226,18 @@ p4 <- comb |> ggplot(aes(w, pool)) +
 
 
 
+glance(fit_3)$log_lik
+glance(fit_4)$log_lik
 
+glance(fit_3)$log_lik - glance(fit_4)$log_lik
 
 
 library(gridExtra)
 grid.arrange(p3,p4)
 
-pdf("EMPL_misspecified.pdf", width = 8, height = 6)
-grid.arrange(p3,p4,nrow=1,top="The point combination between ARIMA(2,1,0) w/ drift and ETS(A,A,N) - Misspecification")
-dev.off()
+# pdf("EMPL_misspecified.pdf", width = 8, height = 6)
+# grid.arrange(p3,p4,nrow=1,top="The point combination between ARIMA(2,1,0) w/ drift and ETS(A,A,N) - Misspecification")
+# dev.off()
 
 
 

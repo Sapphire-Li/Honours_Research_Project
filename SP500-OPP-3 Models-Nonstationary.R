@@ -365,16 +365,20 @@ p6 <- comb |> ggplot(aes(w, pool)) +
   annotate("text", x = 0.5, y = equ_3,
            label = paste0("Simple Average: ", round(equ_3,4)), vjust = 2, size = 4)
 
+glance(fit_1)$log_lik
+glance(fit_2)$log_lik
+glance(fit_3)$log_lik
 
-
-
+glance(fit_1)$log_lik - glance(fit_2)$log_lik
+glance(fit_1)$log_lik - glance(fit_3)$log_lik
+glance(fit_2)$log_lik - glance(fit_3)$log_lik
 
 library(gridExtra)
 grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 
-pdf("SP500_nonstationary.pdf", width = 14, height = 10)
-grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
-dev.off()
+# pdf("SP500_nonstationary.pdf", width = 14, height = 10)
+# grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
+# dev.off()
 
 
 

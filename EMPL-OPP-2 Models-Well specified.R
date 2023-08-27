@@ -312,14 +312,18 @@ p2 <- comb |> ggplot(aes(w, pool)) +
 
 
 
+glance(fit_1)$log_lik
+glance(fit_2)$log_lik
+
+glance(fit_1)$log_lik - glance(fit_2)$log_lik
 
 
 library(gridExtra)
 grid.arrange(p1,p2)
 
-pdf("EMPL_correct.pdf", width = 8, height = 6)
-grid.arrange(p1,p2,nrow=1,top="The point combination between SARIMA and ETS(A,A,A) - Correct Specification")
-dev.off()
+# pdf("EMPL_correct.pdf", width = 8, height = 6)
+# grid.arrange(p1,p2,nrow=1,top="The point combination between SARIMA and ETS(A,A,A) - Correct Specification")
+# dev.off()
 
 
 

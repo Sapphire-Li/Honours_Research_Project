@@ -189,14 +189,19 @@ p8 <- comb |> ggplot(aes(w, pool)) +
            label = paste0("Simple Average: ", round(equ,4)), vjust = 3, size = 4)
 
 
+glance(fit_4)$log_lik
+glance(fit_5_resid)$log_lik
+
+glance(fit_4)$log_lik - glance(fit_5_resid)$log_lik
+
 
 
 library(gridExtra)
 grid.arrange(p7,p8,nrow=1)
 
-pdf("SP500_stationary.pdf", width = 10, height = 6)
-grid.arrange(p7,p8,nrow=1)
-dev.off()
+# pdf("SP500_stationary.pdf", width = 10, height = 6)
+# grid.arrange(p7,p8,nrow=1)
+# dev.off()
 
 
 
