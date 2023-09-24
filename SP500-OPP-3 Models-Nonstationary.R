@@ -183,7 +183,8 @@ LS_comb_optimal[1] <- comb |> filter(pool_train == max(comb$pool_train)) |> sele
 
 p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(title = "ARIMA(1,1,1) and ETS(M,N,N)",
+  labs(title = paste0("P(ARIMA,ETS; ", round(weight_optimal[1],4), ")"),
+    caption = "ARIMA(1,1,1) and ETS(M,N,N)",
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log socre") +
   theme_minimal() +
@@ -209,7 +210,8 @@ LS_comb_optimal[2] <- comb |> filter(pool_train == max(comb$pool_train)) |> sele
 
 p2 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(title = "ARIMA(1,1,1) and Linear Regression",
+  labs(title = paste0("P(ARIMA,LR; ", round(weight_optimal[2],4), ")"),
+    caption = "ARIMA(1,1,1) and Linear Regression",
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log socre") +
   theme_minimal() +
@@ -235,7 +237,8 @@ LS_comb_optimal[3] <- comb |> filter(pool_train == max(comb$pool_train)) |> sele
 
 p3 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(title = "ETS(M,N,N) and Linear Regression",
+  labs(title = paste0("P(ETS, LR; ", round(weight_optimal[3],4), ")"),
+    caption = "ETS(M,N,N) and Linear Regression",
        x = "Weight on model ETS(M,N,N)",
        y = "Log socre") +
   theme_minimal() +
@@ -268,7 +271,8 @@ equ_1 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p4 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(title = "ARIMA(1,1,1) and ETS(M,N,N)",
+  labs(title = paste0("P(ARIMA,ETS; ", round(weight_optimal[1],4), ")"),
+       caption = "ARIMA(1,1,1) and ETS(M,N,N)",
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log predictive socre") +
   theme_minimal() +
@@ -305,7 +309,8 @@ equ_2 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p5 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(title = "ARIMA(1,1,1) and Linear Regression",
+  labs(title = paste0("P(ARIMA,LR; ", round(weight_optimal[2],4), ")"),
+       caption = "ARIMA(1,1,1) and Linear Regression",
        x = "Weight on model ARIMA(1,1,1)",
        y = "Log predictive socre") +
   theme_minimal() +
@@ -343,7 +348,8 @@ equ_3 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p6 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(title = "ETS(M,N,N) and Linear Regression",
+  labs(title = paste0("P(ETS, LR; ", round(weight_optimal[3],4), ")"),
+    caption = "ETS(M,N,N) and Linear Regression",
        x = "Weight on model ETS(M,N,N)",
        y = "Log predictive socre") +
   theme_minimal() +

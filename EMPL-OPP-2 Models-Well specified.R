@@ -254,7 +254,7 @@ LS_comb_optimal <- comb |> filter(pool_train == min(comb$pool_train)) |> select(
 
 p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(
+  labs(title = paste0("P(SARIMA, ETS; ", round(weight_optimal,4), ")"),
     # title = "The In-sample Combination between SARIMA and ETS(A,A,A)",
        x = "Weight on model SARIMA",
        y = "Mean squared error") +
@@ -288,7 +288,7 @@ equ_1 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p2 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(
+  labs(caption = "SARIMA(2,0,2)(0,1,1)[4] and ETS(A,A,A)",
     # title = "The Out-of-sample Combination between SARIMA and ETS(A,A,A)",
        x = "Weight on model SARIMA",
        y = "Mean squared forecast error") +
@@ -322,7 +322,12 @@ library(gridExtra)
 grid.arrange(p1,p2)
 
 # pdf("EMPL_correct.pdf", width = 8, height = 6)
-# grid.arrange(p1,p2,nrow=1,top="The point combination between SARIMA and ETS(A,A,A) - Correct Specification")
+# grid.arrange(p1,p2,top="The point combination between SARIMA and ETS(A,A,A) - well specified models")
+# dev.off()
+
+
+# pdf("EMPL_correct.pdf", width = 6, height = 8)
+# grid.arrange(p1,p2,top="The point combination between SARIMA and ETS(A,A,A) - well specified models")
 # dev.off()
 
 

@@ -137,7 +137,8 @@ LS_comb_optimal <- comb |> filter(pool_train == max(comb$pool_train)) |> select(
 
 p7 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(title = "ARMA(1,1) and Linear Regression 2",
+  labs(title = paste0("P(ARMA, LR2; ", round(weight_optimal,4), ")"),
+       caption = "ARMA(1,1) and Linear Regression 2",
        x = "Weight on model ARMA(1,1)",
        y = "Log socre") +
   theme_minimal() +
@@ -167,7 +168,8 @@ equ <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p8 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(title = "ARMA(1,1) and Linear Regression 2",
+  labs(title = paste0("P(ARMA, LR2; ", round(weight_optimal,4), ")"),
+       caption = "ARMA(1,1) and Linear Regression 2",
        x = "Weight on model ARMA(1,1)",
        y = "Log predictive socre") +
   theme_minimal() +
@@ -204,5 +206,7 @@ grid.arrange(p7,p8,nrow=1)
 # dev.off()
 
 
-
+# pdf("SP500_stationary.pdf", width = 6, height = 10)
+# grid.arrange(p7,p8)
+# dev.off()
 

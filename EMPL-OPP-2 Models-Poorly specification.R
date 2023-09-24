@@ -168,7 +168,7 @@ LS_comb_optimal <- comb |> filter(pool_train == min(comb$pool_train)) |> select(
 
 p3 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(
+  labs(title = paste0("P(ARIMA, ETS; ", round(weight_optimal,4), ")"),
     # title = "The In-sample Combination between ARIMA(2,1,0) w/ drift and ETS(A,A,N)",
        x = "Weight on model ARIMA",
        y = "Mean squared error") +
@@ -202,7 +202,7 @@ equ_2 <- comb |> filter(w == 0.5) |> select(pool) |> as.numeric()
 
 p4 <- comb |> ggplot(aes(w, pool)) +
   geom_line(color = "red") +
-  labs(
+  labs(caption = "ARIMA(2,1,0) and ETS(A,A,N)",
     # title = "The Out-of-sample Combination between ARIMA(2,1,0) w/ drift and ETS(A,A,N)",
        x = "Weight on model ARIMA",
        y = "Mean squared forecast error") +
@@ -236,9 +236,12 @@ library(gridExtra)
 grid.arrange(p3,p4)
 
 # pdf("EMPL_misspecified.pdf", width = 8, height = 6)
-# grid.arrange(p3,p4,nrow=1,top="The point combination between ARIMA(2,1,0) w/ drift and ETS(A,A,N) - Misspecification")
+# grid.arrange(p3,p4,top="The point combination between ARIMA(2,1,0) w/ drift and ETS(A,A,N) - poorly specified models")
 # dev.off()
 
+# pdf("EMPL_misspecified.pdf", width = 6, height = 8)
+# grid.arrange(p3,p4,top="The point combination between ARIMA(2,1,0) w/ drift and ETS(A,A,N) - poorly specified models")
+# dev.off()
 
 
 

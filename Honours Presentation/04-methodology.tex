@@ -1,0 +1,136 @@
+
+\section{Methodology}
+
+\begin{frame}{Forecast Combination}
+
+    We focus on the combination of forecasts from non-nested models for a given dataset, which is commonly performed in two stages:
+
+    \vspace{5mm}
+
+    \begin{enumerate}[<+->]
+        \item \textbf{producing} separate point or probabilistic \textbf{forecasts} for the next time point using observed data and constituent models, and \newline
+        \item \textbf{combining forecasts} based on one of the accuracy criteria. 
+    \end{enumerate}
+
+\end{frame}
+
+
+
+\begin{frame}{First Stage - Parameters Estimation}
+
+    The unknown parameters of each model, $\theta$, are estimated by maximizing the log likelihood function over the in-sample period ($R$):
+
+
+    \begin{equation}
+    \label{eqn:theta}
+    \hat\theta = \underset{\theta}{\text{argmax}} \sum^R_{t=1} log \ f(y_t).
+    \end{equation}
+
+    \begin{itemize}
+        \item Point forecasts
+        \item Density forecasts
+    \end{itemize}
+
+
+\end{frame}
+
+
+
+\begin{frame}{Point: Linear Combination}
+    
+    Two constituent points, $y_{1t}$ and $y_{2t}$, are aggregated linearly:
+    
+    \vspace{3mm}
+    
+    \begin{equation}
+    \label{eqn:PC1}
+    y_t = \omega \ y_{1t} + (1-\omega) \ y_{2t}
+    \end{equation}
+    
+    \vspace{3mm}
+    
+    where $\omega$ is the non-negative weight allocated to the point expressed based on the first model.
+
+\end{frame}
+
+
+
+\begin{frame}{Density: Linear Pools}
+		
+        A linear combination of two densities, $f(y_t)$, is constructed with two constituent densities $f_1(y_t)$ and $f_2(y_t)$:
+        
+        \vspace{3mm}
+        
+        \begin{equation}
+        f(y_t) = \omega \ f_1(y_t) + (1-\omega) \ f_2(y_t)
+        \end{equation}  
+        
+        \vspace{3mm}
+        
+        where $\omega$ is the weight allocated to the first density.
+
+        \vspace{2mm}
+
+        \small{The sum of two weights is implied to be 1, which is necessary and sufficient for the combination to be a density function [\cite{GA11}].}
+        
+\end{frame}
+
+
+
+\begin{frame}{Second Stage - Weight Estimation}
+
+    The optimal weight assigned to the first density is estimated by maximizing the log score function over the in-sample period:
+
+    \begin{equation}
+    \hat{\omega}_{\text{opt}} = \underset{\omega}{\text{argmax}} \sum^R_{t=1}log \Big[\omega \ f_1(y_t |\mathcal{F}_{\small{t-1}}, \hat\theta_1) + (1-\omega) \ f_2(y_t|\mathcal{F}_{\small{t-1}}, \hat\theta_2)\Big].
+    \end{equation}
+
+    \begin{itemize}
+    \small{
+    \item $R$ = the in-sample period
+    \item $\mathcal{F}_{\small{t-1}}$ = all information available at time $t-1$
+    }
+    \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Mean Squared Forecast Error}
+    The Mean squared forecast error (MSFE) of an individual model is the average squared difference between the actual value, $y_t$, and the predicted value, $\hat y_t$, at each time point over the in-sample period $R$:
+
+    \begin{equation}
+    \label{eqn:MSFE1}
+    MSFE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
+    \end{equation}  
+
+\end{frame}
+
+
+
+\begin{frame}{Log Predictive Score Function}
+
+\small{Following \cite{GA11}, we measure the accuracy of the density forecasts with the log predictive score function over the forecast horizon $h=1,2,...,P$ (i.e., the out-of-sample period), which is defined as:}
+
+\vspace{-2mm}
+
+\begin{equation}
+    LS = \sum^P_{h=1} log \Big[ \hat{\omega}_{\text{opt}} f_1(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}}, \hat\theta_1) + (1- \hat{\omega}_{\text{opt}}) \ f_2(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}}, \hat\theta_2)\Big].
+\end{equation}
+
+
+\vspace{2mm}
+
+\begin{itemize}
+\small{
+    \item $P$ = the out-of-sample period
+    \item $h$ = the forecast horizon ($h>0$)
+    \item $\mathcal{F}_{\small{R+h-1}}$ = all information available at time ($R+h-1$)
+    \item $\hat\theta$ = parameter estimates
+    }
+\end{itemize}
+
+\end{frame}
+
+
+

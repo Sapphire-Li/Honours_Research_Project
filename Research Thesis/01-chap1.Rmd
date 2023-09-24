@@ -41,7 +41,7 @@ Follow the idea of "linear opinion pool" [@HM07;@GA11] and consider a simple cas
 \multirow{2}{*}{$M_1$} & Good & $\surd$    & $?$ \\
                        & Bad  & $?$        & $\surd$
 \end{tabular}
-\caption{The first row and the first column refer to two constituent models in a combination, $M_1$ and $M_2$. ``Good`` means that the model fits the data well, whereas ``Bad`` denotes that the model fails to capture some important features of the data. The ``$\surd$`` indicates the presense of the forecast combination puzzle, while ``$?$`` implies that the presense of the puzzle is uncertain.}
+\caption{The first row and the first column refer to two constituent models in a combination, $M_1$ and $M_2$. ``Good`` means that the model fits the data well, whereas ``Bad`` denotes that the model fails to capture some important features of the data. The ``$\surd$`` indicates the presence of the forecast combination puzzle, while ``$?$`` implies that the presence of the puzzle is uncertain.}
 \label{tab:1}
 \end{table}
 
@@ -53,13 +53,7 @@ We revisit the forecast combination puzzle in the pure time series setting by fi
 
 The goal of this thesis is two-fold: first, to substantiate the presence of the combination puzzle in the time series setting and to explore the relationship between the puzzle and the in-sample fit of constituent models; second, to mathematically derive the formula of the optimal weight in the regression setting under mean squared forecast error and then to validate the conjecture in Table \ref{tab:1} with empirical evidence.
 
-The plan of this thesis is as follows. 
-
-The paper develops the basic ideas for a pool of two models (Section 2) and then applies them to prediction model pools for daily S&P 500 returns, 1972 through 2005 (Section 3). It then turns to the general case of pools of n models and studies how changes in the composition of the pool change the optimal weights (Section 4). Section 5 constructs an optimal pool of six alternative prediction models for the S&P 500 returns. Section 6 studies the implications of optimal prediction pools for the existence of prediction models as yet undiscovered that will compare favorably with those in the pool as assessed by a log predictive scoring rule. The final section concludes.
-
-The plan of this paper is as follows. Section 2 discusses some characteristics of combined density forecasts, and Section 3 proposes a simple approach to choose the combining weights optimally. Compar- isons with the optimal combination of point forecasts are made. Section 4 then provides an application to UK inflation. One-year ahead density forecasts of UK inflation are now published each quarter both by the Bank of England in its “fan” chart and the National Institute of Economic and Social Research (NIESR) in its quarterly forecast, and have been for the last ten years. The fan chart is central to the setting of monetary policy by the Monetary Policy Committee at the Bank of England. We examine whether improved density forecasts for inflation might have been obtained in practice if one had optimally combined these compet- ing forecasts with a simple time-series density forecast. Section 5 concludes.
-
-
+The thesis follows two common weighting schemes for `two model` pools (Section 2) and then applies the log score to density combinations for daily S\&P 500 index and the mean squared error to point combinations for quarterly number of unemployed (Section 3). With some empirical evidence of the conjecture, Section 4 derives a closed-form expression for the optimal weight under the mean squared error in a simple regression case. The findings are further examined by density combinations in the cross-sectional setting. The final section concludes.
 
 
 
