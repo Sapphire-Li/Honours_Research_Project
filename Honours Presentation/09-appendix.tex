@@ -1,0 +1,257 @@
+\section{Appendix}
+
+\begin{frame}{Example 1 (Nonstationary) - Model Specification I}
+    
+    \begin{itemize}
+    \item ARIMA(1,1,1) model 
+        \begin{equation*}
+        log(y_t) = c + log(y_{t-1}) + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \epsilon_t + \theta_1\epsilon_{t-1}
+        \end{equation*}
+        
+    \item ETS(M,N,N) model
+        \begin{align*}
+        y_t &= \ell_{t-1} (1+\epsilon_t) \\
+        \ell_t &= \ell_{t-1} (1+\alpha \epsilon_t) \\
+        \end{align*}
+    \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Example 1 (Nonstationary) - Model Specification II}
+
+    \begin{itemize}
+    \item A linear regression model of the natural logarithm of the S\&P 500 index and ARIMA(1,0,0) errors.
+        \begin{align*}
+        log(y_t) &= \beta_0 + \beta_1 t + u_t \\
+        u_t &= \phi_1 u_{t-1} + \epsilon_t
+        \end{align*}
+    \end{itemize}
+
+The $\epsilon_t$ in each model is assumed to be independent and normally distributed with a zero mean and a constant variance.
+
+\end{frame}
+
+
+
+\begin{frame}{Example 1 (Stationary) - Model Specification}
+
+    \begin{itemize}
+    \item ARMA(1,1) model with an intercept of the natural logarithm of S\&P 500 returns. 
+        \begin{equation*}
+    log(y_t) - log(y_{t-1}) = c + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \epsilon_t + \theta_1\epsilon_{t-1}
+    \end{equation*}
+
+    \item A classical linear regression model of the natural logarithm of the S\&P 500 returns and ARMA(1,1) errors. 
+    \begin{align*}
+    log(y_t) &= \beta_0 + u_t \\
+    u_t &= \phi_1 u_{t-1} + \epsilon_t + \theta_1\epsilon_{t-1}
+    \end{align*}
+    \end{itemize}
+    
+\end{frame}
+
+
+
+\begin{frame}{Example 2 - Well-specified Models}
+
+    \begin{itemize}
+    \item ARIMA(2,0,2)(0,1,1)[4] model with an intercept of the natural logarithm of unemployed individuals.
+    \begin{align*}
+    log(y_t) &= c + log(y_{t-4}) + \phi_1\big[log(y_{t-1})-log(y_{t-5})\big] \\
+    & + \phi_2\big[log(y_{t-2})-log(y_{t-6})\big] + \epsilon_t + \theta_1\epsilon_{t-1} + \theta_2\epsilon_{t-2} \\
+    & + \Theta_1\epsilon_{t-4} + \theta_1\Theta_1\epsilon_{t-5} + \theta_2\Theta_1\epsilon_{t-6} \\
+    \end{align*}
+
+    \vspace{-5mm}
+
+    \item ETS(A,A,A) model of the natural logarithm of unemployed individuals. 
+    \begin{align*}
+    log(y_t) &= \ell_{t-1} + b_{t-1} + s_{t-m} + \epsilon_t \\
+    \ell_t &= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
+    b_t &= b_{t-1} + \beta \epsilon_t \\
+    s_{t} &= s_{t-m} + \gamma \epsilon_t
+    \end{align*}
+    \end{itemize}
+    
+\end{frame}
+
+
+
+\begin{frame}{Example 2 - Poorly-specified Models}
+
+    \begin{itemize}
+    \item ARIMA(2,1,0) model with an intercept of the natural logarithm of unemployed individuals.
+    \begin{equation*}
+    log(y_t) = c + log(y_{t-1}) + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \phi_2\big[log(y_{t-2})-log(y_{t-3})\big] + \epsilon_t
+    \end{equation*}
+
+    \item ETS(A,A,N) model of the natural logarithm of unemployed individuals. 
+    \begin{align*}
+    log(y_t) &= \ell_{t-1} + b_{t-1} + \epsilon_t \\
+    \ell_t &= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
+    b_t &= b_{t-1} + \beta \epsilon_t
+    \end{align*}
+    \end{itemize}
+    
+\end{frame}
+
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - Model}
+
+    Models can be written in matrix forms
+\[y = x_1 \beta_{1} + x_2 \beta_{2} + \epsilon\]
+\[ M_1 : y = x_1 \alpha_{1} + u_1\]
+\[ M_2 : y = x_2 \alpha_{2} + u_2\]
+
+where
+\[
+     {y}=\begin{bmatrix}
+           y_{1} \\
+           y_{2} \\
+           \vdots \\
+           y_{N}
+         \end{bmatrix},\;
+     {x_1}=\begin{bmatrix}
+           x_{11} \\
+           x_{21} \\
+           \vdots \\
+           x_{N1}
+         \end{bmatrix},\;
+    {x_2}=\begin{bmatrix}
+           x_{12} \\
+           x_{22} \\
+           \vdots \\
+           x_{N2}
+         \end{bmatrix},\;
+    {\epsilon}=\begin{bmatrix}
+           \epsilon_{1} \\
+           \epsilon_{2} \\
+           \vdots \\
+           \epsilon_{N}
+         \end{bmatrix}.
+\]
+
+\end{frame}
+
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - Parameter Estimation}
+    Applying the OLS estimation.
+\vspace{-0.2mm}
+\begin{align*}
+    \hat\alpha_{1} &= (x'_1x_1)^{-1} x'_1y \\
+    &= (x'_1x_1)^{-1} x'_1(x_1 \beta_{10} + x_2 \beta_{20} + \epsilon) \\
+    &= \beta_{10} + (x'_1x_1)^{-1} x'_1x_2 \beta_{20} \\
+    &= \beta_{10} + var(x_1)^{-1} cov(x_1,x_2) \beta_{20} \\
+    \\
+    \hat\alpha_{2} &= (x'_2x_2)^{-1} x'_2y \\
+    &= (x'_2x_2)^{-1} x'_2(x_1 \beta_{10} + x_2 \beta_{20} + \epsilon) \\
+    &= \beta_{20} + (x'_2x_2)^{-1} x'_2x_1 \beta_{10} \\
+    &= \beta_{20} + var(x_2)^{-1} cov(x_2,x_1) \beta_{10} \\
+\end{align*}
+    
+\end{frame}
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - MSE}
+
+\begin{align*}
+    \hat y &= \hat y_1 \omega + \hat y_2 (1-\omega) \\
+    &= x_1 \hat\alpha_1 \omega + \ x_2 \hat\alpha_2 (1-\omega) \\
+    &= x_1 \hat\alpha_1 \omega - x_2 \hat\alpha_2 \omega + x_2 \hat\alpha_2 \\
+    &= (x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega + x_2 \hat\alpha_2
+\end{align*}
+\begin{align*}
+\hat{\omega}_{\text{opt}} 
+&= \underset{\omega \in [0,1]}{\arg\min} E\big[(Y - \hat Y)' (Y - \hat Y) \big] \\
+&= \underset{\omega \in [0,1]}{\arg\min} \ E\bigg\{\big[Y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega - x_2 \hat\alpha_2\big]'\big[Y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega - x_2 \hat\alpha_2\big]\bigg\}
+\end{align*}
+\end{frame}
+
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - Optimal Weight}
+Solve the First-order condition
+\[-2(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \hat\omega_{opt} - x_2 \hat\alpha_2) = 0.\]
+\begin{align*}
+    (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \hat\omega_{opt} &= (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2) \\
+    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2)}{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)} \\
+    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2)}{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)} \\
+    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2} \\
+\end{align*}
+\end{frame}
+
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - Meaningful Expression}
+\begin{align*}
+  \hat\omega_{opt} 
+    &= \frac{R^{-1}(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - R^{-1}(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 \frac{x'_1 x_1}{R} \hat\alpha_1 - 2\hat\alpha'_1 \frac{x'_1 x_2}{R} \hat\alpha_2 + \hat\alpha'_2 \frac{x'_2 x_2}{R} \hat\alpha_2} \\
+    &= \frac{\hat\alpha_1' \text{cov}_R(x_1,y)-\hat\alpha_2'\text{cov}_R(x_2,y)-\hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2 + \hat\alpha_2'\text{cov}_R(x_2,x_2)\hat\alpha_2}{\hat\alpha_1' \text{cov}_R(x_1,x_1)\hat\alpha_1 - 2\hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2 + \hat\alpha_2'\text{cov}_R(x_2,x_2)\hat\alpha_2} \\
+    &= \frac{\hat\alpha_1'\text{cov}_R(x_1,x_1)\hat\alpha_1 - \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2}{\hat\alpha_1' \text{cov}_R(x_1,x_1)\hat\alpha_1 - 2\hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2 + \hat\alpha_2'\text{cov}_R(x_2,x_2)\hat\alpha_2}
+\end{align*}
+\end{frame}
+
+
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - Limit Result}
+
+\[\omega_\star = \frac{\alpha_1'\Sigma_{11}\alpha_1 -\alpha_1'\Sigma_{12}\alpha_2}{\alpha_1'\Sigma_{11}\alpha_1 - 2\alpha_1'\Sigma_{12}\alpha_2 + \alpha_2'\Sigma_{22}\alpha_2}\]
+
+For $\omega_\star=\frac{1}{2}$ it must be that 
+
+\begin{flalign*}
+\frac{1}{2} &= \frac{\alpha_1'\Sigma_{11}\alpha_1 -\alpha_1'\Sigma_{12}\alpha_2}{\alpha_1'\Sigma_{11}\alpha_1 - 2\alpha_1'\Sigma_{12}\alpha_2 + \alpha_2'\Sigma_{22}\alpha_2} \\
+\alpha_1'\Sigma_{11}\alpha_1 - 2\alpha_1'\Sigma_{12}\alpha_2 + \alpha_2'\Sigma_{22}\alpha_2 &= 2\big(\alpha_1'\Sigma_{11}\alpha_1 -\alpha_1'\Sigma_{12}\alpha_2\big) \\
+\alpha_1'\Sigma_{11}\alpha_1 + \alpha_2'\Sigma_{22}\alpha_2 &= 2\alpha_1'\Sigma_{11}\alpha_1 \\
+\alpha_1'\Sigma_{11}\alpha_1
+&=\alpha_2'\Sigma_{22}\alpha_2.
+\end{flalign*}
+
+\end{frame}
+
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - F-statistic}
+
+Define the sum squared of errors (SSE) for the true model is $SSE_{full} = (y - x_1 \hat\beta_1 - x_2 \hat\beta_2)'(y - x_1 \hat\beta_1 - x_2 \hat\beta_2)$.
+
+\vspace{5mm}
+
+The unbiased estimator of the true model variance is $s^2=\frac{SSE_{full}}{R-2}$.
+
+\vspace{5mm}
+
+The optimal weight can also be constructed by the F-statistics of $M_1$ and $M_2$.
+
+\[\hat\omega_{opt} = \frac{F_{\alpha_1}- R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}{F_{\alpha_1} + F_{\alpha_2} - 2 R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}.\]
+
+\end{frame}
+
+
+
+\begin{frame}{Optimal Weight Derivation (Detail) - F-statistic}
+The F-statistic follows a F-distribution with degrees of freedom (1,R-2) under $H_0$, which is defined as
+\[F_{\alpha_1} = R \ s^{-2} \ \hat\alpha'_1 \text{cov}_R(x_1,x_1) \hat\alpha_1.\]
+
+Similarly, we have 
+\[F_{\alpha_2} = R \ s^{-2} \ \hat\alpha'_2 \text{cov}_R(x_2,x_2) \hat\alpha_2 \sim F_{1,R-2} \text{ under  H}_0.\]
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+

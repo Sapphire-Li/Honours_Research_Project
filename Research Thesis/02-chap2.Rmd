@@ -9,15 +9,15 @@ In the literature, there are several definitions of combinations. We focus on th
 
 1. producing separate point or probabilistic forecasts for the next time point using observed data and constituent models, and
 
-2. combining forecasts based on one of the accuracy criteria.  
+2. combining forecasts based on a given accuracy criteria.  
 
-Specifically, we only consider the combination of two individual forecasts, which allows us to delve into interesting and unexplained findings through fast and relative simple data manipulation.
+Specifically, we only consider the combination of two individual forecasts, i.e., two constituent models, which allows us to delve into interesting and unexplained findings through fast and relative simple data manipulation.
 
 
 
 Before explaining details, the following notation will be used throughout the paper. An observed time series $y_t$ with a total of $T$ observations will be divided proportionally into two parts, an in-sample period $R$ and an out-of-sample period $P$. The realization of a target variable $y$ at time $t$ is denoted as $y_t$. Its future values after the in-sample period is denoted as $y_{\small{R+h}}$, where $h$ is the forecast horizon and $h>0$. The information set at time t, $\mathcal{F}_t$, is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$.
 
-A parametric model $M$ determines the conditional probability density for $y_t$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$, given unknown parameters $\theta_M$ and all the past information $\mathcal{F}_{t-1}$. The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., $\hat\theta_M = \underset{\theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for out-of-sample procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best in-sample accuracy.
+A parametric model $M$ determines the conditional probability density for $y_t$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$, given unknown parameters $\theta_M$ and all the past information $\mathcal{F}_{t-1}$. The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., $\hat\theta_M = \underset{\theta_M \in \Theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)$. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for out-of-sample procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best in-sample accuracy.
 
 
 
@@ -29,10 +29,10 @@ Consider the case of only two competing models, which we identify through their 
 
 \begin{equation}
 \label{eqn:LC1}
-f(y_t) = \omega \ f_1(y_t | \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) f_2(y_t | \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)
+f_{\omega}(y_t) = \omega \ f_1(y_t | \mathcal{F}_{t-1}, \theta_{M1}, M_1) + (1-\omega) f_2(y_t | \mathcal{F}_{t-1}, \theta_{M2}, M_2)
 \end{equation}  
 
-where $\omega$ is the non-negative weight allocated to the probability density derived from the first model. Through this construction, the sum of the model weights is fixed at 1, which is a necessary and sufficient condition for $f(y_t)$ to be a proper density function [@GA11]. In addition to producing point forecasts, density forecasts can offer forecasters or decision markers a comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions).
+where $\omega \in [0,1]$ is the non-negative weight allocated to the probability density derived from the first model. Through this construction, the sum of the model weights is fixed at 1, which is a necessary and sufficient condition for $f(y_t)$ to be a proper density function [@GA11]. In addition to producing point forecasts, density forecasts can offer forecasters or decision markers a comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions).
 
 
 
@@ -42,21 +42,21 @@ Following the literature on density evaluation, our initial analysis will focus 
 
 \begin{equation}
 \label{eqn:LS1}
-LS = \sum^R_{t=1} log \ f(y_t| \mathcal{F}_{t-1}, \hat\theta_M, M).
+LS = \sum^R_{t=1} log \ \hat f(y_t| \mathcal{F}_{t-1}, \hat\theta_M, M).
 \end{equation}
 
-The "optimal" linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over the in-sample $R$ observations,  
+The "optimal" linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over $R$ observations,  
 
 \begin{equation}
 \label{eqn:LS2}
-\hat{\omega}_{\text{opt}} =  \underset{\omega \in [0,1]}{\arg\max} \sum^R_{t=1} log \Big[ \omega \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+\hat{\omega}_{\text{opt}} =  \underset{\omega \in [0,1]}{\arg\max} \sum^R_{t=1} log \Big[ \omega \ \hat f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) \ \hat f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
 \end{equation}
 
 Thus, the log predictive score over the out-of-sample period $t = R+1, R+2, \dots, T$ is:
 
 \begin{equation}
 \label{eqn:LS3}
-LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{\omega}_{\text{opt}}) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ \hat f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{\omega}_{\text{opt}}) \ \hat f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
 \end{equation}
 
 
@@ -71,10 +71,10 @@ Similar to the density case, points from two constituent models, $y_{1t}$ and $y
 
 \begin{equation}
 \label{eqn:PC1}
-y_t = \omega \ y_{1t} + (1-\omega) \ y_{2t}
+y_t({\omega}) = \omega \ y_{1t} + (1-\omega) \ y_{2t}
 \end{equation}  
 
-where $\omega$ is the non-negative weight allocated to the point forecast generated from the first model.
+where $\omega\in [0,1]$ is the non-negative weight allocated to the point forecast generated from the first model.
 
 
 
@@ -87,7 +87,7 @@ The mean squared error (MSE) of an individual model is the average squared diffe
 MSE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
 \end{equation}  
 
-The lower the MSE, the higher the accuracy of the forecast. Therefore, the "optimal" set of weights satisfies that it minimizes the MSE of the point forecast combination among all other possible sets over the training period:
+The lower the MSE, the higher the accuracy of the forecast. Therefore, the "optimal" set of weights satisfies that it minimizes the MSE of the point forecast combination among all other possible sets over $R$ observations:
 
 \begin{equation}
 \label{eqn:MSE2}

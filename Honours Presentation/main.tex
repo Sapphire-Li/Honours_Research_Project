@@ -1,29 +1,30 @@
+% \documentclass[handout,hyperref={pdfpagelabels=false},aspectratio=169]{beamer} % print pdf without pause (overleaf specification)
 \documentclass[hyperref={pdfpagelabels=false},aspectratio=169]{beamer}
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule for better rules in tables
 \usepackage{calligra} % Font for wordart
-\usepackage{appendixnumberbeamer} % A separate slide counter for your appendix
-\usepackage{fnpct}
+\usepackage{appendixnumberbeamer}
 \usepackage{listings} % For code display
 \usepackage{multirow}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage[utf8x]{inputenc}
 \usepackage{url}
-\usepackage{blindtext}
 \usepackage{setspace}
 \usepackage{hyperref}
 \usepackage{amsmath}
-\graphicspath{{Graph/}{./}} % Specifies where to look for included images (trailing slash required)
 \setlength{\parskip}{3pt}
 \setbeamertemplate{caption}[numbered]{}% Number float-like environments
-% \mode<presentation>{}
+
 
 
 
 %---------------------------------------------------------
 %	CITATIONS / REFERENCES
 %---------------------------------------------------------
-\usepackage[style=authoryear]{biblatex}
+\usepackage[style=apa,backend=biber]{biblatex}
 \addbibresource{bib.bib}
 %\bibliographystyle{apalike}
 
@@ -120,7 +121,7 @@
 }
 \date[May 2023]
 
-\logo{\includegraphics[width=2.5cm]{Monash.png}}
+\logo{\includegraphics[width=2.5cm]{Graph/Monash.png}}
 
 %---------------------------------------------------------
 %	CODE DISPLAY
@@ -174,7 +175,9 @@
 \input{03-background.tex}
 \input{04-methodology.tex}
 \input{05-result.tex}
+\input{08-cross.tex}
 \input{06-conclusion.tex}
 \input{07-reference.tex}
+\input{09-appendix.tex}
 
 \end{document}

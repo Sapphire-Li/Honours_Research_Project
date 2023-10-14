@@ -382,6 +382,18 @@ glance(fit_2)$log_lik - glance(fit_3)$log_lik
 library(gridExtra)
 grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 
+# pdf("SP500_nonstat_1.pdf", width = 10, height = 5)
+# grid.arrange(p1,p4,ncol=2)
+# dev.off()
+# 
+# pdf("SP500_nonstat_2.pdf", width = 10, height = 5)
+# grid.arrange(p2,p5,ncol=2)
+# dev.off()
+# 
+# pdf("SP500_nonstat_3.pdf", width = 10, height = 5)
+# grid.arrange(p3,p6,ncol=2)
+# dev.off()
+
 # pdf("SP500_nonstationary.pdf", width = 14, height = 10)
 # grid.arrange(p1,p2,p3,p4,p5,p6,ncol = 3)
 # dev.off()

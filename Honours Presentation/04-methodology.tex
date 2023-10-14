@@ -9,7 +9,7 @@
 
     \begin{enumerate}[<+->]
         \item \textbf{producing} separate point or probabilistic \textbf{forecasts} for the next time point using observed data and constituent models, and \newline
-        \item \textbf{combining forecasts} based on one of the accuracy criteria. 
+        \item \textbf{combining forecasts} based on a given accuracy criteria. 
     \end{enumerate}
 
 \end{frame}
@@ -18,13 +18,18 @@
 
 \begin{frame}{First Stage - Parameters Estimation}
 
-    The unknown parameters of each model, $\theta$, are estimated by maximizing the log likelihood function over the in-sample period ($R$):
+    The unknown parameters of each model, $\theta$, are estimated by maximizing the log likelihood function over the in-sample period:
 
 
     \begin{equation}
     \label{eqn:theta}
-    \hat\theta = \underset{\theta}{\text{argmax}} \sum^R_{t=1} log \ f(y_t).
+    \hat\theta = \underset{\theta \in \Theta}{\arg\max} \ log \ L(\theta|y)
     \end{equation}
+
+    where $L(\theta|y)$ is the joint probability density of observed data viewed as a function of the parameters.
+
+
+    \vspace{5mm}
 
     \begin{itemize}
         \item Point forecasts
@@ -38,7 +43,7 @@
 
 \begin{frame}{Point: Linear Combination}
     
-    Two constituent points, $y_{1t}$ and $y_{2t}$, are aggregated linearly:
+    Two constituent points $y_{1t}$ and $y_{2t}$ are aggregated linearly:
     
     \vspace{3mm}
     
@@ -49,7 +54,7 @@
     
     \vspace{3mm}
     
-    where $\omega$ is the non-negative weight allocated to the point expressed based on the first model.
+    where $\omega\in(0,1)$ is the non-negative weight allocated to the point expressed based on the first model.
 
 \end{frame}
 
@@ -67,9 +72,9 @@
         
         \vspace{3mm}
         
-        where $\omega$ is the weight allocated to the first density.
+        where $\omega\in(0,1)$ is the weight allocated to the first density.
 
-        \vspace{2mm}
+        \vspace{4mm}
 
         \small{The sum of two weights is implied to be 1, which is necessary and sufficient for the combination to be a density function [\cite{GA11}].}
         
@@ -77,58 +82,82 @@
 
 
 
+\begin{frame}{Accuracy Criteria}
+
+    The optimal weight assigned to the first point/density is estimated by satisfying one of the accuracy criteria over the in-sample period (R). 
+
+    \begin{itemize}[<+->]
+        \item Mean Squared Error (\cite{SW09})
+
+        \begin{equation}
+        \label{eqn:MSE1}
+        MSE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2
+        \end{equation}  
+
+        \item Log Score Function (\cite{GA11})
+
+        \begin{equation}
+        \label{eqn:LS1}
+        LS = \sum^R_{t=1} log \ f(y_t| \mathcal{F}_{t-1})
+        \end{equation}  
+        
+    \end{itemize}
+
+     \onslide<2-> $\mathcal{F}_{\small{t-1}}$ = all information available at time $t-1$
+
+\end{frame}
+
+
+
 \begin{frame}{Second Stage - Weight Estimation}
 
-    The optimal weight assigned to the first density is estimated by maximizing the log score function over the in-sample period:
+    \begin{itemize}[<+->]
+        \item Mean Squared Error
 
-    \begin{equation}
-    \hat{\omega}_{\text{opt}} = \underset{\omega}{\text{argmax}} \sum^R_{t=1}log \Big[\omega \ f_1(y_t |\mathcal{F}_{\small{t-1}}, \hat\theta_1) + (1-\omega) \ f_2(y_t|\mathcal{F}_{\small{t-1}}, \hat\theta_2)\Big].
-    \end{equation}
+        \begin{equation}
+        \label{eqn:MSE2}
+        \hat{\omega}_{\text{opt}} = \underset{\omega \in [0,1]}{\arg\min} \ \frac{1}{R} \sum^R_{t=1} \Big[y_t - (\omega \ \hat y_{1t} + (1-\omega) \ \hat y_{2t})\Big]^2
+        \end{equation}
 
-    \begin{itemize}
-    \small{
-    \item $R$ = the in-sample period
-    \item $\mathcal{F}_{\small{t-1}}$ = all information available at time $t-1$
-    }
+        \item Log Score Function
+
+        \begin{equation}
+        \hat{\omega}_{\text{opt}} =  \underset{\omega \in [0,1]}{\arg\max} \sum^R_{t=1}log \Big[\omega \ f_1(y_t) + (1-\omega) \ f_2(y_t)\Big]
+        \end{equation}
+
+        \[f_1(y_t) \equiv f_1(y_t |\mathcal{F}_{\small{t-1}}, \hat\theta_1)\]
+        \[f_2(y_t) \equiv f_2(y_t|\mathcal{F}_{\small{t-1}}, \hat\theta_2)\]
+        
     \end{itemize}
 
 \end{frame}
 
 
 
-\begin{frame}{Mean Squared Forecast Error}
-    The Mean squared forecast error (MSFE) of an individual model is the average squared difference between the actual value, $y_t$, and the predicted value, $\hat y_t$, at each time point over the in-sample period $R$:
+\begin{frame}{Point Forecast Combination}
+
+    The mean squared forecast error (MSFE) over the out-of-sample period ($P$) is:
 
     \begin{equation}
-    \label{eqn:MSFE1}
-    MSFE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
-    \end{equation}  
+    \label{eqn:MSFE3}
+    MSFE = \frac{1}{P} \sum^T_{t = R+1} \Big[y_t - (\hat{\omega}_{\text{opt}} \ \hat y_{1t} + (1-\hat{\omega}_{\text{opt}}) \ \hat y_{2t}) \Big]^2.
+    \end{equation}
 
 \end{frame}
 
 
 
-\begin{frame}{Log Predictive Score Function}
+\begin{frame}{Density Forecast Combination}
 
-\small{Following \cite{GA11}, we measure the accuracy of the density forecasts with the log predictive score function over the forecast horizon $h=1,2,...,P$ (i.e., the out-of-sample period), which is defined as:}
+    The log predictive score over the out-of-sample period ($P$) is:
 
-\vspace{-2mm}
+    \begin{equation}
+    \label{eqn:LS3}
+    LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ \hat f_1(y_t) + (1- \hat{\omega}_{\text{opt}}) \ \hat f_2(y_t)\Big].
+    \end{equation}
 
-\begin{equation}
-    LS = \sum^P_{h=1} log \Big[ \hat{\omega}_{\text{opt}} f_1(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}}, \hat\theta_1) + (1- \hat{\omega}_{\text{opt}}) \ f_2(y_{\small{R+h}}| \mathcal{F}_{\small{R+h-1}}, \hat\theta_2)\Big].
-\end{equation}
-
-
-\vspace{2mm}
-
-\begin{itemize}
-\small{
-    \item $P$ = the out-of-sample period
-    \item $h$ = the forecast horizon ($h>0$)
-    \item $\mathcal{F}_{\small{R+h-1}}$ = all information available at time ($R+h-1$)
-    \item $\hat\theta$ = parameter estimates
-    }
-\end{itemize}
+    \[f_1(y_t) \equiv f_1(y_t |\mathcal{F}_{\small{t-1}}, \hat\theta_1)\]
+    \[f_2(y_t) \equiv f_2(y_t|\mathcal{F}_{\small{t-1}}, \hat\theta_2)\]
 
 \end{frame}
 

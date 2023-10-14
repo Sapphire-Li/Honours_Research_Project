@@ -42,9 +42,7 @@
 \chapter*{Abstract}\label{abstract}}
 \addcontentsline{toc}{chapter}{Abstract}
 
-The abstract should outline the main approach and findings of the thesis and must not be more than 500 words.
-
-Finish up afterwards.
+This thesis demonstrates that the forecast combination puzzle is tightly related to the in-sample fit of constituent models. The forecast combination puzzle refers to the empirically common finding that an equally-weighted forecast combination often outperforms an optimally-weighted forecast combination under a given sophisticated scheme. It can be certain that when constituent models have similar in-sample fit, the puzzle will be in evidence; it is ambiguous otherwise. We analytically show the relationship between the estimated optimal weight and the constituent models in point combinations using mean squared error and empirically confirm these findings in density combinations using log scores. As an additional contribution, the puzzle is shown to be evident in both pure time series and pure cross-sectional settings.
 
 \newpage
 
@@ -71,11 +69,11 @@ Forecast accuracy is of critical concern for forecasters and decision makers. Th
 
 Forecast combination methods, in general, involve combining multiple forecasts generated from individual or constituent models based on a rule or weighting scheme. Every scheme has its own objective function for producing the ``best'' forecast combination, along with the optimal weight assigned to each model. This process can sometimes capture more meaningful characteristics of the true data generating process than using a single model, and allows us to combine the best features of different models within a single framework. Researchers have examined a variety of combination methods for both point and density forecasts over the past 50 years, see \textcite{WHLK22} for a modern literature review.
 
-In most time series setting under which forecast combinations are employed, a striking empirical phenomenon is often observed, coined by \textcite{SW04}, as the ``forecast combination puzzle''. The puzzle is encapsulated by the fact that ``theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts'' \autocite{WHLK22}. In other words, complex weighting schemes are designed to improve in-sample accuracy, so these refined forecast combinations should perform better out-of-sample in theory. However, the mean of the contemporaneous forecasts appears to be more robust in practice than forecasts combined through complicated weighting schemes. This finding has been continuously reaffirmed by extensive literature reviews and papers \autocites[e.g.,][]{MACF82,C89,MSA18,MSA20}, and the simple averaging naturally becomes a benchmark.
+In most time series setting under which forecast combinations are employed, a striking empirical phenomenon is often observed, coined by \textcite{SW04}, as the ``forecast combination puzzle''. The puzzle is encapsulated by the fact that ``theoretically sophisticated weighting schemes should provide more benefits than the simple average from forecast combination, while empirically the simple average has been continuously found to dominate more complicated approaches to combining forecasts'' \autocite{WHLK22}. In other words, complex weighting schemes are designed to improve in-sample accuracy, so these refined forecast combinations should perform better out-of-sample in theory. However, the mean of the contemporaneous forecasts appears to be more robust in practice than forecasts combined through complicated weighting schemes. This finding has been continuously reaffirmed by extensive literature reviews and papers \autocites[e.g.,][]{MACF82,C89,MSA18,MSA20}, and the simple averaging naturally becomes a benchmark. In this thesis, the forecast combination puzzle is loosely defined as the forecast accuracy between the optimal combination and the simple average being small. We allow the optimal combination to be slightly higher than the simple average and treat it as evidence of the puzzle. As their forecast accuracy is not too different, using either combination method will not make a huge difference, except in special circumstances where a small change in accuracy matters a lot.
 
-The literature explains the puzzle mainly in three aspects: the estimation uncertainty in complicated weighting schemes \autocite{SW98,SW04,SW09}, the bias and inefficiency in the Mean Squared Forecast Error (MSFE) function \autocite{E11,CMVW16}, and the sampling variability of the forecasts induced via estimation of the constituent model forecasts \autocite{ZMFP22,FZMP23}. However, all of these explanations implicitly assume that the puzzle will be in evidence when combining forecasts, regardless of the choice of constituent models or the weighing scheme. They overlook the possibility that complicated combination methods can perform much better than the simple average in some cases. In order to make rigorous explanation statement, we systematically explore the determinants behind the presence of the puzzle. Even though there is a widespread literature among different pure time series settings, no attention appears to have been given to the cross-sectional setting. Therefore, we will investigate this in both time series and cross-sectional settings using empirical and simulated data respectively.
+The literature explains the puzzle mainly in three aspects: the estimation uncertainty in complicated weighting schemes \autocite{SW98,SW04,SW09}, the bias and inefficiency in the Mean Squared Forecast Error (MSFE) function \autocite{E11,CMVW16}, and the sampling variability of the forecasts induced via estimation of the constituent model forecasts \autocite{ZMFP22,FZMP23}. However, all of these explanations implicitly assume that the puzzle will be in evidence when combining forecasts, regardless of the choice of constituent models or the weighing scheme. They overlook the possibility that complicated combination methods can perform much better than the simple average in some cases. In order to make a rigorous explanation statement, we systematically explore the determinants behind the presence of the puzzle. Even though there is a widespread literature among different pure time series settings, no attention appears to have been given to the cross-sectional setting. Therefore, we will investigate this in both time series and cross-sectional settings using empirical and simulated data respectively.
 
-Follow the idea of ``linear opinion pool'' \autocite{HM07,GA11} and consider a simple case of two-model combination, our initial conjecture is that the presence of the puzzle is highly related to the in-sample fit of two constituent models. When constituent models have similar in-sample fit, the puzzle will be in evidence. Otherwise, the presence of the puzzle is uncertain. Intuitively, the model in-sample performance determines the behavior of forecasts, so forecasts produced by two similarly performed models will not differ much, leading the estimated optimal weight to be around a half. Therefore, it is reasonable to use the simple average method given that the mean of two forecasts is a good estimate and, more importantly, the forecast variance will be halved with no extra parameter estimation. Consequently, we should expect a small difference of the forecast accuracy between the simple averaging and the sophisticated weighting scheme, which is known as the forecast combination puzzle. On the contrary, if two models have distinct in-sample fit, the optimal forecast combination will give more weight to the better one and therefore both weights will be far away from a half. The presence of the puzzle now becomes ambiguous because there are two possible situations in this case, one is that the simple average forecast perform much better than the optimal combination forecast, and the other one is the opposite. By definition, the puzzle is apparently evident in the first case and hard to argue in the second case. Table \ref{tab:1} summarizes the hypothesis. Two constituent models are evaluated based on their in-sample performance in a relative sense, and are also allowed to perform equivalently \texttt{Bad} for different reasons.
+Following the idea of ``linear opinion pool'' \autocite{HM07,GA11} and considering a simple case of two-model combination, our initial conjecture is that the presence of the puzzle is highly related to the in-sample fit of two constituent models. When constituent models have similar in-sample fit, the puzzle will be in evidence. Otherwise, the presence of the puzzle is uncertain. Intuitively, the model in-sample performance greatly affects the behavior of forecasts, so forecasts produced by two similarly performed models will not differ much, leading the estimated optimal weight to be around a half. Therefore, it is reasonable to use the simple average method given that the mean of two forecasts is a good estimate and, more importantly, the forecast variance will be halved with no extra parameter estimation. Consequently, we should expect a small difference of the forecast accuracy between the simple averaging and the sophisticated weighting scheme, which is known as the forecast combination puzzle. On the contrary, if two models have distinct in-sample fit, the optimal forecast combination will give more weight to the better one and therefore both weights will be far away from a half. The presence of the puzzle now becomes ambiguous because there are two possible situations in this case, one is that the simple average forecast perform much better than the optimal combination forecast, and the other one is the opposite. By definition, the puzzle is apparently evident in the first case and hard to argue in the second case. Table \ref{tab:1} summarizes the hypothesis. Two constituent models are evaluated based on their in-sample performance in a relative sense, and are also allowed to perform equivalently \texttt{Bad} for different reasons.
 
 \begin{table}[ht]
 \centering
@@ -85,7 +83,7 @@ Follow the idea of ``linear opinion pool'' \autocite{HM07,GA11} and consider a s
 \multirow{2}{*}{$M_1$} & Good & $\surd$    & $?$ \\
                        & Bad  & $?$        & $\surd$
 \end{tabular}
-\caption{The first row and the first column refer to two constituent models in a combination, $M_1$ and $M_2$. ``Good`` means that the model fits the data well, whereas ``Bad`` denotes that the model fails to capture some important features of the data. The ``$\surd$`` indicates the presense of the forecast combination puzzle, while ``$?$`` implies that the presense of the puzzle is uncertain.}
+\caption{The first row and the first column refer to two constituent models in a combination, $M_1$ and $M_2$. ``Good`` means that the model fits the data well, whereas ``Bad`` denotes that the model fails to capture some important features of the data. The ``$\surd$`` indicates the presence of the forecast combination puzzle, while ``$?$`` implies that the presence of the puzzle is uncertain.}
 \label{tab:1}
 \end{table}
 
@@ -98,10 +96,6 @@ The thesis follows two common weighting schemes for \texttt{two\ model} pools (S
 \hypertarget{method}{%
 \chapter{Methodology}\label{method}}
 
-We will empirically investigate the effect of in-sample performance between two constituent models on the presence of the forecast combination puzzle. Two main scenarios are considered: a small difference of the in-sample accuracy between the models in the pool and a big difference between their in-sample accuracy. The comparison will mainly rely on the log likelihood or the \(R^2\), which will be explained shortly.
-
-Next is to estimate the unknown parameters of the constituent models and the weight in a single step, and to compare the accuracy of forecasts based on these combinations against the usual combinations process, as well as the equally weighted combination. To measure differences between these forecasts, we will eventually employ forecast accuracy tests, of the type derived in \textcite{W96}, which measure out-of-sample differences between forecasts.
-
 In the literature, there are several definitions of combinations. We focus on the combination of forecasts from non-nested models for a given dataset, which is commonly performed in two stages:
 
 \begin{enumerate}
@@ -109,14 +103,14 @@ In the literature, there are several definitions of combinations. We focus on th
 \item
   producing separate point or probabilistic forecasts for the next time point using observed data and constituent models, and
 \item
-  combining forecasts based on one of the accuracy criteria.
+  combining forecasts based on a given accuracy criteria.
 \end{enumerate}
 
-Specifically, we only consider the combination of two individual forecasts, which allows us to delve into interesting and unexplained findings through fast data manipulation.
+Specifically, we only consider the combination of two individual forecasts, i.e., two constituent models, which allows us to delve into interesting and unexplained findings through fast and relative simple data manipulation.
 
-Before explaining further details, the following notation will be used throughout the paper. An observed time series \(y_t\) with a total of \(T\) observations will be divided proportionally into two parts, an in-sample period \(R\) and an out-of-sample period \(P\). The realization of a target variable \(y\) at time \(t\) is denoted as \(y_t\). Its future values after the in-sample period is denoted as \(y_{\small{R+h}}\), where \(h\) is the forecast horizon and \(h>0\). The information set at time t, \(\mathcal{F}_t\), is comprised of all observed (and known) realizations of \(y\) up to time t, i.e., \(\mathcal{F}_t = \{y_1, y_2, .., y_t\}\).
+Before explaining details, the following notation will be used throughout the paper. An observed time series \(y_t\) with a total of \(T\) observations will be divided proportionally into two parts, an in-sample period \(R\) and an out-of-sample period \(P\). The realization of a target variable \(y\) at time \(t\) is denoted as \(y_t\). Its future values after the in-sample period is denoted as \(y_{\small{R+h}}\), where \(h\) is the forecast horizon and \(h>0\). The information set at time t, \(\mathcal{F}_t\), is comprised of all observed (and known) realizations of \(y\) up to time t, i.e., \(\mathcal{F}_t = \{y_1, y_2, .., y_t\}\).
 
-A parametric model \(M\) determines the conditional probability density for \(y_t\), denoted by \(f(y_t|\mathcal{F}_{t-1}, \theta_M, M)\), given unknown parameters \(\theta_M\) and all the past information \(\mathcal{F}_{t-1}\). The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., \(\hat\theta_M = \underset{\theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)\). Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for out-of-sample procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best in-sample accuracy.
+A parametric model \(M\) determines the conditional probability density for \(y_t\), denoted by \(f(y_t|\mathcal{F}_{t-1}, \theta_M, M)\), given unknown parameters \(\theta_M\) and all the past information \(\mathcal{F}_{t-1}\). The choice and specification of constituent models vary by the features of the in-sample data. For each model, the error term is assumed to be independent and normally distributed so that the Maximum Likelihood Estimation (MLE) method can be applied to generate the estimators of unknown parameters, i.e., \(\hat\theta_M = \underset{\theta_M \in \Theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, M)\). Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for out-of-sample procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best in-sample accuracy.
 
 \hypertarget{density-combinations}{%
 \section{Density combinations}\label{density-combinations}}
@@ -128,33 +122,33 @@ Consider the case of only two competing models, which we identify through their 
 
 \begin{equation}
 \label{eqn:LC1}
-f(y_t) = \omega \ f_1(y_t | \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) f_2(y_t | \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)
+f_{\omega}(y_t) = \omega \ f_1(y_t | \mathcal{F}_{t-1}, \theta_{M1}, M_1) + (1-\omega) f_2(y_t | \mathcal{F}_{t-1}, \theta_{M2}, M_2)
 \end{equation}
 
-where \(\omega\) is the non-negative weight allocated to the probability density derived from the first model. Through this construction, the sum of the model weights is fixed at 1, which is a necessary and sufficient condition for \(f(y_t)\) to be a proper density function \autocite{GA11}. In addition to producing point forecasts, density forecasts can offer forecasters or decision markers a comprehensive view of the target variable (see section 2.6.1. of \textcite{FTP22} for related contributions).
+where \(\omega \in [0,1]\) is the non-negative weight allocated to the probability density derived from the first model. Through this construction, the sum of the model weights is fixed at 1, which is a necessary and sufficient condition for \(f(y_t)\) to be a proper density function \autocite{GA11}. In addition to producing point forecasts, density forecasts can offer forecasters or decision markers a comprehensive view of the target variable (see section 2.6.1. of \textcite{FTP22} for related contributions).
 
 \hypertarget{log-scoring-rules}{%
 \subsection{Log scoring rules}\label{log-scoring-rules}}
 
-Following the literature on density evaluation, our initial analysis will focus on using the log score to measure the accuracy of our density forecasts; see, e.g., \textcite{GA11} for a discussion on log score and its use in density forecasting. For each individual model \(M\), the log score over the sample \(t = 1, \dots, T\) is:
+Following the literature on density evaluation, our initial analysis will focus on using the log score to measure the accuracy of our density forecasts; see, e.g., \textcite{GA11} for a discussion on log score and its use in density forecasting. For each individual model \(M\), the log score over the in-sample period is:
 
 \begin{equation}
 \label{eqn:LS1}
-LS = \sum^T_{t=1} log \ f(y_t| \mathcal{F}_{t-1}, \hat\theta_M, M).
+LS = \sum^R_{t=1} log \ \hat f(y_t| \mathcal{F}_{t-1}, \hat\theta_M, M).
 \end{equation}
 
-The ``optimal'' linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over the in-sample observations \(y_t\), \(t = 1, 2, \dots, R\),
+The ``optimal'' linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over \(R\) observations,
 
 \begin{equation}
 \label{eqn:LS2}
-\hat{\omega}_{\text{opt}} = \underset{\omega}{\arg\max} \sum^R_{t=1} log \Big[ \omega \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+\hat{\omega}_{\text{opt}} =  \underset{\omega \in [0,1]}{\arg\max} \sum^R_{t=1} log \Big[ \omega \ \hat f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) \ \hat f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
 \end{equation}
 
 Thus, the log predictive score over the out-of-sample period \(t = R+1, R+2, \dots, T\) is:
 
 \begin{equation}
 \label{eqn:LS3}
-LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{\omega}_{\text{opt}}) \ f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ \hat f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{\omega}_{\text{opt}}) \ \hat f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
 \end{equation}
 
 \hypertarget{point-combinations}{%
@@ -165,55 +159,48 @@ Although our main focus is the density forecast combination, to simplify certain
 \hypertarget{linear-combination}{%
 \subsection{Linear combination}\label{linear-combination}}
 
-Similar to the density case, point predictions from two constituent models, \(\hat y_{1t}\) and \(\hat y_{2t}\), are aggregated linearly:
+Similar to the density case, points from two constituent models, \(y_{1t}\) and \(y_{2t}\), are aggregated linearly:
 
 \begin{equation}
 \label{eqn:PC1}
-\hat y_t = w \ \hat y_{1t} + (1-w) \ \hat y_{2t}
+y_t({\omega}) = \omega \ y_{1t} + (1-\omega) \ y_{2t}
 \end{equation}
 
-where \(\omega\) is the non-negative weight allocated to the point prediction generated from the first model.
+where \(\omega\in [0,1]\) is the non-negative weight allocated to the point forecast generated from the first model.
 
 \hypertarget{mean-squared-forecast-error}{%
 \subsection{Mean squared forecast error}\label{mean-squared-forecast-error}}
 
-The MSFE of an individual model is the average squared difference between the actual value, \(y_t\), and the predicted value, \(\hat y_t\), at each time point over the in-sample period \(R\):
+The mean squared error (MSE) of an individual model is the average squared difference between the actual value, \(y_t\), and the predicted value, \(\hat y_t\), at each time point over the in-sample period \(R\):
 
 \begin{equation}
-\label{eqn:MSFE1}
-MSFE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
+\label{eqn:MSE1}
+MSE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
 \end{equation}
 
-The lower the MSFE, the higher the accuracy of the forecast. Therefore, the ``optimal'' set of weights satisfies that it minimizes the MSFE of the point forecast combination among all other possible sets over the training period:
+The lower the MSE, the higher the accuracy of the forecast. Therefore, the ``optimal'' set of weights satisfies that it minimizes the MSE of the point forecast combination among all other possible sets over \(R\) observations:
 
 \begin{equation}
-\label{eqn:MSFE2}
-\hat{\omega}_{\text{opt}} = \underset{\omega}{\arg\min} \frac{1}{R} \sum^R_{t=1} \omega \ \hat y_{1t} + (1-\omega) \ \hat y_{2t}.
+\label{eqn:MSE2}
+\hat{\omega}_{\text{opt}} = \underset{\omega \in [0,1]}{\arg\min} \frac{1}{R} \sum^R_{t=1} \Big[y_t - (\omega \ \hat y_{1t} + (1-\omega) \ \hat y_{2t})\Big]^2.
 \end{equation}
 
 Consequently, the MSFE over the out-of-sample period \(t = R+1, R+2, \dots, T\) is:
 
 \begin{equation}
 \label{eqn:MSFE3}
-MSFE = \frac{1}{P} \sum^T_{t = R+1} \hat{\omega}_{\text{opt}} \ \hat y_{1t} + (1-\hat{\omega}_{\text{opt}}) \ \hat y_{2t}.
+MSFE = \frac{1}{P} \sum^T_{t = R+1} \Big[y_t - (\hat{\omega}_{\text{opt}} \ \hat y_{1t} + (1-\hat{\omega}_{\text{opt}}) \ \hat y_{2t}) \Big]^2.
 \end{equation}
-
-\hypertarget{goodness-of-fit}{%
-\section{Goodness-of-fit}\label{goodness-of-fit}}
-
-One well-known way of quantifying the fit of a classical linear regression model is its coefficient of determination (R-squared or \(R^2\)). \(R^2\) represents the proportion of explained variation and is often interpreted as the sample variation of the dependent variable explained by regressors in the model. Details and formulas are elaborated in Chapter 2-3c of \textcite{W15}.
-
-For example, it is known that the in-sample fit of a linear regression model can be represented by \(R^2\), which is therefore a suitable measure to determine \texttt{Good} and \texttt{Bad} models in this context.
 
 \hypertarget{empirical-results}{%
 \chapter{Empirical Results}\label{empirical-results}}
 
 \hypertarget{sp500}{%
-\section{Pure time series setting (S\&P 500)}\label{sp500}}
+\section{Daily time series (S\&P 500)}\label{sp500}}
 
 Reconsidering the example in Section 3 of \textcite{GA11}, the data we use is the daily Standard and Poor's (S\&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total), retrieved from Federal Reserve Economic Data \autocite{SP500}. The S\&P 500 index dataset has a total of 2519 (\(T\)) observations and is partitioned into two periods with a rough proportion. The in-sample period contains the first 60\% of the data (\(R = 1511\)), which is used to estimate all unknown parameters, including the optimal weight. The remaining 40\% (\(P = 1008\)) becomes the out-of-sample period to evaluate the forecast performance.
 
-We will investigate the presence of the forecast combination puzzle when both models fit the training set well and when one of the model badly fit the data. Constituent models are based on common classes of linear time series models: autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors. Detailed model specifications for each case will be elaborated in the Appendix.
+We will investigate the presence of the forecast combination puzzle when both models fit the training set well and when one of the model badly fit the data. Constituent models are based on common classes of linear time series models: autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors (LR). Detailed model specifications for each case will be elaborated in the Appendix.
 
 We choose three predictive models to study the performance of density predictions across sets of \texttt{two-model} pools. Each of the \(j\) predictive model has a conditional Gaussian density, which takes the form \(f^{(j)}(y)=f_j(y_t|\mathcal{F}_{t-1})=N\{y_t; \mu_j, \sigma^2_j\}\), where \(N\{x; \mu, \sigma^2\}\) denotes the normal probability density function evaluated at value \(x\) with mean \(\mu\) and variance \(\sigma^2\). The notation \(\mathcal{F}_{t-1}\) denotes all information available at time \(t-1\), and we assume that the conditional mean and variance of the models are, up to unknown parameters, known at time \(t-1\).
 
@@ -229,37 +216,24 @@ To reduce the level of variability, we take a natural logarithm of the S\&P 500 
 \label{fig:nonstat}
 \end{figure}
 
-Figure \ref{fig:nonstat} suggests that the forecast combination puzzle is evidenced in all three cases, where the simple average performs better out-of-sample than the optimal combination to different degrees. However, the difference in the log predictive score between two combination methods is varying for each case, and is very likely to be influenced by the in-sample fit of the constituent models. Relevant values are calculated and presented in Table \ref{tab:comparison1}. It is noticeable that when both models fit the data equally well, i.e., a small difference in the in-sample log score, the prediction accuracy of optimal and simple average approaches is very close. Meanwhile, the optimal forecast combination with a significant gap between the individual in-sample fit ends up performing worse than the mean of forecast densities.
+Figure \ref{fig:nonstat} suggests that the forecast combination puzzle is evidenced in all three cases, i.e., the simple average performs better than the optimal combination. It is noticeable that the accuracy differences are different. For example, the accuracy difference in P(ARIMA,LR; 0.41) is much smaller than that in other two pools. This is tightly related to the in-sample fit of the constituent models, which can be represented by the log likelihood value. Table \ref{tab:nonfit} illustrates the log likelihood values of constituent models in each pool and the absolute difference.
+
+Linking it with our preliminary conjecture in Table \ref{tab:1}, P(ARIMA,ETS; 0.65) can be viewed as a (B,G) case where the ARIMA model has a much better in-sample fit than the ETS mode. Similarly, we have a (G,B) case for P(ETS,LR; 0.21) since the LR model performs much better than the ETS model. P(ARIMA,LR; 0.41), on the other hand, indicates the (G,G) case where two models fit the in-sample data equally well.
 
 \begin{table}[ht]
   \centering
     \begin{tabular}{l|ccc}
     \toprule
-                                      &    P(ARIMA,ETS; 0.65)     &   P(ARIMA,LR; 0.41)    &    P(ETS,LR; 0.21)   \\
+                                    & P(ARIMA,ETS; 0.65) & P(ARIMA,LR; 0.41) & P(ETS,LR; 0.21) \\  
     \midrule
-    In-sample log score difference    &   5.8989    &   1.2718    &   7.1707   \\
-    Optimal versus average            &   9.9569    &   0.2268    &  19.9928   \\
-    Presence of the puzzle            &   Yes       &   Yes       &   Yes      \\
+    First Model Log Likelihood      &     5113.694       &      5113.694     &   1725.137      \\
+    Second Model Log Likelihood     &     1725.137       &      5116.014     &   5116.014      \\
+    Log Likelihood Difference       &     3388.556       &       2.320       &   3390.876      \\
+    Type                            &       (G,B)        &       (G,G)       &     (B,G)       \\
+    Presence of the puzzle          &       Yes          &        Yes        &     Yes         \\
     \bottomrule
     \end{tabular}
-  \caption{The first row corresponds to each pair of combination in Figure \ref{fig:nonstat}. ``In-sample log score difference`` denotes the absolute difference of the log score over the training period between two models, which can be viewed as an informal accuracy measure of in-sample fit. ``Optimal versus average`` shows the absolute difference in log predictive score between the optimal combination and the simple average.}
-  \label{tab:comparison1}
-\end{table}
-
-\begin{table}[ht]
-  \centering
-    \begin{tabular}{l|ccc}
-    \toprule
-                                      &    P(ARIMA,ETS; 0.65)     &   P(ARIMA,LR; 0.41)    &    P(ETS,LR; 0.21)   \\  
-    \midrule
-    First Model Log Likelihood        &     5113.694       &    5113.694    &   1725.137     \\
-    Second Model Log Likelihood       &     1725.137       &    5116.014    &   5116.014     \\
-    Log Likelihood Difference         &     3388.556       &     2.320      &   3390.876     \\
-    Optimal Weight                    &       0.65         &      0.41      &     0.21       \\
-    Puzzle                            &       Yes          &      Yes       &     Yes        \\
-    \bottomrule
-    \end{tabular}
-  \caption{``Log Likelihood Difference`` represents the absolute difference of in-sample fit between two models, which is evaluated by the log likelihood. ``Optimal Weight`` is the estimated weight assigned to the first model in each combination. ``Puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
+  \caption{``Log Likelihood Difference`` represents the absolute difference of in-sample fit between two models, which is evaluated by the log likelihood. ``Type`` refers to the case of each two-model pool in the conjecture table. ``Presence of the puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
   \label{tab:nonfit}
 \end{table}
 
@@ -277,12 +251,12 @@ One possible explanation could be that the ETS model fits the training set poorl
 
 Continuing with the same dataset, we now take a first difference of the log of S\&P 500 index, to construct log-returns, and then fit this covariance stationary series. A series is said to be covariance stationary when it has constant mean and variance, and its covariance depends on the time interval only.
 
-Consider two candidate models: a Gaussian ARMA(1,1) model and a classical linear regression model with intercept only and ARMA(1,1) errors. To differentiate with the first linear regression model, it is named as Linear Regression 2 in the combination. Figure \ref{fig:stat} illustrates that two constituent models have a very similar in-sample log score, only 0.0011 difference, and the puzzle is evidenced given only 0.1282 accuracy difference between two forecast combination approaches.
+Consider two candidate models: a Gaussian ARMA(1,1) model and a classical linear regression model with intercept only and ARMA(1,1) errors. To differentiate with the first linear regression model, it is named as Linear Regression 2 (LR2) in the combination. Figure \ref{fig:stat} illustrates that two constituent models have a very similar in-sample log score with only 0.0011 difference, and the puzzle is evidenced by the only 0.1282 accuracy difference between two forecast combination approaches. Strictly speaking, the forecast accuracy of the optimally-weighted combination (2349.764) is slightly superior to that of equally-weighted combination (2349.636). However, unless in special circumstances where accuracy is crucial, this accuracy difference is not too big to make any large impact on the decision. In addition, using equal weights is much more efficient than estimating optimal weights through any weighting scheme, given a similar effectiveness. Therefore, we adopt a loose definition of the forecast combination puzzle and refer to the two cases as the puzzle where 1) the simple average performs much better than the optimal combination; and 2) the forecast accuracy of the two methods is similar. Comparing the log likelihood of two models in Table \ref{tab:statfit}, the similar in-sample performance is another evidence of having a (G,G) case with the puzzle in evidence.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.6]{figures/SP500_stationary.pdf}
-\caption{Log predictive score of S\&P 500 index predictive densities in two-model pools over the in-sample (left) and the out-of-sample (right) period. The x-axis represents the weight assigned on the ARMA(1,1) model and the y-axis indicates the log predictive score. The meanings of colored dots remain the same as before.}
+\caption{Log predictive score of S\&P 500 log returns predictive densities in two-model pools over the in-sample (left) and the out-of-sample (right) period. The x-axis represents the weight assigned on the ARMA(1,1) model and the y-axis indicates the log predictive score. The meanings of colored dots remain the same as before.}
 \label{fig:stat}
 \end{figure}
 
@@ -290,23 +264,23 @@ Consider two candidate models: a Gaussian ARMA(1,1) model and a classical linear
   \centering
     \begin{tabular}{l|ccc}
     \toprule
-                                      &           P(ARMA,LR;0.69)  \\  
+                                    &     P(ARMA,LR2;0.69)    \\  
     \midrule
-    First Model Log Likelihood        &               5109.8071               \\
-    Second Model Log Likelihood       &               5109.8054               \\
-    Log Likelihood Difference         &              0.001645751              \\
-    Optimal Weight                    &                0.69                   \\
-    Puzzle                            &                 Yes                   \\
+    First Model Log Likelihood      &         5109.8071       \\
+    Second Model Log Likelihood     &         5109.8054       \\
+    Log Likelihood Difference       &          0.0016         \\
+    Type                            &          (G,G)          \\
+    Presence of the puzzle          &           Yes           \\
     \bottomrule
     \end{tabular}
-  \caption{``Log Likelihood Difference`` represents the absolute difference of in-sample fit between two models, which is evaluated by the log likelihood. ``Optimal Weight`` is the estimated weight assigned to the first model in each combination. ``Puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
+  \caption{``Log Likelihood Difference`` represents the absolute difference of in-sample fit between two models, which is evaluated by the log likelihood. ``Type`` refers to the case of two models in the conjecture table. ``Presence of the puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
   \label{tab:statfit}
 \end{table}
 
-This Section \ref{sp500} provides a little empirical evidence for our initial conjecture. When both models fit the data well, i.e., they are \texttt{Good} models, then the average density forecast performs almost the same as or slightly better than the optimal density forecast combination, indicating the presence of the forecast combination puzzle. If one model is \texttt{Bad} and the other is \texttt{Good}, then, at least, the puzzle can be evidenced.
+This Section \ref{sp500} provides some empirical evidence for our initial conjecture. When both models fit the data well, i.e., they are \texttt{Good} models, then the accuracy of the optimal density forecast combination is close to that of the average density forecast, indicating the presence of the forecast combination puzzle. If one model is \texttt{Bad} and the other is \texttt{Good}, then, at least, the puzzle can be evidenced.
 
-\hypertarget{pure-time-series-with-seasonality}{%
-\section{Pure time series with seasonality}\label{pure-time-series-with-seasonality}}
+\hypertarget{seasonal-time-series}{%
+\section{Seasonal time series}\label{seasonal-time-series}}
 
 With the purpose of further examining our conjecture as to when the puzzle will be in evidence, we now use a quarterly dataset to explore the relationship between the forecast combination puzzle and in-sample model fit. More specifically, we investigate cases where both models are both well-specified (good) or poorly-specified (bad). To simplify the analysis, we produce point forecasts and evaluate point combinations with MSFE.
 
@@ -315,14 +289,14 @@ The data considered is the recorded quarterly total number of unemployed individ
 \hypertarget{well-specified-models}{%
 \subsection{Well-specified models}\label{well-specified-models}}
 
-To ensure compatibility with seasonal component, we propose the Seasonal ARIMA (SARIMA) model and the ETS model: ARIMA(2,0,2)(0,1,1){[}4{]} with drift and ETS(A,A,A). The SARIMA is simply an ARIMA model with extra seasonal component. The first parenthesis is same as before. The second parenthesis represents the seasonal AR, integrated, and MA components respectively, separately by the comma. The number in the box bracket indicates the number of observations per year, i.e., the seasonal frequency. An intercept is included in the model. In the ETS model, the seasonal part is reflected by \texttt{S} and the third position in the parenthesis. Due to the log transformation, we have additive error, additive trend, and additive seasonality.
+To ensure compatibility with seasonal component, we propose the Seasonal ARIMA (SARIMA) model and the ETS model: ARIMA(2,0,2)(0,1,1){[}4{]} with drift and ETS(A,A,A). The SARIMA is simply an ARIMA model with extra seasonal component. The first parenthesis is same as the ARIMA model. The second parenthesis represents the seasonal AR, integrated, and MA components respectively, separately by the comma. The number in the box bracket indicates the number of observations per year, i.e., the seasonal frequency. An intercept is included in the model. In the ETS model, the seasonal part is reflected by \texttt{S} and the third position in the parenthesis. Due to the log transformation, we have additive error, additive trend, and additive seasonality.
 
-The forecast combination puzzle is evidenced when both models are good in Figure \ref{fig:sd}. The optimal forecast point combination has a MSFE of 0.000177 and the simple averaging forecast has a MSFE of 0.000178. The difference between them is negligible. Looking at the in-sample combination plot, two models fit the training set equally well with a difference of 0.00000053. These results exemplify that two \texttt{Good} models in a two-model pool will close to having the forecast combination puzzle.
+The forecast combination puzzle is evidenced in Figure \ref{fig:sd} since the accuracy difference between two combinations is negligible. The optimally-weighted point combination has a MSFE of 0.000177 and the equally-weighted forecast has a MSFE of 0.000178. Looking at the in-sample combination plot, two models fit the training set equally well, which can also be confirmed by the second column of Table \ref{tab:season}.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.5]{figures/EMPL.pdf}
-\caption{MSFE of predictive points in well-specified (left) and pooly-specified (right) two-model pools over the in-sample (top) and out-of-sample (bottom) period. The x-axis represents the weight assigned on the first model and the y-axis indicates the value of MSFE. The meanings of colored dots remain the same.}
+\caption{MSFE of predictive number of unemploymed people in well-specified (left) and pooly-specified (right) two-model pools over the in-sample (top) and out-of-sample (bottom) period. The x-axis represents the weight assigned on the first model and the y-axis indicates the value of MSFE. The meanings of colored dots remain the same.}
 \label{fig:sd}
 \end{figure}
 
@@ -331,95 +305,342 @@ The forecast combination puzzle is evidenced when both models are good in Figure
 
 One way of proposing a \texttt{Bad} model for a seasonal dataset is deliberately ignoring the seasonality in the model specification. Even so, we still try to fit the training set well with SARIMA and ETS models but only discarding their seasonal components: ARIMA(2,1,0) with an intercept and ETS(A,A,N).
 
-The right column of Figure \ref{fig:sd} illustrates that both models have a similar in-sample performance with a deviation of 0.00002175. Furthermore, Figure \ref{fig:sd} does reveal the forecast combination puzzle, as the simple average performs more superior than the optimal forecast combination with a lower MSFE.
-
 \begin{table}[ht]
   \centering
     \begin{tabular}{l|ccc}
     \toprule
                                       &   P(SARIMA,ETS;0.52)   &   P(ARIMA,ETS;0.87)  \\  
     \midrule
-    First Model Log Likelihood        &         321.4497       &        322.1642     \\
-    Second Model Log Likelihood       &         260.9102       &        231.9507     \\
-    Log Likelihood Difference         &         60.5395        &        90.2135      \\
-    Optimal Weight                    &           0.52         &          0.87       \\
-    Puzzle                            &           Yes          &          Yes        \\
+    First Model Log Likelihood        &         321.4497       &      322.1642        \\
+    Second Model Log Likelihood       &         260.9102       &      231.9507        \\
+    Log Likelihood Difference         &         60.5395        &      90.2135         \\
+    Type                              &          (G,G)         &       (B,B)          \\
+    Presence of the puzzle            &           Yes          &        Yes           \\
     \bottomrule
     \end{tabular}
-  \caption{``Log Likelihood Difference`` represents the absolute difference of in-sample fit between two models, which is evaluated by the log likelihood. ``Optimal Weight`` is the estimated weight assigned to the first model in each combination. ``Puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
+  \caption{``Log Likelihood Difference`` represents the absolute difference of in-sample fit between two models, which is evaluated by the log likelihood. ``Type`` refers to the case of two models in the conjecture table. ``Presence of the puzzle`` indicates whether the simple average is close to or outperforms the optimal forecast combination.}
   \label{tab:season}
 \end{table}
 
-In this case, we may claim that, regardless whether the constituent models capture all the features of the data, as long as they have similar in-sample fit, the forecast combination puzzle will be evidenced. As a result, even if we have two \texttt{Bad} models, if they have similar in-sample performance, we should expect to find the puzzle.
+The right column of Figure \ref{fig:sd} does reveal the forecast combination puzzle, as the equally-weighted combination performs more superior than the optimally-weighted forecast combination with a lower MSFE. Furthermore, the third column of Table \ref{tab:season} illustrates that both models have a similar in-sample performance. We may claim that, regardless whether the constituent models capture all the features of the data, as long as they have similar in-sample fit, the forecast combination puzzle will be evidenced. As a result, even if we have two \texttt{Bad} models, if they have similar in-sample performance, we should expect to find the puzzle.
+
+Under a mild definition of the forecast combination puzzle, the empirical evidence suggest that the puzzle is in evidence in all the cases. However, these examples are not enough to draw comprehensive conclusions. Also, one big challenge of working with empirical data is that the true DGP is unknown. Thus, a simulated pure cross-sectional data will be conducted to investigate situations where the optimal forecast combination is more accurate than the simple averaging. Compared with simulated time series data, there is no need to consider the dependence of observations, hence, is an easy starting point. As an additional contribution, it examines the presence of the forecast combination puzzle in the cross-sectional setting.
 
 \hypertarget{pure-cross-sectional-analysis}{%
 \chapter{Pure Cross-sectional Analysis}\label{pure-cross-sectional-analysis}}
 
-Given that the forecast combination can greatly improve the forecast accuracy, this idea of model combination can also be applied to the cross-sectional setting. In this section, a simulated cross-sectional dataset is designed to work out the analytical expression of the optimal weight in the regression setting and investigate the determinants of the puzzle. In order to get a closed form expression, we derive the formula in the MSE context. Density simulations will then be used to verify the applicability of the findings in the point combinations to the density combinations. Besides, it is less likely to obtain a closed form expression in the log scoring rules.
+Given that the forecast combination can greatly improve the forecast accuracy, this idea of model combination can also be applied to the pure cross-sectional setting for a counter-factual analysis. Besides, simulating cross-sectional data is simpler to work with than simulating time-series data with dependence. In this section, we derive an analytical closed-form expression of the optimal weight to investigate the determinants behind the puzzle. A simulation study is then conducted to evaluate and verify the applicability of findings in point combinations to density combinations.
 
-Compared with the real-life data, implementing simulation is easy to control and make interpretation given that the true DGP is known. Meanwhile, it is an effective way of validating our conjecture by freely changing the elements and looking for the forecast combination puzzle. In line with previous notations but in the cross-sectional setting, the subscript \texttt{t} will change to \texttt{i} to represent each individual observation.
+Compared with real-life data, implementing simulation is easy to control and interpret given that the true DGP is known. Meanwhile, it is an effective way of validating our conjecture by freely changing the elements and looking for the forecast combination puzzle. In line with previous notations, but in the cross-sectional setting, the subscript \texttt{t} will change to \texttt{i} to represent each individual observation.
 
 \hypertarget{model-setup}{%
 \section{Model Setup}\label{model-setup}}
 
 The true DGP is assumed to be a linear regression model with no intercept and only two exogenous and weakly correlated regressors, which satisfies all classical assumptions:
-
 \begin{equation}
 \label{eqn:DGP}
-y_i = \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i, \ \ \epsilon_i \stackrel{i.i.d}{\sim} N(\mu_{\epsilon},\sigma^2_{\epsilon}) \\
+y_i = \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i, \ \ \epsilon_i \stackrel{i.i.d}{\sim} N(0,\sigma^2_{\epsilon}) \\
 \end{equation}
-
 where \(i\) represents each observation.
 
-The forecasting models, or constituent models, are proposed as
+\newpage
 
-\begin{align}
-M_1: y_i &= \alpha_1 x_{1i} + e_{1i}, \ \ e_{1i} \stackrel{i.i.d}{\sim} N(\mu_{1},\sigma^2_1) \\
-M_2: y_i &= \alpha_2 x_{2i} + e_{2i}, \ \ e_{2i} \stackrel{i.i.d}{\sim} N(\mu_{2},\sigma^2_2).
-\end{align}
+The forecasting models, or constituent models, are proposed as
+\begin{align*}
+M_1: y_i &= \alpha_1 x_{1i} + e_{1i}, \ \ e_{1i} \stackrel{i.i.d}{\sim} N(0,\sigma^2_1) \\
+M_2: y_i &= \alpha_2 x_{2i} + e_{2i}, \ \ e_{2i} \stackrel{i.i.d}{\sim} N(0,\sigma^2_2).
+\end{align*}
 
 \hypertarget{op}{%
 \section{Optimal Weight (MSE)}\label{op}}
 
-Following the methodology in Section \ref{method}, the data will be divided into an in-sample period (R) for estimation and an out-of-sample period (P) for accuracy evaluation. As noted before, the estimated optimal weight, \(\hat\omega_{opt}\), will be generated over the first R number of observations.
-
-\hypertarget{formula-related-to-hatalpha-and-the-limit-result}{%
-\subsection{\texorpdfstring{Formula related to \(\hat\alpha\) (and the limit result)}{Formula related to \textbackslash hat\textbackslash alpha (and the limit result)}}\label{formula-related-to-hatalpha-and-the-limit-result}}
+Following the methodology in Section \ref{method}, the data will be divided into an in-sample period (R) for parameter estimation and an out-of-sample period (P) for accuracy evaluation. As noted before, the estimated optimal weight, \(\hat\omega_{opt}\), will be generated over the first R number of observations.
 
 To simplify the notation, we use the matrix form of above linear regression models, and obtain the formula of \(\hat\omega_{opt}\) under the MSE weighting scheme
-
-\begin{equation}
+\begin{equation*}
 \label{eqn:opt}
 \hat\omega_{opt} = \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2}
-\end{equation}
-
+\end{equation*}
 where \(\hat\alpha_1\) and \(\hat\alpha_2\) are the Ordinary Least Squares (OLS) estimators in \(M_1\) and \(M_2\) respectively.
 
-A more meaningful expression can be achieved by multiplying both sides with \(\frac{1}{R}\) and be simplified as
-
+A more meaningful expression can be achieved by multiplying \(\frac{1}{R}\) to both sides.
 \begin{equation}
-\hat\omega_{opt} = \frac{\hat\alpha_1'\text{cov}_R(x_1,x_1)\hat\alpha_1 - \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2}{\hat\alpha_1' \text{cov}_R(x_1,x_1)\hat\alpha_1 - 2\hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2 + \hat\alpha_2'\text{cov}_R(x_2,x_2)\hat\alpha_2}.
+\hat\omega_{opt} = \frac{\hat\alpha_1'\text{cov}_R(x_1,x_1)\hat\alpha_1 - \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2}{\hat\alpha_1' \text{cov}_R(x_1,x_1)\hat\alpha_1 - 2\hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2 + \hat\alpha_2'\text{cov}_R(x_2,x_2)\hat\alpha_2}
 \end{equation}
+where \(\text{cov}_R(x_j,x_k)\) is the sample covariance between regressors \(x_j\) and \(x_k\)
 
-In the classical linear regression setting, the OLS estimator is consistent when the sample size goes to infinity. That is, we should have \(\hat\alpha_1 \overset{p}{\to} \alpha_1\) and \(\hat\alpha_2 \overset{p}{\to} \alpha_2\) asymptotically. Consider the limit result, we have
-
+In the classical linear regression setting, the OLS estimator is consistent when the sample size goes to infinity. That is, we should have \(\hat\alpha_1 \overset{p}{\to} \alpha_1\) and \(\hat\alpha_2 \overset{p}{\to} \alpha_2\). Consider the limit result, we have
 \begin{equation}
 \label{eqn:limit}
 \hat\omega_{opt} \overset{p}{\to} \omega_\star = \frac{\alpha_1'\Sigma_{11}\alpha_1 - \alpha_1'\Sigma_{12}\alpha_2}{\alpha_1'\Sigma_{11}\alpha_1 - 2\alpha_1'\Sigma_{12}\alpha_2 + \alpha_2'\Sigma_{22}\alpha_2}
 \end{equation}
+where \(\omega_\star\) is the true value of the optimal weight, \(\Sigma_{jk}\) denotes the variance-covariance matrix of corresponding regressors \(x_j\) and \(x_k\). With the limit result \ref{eqn:limit}, we can easily work out the asymptotic determinants of having \(\omega_\star=\frac{1}{2}\) and then connect it with the presence of the puzzle. For \(\omega_\star=\frac{1}{2}\), it must be that \(\alpha_1'\Sigma_{11}\alpha_1 = \alpha_2'\Sigma_{22}\alpha_2\).
 
-where \(\omega_\star\) is the true value of the optimal weight, \(\Sigma_{jk}\) denotes the variance-covariance matrix of corresponding regressors \(x_j\) and \(x_k\).
+The equality suggests that there is a symmetrical relationship between two constituent model when the true optimal weight is exactly a half. It further confirms that the similar in-sample performance of two models will likely lead to the presence of the puzzle. Besides, any situation where this final equality is nearly satisfied will inevitably lead the optimal weight to be around a half. Then, the estimated optimal weight, \(\hat\omega_{opt}\), should be close to \(\frac{1}{2}\) when the training set is large enough, and then the puzzle is likely to be in evidence.
 
-With the limit result \ref{eqn:limit}, we can easily work out the asymptotic determinants of having \(\omega_\star=\frac{1}{2}\) and then connect it with the presence of the puzzle. For \(\omega_\star=\frac{1}{2}\), it must be that
+In addition, according to the relationship between \(\pmb \alpha\) and \(\pmb \beta\) in Appendix \ref{detail}, \(\alpha_1\) and \(\alpha_2\) will be close to \(\beta_1\) and \(\beta_2\), respectively, for a given small correlation between regressors. This suggests that the optimal weight interacts with the true data generating process and is therefore related to the true DGP.
 
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{figures/MSFE.pdf}
+\caption{MSFE of predictive points in a two-model pool over the in-sample (left) and the out-of-sample (right) period. The x-axis represents the weight assigned on $M_1$ and the y-axis indicates MSFE. The orange dot represents the optimally-weighted combination, while the blue dot indicates the equally-weighted combination.}
+\label{fig:msfe}
+\end{figure}
+
+Figure \ref{fig:msfe} illustrates one example of having \(\hat\omega_{opt}\) equal to 0.5 when \(N = 10000\), \(\beta_1=\beta_2=2\), \(Var(X_1)=Var(X_2)=1\), \(Cov(X_1,X_2)=0.3\) under the MSE weighting scheme. Both in-sample and out-of-sample curves look symmetric.
+
+\hypertarget{density-simulations}{%
+\section{Density Simulations}\label{density-simulations}}
+
+Applying the lesson from Section \ref{op} to density combinations and log scoring rules where we believe is not likely to get a closed-form expression, we empirically examine the applicability of findings from the point combinations. The initial set-up has 10000 (N) artificial cross-sectional observations generated from the equation \ref{eqn:DGP} with \(E[X_{1i}] = E[X_{2i}] = 0\), \(Var(X_{1i}) = Var(X_{2i}) = 1\), \(Cov(X_{1i}, X_{2i}) = 0.3\), \(\pmb{\beta} = (\beta_1, \beta_2)' = (2,2)'\), and \(\sigma^2_{\epsilon}=4\). Same as before, around 60\% of the data will be used for model estimation. The density forecast combinations will follow the construction of \texttt{two-model} pools and be evaluated using the log score.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{figures/LPS_10000.pdf}
+\caption{Two curves refer to the in-sample (left) and out-of-sample (right) performance of density combinations with artificial cross-sectional data based on the initial set-up. The x-axis represents the weight assigned on $M_1$ and the y-axis indicates the log score. The meanings of colored dots remain unchanged.}
+\label{fig:ss10000}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{figures/LPS_1000.pdf}
+\caption{Two curves refer to the in-sample (left) and out-of-sample (right) performance of density combinations with artificial cross-sectional data. The x-axis represents the weight assigned on $M_1$ and the y-axis indicates the log score. The meanings of dots remain unchanged.}
+\label{fig:ss1000}
+\end{figure}
+
+Using the same model specification in Figure \ref{fig:msfe} to construct the density forecast combination via the log score, \(\hat\omega_{opt}\) is now no longer a half in Figure \ref{fig:ss10000}. On the other hand, Figure \ref{fig:ss1000} shows that \(\hat\omega_{opt}\) is equal to 0.5 when \(N = 1000\), \(\beta_1=1.2\), \(\beta_2=-1.1\). This indicates that besides the magnitude of \(\pmb{\beta}\), the sign will also have an impact on \(\hat\omega_{opt}\), even in large samples (\(N = 50000\)). Therefore, we speculate that the optimal weight has a non-linear relationship with the proposed models under the log score weighting scheme.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.53]{figures/con_cases.png}
+\caption{The out-of-sample performance of density combinations with artificial cross-sectional data. The true DGP are in the bottom-right of individual plots. ``Optimal Weight`` shows the estimated optimal weight. The log predictive scores of optimally-weighted combination and equally-weighted combination are indicated by ``LPS`` and ``Simple Average`` respectively.}
+\label{fig:cases}
+\end{figure}
+
+In the regression setting, we evaluate the in-sample performance with \(R^2\), and then link with the conjecture in Table \ref{tab:1}. Four cases in Figure \ref{fig:cases} are selected to further validate different types of model combinations as empirical evidence. Clearly, the optimally-weighted combination outperforms the equally-weighted combination with higher forecast accuracy in the first two cases; hence, we do not have the forecast combination puzzle. After comparing the in-sample fit of constituent models with \(R^2\), these two pools are can be labelled as (G,B) and (B,G), respectively, as summarized in Table \ref{tab:cases}. This supports our preliminary conjecture that when two models have different in-sample performance, the presence of the puzzle is unclear, i.e., the puzzle will not always occur.
+
+\begin{table}[ht]
+  \centering
+    \begin{tabular}{l|cccc}
+    \toprule
+                              &    Case 1    &    Case 2   &    Case 3    &    Case 4   \\  
+    \midrule
+    $R^2$ of $M_1$            &    0.393     &    0.141    &    0.476     &    0.558    \\
+    $R^2$ of $M_2$            &    0.256     &    0.224    &    0.452     &    0.504    \\
+    $R^2$ Difference          &    0.138     &    0.083    &    0.024     &    0.053    \\
+    Type                      &    (G,B)     &    (B,G)    &    (B,B)     &    (G,B)    \\
+    Presence of the puzzle    &     No       &     No      &     Yes      &     No     \\
+    \bottomrule
+    \end{tabular}
+    \caption{``Difference`` is the absolute difference of in-sample $R^2$ between two models. ``Type`` refers to the case of two models in the conjecture table. ``Presence of the puzzle`` indicates whether the equally-weighted combination is close to or outperforms the optimally-weighted combination.}
+  \label{tab:cases}
+\end{table}
+
+Recall the relaxed definition of the forecast combination puzzle, the small accuracy difference is not defined, making it hard to decide whether the puzzle is evident or not. For example, cases 3 and 4 in Figure \ref{fig:cases} both illustrate a close distance between the optimal forecast combination and the simple average. Even the \(R^2\) of constituent models in each pool are similar, as indicated by Table \ref{tab:cases}. One possible solution is to formally test the statistical significance of the accuracy difference through the Diebold-Mariano Test \autocite{D15}. Unfortunately, it has been proven that the test is not appropriate as the test statistic will not follow a standard normal distribution using the two-stage estimation \autocite{FZMP23}. Another possible choice is deciding on an arbitrary value for the accuracy difference. It turns out that the magnitude of the log predictive score is tightly related to the sample size and assumptions about the error term in the true DGP. Hence, this method can be used when fixing the sample size and assumptions of the error term.
+
+Instead of the forecast accuracy, we can also look at the difference in \(R^2\). One possible rule of thumb is that when the absolute difference of \(R^2\) between two models is less than 0.05, i.e., two models have similar in-sample fit, then the two-model pool can be viewed as either the (G,G) or (B,B) case, and therefore the puzzle will be in evidence. Applying this to cases 3 and 4 in Table \ref{tab:cases}, case 3 is a (G,G) case where its \(R^2\) difference is 0.024, less than 0.05, whereas case 4 is a (G,B) case where its \(R^2\) difference is 0.053, slightly higher than 0.05. By using this rule of thumb, we can only be certain that the puzzle is evident in case 3 but not confident in case 4. In terms of the log likelihood, it is highly affected by the sample size, similar to the log predictive score. One possible way, however, is to normalize the difference of two log likelihoods by their sum based on the chosen constituent models. The heuristic is around 0.009, meaning that when the normalized difference is less than 0.009, two models have similar in-sample fit, and therefore the puzzle is likely to be in evidence.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+                       &      & \multicolumn{2}{c}{$M_2$} \\
+                       &      & Good       & Bad       \\
+\multirow{2}{*}{$M_1$} & Good & $\surd$    & $?$ \\
+                       & Bad  & $?$        & $\surd$
+\end{tabular}
+\caption{The first row and the first column refer to two constituent models, $M_1$ and $M_2$. ``Good`` and ``Bad`` denote the relative in-sample fit of constituent model. The ``$\surd$`` indicates the presence of the forecast combination puzzle, while ``$?$`` implies that the presence of the puzzle is ambiguous.}
+\label{tab:2}
+\end{table}
+
+This whole section provides a general idea of the relationship between the in-sample fit of constituent models and the presence of the puzzle in both point and density forecast combinations. Based on new empirical evidence, the conjecture table for a two-model pool remains the same but with updated definitions, as illustrated in Table \ref{tab:2}.
+
+\hypertarget{conclusion}{%
+\chapter{Conclusion}\label{conclusion}}
+
+This thesis develops a way of determining the presence of the forecast combination puzzle in a two-model pool. Empirical results suggest that when both constituent models have similar in-sample fit, the equally-weighted combination will either provide an equivalent or superior forecast accuracy to the optimally-weighted forecast combination for both point and density combinations. On the other hand, when the in-sample fit difference between two models is quite different, the presence of the puzzle is ambiguous.
+
+Importantly, we derive the relationship between the optimal weight and elements in the proposed models under the mean squared error scheme when using point combinations. According to the closed-form expression of the estimated optimal weight, it is obvious that it is tightly related with the sample size, the sign and magnitude of parameters in the constituent models, the sample variances of regressors, and the correlation between regressors. It can also be shown that a big difference in the in-sample performance of proposed models will move the estimated optimal weight away from a half (the equal weight), especially in a large sample case. Additionally, the optimal weight also interacts with the true DGP in a broad sense, which determines the estimated coefficients in the constituent models.
+
+Not surprisingly, these findings can be applied to density combinations under the log score scheme, where the estimated optimal weight is unlikely to have a closed-form expression. However, two constituent models have a symmetrical relationship when the population weight is equal to a half in the MSE case. It may not be the same case in the log score case based on some empirical evidence from the simulation.
+
+Working in the two-model pools provides an opportunity of exploring a variety of situations in a short period of time. The next challenging step should naturally be to investigate the multiple forecasts combination. It is also necessary to relax some of the restrict model assumptions and increase the complexity of the model structure in the simulation study. Under the mild definition of the forecast combination puzzle, it is hard to determine the significance of the accuracy difference between optimally-weighted combination and equally-weighted combination, given that neither the testing or an arbitrary choice will work for all cases. We leave them all to future research.
+
+\appendix
+
+\hypertarget{appendix}{%
+\chapter{Appendix}\label{appendix}}
+
+All codes are performed in R Statistical Software (version 4.2.1 (2022-06-23)). The packages used are \texttt{tidyverse} \autocite{tidy19}, \texttt{dplyr} \autocite{dplyr23}, \texttt{fpp3} \autocite{fpp23}, \texttt{gridExtra} \autocite{gridExtra}, and \texttt{mvtnorm} \autocite{GBMMLSH21}.
+
+\hypertarget{model-specification}{%
+\section{Model Specification}\label{model-specification}}
+
+The error term, \(\epsilon_t\), in each model is assumed to be independent and normally distributed with a zero mean and a constant variance. Each model is independent. Even if using the same notation for unknown parameters across models, the estimators are different.
+
+Exact formulas and explanations of these models can be found in \textcite{fpp3}. The formula of the conditional variance for the ETS(M,N,N) model is discussed in Chapter 6.3 of \textcite{HKOS08}.
+
+\hypertarget{nonstationary-sp-500-index}{%
+\subsection{Nonstationary S\&P 500 Index}\label{nonstationary-sp-500-index}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  ARIMA(1,1,1) model with an intercept of the natural logarithm of S\&P 500 index.
+  \begin{equation*}
+  log(y_t) = c + log(y_{t-1}) + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \epsilon_t + \theta_1\epsilon_{t-1}
+  \end{equation*}
+\item
+  ETS(M,N,N) model of the natural logarithm of S\&P 500 index.
+  \begin{align*}
+  log(y_t) &= \ell_{t-1} (1+\epsilon_t) \\
+  \ell_t &= \ell_{t-1} (1+\alpha \epsilon_t) \\
+  \end{align*}
+\item
+  A classical linear regression model of the natural logarithm of the S\&P 500 index and ARIMA(1,0,0) errors.
+  \begin{align*}
+  log(y_t) &= \beta_0 + \beta_1 t + u_t \\
+  u_t &= \phi_1 u_{t-1} + \epsilon_t
+  \end{align*}
+\end{enumerate}
+
+\hypertarget{stationary-sp-500-index}{%
+\subsection{Stationary S\&P 500 Index}\label{stationary-sp-500-index}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  ARMA(1,1) model with an intercept of the natural logarithm of S\&P 500 returns.
+  \begin{equation*}
+  log(y_t) - log(y_{t-1}) = c + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \epsilon_t + \theta_1\epsilon_{t-1}
+  \end{equation*}
+\item
+  A classical linear regression model of the natural logarithm of the S\&P 500 returns and ARMA(1,1) errors.
+  \begin{align*}
+  log(y_t) - log(y_{t-1}) &= \beta_0 + u_t \\
+  u_t &= \phi_1 u_{t-1} + \epsilon_t + \theta_1\epsilon_{t-1}
+  \end{align*}
+\end{enumerate}
+
+\hypertarget{well-specified-models-for-seasonal-unemployment-dataset}{%
+\subsection{Well-specified Models for Seasonal Unemployment Dataset}\label{well-specified-models-for-seasonal-unemployment-dataset}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  ARIMA(2,0,2)(0,1,1){[}4{]} model with an intercept of the natural logarithm of unemployed individuals.
+  \begin{align*}
+  log(y_t) &= c + log(y_{t-4}) + \phi_1\big[log(y_{t-1})-log(y_{t-5})\big] + \phi_2\big[log(y_{t-2})-log(y_{t-6})\big] \\
+        &+ \epsilon_t + \theta_1\epsilon_{t-1} + \theta_2\epsilon_{t-2} + \Theta_1\epsilon_{t-4} + \theta_1\Theta_1\epsilon_{t-5} + \theta_2\Theta_1\epsilon_{t-6} \\
+  \end{align*}
+\item
+  ETS(A,A,A) model of the natural logarithm of unemployed individuals.
+  \begin{align*}
+  log(y_t) &= \ell_{t-1} + b_{t-1} + s_{t-m} + \epsilon_t \\
+  \ell_t &= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
+  b_t &= b_{t-1} + \beta \epsilon_t \\
+  s_{t} &= s_{t-m} + \gamma \epsilon_t
+  \end{align*}
+\end{enumerate}
+
+\hypertarget{poorly-specified-models-for-seasonal-unemployment-dataset}{%
+\subsection{Poorly-specified Models for Seasonal Unemployment Dataset}\label{poorly-specified-models-for-seasonal-unemployment-dataset}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  ARIMA(2,1,0) model with an intercept of the natural logarithm of unemployed individuals.
+  \begin{equation*}
+  log(y_t) = c + log(y_{t-1}) + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \phi_2\big[log(y_{t-2})-log(y_{t-3})\big] + \epsilon_t
+  \end{equation*}
+\item
+  ETS(A,A,N) model of the natural logarithm of unemployed individuals.
+  \begin{align*}
+  log(y_t) &= \ell_{t-1} + b_{t-1} + \epsilon_t \\
+  \ell_t &= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
+  b_t &= b_{t-1} + \beta \epsilon_t
+  \end{align*}
+\end{enumerate}
+
+\hypertarget{detail}{%
+\section{Optimal Weight Derivation Details}\label{detail}}
+
+In this section, we detail the derivation steps of producing the results in Section \ref{op}.
+
+Recall that the data is drawn from the true DGP:
+\[y_i = \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i, \ \ \epsilon_i \stackrel{i.i.d}{\sim} N(0,\sigma^2_{\epsilon}) \]
+where the in-sample period (R) is used to estimate the parameters for the following two constituent models:
 \begin{align*}
-2 (\alpha_1'\Sigma_{11}\alpha_1 - \alpha_1'\Sigma_{12}\alpha_2) &= \alpha_1'\Sigma_{11}\alpha_1 - 2\alpha_1'\Sigma_{12}\alpha_2 + \alpha_2'\Sigma_{22}\alpha_2 \\
-\alpha_1'\Sigma_{11}\alpha_1 &= \alpha_2'\Sigma_{22}\alpha_2. \\
+M_1: y_i &= \alpha_1 x_{1i} + u_{1i}, \ \ u_{1i} \stackrel{i.i.d}{\sim} N(0,\sigma^2_1) \\
+M_2: y_i &= \alpha_2 x_{2i} + u_{2i}, \ \ u_{2i} \stackrel{i.i.d}{\sim} N(0,\sigma^2_2).
 \end{align*}
 
-Therefore, any situation where this final equality is nearly satisfied will inevitably lead the optimal weight to be around a half. Then, the estimated optimal weight should be close to \(\frac{1}{2}\) when the training set is large enough, and then deliver the puzzle as expected. Besides, the equality suggest that the presence of the puzzle is highly correlated to the relative magnitude of \(\alpha_1\) and \(\alpha_2\), as well as the relative magnitude of \(\Sigma_{11}\) and \(\Sigma_{22}\). That is, the more similar both of them are, the more likely we will find the puzzle.
+Besides, we allow \(x_{1i}\) and \(x_{2i}\) to have a small correlation, otherwise, there may be multicollinearity, resulting in higher standard errors of estimated parameters.
 
-If we assume regressors to have identity variances, then the puzzle will be in evidence when the absolute difference between \(\alpha_1\) and \(\alpha_2\) is small. Given a small correlation between regressors, \(\alpha_1\) and \(\alpha_2\) will be close to \(\beta_1\) and \(\beta_2\) respectively.
+For simplicity, these models can be written in matrix forms
+\begin{align*}
+y &= x_1 \beta_{1} + x_2 \beta_{2} + \epsilon \\
+M_1 : y &= x_1 \alpha_{1} + u_1 \\
+M_2 : y &= x_2 \alpha_{2} + u_2
+\end{align*}
+where
+\[
+     {y}=\begin{bmatrix}
+           y_{1} \\
+           y_{2} \\
+           \vdots \\
+           y_{N}
+         \end{bmatrix},\;
+     {x_1}=\begin{bmatrix}
+           x_{11} \\
+           x_{21} \\
+           \vdots \\
+           x_{N1}
+         \end{bmatrix},\;
+    {x_2}=\begin{bmatrix}
+           x_{12} \\
+           x_{22} \\
+           \vdots \\
+           x_{N2}
+         \end{bmatrix},\;
+    {\epsilon}=\begin{bmatrix}
+           \epsilon_{1} \\
+           \epsilon_{2} \\
+           \vdots \\
+           \epsilon_{N}
+         \end{bmatrix}.
+\]
+
+Applying the OLS estimation, we can immediately obtain the formula of \(\hat\alpha_{1}\) and \(\hat\alpha_{2}\). Given a weak correlation between regressors, each formula will have an extra component, which represents that correlation.
+\begin{align*}
+    \hat\alpha_{1} &= (x'_1x_1)^{-1} x'_1y \\
+    &= (x'_1x_1)^{-1} x'_1(x_1 \beta_1 + x_2 \beta_2 + \epsilon) \\
+    &= \beta_1 + (x'_1x_1)^{-1} x'_1x_2 \beta_2 \\
+    &= \beta_1 + var(x_1)^{-1} cov(x_1,x_2) \beta_2 \\
+    \\
+    \hat\alpha_{2} &= (x'_2x_2)^{-1} x'_2y \\
+    &= (x'_2x_2)^{-1} x'_2(x_1 \beta_1 + x_2 \beta_2 + \epsilon) \\
+    &= \beta_2 + (x'_2x_2)^{-1} x'_2x_1 \beta_1 \\
+    &= \beta_2 + var(x_2)^{-1} cov(x_2,x_1) \beta_1 \\
+\end{align*}
+\begin{align*}
+    \hat y_{\omega} &= \hat y_1 \omega + \hat y_2 (1-\omega) \\
+    &= x_1 \hat\alpha_1 \omega + \ x_2 \hat\alpha_2 (1-\omega) \\
+    &= x_1 \hat\alpha_1 \omega - x_2 \hat\alpha_2 \omega + x_2 \hat\alpha_2 \\
+    &= (x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega + x_2 \hat\alpha_2 
+\end{align*}
+
+\begin{align*}
+\hat{\omega}_{\text{opt}} 
+&= \underset{\omega \in [0,1]}{\arg\min} \ \frac{1}{R} \sum^R_{t=1} \big(y - \hat y_{\omega}\big)' \big(y - \hat y_{\omega}\big) \\
+&= \underset{\omega \in [0,1]}{\arg\min} \ \frac{1}{R} \sum^R_{t=1} \big[y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega - x_2 \hat\alpha_2\big]'\big[y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega - x_2 \hat\alpha_2\big]\\
+\end{align*}
+\begin{align*}
+    -2(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \hat\omega_{opt} - x_2 \hat\alpha_2) &= 0 \\
+    (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \hat\omega_{opt} &= (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2) \\
+    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2)}{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)} \\
+    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2)}{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)} \\
+    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2} \\
+\end{align*}
 
 \hypertarget{formula-related-to-the-f-statistics}{%
 \subsection{\texorpdfstring{Formula related to the \(F\)-statistics}{Formula related to the F-statistics}}\label{formula-related-to-the-f-statistics}}
@@ -431,7 +652,6 @@ The hypothesis of the overall significance test for \(M_1\) can be written as \(
 Define \(m\) as the number of restrictions in the null hypothesis, and the sum squared of errors (SSE) for the full (true) model \ref{eqn:DGP} is \(SSE_{full} = (y - x_1 \hat\beta_1 - x_2 \hat\beta_2)'(y - x_1 \hat\beta_1 - x_2 \hat\beta_2)\). Then the unbiased estimator of the true model variance is \(s^2=\frac{SSE_{full}}{R-2}\).
 
 The F-statistic follows a F-distribution with degrees of freedom (1,R-2) under \(H_0\), which is defined as
-
 \begin{align*}
 F_{\alpha_1} &= (R\hat\alpha_1 - r)'[s^2R(x_1'x_1)^{-1}R']^{-1}(R\hat\alpha_1 - r)/m \\
 &= (\hat\alpha_1 - 0)' \Big[s^2(x_1'x_1)^{-1}\Big]^{-1} (\hat\alpha_1 - 0)/1 \\
@@ -439,32 +659,20 @@ F_{\alpha_1} &= (R\hat\alpha_1 - r)'[s^2R(x_1'x_1)^{-1}R']^{-1}(R\hat\alpha_1 - 
 \end{align*}
 
 Similarly, we have
-
 \begin{equation*}
-F_{\alpha_2} = R \ s^{-2} \ \hat\alpha'_2 \text{cov}_R(x_2,x_2) \hat\alpha_2 \sim F_{1,R-1} \text{ under  H}_0.
+F_{\alpha_2} = R \ s^{-2} \ \hat\alpha'_2 \text{cov}_R(x_2,x_2) \hat\alpha_2 \sim F_{1,R-2} \text{ under  H}_0.
 \end{equation*}
 
 The optimal weight can also be constructed by the F-statistics of \(M_1\) and \(M_2\).
 
-\begin{equation}
+\begin{equation*}
 \hat\omega_{opt} = \frac{F_{\alpha_1}- R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}{F_{\alpha_1} + F_{\alpha_2} - 2 R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}.
-\end{equation}
+\end{equation*}
 
 If the covariance between \(x_1\) and \(x_2\) is close to zero, the optimal weight can be approximated as \(\hat\omega_{opt} = \frac{F_{\alpha_1}}{F_{\alpha_1} + F_{\alpha_2}}\). This is the reason why the in-sample performance of model is highly correlated with the presence of the puzzle.
 
-\hypertarget{density-simulations}{%
-\section{Density Simulations}\label{density-simulations}}
-
-Applying the learning from Section \ref{op} to density combinations and log scoring rules where we believe is not likely to get a closed-form expression, we empirically examine the applicability of findings from the point combinations. The initial set-up has 1000 (N) artificial cross-sectional observations generated from the equation \ref{eqn:DGP} with \(E[x_{1i}] = E[x_{2i}] = 0\), \(Var(x_{1i}) = Var(x_{2i}) = 1\), \(Cov(x_{1i}, x_{2i}) = 0.3\), \(\pmb{\beta} = (\beta_1, \beta_2)' = (2,2)'\), \(\mu_e = 0\) and \(\sigma^2_e=4\). Same as before, around 60\% of the data will be used for model estimation. The density forecast combinations will follow the construction of \texttt{two-model} pools and be evaluated using the log score.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.6]{figures/ss_1000.pdf}
-\caption{Two curves refer to the in-sample (left) and out-of-sample (right) performance of density combinations with artificial cross-sectional data based on the initial set-up. The x-axis represents the weight assigned on Model 1 and the y-axis indicates the log score for each density combination. The orange dot represents the optimal forecast combination, while the blue dot indicates the forecast performance of the simple average combination.}
-\label{fig:ss1000}
-\end{figure}
-
-Figure \ref{fig:ss1000} clearly shows that when the sample size is large and two models have similar in-sample performance, the forecast accuracy will be indistinguishable between the simple average of predicted densities and the optimal density forecast combination, which is a strong evidence of the forecast combination puzzle. We can then change the true value of different elements, and determine the conditions under which the puzzle is likely to be evidenced. More rigorously, we will evaluate the in-sample performance with the \(R^2\) of constituent models, and then analyse its relationship with the optimal combination weight and the presence of the puzzle.
+\hypertarget{density-simulation}{%
+\section{Density Simulation}\label{density-simulation}}
 
 \begin{itemize}
 \tightlist
@@ -472,15 +680,7 @@ Figure \ref{fig:ss1000} clearly shows that when the sample size is large and two
   \bf{Sample Size}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=0.47\textwidth]{figures/ss_50.pdf}
-\hspace{\fill}
-\includegraphics[width=0.47\textwidth]{figures/ss_100.pdf}
-\caption{Two columns refer to the in-sample combination performance (top) and the out-of-sample combination accuracy (bottom) when $N=100$ and $N=1000$ while keeping all others the same as in the initial set-up. The meanings of colored dots are the same as those in Figure \ref{fig:ss1000}.}
-\label{fig:samplesize}
-\end{figure}
-
-From Figure \ref{fig:samplesize}, it is noticeable that the set of optimal weight varies a lot when we have different sample sizes. Model 1 is given an extremely low weight when \(N=50\) whereas it is highly preferred when \(N=100\). The optimal weight is 0.48 when the sample size becomes 1000, shown in Figure \ref{fig:ss1000}. Based on the log score curve of in-sample combinations, the optimal weight is highly correlated with the individual model performance. The number of observations can be viewed as one factor that can affect the model fit. Figure \ref{fig:samplesize} also shows that the average density forecast performs much better than the optimal density combination in both cases, i.e., the forecast combination puzzle is found.
+It is noticeable that the set of optimal weight varies a lot when we have different sample sizes. Model 1 is given an extremely low weight when \(N=50\) whereas it is highly preferred when \(N=100\). The optimal weight is 0.48 when the sample size becomes 1000, shown in Figure \ref{fig:ss1000}. Based on the log score curve of in-sample combinations, the optimal weight is highly correlated with the individual model performance. The number of observations can be viewed as one factor that can affect the model fit. Figure \ref{fig:samplesize} also shows that the average density forecast performs much better than the optimal density combination in both cases, i.e., the forecast combination puzzle is found.
 
 \begin{table}[ht]
   \centering
@@ -575,240 +775,26 @@ We keep the variance of \(x_{2i}\) the same value and only increase the variance
   \label{tab:regvar}
 \end{table}
 
-One additional hypothesis is that when the absolute difference of \(R^2\) between two models is less than 0.05, they should be treated as having similar in-sample performance. \textbf{Formally, the null hypothesis is that the absolute difference of the in-sample fit \(R^2\) is less than 0.05.}
-
-These results provide a general idea of the relationship between the in-sample fit of constituent models and the presence of the forecast combination puzzle. Based on the new information, the conjecture for two-model pools should be updated, as illustrated in Table \ref{tab:2}.
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{lcc}
-Absolute difference of in-sample fit    &     Small      &    Large    \\
-Presence of the puzzle                  &     $\surd$    &    $?$      \\
-\end{tabular}
-\caption{``Small`` means that both models fit the in-sample data equally well (or equally bad), whereas ``Large`` implies that one of the models performs poorly in fitting the training set. The ``$\surd$`` implies the presense of the forecast combination puzzle, while ``$?$`` means that the presense of the puzzle is ambiguous.}
-\label{tab:2}
-\end{table}
-
-The choice of model is arbitrary and only the two-model pool is considered. It is also not prudent to determine \texttt{small} and \texttt{Large} difference based on subjective opinions. Potential improvements include\ldots{}
-
-\hypertarget{discussion}{%
-\chapter{Discussion}\label{discussion}}
-
-\hypertarget{conclusion}{%
-\chapter{Conclusion}\label{conclusion}}
-
-Working in the two-model pools provides an opportunity of exploring a variety of situations in a short period of time. The next challenging step should naturally be to investigate the multiple forecasts combination, and we leave it to future research.
-
-\appendix
-
-\hypertarget{appendix}{%
-\chapter{Appendix}\label{appendix}}
-
-All codes are performed in R Statistical Software (version 4.2.1 (2022-06-23)). The packages used are \texttt{tidyverse} \autocite{tidy19}, \texttt{dplyr} \autocite{dplyr23}, \texttt{fpp3} \autocite{fpp23}, \texttt{gridExtra} \autocite{gridExtra}, and \texttt{mvtnorm} \autocite{GBMMLSH21}.
-
-\hypertarget{model-specification}{%
-\section{Model Specification}\label{model-specification}}
-
-The error term, \(\epsilon_t\), in each model is assumed to be independent and normally distributed with a zero mean and a constant variance. Each model is independent. Even if using the same notation for unknown parameters across models, the estimators are different.
-
-Exact formulas and explanations of these models can be found in \textcite{fpp3}. The formula of the conditional variance for the ETS(M,N,N) model is discussed in Chapter 6.3 of \textcite{HKOS08}.
-
-\hypertarget{nonstationary-sp-500-index}{%
-\subsection{Nonstationary S\&P 500 Index}\label{nonstationary-sp-500-index}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  ARIMA(1,1,1) model with an intercept of the natural logarithm of S\&P 500 index.
-  \begin{equation*}
-  log(y_t) = c + log(y_{t-1}) + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \epsilon_t + \theta_1\epsilon_{t-1}
-  \end{equation*}
-\item
-  ETS(M,N,N) model of the natural logarithm of S\&P 500 index.
-  \begin{align*}
-  log(y_t) &= \ell_{t-1} (1+\epsilon_t) \\
-  \ell_t &= \ell_{t-1} (1+\alpha \epsilon_t) \\
-  \end{align*}
-\item
-  A classical linear regression model of the natural logarithm of the S\&P 500 index and ARIMA(1,0,0) errors.
-  \begin{align*}
-  log(y_t) &= \beta_0 + \beta_1 t + u_t \\
-  u_t &= \phi_1 u_{t-1} + \epsilon_t
-  \end{align*}
-\end{enumerate}
-
-\hypertarget{stationary-sp-500-index}{%
-\subsection{Stationary S\&P 500 Index}\label{stationary-sp-500-index}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  ARMA(1,1) model with an intercept of the natural logarithm of S\&P 500 returns.
-  \begin{equation*}
-  log(y_t) - log(y_{t-1}) = c + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \epsilon_t + \theta_1\epsilon_{t-1}
-  \end{equation*}
-\item
-  A classical linear regression model of the natural logarithm of the S\&P 500 returns and ARMA(1,1) errors.
-  \begin{align*}
-  log(y_t) &= \beta_0 + u_t \\
-  u_t &= \phi_1 u_{t-1} + \epsilon_t + \theta_1\epsilon_{t-1}
-  \end{align*}
-\end{enumerate}
-
-\hypertarget{well-specified-models-for-seasonal-unemployment-dataset}{%
-\subsection{Well-specified Models for Seasonal Unemployment Dataset}\label{well-specified-models-for-seasonal-unemployment-dataset}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  ARIMA(2,0,2)(0,1,1){[}4{]} model with an intercept of the natural logarithm of unemployed individuals.
-  \begin{align*}
-  log(y_t) &= c + log(y_{t-4}) + \phi_1\big[log(y_{t-1})-log(y_{t-5})\big] + \phi_2\big[log(y_{t-2})-log(y_{t-6})\big] \\
-        &+ \epsilon_t + \theta_1\epsilon_{t-1} + \theta_2\epsilon_{t-2} + \Theta_1\epsilon_{t-4} + \theta_1\Theta_1\epsilon_{t-5} + \theta_2\Theta_1\epsilon_{t-6} \\
-  \end{align*}
-\item
-  ETS(A,A,A) model of the natural logarithm of unemployed individuals.
-  \begin{align*}
-  log(y_t) &= \ell_{t-1} + b_{t-1} + s_{t-m} + \epsilon_t \\
-  \ell_t &= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
-  b_t &= b_{t-1} + \beta \epsilon_t \\
-  s_{t} &= s_{t-m} + \gamma \epsilon_t
-  \end{align*}
-\end{enumerate}
-
-\hypertarget{poorly-specified-models-for-seasonal-unemployment-dataset}{%
-\subsection{Poorly-specified Models for Seasonal Unemployment Dataset}\label{poorly-specified-models-for-seasonal-unemployment-dataset}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  ARIMA(2,1,0) model with an intercept of the natural logarithm of unemployed individuals.
-  \begin{equation*}
-  log(y_t) = c + log(y_{t-1}) + \phi_1\big[log(y_{t-1})-log(y_{t-2})\big] + \phi_2\big[log(y_{t-2})-log(y_{t-3})\big] + \epsilon_t
-  \end{equation*}
-\item
-  ETS(A,A,N) model of the natural logarithm of unemployed individuals.
-  \begin{align*}
-  log(y_t) &= \ell_{t-1} + b_{t-1} + \epsilon_t \\
-  \ell_t &= \ell_{t-1} + b_{t-1} + \alpha \epsilon_t \\
-  b_t &= b_{t-1} + \beta \epsilon_t
-  \end{align*}
-\end{enumerate}
-
-\hypertarget{optimal-weight-derivation-details}{%
-\section{Optimal Weight Derivation Details}\label{optimal-weight-derivation-details}}
-
-In this section, we detail the derivation steps of producing the results in Section \ref{op}.
-
-Recall that the data is drawn from the true DGP:
-
-\begin{equation*}
-y_i = \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i, \ \ \epsilon_i \stackrel{i.i.d}{\sim} N(\mu_{\epsilon},\sigma^2_{\epsilon}) \\
-\end{equation*}
-
-where the in-sample period (R) is used to estimate the parameters for the following two constituent models:
-
-\begin{align*}
-M_1: y_i &= \alpha_1 x_{1i} + e_{1i}, \ \ e_{1i} \stackrel{i.i.d}{\sim} N(\mu_{1},\sigma^2_1) \\
-M_2: y_i &= \alpha_2 x_{2i} + e_{2i}, \ \ e_{2i} \stackrel{i.i.d}{\sim} N(\mu_{2},\sigma^2_2).
-\end{align*}
-
-These models can also be written as matrix forms
-\[y = x_1 \beta_{10} + x_2 \beta_{20} + \epsilon\]
-\[ M_1 : y = x_1 \alpha_{1} + u_1 \hspace{5em} \hat y = x_1 \hat\alpha_1\]
-\[ M_2 : y = x_2 \alpha_{2} + u_2 \hspace{5em} \hat y = x_2 \hat\alpha_2 \]
-
-where
-\[
-     {y}=\begin{bmatrix}
-           y_{1} \\
-           y_{2} \\
-           \vdots \\
-           y_{N}
-         \end{bmatrix},\;
-     {x_1}=\begin{bmatrix}
-           x_{11} \\
-           x_{21} \\
-           \vdots \\
-           x_{N1}
-         \end{bmatrix},\;
-    {x_2}=\begin{bmatrix}
-           x_{12} \\
-           x_{22} \\
-           \vdots \\
-           x_{N2}
-         \end{bmatrix}.
-\]
-
-\begin{align*}
-    \hat\alpha_{1} &= (x'_1x_1)^{-1} x'_1y \\
-    &= (x'_1x_1)^{-1} x'_1(x_1 \beta_{10} + x_2 \beta_{20} + \epsilon) \\
-    &= \beta_{10} + (x'_1x_1)^{-1} x'_1x_2 \beta_{20} \\
-    &= \beta_{10} + var(x_1)^{-1} cov(x_1,x_2) \beta_{20} \\
-\end{align*}
-\begin{align*}
-    \hat\alpha_{2} &= (x'_2x_2)^{-1} x'_2y \\
-    &= (x'_2x_2)^{-1} x'_2(x_1 \beta_{10} + x_2 \beta_{20} + \epsilon) \\
-    &= \beta_{20} + (x'_2x_2)^{-1} x'_2x_1 \beta_{10} \\
-    &= \beta_{20} + var(x_2)^{-1} cov(x_2,x_1) \beta_{10} \\
-\end{align*}
-
-\begin{align*}
-    \hat y_{\omega} &= x_1 \hat\alpha_1 \omega + \ x_2 \hat\alpha_2 (1-\omega) \\
-    &= x_1 \hat\alpha_1 \omega - x_2 \hat\alpha_2 \omega + x_2 \hat\alpha_2 \\
-    &= (x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega + x_2 \hat\alpha_2 
-\end{align*}
-
-\newpage
-
-\[ \hat\omega_{opt} =  \underset{\omega \in [0,1]}{\arg\min} \ E[(y-\hat y_{\omega})^2] \]
-\[(y-\hat y_{\omega})^2 = [y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \omega - x_2 \hat\alpha_2]^2\]
-
-\begin{align*}
-    -2(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y-(x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \hat\omega_{opt} - x_2 \hat\alpha_2) &= 0 \\
-    (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2) \hat\omega_{opt} &= (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2) \\
-    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2)}{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)} \\
-    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (y - x_2 \hat\alpha_2)}{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)} \\
-    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2} \\
-\end{align*}
-
-\begin{align*}
-    x'_1y &= x'_1(x_1 \beta_{10} + x_2 \beta_{20} + \epsilon) \\
-    &= x'_1x_1 \beta_{10} + x'_1x_2 \beta_{20} \\
-    &= (N-1) \big[var(x_1)\beta_{10} + cov(x_1,x_2) \beta_{20}\big] \\
-\end{align*}
-\begin{align*}
-    x'_2y &= x'_2(x_2 \beta_{10} + x_2 \beta_{20} + \epsilon) \\
-    &= x'_2x_2 \beta_{20} + x'_2x_1 \beta_{10} \\
-    &= (N-1) \big[var(x_2)\beta_{20} + cov(x_2,x_1) \beta_{10}\big] \\
-\end{align*}
-
-\begin{align*}
-    \hat\omega_{opt} &= \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2} \\
-    &= \frac{\frac{1}{N-1} (\hat\alpha'_1 x'_1y - \hat\alpha'_2 x'_2y - \hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2)}{\frac{1}{N-1} (\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2)} \\
-    &= \frac{\hat\alpha'_1 \big[var(x_1)\beta_{10} + cov(x_1,x_2) \beta_{20}\big] - \hat\alpha'_2 \big[var(x_2)\beta_{20} + cov(x_2,x_1) \beta_{10}\big] - \hat\alpha'_1 cov(x_1,x_2) \hat\alpha_2 + \hat\alpha'_2 var(x_2) \hat\alpha_2}{\hat\alpha'_1 var(x_1) \hat\alpha_1 - 2\hat\alpha'_1 cov(x_1,x_2) \hat\alpha_2 + \hat\alpha'_2 var(x_2) \hat\alpha_2} \\
-\end{align*}
-
 \hypertarget{plot}{%
 \section{In-sample and Out-of-sample Combination Plots}\label{plot}}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.18, angle=90]{figures/betamag11.jpg}
+\includegraphics[scale=0.18, angle=90]{backup_figure/betamag11.jpg}
 \caption{$\beta_1$ and $\beta_2$ have the same sign but different magnitudes. The first and third columns $\beta_1=2$ and $\beta_2=4$, and the second and fourth columns $\beta_1=2$ and $\beta_2=6$. The sample size is indicated in the subtitle. Other variables remain unchanged as in the initial set-up.}
 \label{fig:magnitude}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.18, angle=90]{figures/betasign11.jpg}
+\includegraphics[scale=0.18, angle=90]{backup_figure/betasign11.jpg}
 \caption{$\beta_1$ and $\beta_2$ have the same magnitude but different signs, i.e. $\beta_1=-\beta_2$. The first and third columns $\beta_1=2$ and $\beta_2=-2$, and the second and fourth columns $\beta_1=4$ and $\beta_2=-4$. The sample size is indicated in the subtitle. Other variables remain unchanged as in the initial set-up.}
 \label{fig:sign}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=0.18, angle=90]{figures/var11.jpg}
+\includegraphics[scale=0.18, angle=90]{backup_figure/var11.jpg}
 \caption{The first and third columns $Var(x_{1i}) = 2$ and $Var(x_{2i}) = 1$. The second and fourth columns $Var(x_{1i}) = 4$ and $Var(x_{2i}) = 1$. The sample size is indicated in the subtitle. Other variables remain unchanged as in the initial set-up.}
 \label{fig:variance}
 \end{figure}

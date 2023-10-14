@@ -9,17 +9,11 @@
     \vspace{5mm}
 
     
-    Point Combination 
-    \[y_t = \omega \ y_{1t} + (1-\omega) \ y_{2t}\]
+    Point Forecast Combination 
+    \[\hat y_t = \omega \ \hat y_{1t} + (1-\omega) \ \hat y_{2t}\]
 
-    Density Combination
-    \[f(y_t) = \omega \ f_1(y_t) + (1-\omega) f_2(y_t)\]
-
-
-\begin{figure}[b]
-\centering
-\includegraphics[width=3cm]{Graph/Weather.jpg}
-\end{figure}
+    Density Forecast Combination
+    \[ \hat f(y_t) = \omega \ \hat f_1(y_t) + (1-\omega) \hat f_2(y_t)\]
 
 \end{frame}
 
@@ -38,19 +32,20 @@
     \end{column}
     \end{columns}
 
-
+    \vspace{-6mm}
+    
     \begin{columns}[t]
     \begin{column}{0.5\textwidth}
         \begin{alertblock}{}
         \centering
-        Complicated Weighting Schemes
+        \tikz{\fill[orange] circle (3pt);} \ Complicated Weighting Schemes
         \end{alertblock}
     \end{column}
     
     \begin{column}{0.5\textwidth}
         \begin{exampleblock}{}
         \centering
-        Simple Averaging
+        \tikz{\fill[blue] circle (3pt);} \ Simple Averaging
         / Equal Weights
         \end{exampleblock}
     \end{column}
@@ -68,7 +63,7 @@
     \[\hat\omega_{opt} \overset{p}{\to} \omega_\star = \frac{\alpha_1'\Sigma_{11}\alpha_1 - \alpha_1'\Sigma_{12}\alpha_2}{\alpha_1'\Sigma_{11}\alpha_1 - 2\alpha_1'\Sigma_{12}\alpha_2 + \alpha_2'\Sigma_{22}\alpha_2}\]
 
 
-    The presence of the puzzle is highly relevant to the coefficients and the variances of regressors in both models.
+    The presence of the puzzle is tightly related to the coefficients and the variances of regressors in both proposed models.
     
     
     \[\omega_\star=\frac{1}{2} \Rightarrow \alpha_1'\Sigma_{11}\alpha_1 = \alpha_2'\Sigma_{22}\alpha_2\]
@@ -80,39 +75,47 @@
 
 
 
-
 \begin{frame}{Preliminary Conjecture}
 
-    Consider a simple case of two-model combination.
+    Consider a two-model combination.
 
     \begin{table}[ht]
     \centering
     \begin{tabular}{cccc}
                            &      & \multicolumn{2}{c}{$M_2$} \\
                            &      & Good       & Bad       \\
-    \multirow{2}{*}{$M_1$} & Good & $\surd$    & $?$ \\
-                           & Bad  & $?$        & $\surd$
+    \multirow{2}{*}{$M_1$} & Good & \alt<2>{\color{MonashBlue} $\surd$}{$\surd$}    & \alt<2>{\color{Orange} $?$}{$?$} \\
+                           & Bad  & \alt<2>{\color{Orange} $?$}{$?$}        & \alt<2>{\color{MonashBlue} $\surd$}{$\surd$}
     \end{tabular}
     \label{tab:1}
-    \caption{Initial conjecture on the presence of forecast combination puzzles when combining two models}
+    \caption{\footnotesize Initial conjecture on the presence of forecast combination puzzle}
     \end{table}
     
-    \hspace*{20pt} The in-sample fit comparison between two models 
-    
-    \hspace*{20pt} The presence of the puzzle
+    The in-sample fit between two models in a relative sense may indicate the presence of the puzzle.
 
 
 \end{frame}
 
 
+
 \begin{frame}{Preliminary Conjecture}
+\centering
+\begin{tikzpicture}
+    \draw[step=1cm,gray,very thin];
+    \draw[thick,->] (0,0) -- (7,0);
+    \draw[thick,->] (0,0) -- (0,5);
+    \draw[thick,->] (0,0) -- (7,0) node[anchor=north west] {$M_1$ LogL};
+    \draw[thick,->] (0,0) -- (0,5) node[anchor=south east] {$M_2$ LogL};
+    
+    \foreach \Point in {(1,1), (2,2), (3,3), (4,4)}{
+    \node [MonashBlue] at \Point {$\surd$};}
+    
+    \foreach \Point in {(6,2), (5,1), (1,4), (2,5)}{
+    \node [Orange] at \Point {$?$};}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=8cm]{Graph/Conjecture.png}
-    \label{fig:enter-label}
-\end{figure}
-
+    \foreach \Point/\PointLabel in {(6,2)/GB, (5,1)/GB, (1,4)/BG, (2,5)/BG}
+        \draw[fill=Orange] \Point circle (0.0005) node[above right] {\color{Orange} \PointLabel};
+\end{tikzpicture}
 
 \end{frame}
 

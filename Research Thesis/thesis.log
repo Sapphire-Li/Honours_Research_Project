@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.4)  3 SEP 2023 22:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.4)  10 OCT 2023 16:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -899,7 +899,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `zplm' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<figures/crest.jpg, id=94, 509.905pt x 553.06625pt>
+<figures/crest.jpg, id=90, 509.905pt x 553.06625pt>
 File: figures/crest.jpg Graphic file (type jpg)
 <use figures/crest.jpg>
 Package pdftex.def Info: figures/crest.jpg  used on input line 35.
@@ -929,138 +929,138 @@ LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
 ]
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 13.49991pt on input line 61.
+(Font)              scaled to size 13.49991pt on input line 59.
 [3
 
 ]
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 12.9599pt on input line 77.
-[4] [5] [6]
+(Font)              scaled to size 12.9599pt on input line 75.
+[4] [5] [6] [7]
 Chapter 2.
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 117.
+LaTeX Font Warning: Command \small invalid in math mode on input line 111.
 
-[7
+[8
 
 ]
 LaTeX Font Info:    Font shape `T1/fvs/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 125.
-[8] [9] [10]
+(Font)              scaled to size 10.79993pt on input line 119.
+[9] [10] [11]
 Chapter 3.
-[11
+[12
 
 ]
-<figures/SP500_nonstationary.pdf, id=276, 1011.78pt x 722.7pt>
+<figures/SP500_nonstationary.pdf, id=270, 1011.78pt x 722.7pt>
 File: figures/SP500_nonstationary.pdf Graphic file (type pdf)
 <use figures/SP500_nonstationary.pdf>
-Package pdftex.def Info: figures/SP500_nonstationary.pdf  used on input line 22
-7.
+Package pdftex.def Info: figures/SP500_nonstationary.pdf  used on input line 21
+4.
 (pdftex.def)             Requested size: 455.2968pt x 325.21199pt.
-[12 <./figures/SP500_nonstationary.pdf>]
-Overfull \hbox (4.61453pt too wide) in paragraph at lines 236--245
+[13 <./figures/SP500_nonstationary.pdf>]
+Overfull \hbox (5.64389pt too wide) in paragraph at lines 225--236
  [][] 
  []
 
-
-Overfull \hbox (5.64389pt too wide) in paragraph at lines 251--262
- [][] 
- []
-
-<figures/log_linegraph.pdf, id=294, 578.16pt x 433.62pt>
+<figures/log_linegraph.pdf, id=286, 578.16pt x 433.62pt>
 File: figures/log_linegraph.pdf Graphic file (type pdf)
 <use figures/log_linegraph.pdf>
-Package pdftex.def Info: figures/log_linegraph.pdf  used on input line 270.
+Package pdftex.def Info: figures/log_linegraph.pdf  used on input line 244.
 (pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
-[13]
-<figures/SP500_stationary.pdf, id=305, 722.7pt x 433.62pt>
+[14 <./figures/log_linegraph.pdf>]
+<figures/SP500_stationary.pdf, id=302, 722.7pt x 433.62pt>
 File: figures/SP500_stationary.pdf Graphic file (type pdf)
 <use figures/SP500_stationary.pdf>
-Package pdftex.def Info: figures/SP500_stationary.pdf  used on input line 284.
+Package pdftex.def Info: figures/SP500_stationary.pdf  used on input line 258.
 (pdftex.def)             Requested size: 433.62334pt x 260.17401pt.
-[14 <./figures/log_linegraph.pdf> <./figures/SP500_stationary.pdf>] [15]
-<figures/EMPL.pdf, id=333, 939.51pt x 433.62pt>
+[15] [16 <./figures/SP500_stationary.pdf>]
+<figures/EMPL.pdf, id=324, 939.51pt x 433.62pt>
 File: figures/EMPL.pdf Graphic file (type pdf)
 <use figures/EMPL.pdf>
-Package pdftex.def Info: figures/EMPL.pdf  used on input line 324.
+Package pdftex.def Info: figures/EMPL.pdf  used on input line 298.
 (pdftex.def)             Requested size: 469.75385pt x 216.80946pt.
 
-Overfull \hbox (14.50974pt too wide) in paragraph at lines 324--325
+Overfull \hbox (14.50974pt too wide) in paragraph at lines 298--299
  [][] 
  []
 
-[16 <./figures/EMPL.pdf>] [17]
+[17] [18 <./figures/EMPL.pdf>] [19]
 Chapter 4.
-[18
+[20
 
-] [19] [20]
-<figures/ss_1000.pdf, id=385, 722.7pt x 361.35pt>
-File: figures/ss_1000.pdf Graphic file (type pdf)
-<use figures/ss_1000.pdf>
-Package pdftex.def Info: figures/ss_1000.pdf  used on input line 462.
+] [21]
+<figures/MSFE.pdf, id=369, 722.7pt x 361.35pt>
+File: figures/MSFE.pdf Graphic file (type pdf)
+<use figures/MSFE.pdf>
+Package pdftex.def Info: figures/MSFE.pdf  used on input line 385.
 (pdftex.def)             Requested size: 433.62334pt x 216.81168pt.
-[21]
-LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 4
-72.
-(/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ppl.fd
-File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
-)
-<figures/ss_50.pdf, id=394, 433.62pt x 578.16pt>
-File: figures/ss_50.pdf Graphic file (type pdf)
-<use figures/ss_50.pdf>
-Package pdftex.def Info: figures/ss_50.pdf  used on input line 476.
-(pdftex.def)             Requested size: 213.96529pt x 285.28583pt.
-<figures/ss_100.pdf, id=395, 433.62pt x 578.16pt>
-File: figures/ss_100.pdf Graphic file (type pdf)
-<use figures/ss_100.pdf>
-Package pdftex.def Info: figures/ss_100.pdf  used on input line 478.
-(pdftex.def)             Requested size: 213.96529pt x 285.28583pt.
-[22 <./figures/ss_1000.pdf>] [23 <./figures/ss_50.pdf> <./figures/ss_100.pdf>]
-Overfull \hbox (3.1657pt too wide) in paragraph at lines 536--548
- [][] 
- []
-
-[24] [25] [26]
+<figures/LPS_10000.pdf, id=373, 722.7pt x 361.35pt>
+File: figures/LPS_10000.pdf Graphic file (type pdf)
+<use figures/LPS_10000.pdf>
+Package pdftex.def Info: figures/LPS_10000.pdf  used on input line 399.
+(pdftex.def)             Requested size: 433.62334pt x 216.81168pt.
+[22 <./figures/MSFE.pdf>]
+<figures/LPS_1000.pdf, id=386, 722.7pt x 361.35pt>
+File: figures/LPS_1000.pdf Graphic file (type pdf)
+<use figures/LPS_1000.pdf>
+Package pdftex.def Info: figures/LPS_1000.pdf  used on input line 406.
+(pdftex.def)             Requested size: 433.62334pt x 216.81168pt.
+[23 <./figures/LPS_10000.pdf> <./figures/LPS_1000.pdf>]
+<figures/con_cases.png, id=410, 856.8813pt x 436.029pt>
+File: figures/con_cases.png Graphic file (type png)
+<use figures/con_cases.png>
+Package pdftex.def Info: figures/con_cases.png  used on input line 415.
+(pdftex.def)             Requested size: 454.14493pt x 231.09425pt.
+[24 <./figures/con_cases.png>] [25] [26]
 Chapter 5.
 [27
 
-]
-Chapter 6.
-[28
-
-]
+] [28]
 Appendix A.
 [29
 
-] [30] [31] [32]
-Overfull \hbox (50.93213pt too wide) detected at line 790
-[]
+] [30] [31] [32] [33]
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 6
+80.
+(/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+
+LaTeX Warning: Reference `fig:samplesize' on page 34 undefined on input line 68
+3.
+
+[34] [35]
+Overfull \hbox (3.1657pt too wide) in paragraph at lines 736--748
+ [][] 
  []
 
-[33]
-<figures/betamag11.jpg, id=520, 3556.28625pt x 1442.38875pt>
-File: figures/betamag11.jpg Graphic file (type jpg)
-<use figures/betamag11.jpg>
-Package pdftex.def Info: figures/betamag11.jpg  used on input line 797.
+[36]
+<backup_figure/betamag11.jpg, id=537, 3556.28625pt x 1442.38875pt>
+File: backup_figure/betamag11.jpg Graphic file (type jpg)
+<use backup_figure/betamag11.jpg>
+Package pdftex.def Info: backup_figure/betamag11.jpg  used on input line 783.
 (pdftex.def)             Requested size: 640.10391pt x 259.61877pt.
-<figures/betasign11.jpg, id=521, 3556.28625pt x 1442.38875pt>
-File: figures/betasign11.jpg Graphic file (type jpg)
-<use figures/betasign11.jpg>
-Package pdftex.def Info: figures/betasign11.jpg  used on input line 804.
+<backup_figure/betasign11.jpg, id=538, 3556.28625pt x 1442.38875pt>
+File: backup_figure/betasign11.jpg Graphic file (type jpg)
+<use backup_figure/betasign11.jpg>
+Package pdftex.def Info: backup_figure/betasign11.jpg  used on input line 790.
 (pdftex.def)             Requested size: 640.10391pt x 259.61877pt.
 
-LaTeX Warning: Float too large for page by 1.72084pt on input line 807.
+LaTeX Warning: Float too large for page by 1.72084pt on input line 793.
 
-<figures/var11.jpg, id=522, 3556.28625pt x 1442.38875pt>
-File: figures/var11.jpg Graphic file (type jpg)
-<use figures/var11.jpg>
-Package pdftex.def Info: figures/var11.jpg  used on input line 811.
+<backup_figure/var11.jpg, id=539, 3556.28625pt x 1442.38875pt>
+File: backup_figure/var11.jpg Graphic file (type jpg)
+<use backup_figure/var11.jpg>
+Package pdftex.def Info: backup_figure/var11.jpg  used on input line 797.
 (pdftex.def)             Requested size: 640.10391pt x 259.61877pt.
-[34] [35 <./figures/betamag11.jpg>] [36 <./figures/betasign11.jpg>] [37 <./figu
-res/var11.jpg>] [38
+[37] [38 <./backup_figure/betamag11.jpg>] [39 <./backup_figure/betasign11.jpg>]
+[40 <./backup_figure/var11.jpg>] [41
 
-] [39] [40] (./thesis.aux)
+] [42] [43] (./thesis.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 97CCBD0984CB5E619F30A7A8CFAE9879;3771.
+(rerunfilecheck)             Checksum: 9CD4CB8967727ADD2FA28107AF02DEAD;3575.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
@@ -1070,13 +1070,13 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 ### semi simple group (level 1) entered at line 105 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23907 strings out of 478268
- 416060 string characters out of 5846348
- 1178850 words of memory out of 5000000
- 41119 multiletter control sequences out of 15000+600000
- 593626 words of font info for 409 fonts, out of 8000000 for 9000
+ 23916 strings out of 478268
+ 416130 string characters out of 5846348
+ 1177934 words of memory out of 5000000
+ 41120 multiletter control sequences out of 15000+600000
+ 593699 words of font info for 415 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,82p,1815b,18370s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,82p,1826b,18362s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -1090,10 +1090,10 @@ f-dist/fonts/type1/public/bera/fvsr8a.pfb></usr/local/texlive/2022/texmf-dist/f
 onts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/ty
 pe1/urw/palatino/uplr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw
 /palatino/uplri8a.pfb>
-Output written on thesis.pdf (42 pages, 2752855 bytes).
+Output written on thesis.pdf (45 pages, 2992140 bytes).
 PDF statistics:
- 670 PDF objects out of 1000 (max. 8388607)
- 576 compressed objects within 6 object streams
- 189 named destinations out of 1000 (max. 500000)
- 117480 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 684 PDF objects out of 1000 (max. 8388607)
+ 587 compressed objects within 6 object streams
+ 185 named destinations out of 1000 (max. 500000)
+ 117477 words of extra memory for PDF output out of 128383 (max. 10000000)
 
