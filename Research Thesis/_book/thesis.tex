@@ -460,7 +460,7 @@ Working with the two-model pools provides an opportunity to explore a variety of
 \hypertarget{appendix}{%
 \chapter{Appendix}\label{appendix}}
 
-All codes are performed in R Statistical Software (version 4.2.1 (2022-06-23)). The packages used are \texttt{tidyverse} \autocite{tidy19}, \texttt{dplyr} \autocite{dplyr23}, \texttt{fpp3} \autocite{fpp23}, \texttt{gridExtra} \autocite{gridExtra}, and \texttt{mvtnorm} \autocite{GBMMLSH21}.
+All codes are performed in R Statistical Software (version 4.2.1 (2022-06-23)). The packages used are \texttt{tidyverse} \autocite{tidy19}, \texttt{dplyr} \autocite{dplyr23}, \texttt{fpp3} \autocite{fpp23}, \texttt{gridExtra} \autocite{gridExtra}, and \texttt{mvtnorm} \autocite{GBMMLSH21}. Full code and data are available online in GitHub repository: \url{https://github.com/Sapphire-Li/Honours_Research_Project}.
 
 \hypertarget{model-specification}{%
 \section{Model Specification}\label{model-specification}}
@@ -653,8 +653,7 @@ Similarly, we have
 F_{\alpha_2} = R \ s^{-2} \ \hat\alpha'_2 \text{cov}_R(x_2,x_2) \hat\alpha_2 \sim F_{1,R-2} \text{ under  H}_0.
 \end{equation*}
 
-The optimal weight can also be constructed by the F-statistics of \(M_1\) and \(M_2\).
-
+The optimal weight \(\hat\omega_{opt}\) can also be expressed with F-statistics of \(M_1\) and \(M_2\)
 \begin{equation*}
 \hat\omega_{opt} = \frac{F_{\alpha_1}- R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}{F_{\alpha_1} + F_{\alpha_2} - 2 R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}.
 \end{equation*}

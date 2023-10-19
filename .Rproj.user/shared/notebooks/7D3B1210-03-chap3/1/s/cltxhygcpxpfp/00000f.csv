@@ -1,7 +1,0 @@
-"0","future <- new_data(sales, n=4) %>%"
-"0","  mutate(AdBudget = tail(sales$AdBudget, 1),"
-"0","         GDP = tail(sales$GDP, 1)"
-"0","  )"
-"2","Error in new_data(sales, n = 4) %>% mutate(AdBudget = tail(sales$AdBudget,  : 
-  could not find function ""%>%""
-"

@@ -1,34 +1,21 @@
-# Honours_Research_Project
-This is the honours research project for Sapphire Li (2023) 
+# Revisiting the Forecast CombinationPuzzle: An Empirical Study
 
-* DESCRIPTION
-All files are zipped in 
+Honours Research Project at Monash University (2023) 
 
-* Replication Paper - ETC4410_Replication_Exercise.pdf
-This pdf document is the writeup for the replication exercise.
+Supervisor: David Frazier
 
+This thesis demonstrates that the forecast combination puzzle is tightly related to the in-sample fit of constituent models used in the analysis. The forecast combination puzzle refers to the common finding that an equally-weighted forecast combination often outperforms an optimally- weighted forecast combination calculated via a sophisticated scheme. We show that when constituent models have similar in-sample fit, the puzzle will be in evidence; it is ambiguous otherwise. We analytically show the relationship between the estimated optimal weight and the constituent models in terms of point combinations using mean squared error and empirically confirm these findings in density combinations using log score. As an additional contribution, the puzzle is shown to be evident in both time series and cross-sectional settings.
 
-* MAIN SCRIPT - 
-It will produce all the results in the paper, including Figures and Tables
-  - 
+The thesis and relevant file are in the Research Thesis folder.
 
-It also includes some instructions and explanations between the lines.
-The pdffigures folder is used to store plots of code runs.
-
-
-* DATA
-The datasets are in the data folder. All data are sourced from FRED. 
-
-
-
-* AUXILIARY FUNCTIONS
-The auxiliary functions referenced by the main file are
-
+All code and data are in the R folder.
 
 I cannot be held responsible for any use and mis-use of my code.
 
 Sapphire Li
+
 xlii0145@student.monash.edu
+
 Monash University
 
-September 2023
+October 2023
