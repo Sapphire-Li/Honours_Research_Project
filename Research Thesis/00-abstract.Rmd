@@ -4,6 +4,10 @@ knit: "bookdown::render_book"
 
 # Abstract {-}
 
-This thesis demonstrates that the forecast combination puzzle is tightly related to the in-sample fit of constituent models. The forecast combination puzzle refers to the empirically common finding that an equally-weighted forecast combination often outperforms an optimally-weighted forecast combination under a given sophisticated scheme. It can be certain that when constituent models have similar in-sample fit, the puzzle will be in evidence; it is ambiguous otherwise. We analytically show the relationship between the estimated optimal weight and the constituent models in point combinations using mean squared error and empirically confirm these findings in density combinations using log scores. As an additional contribution, the puzzle is shown to be evident in both pure time series and pure cross-sectional settings.
+This thesis demonstrates that the forecast combination puzzle is tightly related to the in-sample fit of constituent models used in the analysis. The forecast combination puzzle refers to the common finding that an equally-weighted forecast combination often outperforms an optimally-weighted forecast combination calculated via a sophisticated scheme. We show that when constituent models have similar in-sample fit, the puzzle will be in evidence; it is ambiguous otherwise. We analytically show the relationship between the estimated optimal weight and the constituent models in terms of point combinations using mean squared error and empirically confirm these findings in density combinations using log score. As an additional contribution, the puzzle is shown to be evident in both time series and cross-sectional settings.  
+
+\vspace{1cm}
+
+\textit{Keywords}: Forecast Combination, Forecast Combination Puzzle, Point Forecasting, Probabilistic Forecasting, Scoring Rules
 
 \newpage

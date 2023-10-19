@@ -8,10 +8,10 @@ rm(list=ls())
 
 
 set.seed(12345678)
-N = 1000
+N = 10000
 
-beta1 <- 9.3
-beta2 <- 8
+beta1 <- 2
+beta2 <- 2
 
 # beta1 <- 1.2
 # beta2 <- -1.1
@@ -135,7 +135,7 @@ optimal <- comb |> filter(pool_train == max(comb$pool_train))
 
 p1 <- comb |> ggplot(aes(w, pool_train)) +
   geom_line(color = "red") +
-  labs(caption = TeX(r'(N = 100, $\beta_1$=2, $\beta_2$=2, $var(X_1)$=4, $var(X_2)$=1, $cov(X_1,X_2)$=0.3)'),
+  labs(caption = TeX(r'(N = 10000, $\beta_1$=2, $\beta_2$=2, $var(X_1)$=1, $var(X_2)$=1, $cov(X_1,X_2)$=0.3)'),
     # title = TeX(r'(The density combination of $M_1$ and $M_2$)'),
        x = TeX(r'(Weight on $M_1$)'),
        y = "Log socre") +
@@ -168,7 +168,7 @@ equ <- comb |> filter(w == 0.5) |> select(pool_test) |> as.numeric()
 
 p2 <- comb |> ggplot(aes(w, pool_test)) +
   geom_line(color = "red") +
-  labs(caption = TeX(r'(N = 10000, $\beta_1$=5.5, $\beta_2$=5, $var(X_1)$=1, $var(X_2)$=1, $cov(X_1,X_2)$=0.3)'),
+  labs(caption = TeX(r'(N = 10000, $\beta_1$=2, $\beta_2$=2, $var(X_1)$=1, $var(X_2)$=1, $cov(X_1,X_2)$=0.3)'),
     # title = "The out-of-sample combination of M1 and M2 when coefficients have different magnitudes but the same sign",
     # title = "The out-of-sample combination of M1 and M2 (N=1000)",
        x = TeX(r'(Weight on $M_1$)'),
@@ -193,18 +193,11 @@ p2 <- comb |> ggplot(aes(w, pool_test)) +
   #          label = paste0("Simple Average: ", round(equ,4)), vjust = -1, hjust = -0.1, size = 4)
 
 
-
-
-
-
 grid.arrange(p1,p2)
+
 
 # pdf("ss_100.pdf", width = 5, height = 8)
 # grid.arrange(p1,p2,top = 'The density combination of Model 1 and Model 2 when N is 100')
-# dev.off()
-
-# pdf("beta0.1.pdf", width = 5, height = 8)
-# grid.arrange(p1,p2)
 # dev.off()
 
 
@@ -223,25 +216,11 @@ grid.arrange(p1,p2)
 # fit2_R2
 # fit2_R2 - fit1_R2
 # # R-squared of each model
-# 
-# R2
-# R2[2] - R2[1]
-# # R-squared of each model over the total R-squared (from the true model)
-# 
+
+
 # partial_R2
 # partial_R2[2] - partial_R2[1]
 # # partial R-squared
-
-
-# pdf("con44.pdf", width = 5, height = 6)
-# grid.arrange(p2,top = 'Case 4 - density combination of M1 and M2')
-# dev.off()
-
-# fit1_R2
-# fit2_R2
-fit2_R2 - fit1_R2
-
-opt-equ
 
 
 #calculate AIC of each model
@@ -253,10 +232,5 @@ LL <- AIC$LL
 LL <- LL / sum(LL)
 abs(diff(LL))
 
-0.00344948
-0.00907581
-0.008704384
 
 
-0.01234829
-0.01463087

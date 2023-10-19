@@ -1,0 +1,16 @@
+---
+chapter: 
+knit: "bookdown::render_book"
+---
+
+# Conclusion
+
+This thesis develops a means of determining the presence of the forecast combination puzzle in a two-model pool by closely examing in-sample model fit. Empirical results suggest that when both constituent models have similar in-sample fit, poor or good, the equally-weighted combination will provide equivalent forecast accuracy relative to the optimally-weighted forecast combination. On the other hand, when the in-sample fit differs between the two models, the presence of the puzzle is ambiguous.
+
+Importantly, in a linear regression context, we derive the relationship between the optimal weight and elements in the proposed models under mean squared error scheme when using point combinations. According to the closed-form expression for the estimated optimal weight, the presence of the puzzle is tightly-related to the sample size, the sign and magnitude of parameters in the constituent models, the sample variances of regressors, and the correlation between regressors. It is also shown that a large difference in the in-sample performance of proposed models can move the estimated optimal weight away from one-half (equal weights), especially in large samples. Additionally, the optimal weight also interacts with the true DGP in a broad sense, which determines the estimated coefficients in the constituent models.
+
+Not surprisingly, these findings can be applied to density combinations under log predictive score, where the estimated optimal weight does not have a closed-form expression. While the two constituent models have a symmetrical relationship when the population weight is equal to one-half in the MSE case, we find empirical evidence that this may not be the same case under log score.
+
+Working with the two-model pools provides an opportunity to explore a variety of situations in a short period of time. The next natural step is to investigate multiple forecast combinations. It is also necessary to relax some of the restrict model assumptions and increase the complexity of the model structure in our simulation study. Under the explicit definition of the forecast combination puzzle, it is hard to determine the significance of the accuracy difference between optimally-weighted combination and equally-weighted combination, given that neither the testing or an arbitrary choice will work for all cases. We leave these, and other interesting issues, for future research.
+
+

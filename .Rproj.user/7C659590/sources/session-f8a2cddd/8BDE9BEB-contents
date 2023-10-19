@@ -1,0 +1,109 @@
+---
+chapter: 2
+knit: "bookdown::render_book"
+---
+
+# Methodology {#method}
+
+In the literature, there are several definitions of combinations. We focus on the combination of forecasts from non-nested models for a given dataset, which is commonly performed in two stages:
+
+1. producing separate point or probabilistic forecasts for the next time point using observed data and constituent models;
+
+2. combining forecasts based on a given accuracy criteria.  
+
+We only consider the combination of two individual forecasts, i.e., two constituent models, to simplify the analysis through fast and relative simple data manipulation.
+
+
+
+Before explaining details, the following notation will be used throughout the paper. To examine forecast accuracy, we partition on observed time series $y_t$ with a total of $T$ observations into two proportional parts, an in-sample period with $R$ observations and an out-of-sample period with $P$ observations. We restrict the analysis to a 1-step ahead prediction, conditioning on the information set at time t, $\mathcal{F}_t$, which is comprised of all observed (and known) realizations of $y$ up to time t, i.e., $\mathcal{F}_t = \{y_1, y_2, .., y_t\}$.
+
+Every proposed parametric model determines the conditional probability density for $y_t$, denoted by $f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$, given unknown parameters $\theta_M$ and all the past information $\mathcal{F}_{t-1}$. The choice and specification of constituent models vary by the features of the in-sample data. For each model, the Maximum Likelihood Estimation (MLE) method is applied to generate the estimators of unknown parameters, i.e., $\hat\theta_M = \underset{\theta_M \in \Theta_M}{\arg\max} \sum^R_{t=1} log f(y_t|\mathcal{F}_{t-1}, \theta_M, M)$. Given the log likelihood function of in-sample period for each model, the corresponding estimates are obtained when they maximize that function and then held fixed for out-of-sample procedures. The optimal combination is then constructed with the estimated weight of each model that delivers the best in-sample accuracy.
+
+
+
+## Density combinations
+
+\subsection*{Linear pooling}
+
+Consider the case of two competing models, which we identify through their probability densities. Undoubtedly, densities can be combined in many ways; see Section 3 of @WHLK22 for many popular means of probabilistic combination. One of the commonly used approaches is the "linear opinion pool", which weights densities in a linear form [e.g., @BG69;@HM07;@GA11]. For ``two-model`` pools, constituent densities $f_1(y_t)$ and $f_2(y_t)$ are combined as follows:
+
+\begin{equation}
+\label{eqn:LC1}
+f_{\omega}(y_t) = \omega \ f_1(y_t | \mathcal{F}_{t-1}, \theta_{M_1}, M_1) + (1-\omega) f_2(y_t | \mathcal{F}_{t-1}, \theta_{M_2}, M_2),
+\end{equation}  
+
+where $\omega \in [0,1]$ is the non-negative weight allocated to the probability density attributed to the first model. Through this construction, the sum of the model weights is fixed at 1, which is a necessary and sufficient condition for $f_{\omega}(y_t)$ to be a proper density function [@GA11]. In addition to producing point forecasts, density forecasts can offer forecasters or decision markers a comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions).
+
+
+
+\subsection*{Log scoring rules}
+
+Following the literature on density evaluation, our initial analysis will focus on using log score to measure the accuracy of our density forecasts; see, e.g., @GA11 for a discussion on log score and its use in density forecasting. For each individual model, the log score over the in-sample period is:  
+
+\begin{equation}
+\label{eqn:LS1}
+LS = \sum^R_{t=1} log \ \hat f(y_t| \mathcal{F}_{t-1}, \hat\theta_M, M).
+\end{equation}
+
+The "optimal" linear combination is identified to produce the most accurate forecasts when the set of weights maximizes the log score function of two densities over the in-sample $R$ observations,  
+
+\begin{equation}
+\label{eqn:LS2}
+\hat{\omega}_{\text{opt}} =  \underset{\omega \in [0,1]}{\arg\max} \sum^R_{t=1} log \Big[ \omega \ \hat f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1-\omega) \ \hat f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+\end{equation}
+
+Thus, the log predictive score over the out-of-sample period $t = R+1, R+2, \dots, T$ is:
+
+\begin{equation}
+\label{eqn:LS3}
+LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ \hat f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{M1}, M_1) + (1- \hat{\omega}_{\text{opt}}) \ \hat f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{M2}, M_2)\Big].
+\end{equation}
+
+
+
+## Point combinations
+
+Although our main focus is density forecast combination, to simplify certain analysis, point forecast combination is also considered The point forecast of each model corresponds to the mean value of the predictive density. We use mean squared forecast error (MSFE), following @BG69 and @SW09, to measure the accuracy of point forecasts in the two-model pools.
+
+\subsection*{Linear combination}
+
+Similar to the density case, points from two constituent models, $y_{1t}$ and $y_{2t}$, are aggregated linearly:
+
+\begin{equation}
+\label{eqn:PC1}
+y_t({\omega}) = \omega \ y_{1t} + (1-\omega) \ y_{2t}
+\end{equation}  
+
+where $\omega\in [0,1]$ is the non-negative weight allocated to the point forecast generated from the first model.
+
+\subsection*{Mean squared forecast error}
+
+The mean squared error (MSE) of the individual prediction is the average squared difference between the actual value, $y_t$, and the predicted value, $\hat y_t$, at each time point over the in-sample period:
+
+\begin{equation}
+\label{eqn:MSE1}
+MSE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
+\end{equation}  
+
+The lower the MSE, the higher the accuracy of the forecast. Therefore, the "optimal" set of weights minimizes the MSE of the point forecast combination among all other possible sets over the $R$ in-sample observations:
+
+\begin{equation}
+\label{eqn:MSE2}
+\hat{\omega}_{\text{opt}} = \underset{\omega \in [0,1]}{\arg\min} \frac{1}{R} \sum^R_{t=1} \Big[y_t - (\omega \ \hat y_{1t} + (1-\omega) \ \hat y_{2t})\Big]^2.
+\end{equation}
+
+Consequently, the MSFE over the out-of-sample period $t = R+1, R+2, \dots, T$ is:
+
+\begin{equation}
+\label{eqn:MSFE3}
+MSFE = \frac{1}{P} \sum^T_{t = R+1} \Big[y_t - (\hat{\omega}_{\text{opt}} \ \hat y_{1t} + (1-\hat{\omega}_{\text{opt}}) \ \hat y_{2t}) \Big]^2.
+\end{equation}
+
+
+
+
+
+
+
+
+

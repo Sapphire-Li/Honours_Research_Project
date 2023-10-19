@@ -1,0 +1,147 @@
+---
+chapter: 
+knit: "bookdown::render_book"
+---
+
+# Pure Cross-sectional Analysis
+
+Given that forecast combinations can greatly improve forecast accuracy, this idea can also be applied to the pure cross-sectional settings. Remark that the use of prediction combinations is not common in such setting. In this section, we derive an analytical closed-form expression of the optimal weight under mean squared forecast error to investigate the determinants behind the puzzle in the cross-sectional setting. A simulation study is then conducted to evaluate and verify the applicability of findings.
+
+Compared with real-life data, implementing simulation is easy to control and interpret given that the true DGP is known. Meanwhile, it is an effective way of validating our conjecture by freely changing the elements of true DGPand looking for the forecast combination puzzle. In line with previous notations, but in the cross-sectional setting, the subscript `t` will change to `i` to represent each individual observation.
+
+
+
+## Model Setup
+
+The true DGP is assumed to be a linear regression model with no intercept and only two exogenous and weakly correlated regressors, which satisfy all assumptions of the classical linear regression model:
+\begin{equation}
+\label{eqn:DGP}
+y_i = \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i, \ \ \epsilon_i \stackrel{i.i.d}{\sim} N(0,\sigma^2_{\epsilon}) \ \ \ (i = 1,2,...,N). \\
+\end{equation}
+
+\newpage
+
+The forecasting models, or constituent models, are
+\begin{align*}
+M_1: y_i &= \alpha_1 x_{1i} + e_{1i}, \ \ e_{1i} \stackrel{i.i.d}{\sim} N(0,\sigma^2_1) \\
+M_2: y_i &= \alpha_2 x_{2i} + e_{2i}, \ \ e_{2i} \stackrel{i.i.d}{\sim} N(0,\sigma^2_2).
+\end{align*}
+
+
+## Optimal Weight (MSE)  {#op}
+
+Following the methodology in Section \@ref(method), the observed data are divided into an in-sample period (R) for parameter estimation and an out-of-sample period (P) for accuracy evaluation. As noted before, the estimated optimal weight, $\hat\omega_{opt}$, will be generated using the first R number of observations, and held fixed over the P observation.
+
+To simplify the notation, we use the notation for linear regression models in matrix form, and obtain the following formula for $\hat\omega_{opt}$ under the MSE loss
+\begin{equation*}
+\label{eqn:opt}
+\hat\omega_{opt} = \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2},
+\end{equation*}
+where $\hat\alpha_1$ and $\hat\alpha_2$ are the ordinary least squares estimators in $M_1$ and $M_2$ respectively.
+
+A more meaningful expression can be achieved by multiplying $\frac{1}{R}$ to both numerator and denominator and writing
+\begin{equation}
+\hat\omega_{opt} = \frac{\hat\alpha_1'\text{cov}_R(x_1,x_1)\hat\alpha_1 - \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2}{\hat\alpha_1' \text{cov}_R(x_1,x_1)\hat\alpha_1 - 2\hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2 + \hat\alpha_2'\text{cov}_R(x_2,x_2)\hat\alpha_2},
+\end{equation}
+where $\text{cov}_R(x_j,x_k)$ is the in-sample covariance between regressors $x_j$ and $x_k$.
+
+
+In the classical linear regression setting, OLS estimator is consistent when the sample size goes to infinity. That is, we should have $\hat\alpha_1 \overset{p}{\to} \alpha_1$ and $\hat\alpha_2 \overset{p}{\to} \alpha_2$. Considering the limit result, we have
+\begin{equation}
+\label{eqn:limit}
+\hat\omega_{opt} \overset{p}{\to} \omega_\star = \frac{\alpha_1'\Sigma_{11}\alpha_1 - \alpha_1'\Sigma_{12}\alpha_2}{\alpha_1'\Sigma_{11}\alpha_1 - 2\alpha_1'\Sigma_{12}\alpha_2 + \alpha_2'\Sigma_{22}\alpha_2},
+\end{equation}
+where $\omega_\star$ is the limiting value of the optimal weight, $\Sigma_{jk}$ denotes the population covariance matrix of corresponding regressors $x_j$ and $x_k$. With the limit result in equation (\ref{eqn:limit}), we can easily work out the asymptotic determinants of having $\omega_\star=\frac{1}{2}$ and then connect it with the presence of the puzzle. 
+
+For $\omega_\star=\frac{1}{2}$, it must be that $\alpha_1'\Sigma_{11}\alpha_1 = \alpha_2'\Sigma_{22}\alpha_2$, which suggests a symmetrical relationship between two constituent model. This gives rigorous evidence that similar in-sample performance of two models will lead to the presence of the puzzle. Besides, any situation where this final equality is nearly satisfied will inevitably lead an optimal weight near one-half.
+
+In addition, according to the relationship between $\pmb \alpha$ and $\pmb \beta$ in Appendix \@ref(detail), $\alpha_1$ and $\alpha_2$ will be close to $\beta_1$ and $\beta_2$, respectively, when the correlation between regressors is small. This suggests that the optimal weight interacts with the true data generating process and is therefore related to the true DGP.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{figures/MSFE.pdf}
+\caption{MSFE of predictive points in a two-model pool over the in-sample (left) and the out-of-sample (right) period. The x-axis represents the weight assigned on $M_1$ and the y-axis indicates MSFE. The orange dot represents the optimally-weighted combination, while the blue dot indicates the equally-weighted combination.}
+\label{fig:msfe}
+\end{figure}
+
+Figure \ref{fig:msfe} illustrates one example of having $\hat\omega_{opt}$ equal to 0.5 when $N = 10000$, $\beta_1=\beta_2=2$, $Var(X_1)=Var(X_2)=1$, $Cov(X_1,X_2)=0.3$ under the MSE weighting scheme. Both in-sample and out-of-sample curves look symmetric.
+
+
+
+## Density Simulations
+
+Recall the equation (\ref{eqn:LS2}) in Section \@ref(method), it is clear that the weight $\omega$ appears in the natural logarithm function. The expectation operator can only evaluate the first derivative of equation (\ref{eqn:LS2}) with respect to $\omega$ by integration. As a consequence, there is no closed-form limiting expression for the optimal weight $\hat\omega_{opt}$ under log score. However, we can use a simulation study to examine the applicability of findings from Section \@ref(op) to density combinations and log scoring rules. 
+
+The initial set-up has 10000 (N) artificial cross-sectional observations generated from the equation \ref{eqn:DGP} with $E[X_{1i}] = E[X_{2i}] = 0$, $Var(X_{1i}) = Var(X_{2i}) = 1$, $Cov(X_{1i}, X_{2i}) = 0.3$, $\pmb{\beta} = (\beta_1, \beta_2)' = (2,2)'$, and $\sigma^2_{\epsilon}=4$. Same as before, around 60% of the data will be used for model estimation. The density forecast combinations will follow the construction of `two-model` pools and be evaluated using the log score. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{figures/LPS_10000.pdf}
+\caption{Two curves refer to the in-sample (left) and out-of-sample (right) performance of density combinations with artificial cross-sectional data based on the initial set-up. The x-axis represents the weight assigned on $M_1$ and the y-axis indicates the log score. The meanings of colored dots remain unchanged.}
+\label{fig:ss10000}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.6]{figures/LPS_1000.pdf}
+\caption{Two curves refer to the in-sample (left) and out-of-sample (right) performance of density combinations with artificial cross-sectional data. The x-axis represents the weight assigned on $M_1$ and the y-axis indicates the log score. The meanings of dots remain unchanged.}
+\label{fig:ss1000}
+\end{figure}
+
+Using the same model specification as in Figure \ref{fig:msfe} to construct the density forecast combination via the log score, we see that the optimal weight $\hat\omega_{opt}$ is no longer one-half in Figure \ref{fig:ss10000}. On the other hand, Figure \ref{fig:ss1000} shows that $\hat\omega_{opt}$ is equal to one-half when $N = 1000$, $\beta_1=1.2$, $\beta_2=-1.1$. This indicates that besides the magnitude of $\pmb{\beta}$, the sign will also have an impact on $\hat\omega_{opt}$, even in large samples ($N = 50000$). Therefore, we speculate that the optimal weight has a non-linear relationship with the proposed models under the log score weighting scheme.
+
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.53]{figures/con_cases.png}
+\caption{The out-of-sample performance of density combinations with artificial cross-sectional data. The true DGP are in the bottom-right of individual plots. ``Optimal Weight`` shows the estimated optimal weight. The log predictive scores of optimally-weighted combination and equally-weighted combination are indicated by ``LPS`` and ``Simple Average`` respectively.}
+\label{fig:cases}
+\end{figure}
+
+In the regression setting, we evaluate the in-sample performance with $R^2$, and then link this value to the conjecture in Table \ref{tab:1}. Four cases in Figure \ref{fig:cases} are selected to further validate different types of model combinations as empirical evidence. Clearly, the optimally-weighted combination outperforms the equally-weighted combination with higher forecast accuracy in the first two cases; hence, we do not have the forecast combination puzzle. After comparing the in-sample fit of constituent models with $R^2$, these two pools can be labelled as (G,B) and (B,G), respectively, as summarized in Table \ref{tab:cases}. This supports our preliminary conjecture that when two models have differing levels of in-sample performance, the presence of the puzzle is unclear, i.e., the puzzle may or may not occur.
+
+\begin{table}[ht]
+  \centering
+    \begin{tabular}{l|cccc}
+    \toprule
+                              &    Case 1    &    Case 2   &    Case 3    &    Case 4   \\  
+    \midrule
+    $R^2$ of $M_1$            &    0.393     &    0.141    &    0.476     &    0.558    \\
+    $R^2$ of $M_2$            &    0.256     &    0.224    &    0.452     &    0.504    \\
+    $R^2$ Difference          &    0.138     &    0.083    &    0.024     &    0.053    \\
+    Type                      &    (G,B)     &    (B,G)    &    (B,B)     &    (G,B)    \\
+    Presence of the puzzle    &     No       &     No      &     Yes      &     No     \\
+    \bottomrule
+    \end{tabular}
+    \caption{``Difference`` is the absolute difference of in-sample $R^2$ between two models. ``Type`` refers to the case of two models in the conjecture table. ``Presence of the puzzle`` indicates whether the equally-weighted combination is close to or outperforms the optimally-weighted combination.}
+  \label{tab:cases}
+\end{table}
+
+Recall that in our definition of the forecast combination puzzle, small accuracy differences make it hard to decide whether the puzzle is in evidence. For example, cases 3 and 4 in Figure \ref{fig:cases} both illustrate a close distance between the optimal forecast combination and the simple average. Even the $R^2$ of constituent models in each pool are similar, as indicated by Table \ref{tab:cases}. One possible solution is to formally test the statistical significance of the accuracy difference through the Diebold-Mariano Test [@D15]. Unfortunately, it has been proven that the test is not appropriate in this context as the test statistic will not follow a standard normal distribution using the two-stage estimation [@FZMP23]. Another possible choice is deciding on an arbitrary value for the accuracy difference. It turns out that the magnitude of the log predictive score is tightly related to the sample size and assumptions about the error term in the true DGP. Hence, this method can be used when fixing the sample size and assumptions of the error term.
+
+Instead of forecast accuracy, we can look at the difference in in-sample $R^2$. One possible rule of thumb is that when the absolute difference of in-sample $R^2$ between two models is less than 0.05, i.e., two models have similar in-sample fit, then the two-model pool can be viewed as either the (G,G) or (B,B) case, and therefore the puzzle seems to be in evidence. Applying this finding to cases 3 and 4 in Table \ref{tab:cases}, case 3 is a (G,G) case where its in-sample $R^2$ difference is 0.024, less than 0.05, whereas case 4 is a (G,B) case with a 0.053 in-sample $R^2$ difference, slightly higher than 0.05. By using this rule of thumb, we can only be certain that the puzzle is evident in case 3 but we are unconfident in case 4. In terms of the log likelihood, it is highly affected by the sample size, similar to the log predictive score. One possible way, however, is to normalize the difference of two log likelihoods by their sum based on the chosen constituent models. The heuristic is around 0.009, meaning that when the normalized difference is less than 0.009, two models have similar in-sample fit, and therefore the puzzle is likely to be in evidence.
+
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+                       &      & \multicolumn{2}{c}{$M_2$} \\
+                       &      & Good       & Bad       \\
+\multirow{2}{*}{$M_1$} & Good & $\surd$    & $?$ \\
+                       & Bad  & $?$        & $\surd$
+\end{tabular}
+\caption{The first row and the first column refer to two constituent models, $M_1$ and $M_2$. ``Good`` and ``Bad`` denote the relative in-sample fit of constituent model. The ``$\surd$`` indicates the presence of the forecast combination puzzle, while ``$?$`` implies that the presence of the puzzle is ambiguous.}
+\label{tab:2}
+\end{table}
+
+The analysis in this section provides a general idea of the relationship between the in-sample fit of constituent models and the presence of the puzzle in both point and density forecast combinations. Based on new empirical evidence, the conjecture table for a two-model pool remains the same but with updated definitions, as illustrated in Table \ref{tab:2}.
+
+
+
+
+
+
+
+
