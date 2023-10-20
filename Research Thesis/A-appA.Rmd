@@ -69,7 +69,6 @@ log(y_t) &= c + log(y_{t-4}) + \phi_1\big[log(y_{t-1})-log(y_{t-5})\big] + \phi_
          &+ \epsilon_t + \theta_1\epsilon_{t-1} + \theta_2\epsilon_{t-2} + \Theta_1\epsilon_{t-4} + \theta_1\Theta_1\epsilon_{t-5} + \theta_2\Theta_1\epsilon_{t-6} \\
 \end{align*}
 
-
 2. ETS(A,A,A) model of the natural logarithm of unemployed individuals. 
 \begin{align*}
 log(y_t) &= \ell_{t-1} + b_{t-1} + s_{t-m} + \epsilon_t \\
@@ -211,7 +210,7 @@ The optimal weight $\hat\omega_{opt}$ can also be expressed with F-statistics of
 \hat\omega_{opt} = \frac{F_{\alpha_1}- R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}{F_{\alpha_1} + F_{\alpha_2} - 2 R \ \hat\alpha_1'\text{cov}_R(x_1,x_2)\hat\alpha_2/s^2}.
 \end{equation*}
 
-If the covariance between $x_1$ and $x_2$ is close to zero, the optimal weight can be approximated as $\hat\omega_{opt} = \frac{F_{\alpha_1}}{F_{\alpha_1} + F_{\alpha_2}}$. This is the reason why the in-sample performance of model is highly correlated with the presence of the puzzle. 
+If the covariance between $x_1$ and $x_2$ is close to zero, the optimal weight can be approximated as $\hat\omega_{opt} = \frac{F_{\alpha_1}}{F_{\alpha_1} + F_{\alpha_2}}$. This is the reason why the in-sample performance of model is tightly-related to the presence of the puzzle. 
 
 
 

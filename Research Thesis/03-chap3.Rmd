@@ -10,7 +10,7 @@ knit: "bookdown::render_book"
 
 Reconsidering the example in Section 3 of @GA11, the data we use is the daily Standard and Poor's (S\&P) 500 index from February 11, 2013 to February 10, 2023 (10 years in total), retrieved from Federal Reserve Economic Data [@SP500]. The S&P 500 index dataset has $T = 2519$ total observations and is partitioned into two periods with a rough proportion. The in-sample period contains the first 60% of the data ($R = 1511$), which is used to estimate all unknown parameters, including the optimal weight. The remaining 40% ($P = 1008$) is reserved to evaluate forecast performance.  
 
-We will investigate the presence of the forecast combination puzzle when both models fit the training set well and when one model badly fits the data. Three predictive models are chosen to study the performance of density predictions across sets of two-model pools from common classes of linear time series models: autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors (LR). Detailed model specifications are elaborated in the Appendix. 
+We investigate the presence of the forecast combination puzzle when both models fit the training set well and when one model badly fits the data. Three predictive models are chosen to study the performance of density predictions across sets of two-model pools from common classes of linear time series models: autoregressive integrated moving average (ARIMA), exponential smoothing (ETS), and linear regression model with ARIMA errors (LR). Detailed model specifications are elaborated in the Appendix. 
 
 We use $P(A_1, A_2; \omega_{opt})$ to denote a two-model pool, where $A_1$ and $A_2$ are constituent models in the pool and $\omega_{opt}$ is the optimal weight assigned to the first model $A_1$. 
 
@@ -65,7 +65,9 @@ Linking it with our preliminary conjecture in Table \ref{tab:1}, P(ARIMA,ETS; 0.
 
 Continuing with the same dataset, we now take a first difference of the log of S\&P 500 index, to construct log-returns, and then fit this series, which is covariance stationary. A series is said to be covariance stationary when it has constant mean and variance, and the covariance between two observations at different time points depends on their time interval only.
 
-Two candidate models are automatically selected by the `ARIMA()` function in the fable package [@fpp23]: a Gaussian ARMA(1,1) model and a linear regression model with ARMA(1,1) errors. To differentiate with the first LR model, the second model is named as Linear Regression 2 (LR2) in the pool. Figure \ref{fig:stat} illustrates that two constituent models have a very similar in-sample log score with only 0.0011 difference, and the puzzle is evidenced by the only 0.1282 accuracy difference between two forecast combination approaches. Strictly speaking, the forecast accuracy of the optimally-weighted combination (2349.764) is slightly superior to that of equally-weighted combination (2349.636). However, this difference in forecast accuracy is so small as to make no real difference in practice. In addition, using equal weights is much more efficient than estimating optimal weights through any weighting scheme. Recall that our definition of the forecast combination puzzle are cases where 1) the simple average performs much better out-of-sample than the optimal combination; and 2) the forecast accuracy of the two methods is similar. Comparing the log likelihood of two models in Table \ref{tab:statfit}, the similar in-sample performance is another evidence of having a (G,G) case with the puzzle in evidence.
+Two candidate models are automatically selected by the `ARIMA()` function in the fable package [@fpp23]: a Gaussian ARMA(1,1) model and a linear regression model with ARMA(1,1) errors. Although the names are different, their model specifications differ only in the constant term. To differentiate with the first LR model, the second model is named as Linear Regression 2 (LR2) in the pool. Figure \ref{fig:stat} illustrates that two constituent models have very similar in-sample log scores with only 0.0011 difference, and the puzzle is evidenced by the only 0.1282 accuracy difference between two forecast combination approaches. Strictly speaking, the forecast accuracy of the optimally-weighted combination (2349.764) is slightly superior to that of equally-weighted combination (2349.636). However, this difference in forecast accuracy is so small as to make no real difference in practice. In addition, using equal weights is much more efficient than estimating optimal weights through any weighting scheme. Comparing the log likelihood of two models in Table \ref{tab:statfit}, the similar in-sample performance is another evidence of having a (G,G) case with the puzzle in evidence.
+
+\vspace{7mm}
 
 \begin{figure}[ht]
 \centering
@@ -107,9 +109,11 @@ It has $T = 153$ total observations and is slit into two sets in proportion. As 
 
 \subsection*{Well-specified models}
 
-To ensure compatibility with seasonal component, we propose the Seasonal ARIMA (SARIMA) model and the ETS model: ARIMA(2,0,2)(0,1,1)[4] with drift and ETS(A,A,A). The SARIMA is simply an ARIMA model with extra seasonal component. The first parenthesis is same as the ARIMA model. The second parenthesis represents the seasonal AR, integrated, and MA components respectively, separately by the comma. The number in the box bracket indicates the number of observations per year, i.e., the seasonal frequency. An intercept is included in the model. In the ETS model, the seasonal part is reflected by `S` and the third position in the parenthesis. Due to the log transformation, we have additive error, additive trend, and additive seasonality.
+To ensure compatibility with seasonal component, we propose the Seasonal ARIMA (SARIMA) model and the ETS model: ARIMA(2,0,2)(0,1,1)[4] with drift and ETS(A,A,A). The SARIMA is simply an ARIMA model with extra seasonal component. The first parenthesis is same as the ARIMA model. The second parenthesis represents the seasonal AR, integrated, and MA components respectively, separately by the comma. The number in the box bracket indicates the number of observations per year, i.e., the seasonal frequency. In the ETS model, the seasonal part is reflected by `S` and the third position in the parenthesis. Due to the log transformation, we have additive error, additive trend, and additive seasonality.
 
-The forecast combination puzzle is evidenced in Figure \ref{fig:sd}; the accuracy difference between two combinations is negligible. The optimally-weighted point combination has a MSFE of 0.000177 and the equally-weighted forecast has a MSFE of 0.000178. Looking at the in-sample combination plot, two models fit the training set equally well, which can also be confirmed by the second column of Table \ref{tab:season}.
+The forecast combination puzzle is evidenced in the left column of Figure \ref{fig:sd}; the accuracy difference between two combinations is negligible. The optimally-weighted point combination has a MSFE of 0.000177 and the equally-weighted forecast has a MSFE of 0.000178. Looking at the in-sample combination plot, two models fit the training set equally well, which can also be confirmed by the second column of Table \ref{tab:season}.
+
+\vspace{7mm}
 
 \begin{figure}[ht]
 \centering
@@ -119,12 +123,12 @@ The forecast combination puzzle is evidenced in Figure \ref{fig:sd}; the accurac
 \end{figure}
 
 
-
+\newpage
 
 
 \subsection*{Poorly-specified models}
 
-One way of proposing a ``Bad`` model for a seasonal dataset is to deliberately ignore the seasonality in data. In this section, we consider the ARIMA(2,1,0) and ETS(A,A,N) models, which do not capture any seasonal component and are the best models automatically selected by `ARIMA` and `ETS` functions in R.
+One way of proposing a ``Bad`` model for a seasonal dataset is to deliberately ignore the seasonality in data. In this section, we consider the ARIMA(2,1,0) and ETS(A,A,N) models, which do not capture any seasonal component and are the best models automatically selected by the `ARIMA()` and `ETS()` functions in the fable package [@fpp23].
 
 \begin{table}[ht]
   \centering
@@ -143,11 +147,11 @@ One way of proposing a ``Bad`` model for a seasonal dataset is to deliberately i
   \label{tab:season}
 \end{table}
 
-The right column of Figure \ref{fig:sd} does reveal the forecast combination puzzle, as the equally-weighted combination performs better than the optimally-weighted forecast combination. Furthermore, the third column of Table \ref{tab:season} illustrates that both models have similar log likelihood. We may claim that, regardless of whether the constituent models capture all the features of the data, as long as they have similar in-sample performance, the forecast combination puzzle will be evidenced. As a result, we should also expect to find the puzzle if two models are equally ``Bad``.
+The right column of Figure \ref{fig:sd} does reveal the forecast combination puzzle, as the equally-weighted combination performs better than the optimally-weighted forecast combination. Furthermore, the third column of Table \ref{tab:season} illustrates that both models have similar log likelihood. We may claim that, regardless of whether the constituent models capture all the features of the data, as long as they have similar in-sample performance, the forecast combination puzzle is in evidence. As a result, we should also expect to find the puzzle if two models are equally ``Bad``.
 
 The empirical evidence suggest that the puzzle is in evidence in all cases, however, these examples are not enough to draw comprehensive conclusions. Also, one big challenge of working with empirical data is that the true DGP is unknown. 
 
-To partially circumvent these issues, we use a simulation experiment based on a pure cross-sectional process to further investigate when the optimal forecast combination is more accurate than the simple averaging. Compared with simulated time series data, there is no need to consider the dependence of observations, hence, is an easy starting point. As an additional contribution, it examines the presence of the forecast combination puzzle in the cross-sectional setting.
+To partially circumvent these issues, we use a simulation experiment based on a pure cross-sectional process to further investigate when the optimal forecast combination is more accurate than the simple averaging. Compared with time series data, there is no need to consider the dependence of observations, hence, it is an easy starting point. As an additional contribution, it examines the presence of the forecast combination puzzle in the cross-sectional setting.
 
 
 

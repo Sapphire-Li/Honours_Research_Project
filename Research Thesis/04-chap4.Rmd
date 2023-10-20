@@ -28,9 +28,9 @@ M_2: y_i &= \alpha_2 x_{2i} + e_{2i}, \ \ e_{2i} \stackrel{i.i.d}{\sim} N(0,\sig
 
 ## Optimal Weight (MSE)  {#op}
 
-Following the methodology in Section \@ref(method), the observed data are divided into an in-sample period ($R$) for parameter estimation and an out-of-sample period ($P$) for accuracy evaluation. As noted before, the estimated optimal weight, $\hat\omega_{opt}$, will be generated using the first R number of observations, and held fixed over the P observation.
+Following the methodology in Section \@ref(method), the observed data are divided into an in-sample period ($R$) for parameter estimation and an out-of-sample period ($P$) for accuracy evaluation. As noted before, all unknown parameters, including the optimal weight $\omega_{opt}$, are estimated using the first $R$ number of observations, and held fixed for out-of-sample evaluation.
 
-To simplify the notation, we use the notation for linear regression models in matrix form, and obtain the following formula for $\hat\omega_{opt}$ under the MSE loss
+For simplicity, we use the notation for linear regression models in matrix form, and obtain the following formula for $\hat\omega_{opt}$ under the MSE loss
 \begin{equation*}
 \hat\omega_{opt} = \frac{(x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' y - (x_1 \hat\alpha_1 - x_2 \hat\alpha_2)' x_2 \hat\alpha_2}{\hat\alpha'_1 x'_1 x_1 \hat\alpha_1 - 2\hat\alpha'_1 x'_1 x_2 \hat\alpha_2 + \hat\alpha'_2 x'_2 x_2 \hat\alpha_2},
 \end{equation*}

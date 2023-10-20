@@ -31,7 +31,7 @@ f_{\omega}(y_t) = \omega \ f_1(y_t | \mathcal{F}_{t-1}, \theta_{1}) + (1-\omega)
 \end{equation*}
 where $\omega \in [0,1]$ is the non-negative weight allocated to the probability density attributed to the first model. Two densities are often determined by different sets of parameters, differentiated by $\theta_{1}$ and $\theta_{2}$. Through this construction, the sum of the model weights is fixed at 1, which is a necessary and sufficient condition for $f_{\omega}(y_t)$ to be a proper density function [@GA11]. In addition to producing point forecasts, density forecasts can offer forecasters or decision markers a comprehensive view of the target variable (see section 2.6.1. of @FTP22 for related contributions).
 
-\vspace{5mm}
+
 
 \subsection*{Log scoring rules}
 
@@ -52,7 +52,7 @@ Thus, the log predictive score over the out-of-sample period $t = R+1, R+2, \dot
 LPS = \sum^T_{t = R+1} log \Big[ \hat{\omega}_{\text{opt}} \ \hat f_1(y_t| \mathcal{F}_{t-1}, \hat\theta_{1}) + (1- \hat{\omega}_{\text{opt}}) \ \hat f_2(y_t| \mathcal{F}_{t-1}, \hat\theta_{2})\Big].
 \end{equation}
 
-
+\vspace{1cm}
 
 ## Point combinations
 
@@ -64,19 +64,18 @@ Similar to the density case, points from two constituent models, $y_{1t}$ and $y
 \begin{equation*}
 y_t({\omega}) = \omega \ y_{1t} + (1-\omega) \ y_{2t},
 \end{equation*}
-where $\omega\in [0,1]$ is the non-negative weight allocated to the point forecast generated from the first model.
+where $\omega\in [0,1]$ is the non-negative weight allocated to the point generated from the first model.
 
-\vspace{5mm}
+
 
 \subsection*{Mean squared forecast error}
 
 The mean squared error (MSE) of the individual prediction is the average squared difference between the actual value, $y_t$, and the predicted value, $\hat y_t$, at each time point over the in-sample period:
-
 \begin{equation*}
 MSE = \frac{1}{R} \sum^R_{t=1} (y_t - \hat y_t)^2.
 \end{equation*}  
 
-The lower the MSE, the higher the accuracy of the forecast. Therefore, the "optimal" set of weights minimizes the MSE of the point forecast combination among all other possible sets over the $R$ in-sample observations:
+The lower the MSE, the higher the accuracy of the forecast. Therefore, the optimal set of weights minimizes the MSE of the point forecast combination among all other possible sets over the $R$ in-sample observations:
 \begin{equation*}
 \hat{\omega}_{\text{opt}} = \underset{\omega \in [0,1]}{\arg\min} \frac{1}{R} \sum^R_{t=1} \Big[y_t - (\omega \ \hat y_{1t} + (1-\omega) \ \hat y_{2t})\Big]^2.
 \end{equation*}
